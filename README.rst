@@ -39,6 +39,7 @@ Once all the requirements are installed, cd into the root directory of the proje
 
 Then, create a PostgreSQL database with the following command, where
 *[project_slug]* is the project's slug in this case *bike_parking_toronto*:
+
 .. code-block:: bash
     createdb [project_slug]
 

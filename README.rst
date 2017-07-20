@@ -34,6 +34,7 @@ For postgres check link_.
 Once all the requirements are installed, cd into the root directory of the project and install the requirements for the local development:
 
 .. code-block:: bash
+
     pip install -r requirements/local.txt
 
 
@@ -41,11 +42,13 @@ Then, create a PostgreSQL database with the following command, where
 *[project_slug]* is the project's slug in this case *bike_parking_toronto*:
 
 .. code-block:: bash
+
     createdb [project_slug]
 
 You can now run the usual Django `migrate` and `runserver` commands:
 
 .. code-block:: bash
+
     python manage.py migrate
     python manage.py runserver
 

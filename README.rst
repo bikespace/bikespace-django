@@ -21,14 +21,18 @@ Assumption is you have the following installed:
 * PostgresSQL
 
 For virtualenv make sure you are defining the python version to be python3.
+
 .. code-block:: bash
     virtualenv -p python3 venv
 
-For postgres check [link](https://www.postgresql.org/download/)
+For postgres check link_.
+
+.. _link: https://www.postgresql.org/download/
 
 
 Once all the requirements are installed.
 cd into the root directory of the project and install the requirements for the local development:
+
 .. code-block:: bash
     pip install -r requirements/local.txt
 
@@ -39,6 +43,7 @@ Then, create a PostgreSQL database with the following command, where
     createdb [project_slug]
 
 You can now run the usual Django `migrate` and `runserver` commands:
+
 .. code-block:: bash
     python manage.py migrate
     python manage.py runserver

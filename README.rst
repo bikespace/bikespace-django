@@ -23,6 +23,7 @@ Assumption is you have the following installed:
 For virtualenv make sure you are defining the python version to be python3.
 
 .. code-block:: bash
+
     virtualenv -p python3 venv
 
 For postgres check link_.
@@ -30,8 +31,7 @@ For postgres check link_.
 .. _link: https://www.postgresql.org/download/
 
 
-Once all the requirements are installed.
-cd into the root directory of the project and install the requirements for the local development:
+Once all the requirements are installed, cd into the root directory of the project and install the requirements for the local development:
 
 .. code-block:: bash
     pip install -r requirements/local.txt

@@ -11,4 +11,4 @@ cur = conn.cursor()
 
 def addPoint(ip,lat,lon,timestamp,surveyAnswers,comments):
     #ip = string, lat = float, lon = float, timestamp = int, surveyAnswers = json,comments = string
-    cur.execute('INSERT INTO bicycle_parking_tb (ip, latitude, longitude, point_timestamp, survey_answers, comments) VALUES (%s,%s,%s,%s,%s,%s)',(ip, lat, lon, timestamp, surveyAnswers, comments))
+    cur.execute('INSERT INTO bicycle_parking_pins_tb (ip, latitude, longitude, point_timestamp, survey_answers, comments) VALUES (%s,%s,%s,%s,%s,%s)',(ip, lat, lon, timestamp, surveyAnswers, comments))

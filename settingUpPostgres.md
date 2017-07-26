@@ -15,7 +15,7 @@ Switch into the database (`psql`):
 
 Create a new table with:
 
-`CREATE TABLE bicycle_parking_tb (
+`CREATE TABLE bicycle_parking_pins_tb (
   id BIGSERIAL NOT NULL PRIMARY KEY,
   ip varchar NOT NULL,
   latitude NUMERIC(8, 8) NOT NULL,
@@ -25,4 +25,4 @@ Create a new table with:
   comments varchar[] NOT NULL);`
 
 Lastly, we have to grant PRIVILEGES to the new user
-`GRANT ALL PRIVILEGES ON TABLE bicycle_parking_tb TO staff;`
+`GRANT ALL PRIVILEGES ON TABLE bicycle_parking_pins_tb TO staff;`

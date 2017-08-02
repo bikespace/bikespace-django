@@ -1,5 +1,0 @@
-[run]
-include = bike_parking_toronto/*
-omit = *migrations*, *tests*
-plugins =
-    django_coverage_plugin

@@ -16,7 +16,7 @@ staging:
   only:
   - master
 
-staging:
+production:
   type: deploy
   script:
   - apt-get update -qy

@@ -1,32 +1,53 @@
-Discussion Points
+# Heroku Django Starter Template
 
-Identification required? (check)
-Prevent repeated spamming from one person / trolling
-Makes the process more complicated
+An utterly fantastic project starter template for Django 1.11.
 
-Just Cookie or IP address to prevent abuse
-Need option to trackback to users pins - ask users?
+## Features
 
-Commenting vs Survey (Use user survey to validate)
-Commenting 
-Broad range of data can be acquired but it is hard to sort/analyze
-Survey
-Easy and fast but it will exclude edge cases
-Not clear what the main concerns would be yet
-Have other option
+- Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
+- Enhancements to Django's static file serving functionality via WhiteNoise.
+- Latest Python 3.6 runtime environment. 
 
-What kind of data do we need? (City DONE)
-Time
-Type of issue (bike damaged, bike rack full)
-Location
-Picture?
-Where were you visiting? (residential, restaurant, public facility)
+## How to Use
 
-Webapp- what are the limitation (ask Dev)
-Would we have access to GPS?
-Would maps take too long on mobile web app?
-We need to ask for permission to share location every time
+To use this project, follow these steps:
 
-How are we organize the pinpoints? (ask City)
-By jurisdiction? By 5km radius? How do we divide the map?
-Heatmaps? Numbers indicating number of pins on map?
+1. Create your working environment.
+2. Install Django (`$ pip install django`)
+3. Create a new project using this template
+
+## Creating Your Project
+
+Using this template to create a new Django app is easy::
+
+    $ django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
+
+(If this doesn't work on windows, replace `django-admin.py` with `django-admin`)
+
+You can replace ``helloworld`` with your desired project name.
+
+## Deployment to Heroku
+
+    $ git init
+    $ git add -A
+    $ git commit -m "Initial commit"
+
+    $ heroku create
+    $ git push heroku master
+
+    $ heroku run python manage.py migrate
+
+See also, a [ready-made application](https://github.com/heroku/python-getting-started), ready to deploy.
+
+## Using Python 2.7?
+
+Just update `runtime.txt` to `python-2.7.13` (no trailing spaces or newlines!).
+
+
+## License: MIT
+
+## Further Reading
+
+- [Gunicorn](https://warehouse.python.org/project/gunicorn/)
+- [WhiteNoise](https://warehouse.python.org/project/whitenoise/)
+- [dj-database-url](https://warehouse.python.org/project/dj-database-url/)

@@ -1,53 +1,121 @@
-# Heroku Django Starter Template
+# Toronto Bike Parking Project
 
-An utterly fantastic project starter template for Django 1.11.
 
-## Features
-
-- Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
-- Enhancements to Django's static file serving functionality via WhiteNoise.
-- Latest Python 3.6 runtime environment. 
-
-## How to Use
+## Local Development
 
 To use this project, follow these steps:
 
-1. Create your working environment.
-2. Install Django (`$ pip install django`)
-3. Create a new project using this template
+1. Clone this repo
+2. Create a virtualenv in the project root folder
+3. Install requirements
+4. Have a local instance of postgres running
+5. Code away
 
-## Creating Your Project
+### Virtualenv
 
-Using this template to create a new Django app is easy::
+Strongly suggest on using virtualenv for local development.
 
-    $ django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
+**Install virtualenv if not installed using**
 
-(If this doesn't work on windows, replace `django-admin.py` with `django-admin`)
+```bash
+pip install virtualenv
+````
 
-You can replace ``helloworld`` with your desired project name.
+**Use python3 for the virtualenv**
+```bash
+virtualenv -p python3 venv
+```
 
-## Deployment to Heroku
+**Start the virtualenv**
 
-    $ git init
-    $ git add -A
-    $ git commit -m "Initial commit"
+```bash
+source venv/bin/activate
+```
 
-    $ heroku create
-    $ git push heroku master
+### Install requirements
 
-    $ heroku run python manage.py migrate
+Install the requirements from the supplied `requirements.txt`.
 
-See also, a [ready-made application](https://github.com/heroku/python-getting-started), ready to deploy.
+```bash
+pip install -r requirements.txt
+```
 
-## Using Python 2.7?
+### Have a postgres instance running
 
-Just update `runtime.txt` to `python-2.7.13` (no trailing spaces or newlines!).
+Download your OS specific postgres package running on the default 5432 port from their download [page](https://www.postgresql.org/download/)
+
+For mac OSX the easiest method is to download the [Postgres app](http://postgresapp.com/)
+
+### Start the Django Application
+
+Once all the above steps are complete test by running the django app.
+
+**Run migrations to apply the models defined into the database**
+
+Run this migrate whenever the models.py for the app has been changed so the
+changes can be applied to the databases.
+
+```bash
+python manage.py migrate
+```
+
+**Run the django app**
+
+```bash
+python manage.py runserver
+```
+
+**Create a superuser for admin**
+
+```bash
+python manage.py createsuperuser
+```
+
+## Project Structure
+
+This the current project structure
+```
+.
+├── addDataToPostgres.py
+├── bicycleparking
+│   ├── admin.py
+│   ├── apps.py
+│   ├── __init__.py
+│   ├── migrations
+│   ├── models.py
+│   ├── __pycache__
+│   ├── static
+│   ├── templates
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── Bicycle_parking
+│   ├── __init__.py
+│   ├── __pycache__
+│   ├── settings.py
+│   ├── static
+│   ├── urls.py
+│   └── wsgi.py
+├── db.sqlite3
+├── LICENSE
+├── manage.py
+├── Procfile
+├── README.md
+├── README.rst
+├── requirements.txt
+├── runtime.txt
+├── settingUpPostgres.md
+```
+
+`Bicycle_parking` is the main Django Project folder.
+
+`bicycleparking` is one of the apps for the project.
+
+## Pushing changes
+
+Please checkout out a new branch when working on the project and submit merge requests
+for the proposed changes to the master branch.
+
 
 
 ## License: MIT
-
-## Further Reading
-
-- [Gunicorn](https://warehouse.python.org/project/gunicorn/)
-- [WhiteNoise](https://warehouse.python.org/project/whitenoise/)
-- [dj-database-url](https://warehouse.python.org/project/dj-database-url/)

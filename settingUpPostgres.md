@@ -22,7 +22,9 @@ Create a new table with:
   longitude NUMERIC(8, 8) NOT NULL,
   point_timestamp integer NOT NULL,
   survey_answers json NOT NULL,
-  comments varchar[] NOT NULL);`
+  comments varchar[] NOT NULL,
+  photo_uri varchar NOT NULL,
+  photo_desc varchar NOT NULL);`
 
 Lastly, we have to grant PRIVILEGES to the new user
 `GRANT ALL PRIVILEGES ON TABLE bicycle_parking_pins_tb TO staff;`

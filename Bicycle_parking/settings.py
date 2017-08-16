@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'bike_parking_toronto',
         'USER': 'postgres',
         'PASSWORD': '',
-        'HOST': 'localhost',
+        'HOST': 'postgres',
         'PORT': '5432',
     }
 }

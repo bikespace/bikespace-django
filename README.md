@@ -111,6 +111,14 @@ This the current project structure
 
 `bicycleparking` is one of the apps for the project.
 
+## Client Side
+
+```
+cd bicycleparking
+npm install
+rollup -c -w
+```
+
 ## Pushing changes
 
 Please checkout out a new branch when working on the project and submit merge requests

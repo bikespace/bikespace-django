@@ -9,7 +9,8 @@ To use this project, follow these steps:
 2. Create a virtualenv in the project root folder
 3. Install requirements
 4. Have a local instance of postgres running
-5. Code away
+5. Install ngrok
+6. Code away
 
 ### Virtualenv
 
@@ -46,6 +47,25 @@ Download your OS specific postgres package running on the default 5432 port from
 
 For mac OSX the easiest method is to download the [Postgres app](http://postgresapp.com/)
 
+Create a database on postgres with the name `bike_parking_toronto`
+
+Export your databse url on your bash, so django can just use that instead of the default sqlite.
+
+```bash
+export DATABASE_URL=postgresql://localhost/bike_parking_toronto
+```
+
+### Install ngrok
+
+ngrok is needed to server the local django application over ssl.
+To install ngrok, use [npm](https://www.npmjs.com/get-npm).
+
+Install ngrok globally:
+
+```bash
+npm install ngrok -g
+```
+
 ### Start the Django Application
 
 Once all the above steps are complete test by running the django app.
@@ -63,6 +83,12 @@ python manage.py migrate
 
 ```bash
 python manage.py runserver
+```
+
+**Run ngrok to serve over https**
+
+```bash
+ngrok http [port_django_is_running_on]
 ```
 
 **Create a superuser for admin**

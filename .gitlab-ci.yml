@@ -1,3 +1,11 @@
+services:
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: bike_parking_toronto
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: ""
+
 test:
   script:
   # this configures Django application to use attached postgres database that is run on `postgres` host

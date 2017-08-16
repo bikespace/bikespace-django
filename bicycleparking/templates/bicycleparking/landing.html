@@ -2,16 +2,14 @@
 <html>
     <head>
         <title>Toronto Bicycle Parking Project</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     </head>
     <body>
-        <div>
-        <h2>BIKE PARKING TORONTO</h2>
-        <h1>Help us get Toronto moving.</h1>
-        <h2>This is a survey to help us understand where Toronto needs more bike parking</h2>
+        <script type="text/template" id="step">
+        </script>
+        <div class="app">
+            <div id="render"></div>
+            <div id="map"></div>
         </div>
-        <a href="http://aws-website-bikeparking-xoy3j.s3-website-us-east-1.amazonaws.com/" class="btn btn-default" role="button">Begin</a>
+        <script src="{% static 'main.js' %}"></script>
     </body>
 </html>

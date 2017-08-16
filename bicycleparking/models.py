@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 
 # Create your models here.
 class SurveyAnswer(models.Model):
@@ -6,7 +7,7 @@ class SurveyAnswer(models.Model):
     longitude = models.FloatField()
     ip = models.IntegerField()
     point_timestamp = models.DateTimeField()
-    #survey = models.JSONField()
+    survey = JSONField(default=None)
     comments = models.TextField(default=None)
     photo_uri = models.TextField(default=None)
     photo_desc = models.TextField(default=None)

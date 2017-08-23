@@ -2,12 +2,12 @@ function pad(val) {
   return val < 10 ? `0${val}` : val;
 }
 
-class TextInput {
+class Input {
   constructor(props, submit) {
     this.props = props;
     this.submit = submit;
   }
-
+  
   bind() {
     document.getElementById('button').addEventListener('click', (event) => {
       const value = document.getElementById('input').value;
@@ -20,6 +20,9 @@ class TextInput {
     }
   }
 
+}
+
+class TextInput extends Input {
   get template() {
     const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
     return (`
@@ -33,24 +36,7 @@ class TextInput {
   }
 }
 
-class StringInput {
-  constructor(props, submit) {
-    this.props = props;
-    this.submit = submit;
-  }
-
-  bind() {
-    document.getElementById('button').addEventListener('click', (event) => {
-      const value = document.getElementById('input').value;
-      this.submit(value);
-    });
-    if (!this.props.required) {
-      document.getElementById('skip').addEventListener('click', (event) => {
-        this.submit(null);
-      });
-    }
-  }
-
+class StringInput extends Input {
   get template() {
     const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
     return (`
@@ -64,12 +50,7 @@ class StringInput {
   }
 }
 
-class DateTimeInput {
-  constructor(props, submit) {
-    this.props = props;
-    this.submit = submit;
-  }
-
+class DateTimeInput extends Input {
   get template() {
     const date = new Date();
     const month = pad(date.getMonth() + 1);
@@ -86,18 +67,6 @@ class DateTimeInput {
       </div>
       `
     )
-  }
-  
-  bind() {
-    document.getElementById('button').addEventListener('click', (event) => {
-      const value = document.getElementById('input').value;
-      this.submit(value);
-    });
-    if (!this.props.required) {
-      document.getElementById('skip').addEventListener('click', (event) => {
-        this.submit(null);
-      });
-    }
   }
 }
 

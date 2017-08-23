@@ -9,23 +9,17 @@ import StepThreeB from './steps/three-b';
 import StepFour from './steps/four';
 import Complete from './steps/complete';
 import Step from './step';
+import questions from './survey-questions';
+import Question from './question';
 import '../css/app.css';
-
-const steps = {
-  splash: Splash,
-  '1a': StepOneA,
-  '1b': StepOneB,
-  '2': StepTwo,
-  '3a': StepThreeA,
-  '3b': StepThreeB,
-  '4': StepFour,
-  complete: Complete,
-}
 
 class Survey {
   constructor() {
     this.steps = {};
     this.router = new Navigo('/', true);
+    this.steps = questions.map((question) => {
+      return new Question(question, this)
+    })
     try {
       this.state = localStorage.getItem('survey_state') ? JSON.parse(localStorage.getItem('survey_state')) : {};
     } catch (err) {
@@ -35,10 +29,12 @@ class Survey {
       'survey/:step': (params, query) => {
         this.renderStep(params, query)
       },
-      '*': () => {
-        this.renderHome()
-      },
     }).resolve();
+  }
+
+  navigate() {
+    const next = parseInt(this.router.lastRouteResolved().params.step, 10) + 1;
+    this.router.navigate(`/survey/${next}`)
   }
 
   setState(newState) {
@@ -46,14 +42,8 @@ class Survey {
     localStorage.setItem('survey_state', JSON.stringify(this.state));
   }
 
-  renderHome() {
-    this.steps.home = this.steps.home || new Splash('splash', copy.splash, this);
-    this.steps.home.render();
-  }
-
   renderStep(params, query) {
     let step = params.step;
-    this.steps[step] = this.steps[step] || new steps[step](step, copy[step], this);
     this.steps[step].render();
   }
 }

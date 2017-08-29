@@ -22405,7 +22405,7 @@ const types = {
   NUMBER: 'NUMBER',
   ARRAY: 'ARRAY',
   DATETIME: 'DATETIME',
-  IMAGRE: 'IMAGE'
+  IMAGE: 'IMAGE'
 };
 
 const questions = [
@@ -22579,7 +22579,7 @@ class Question {
       this.survey.navigate();
     } else {
       if (this.props.required) {
-        console.log('error');
+        this.error.innerHTML = 'Please fill out this value';
       } else {
         this.survey.navigate();
       }

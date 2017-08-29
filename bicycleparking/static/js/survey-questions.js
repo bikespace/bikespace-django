@@ -5,7 +5,7 @@ const types = {
   NUMBER: 'NUMBER',
   ARRAY: 'ARRAY',
   DATETIME: 'DATETIME',
-  IMAGRE: 'IMAGE'
+  IMAGE: 'IMAGE'
 }
 
 const questions = [

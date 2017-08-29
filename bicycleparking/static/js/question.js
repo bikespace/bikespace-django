@@ -91,7 +91,7 @@ export default class Question {
       this.survey.navigate()
     } else {
       if (this.props.required) {
-        console.log('error');
+        this.error.innerHTML = 'Please fill out this value'
       } else {
         this.survey.navigate()
       }

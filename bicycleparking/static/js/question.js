@@ -1,85 +1,27 @@
-function pad(val) {
-  return val < 10 ? `0${val}` : val;
-}
-
-class Input {
-  constructor(props, submit) {
-    this.props = props;
-    this.submit = submit;
-  }
-  
-  bind() {
-    document.getElementById('button').addEventListener('click', (event) => {
-      const value = document.getElementById('input').value;
-      this.submit(value);
-    });
-    if (!this.props.required) {
-      document.getElementById('skip').addEventListener('click', (event) => {
-        this.submit(null);
-      });
-    }
-  }
-
-}
-
-class TextInput extends Input {
-  get template() {
-    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
-    return (`
-      <div className="question">
-        <textarea name=${this.props.key} id="input"></textarea>
-        <button id="button">Submit</button>
-        ${skipButton}
-      </div>
-      `
-    )
-  }
-}
-
-class StringInput extends Input {
-  get template() {
-    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
-    return (`
-      <div className="question">
-        <input type="text" name=${this.props.key} id="input" />
-        <button id="button">Submit</button>
-        ${skipButton}
-      </div>
-      `
-    )
-  }
-}
-
-class DateTimeInput extends Input {
-  get template() {
-    const date = new Date();
-    const month = pad(date.getMonth() + 1);
-    const day = pad(date.getDate());
-    const hour = pad(date.getHours());
-    const minutes = pad(date.getMinutes());
-    const dateString = `${date.getFullYear()}-${month}-${day}T${hour}:${minutes}`;
-    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
-    return (`
-      <div className="question">
-        <input type="datetime-local" value="${dateString}" name=${this.props.key} id="input" />
-        <button id="button">Submit</button>
-        ${skipButton}
-      </div>
-      `
-    )
-  }
-}
+import TextInput from './types/text';
+import StringInput from './types/string';
+import DateTimeInput from './types/date';
+import LatLngInput from './types/latlng';
+import types from './types/types';
 
 export default class Question {
   constructor(props, survey) {
     this.props = props;
     this.survey = survey;
+    const question = {
+      submit: this.submit.bind(this),
+      onError: this.onError.bind(this),
+      onMessage: this.onMessage.bind(this),
+      router: this.survey.router
+    }
     if (this.props.type === 'DATETIME') {
-      this.input = new DateTimeInput(props, this.submit.bind(this))
+      this.input = new DateTimeInput(props, question)
     } else if (this.props.type === 'TEXT') {
-      this.input = new TextInput(props, this.submit.bind(this))
+      this.input = new TextInput(props, question)
+    } else if (this.props.type === types.LATLNG) {
+      this.input = new LatLngInput(props, question)
     } else {
-      this.input = new StringInput(props, this.submit.bind(this))
+      this.input = new StringInput(props, question)
     }
   }
 
@@ -96,6 +38,14 @@ export default class Question {
         this.survey.navigate()
       }
     }
+  }
+
+  onError(error) {
+    this.error.text = error;
+  }
+
+  onMessage(message) {
+    this.message.text = message;
   }
 
   render() {

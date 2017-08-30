@@ -30,6 +30,10 @@ export default class Question {
       this.survey.setState({
         [this.props.key]: value
       })
+    }
+    if (this.props.final) {
+      this.survey.submit();
+    } else if (value) {
       this.survey.navigate()
     } else {
       if (this.props.required) {

@@ -1,14 +1,4 @@
 import Navigo from 'navigo';
-import copy from './copy';
-import Splash from './steps/splash';
-import StepOneA from './steps/one-a';
-import StepOneB from './steps/one-b';
-import StepTwo from './steps/two';
-import StepThreeA from './steps/three-a';
-import StepThreeB from './steps/three-b';
-import StepFour from './steps/four';
-import Complete from './steps/complete';
-import Step from './step';
 import questions from './survey-questions';
 import Question from './question';
 import '../css/app.css';
@@ -17,8 +7,14 @@ class Survey {
   constructor() {
     this.steps = {};
     this.router = new Navigo('/', true);
-    this.steps = questions.map((question) => {
-      return new Question(question, this)
+    this.steps = questions.map((question, i) => {
+      let props = question;
+      if (i + 1 === questions.length) {
+         props = Object.assign({}, props, {
+           final: true
+         })
+      }
+      return new Question(props, this)
     })
     try {
       this.state = localStorage.getItem('survey_state') ? JSON.parse(localStorage.getItem('survey_state')) : {};
@@ -35,6 +31,10 @@ class Survey {
   navigate() {
     const next = parseInt(this.router.lastRouteResolved().params.step, 10) + 1;
     this.router.navigate(`/survey/${next}`)
+  }
+
+  submit() {
+    console.log(this.state)
   }
 
   setState(newState) {

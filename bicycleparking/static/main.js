@@ -452,6 +452,168 @@ Navigo.REPLACE_WILDCARD = '(?:.*)';
 Navigo.FOLLOWED_BY_SLASH_REGEXP = '(?:\/$|$)';
 Navigo.MATCH_REGEXP_FLAGS = '';
 
+const types = {
+  LATLNG: 'LATLNG',
+  STRING: 'STRING',
+  TEXT: 'TEXT',
+  NUMBER: 'NUMBER',
+  ARRAY: 'ARRAY',
+  DATETIME: 'DATETIME',
+  IMAGE: 'IMAGE'
+};
+
+const questions = [
+  {
+    key: 'target_location',
+    type: types.LATLNG,
+    heading: 'Where were you trying to go?',
+    text: 'Tell us where you were trying to go or where you tried to park',
+    required: true
+  },
+  {
+    key: 'problem_type',
+    type: types.ARRAY,
+    heading: 'What was the problem here?',
+    text: 'select all that apply',
+    required: true,
+    values: [
+      {
+        key: 'full',
+        text: 'All nearby bike racks were full'
+      },
+      {
+        key: 'difficult',
+        text: 'Difficult to locate bike racks'
+      },
+      {
+        key: 'absent',
+        text: 'No nearby bike racks'
+      }
+    ]
+  },
+  {
+    key: 'report_time',
+    type: types.DATETIME,
+    required: true,
+    heading: 'When did you identify the problem?',
+    text: 'Specify the time and date',
+    default: new Date() 
+  },
+  {
+    key: 'duration',
+    type: types.STRING,
+    heading: 'How long were you planning to lock your bike?',
+    required: true,
+    text: '',
+    values: [
+      {
+        key: 'short',
+        text: 'Less than 1 hour'
+      },
+      {
+        key: 'med',
+        text: 'Up to 8 hours'
+      },
+      {
+        key: 'long',
+        text: 'Overnight'
+      }
+    ]
+  },
+  {
+    key: 'comment',
+    type: types.TEXT,
+    heading: 'Anything else?',
+    text: 'Please leave a short comment',
+  },
+  {
+    key: 'photo',
+    type: types.IMAGE,
+    heading: 'Upload a picture',
+    text: 'Optionally upload an image of a problem'
+  },
+  {
+    key: 'email',
+    type: types.STRING,
+    heading: 'Let\'s keep in touch',
+    text: 'Sign up to receive updates'
+  }
+];
+
+class Input {
+  constructor(props, question) {
+    this.props = props;
+    this.submit = question.submit;
+    this.onError = question.onError;
+    this.onMessage = question.onMessage;
+    this.router = question.router;
+  }
+
+  bind() {
+    document.getElementById('button').addEventListener('click', (event) => {
+      const value = document.getElementById('input').value;
+      this.submit(value);
+    });
+    if (!this.props.required) {
+      document.getElementById('skip').addEventListener('click', (event) => {
+        this.submit(null);
+      });
+    }
+  }
+}
+
+class TextInput extends Input {
+  get template() {
+    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
+    return (`
+      <div className="question">
+        <textarea name=${this.props.key} id="input"></textarea>
+        <button id="button">Submit</button>
+        ${skipButton}
+      </div>
+      `
+    )
+  }
+}
+
+class StringInput extends Input {
+  get template() {
+    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
+    return (`
+      <div className="question">
+        <input type="text" name=${this.props.key} id="input" />
+        <button id="button">Submit</button>
+        ${skipButton}
+      </div>
+      `
+    )
+  }
+}
+
+function pad(val) {
+  return val < 10 ? `0${val}` : val;
+}
+
+class DateTimeInput extends Input {
+  get template() {
+    const date = new Date();
+    const month = pad(date.getMonth() + 1);
+    const day = pad(date.getDate());
+    const hour = pad(date.getHours());
+    const minutes = pad(date.getMinutes());
+    const dateString = `${date.getFullYear()}-${month}-${day}T${hour}:${minutes}`;
+    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
+    return (`
+      <div className="question">
+        <input type="datetime-local" value="${dateString}" name=${this.props.key} id="input" />
+        <button id="button">Submit</button>
+        ${skipButton}
+      </div>
+      `
+    )
+  }
+}
+
 var global$1 = typeof global !== "undefined" ? global :
             typeof self !== "undefined" ? self :
             typeof window !== "undefined" ? window : {};
@@ -22400,171 +22562,9 @@ exports.map = createMap;
 //# sourceMappingURL=leaflet-src.js.map
 });
 
-const types = {
-  LATLNG: 'LATLNG',
-  STRING: 'STRING',
-  TEXT: 'TEXT',
-  NUMBER: 'NUMBER',
-  ARRAY: 'ARRAY',
-  DATETIME: 'DATETIME',
-  IMAGE: 'IMAGE'
-};
-
-const questions = [
-  {
-    key: 'target_location',
-    type: types.LATLNG,
-    heading: 'Where were you trying to go?',
-    text: 'Tell us where you were trying to go or where you tried to park',
-    required: true
-  },
-  {
-    key: 'problem_type',
-    type: types.ARRAY,
-    heading: 'What was the problem here?',
-    text: 'select all that apply',
-    required: true,
-    values: [
-      {
-        key: 'full',
-        text: 'All nearby bike racks were full'
-      },
-      {
-        key: 'difficult',
-        text: 'Difficult to locate bike racks'
-      },
-      {
-        key: 'absent',
-        text: 'No nearby bike racks'
-      }
-    ]
-  },
-  {
-    key: 'report_time',
-    type: types.DATETIME,
-    required: true,
-    heading: 'When did you identify the problem?',
-    text: 'Specify the time and date',
-    default: new Date() 
-  },
-  {
-    key: 'duration',
-    type: types.STRING,
-    heading: 'How long were you planning to lock your bike?',
-    required: true,
-    text: '',
-    values: [
-      {
-        key: 'short',
-        text: 'Less than 1 hour'
-      },
-      {
-        key: 'med',
-        text: 'Up to 8 hours'
-      },
-      {
-        key: 'long',
-        text: 'Overnight'
-      }
-    ]
-  },
-  {
-    key: 'comment',
-    type: types.TEXT,
-    heading: 'Anything else?',
-    text: 'Please leave a short comment',
-  },
-  {
-    key: 'photo',
-    type: types.IMAGE,
-    heading: 'Upload a picture',
-    text: 'Optionally upload an image of a problem'
-  },
-  {
-    key: 'email',
-    type: types.STRING,
-    heading: 'Let\'s keep in touch',
-    text: 'Sign up to receive updates'
-  }
-];
-
-class Input {
-  constructor(props, question) {
-    this.props = props;
-    this.submit = question.submit;
-    this.onError = question.onError;
-    this.onMessage = question.onMessage;
-    this.router = question.router;
-  }
-
-  bind() {
-    document.getElementById('button').addEventListener('click', (event) => {
-      const value = document.getElementById('input').value;
-      this.submit(value);
-    });
-    if (!this.props.required) {
-      document.getElementById('skip').addEventListener('click', (event) => {
-        this.submit(null);
-      });
-    }
-  }
-}
-
-class TextInput extends Input {
-  get template() {
-    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
-    return (`
-      <div className="question">
-        <textarea name=${this.props.key} id="input"></textarea>
-        <button id="button">Submit</button>
-        ${skipButton}
-      </div>
-      `
-    )
-  }
-}
-
-class StringInput extends Input {
-  get template() {
-    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
-    return (`
-      <div className="question">
-        <input type="text" name=${this.props.key} id="input" />
-        <button id="button">Submit</button>
-        ${skipButton}
-      </div>
-      `
-    )
-  }
-}
-
-function pad$2(val) {
-  return val < 10 ? `0${val}` : val;
-}
-
-class DateTimeInput extends Input {
-  get template() {
-    const date = new Date();
-    const month = pad$2(date.getMonth() + 1);
-    const day = pad$2(date.getDate());
-    const hour = pad$2(date.getHours());
-    const minutes = pad$2(date.getMinutes());
-    const dateString = `${date.getFullYear()}-${month}-${day}T${hour}:${minutes}`;
-    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
-    return (`
-      <div className="question">
-        <input type="datetime-local" value="${dateString}" name=${this.props.key} id="input" />
-        <button id="button">Submit</button>
-        ${skipButton}
-      </div>
-      `
-    )
-  }
-}
-
-const TILE_URL$1 = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
-const ATTRIBUTION$1 = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>';
-const TOKEN$3 = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
+const TILE_URL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
+const ATTRIBUTION = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>';
+const TOKEN$1 = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
 
 const icon = window.ASSETS_PATH + 'images/marker-icon.png';
 const iconShadow = window.ASSETS_PATH + 'images/marker-shadow.png';
@@ -22649,16 +22649,16 @@ class Map {
   }
 
   initTiles() {
-    leafletSrc.tileLayer(TILE_URL$1, {
-      attribution: ATTRIBUTION$1,
+    leafletSrc.tileLayer(TILE_URL, {
+      attribution: ATTRIBUTION,
       maxZoom: 18,
       id: 'mapbox.streets',
-      accessToken: TOKEN$3
+      accessToken: TOKEN$1
     }).addTo(this.map);
   }
 }
 
-const TOKEN$2 = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
+const TOKEN = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
 class LatLngInput extends Input {
   constructor() {
     super(...arguments);
@@ -22667,7 +22667,7 @@ class LatLngInput extends Input {
       lng: null
     };
     this.map = null;
-    this.mapBoxClient = new geocoding(TOKEN$2);
+    this.mapBoxClient = new geocoding(TOKEN);
     this.output = null;
   }
 
@@ -22779,6 +22779,10 @@ class Question {
       this.survey.setState({
         [this.props.key]: value
       });
+    }
+    if (this.props.final) {
+      this.survey.submit();
+    } else if (value) {
       this.survey.navigate();
     } else {
       if (this.props.required) {
@@ -22830,8 +22834,14 @@ class Survey {
   constructor() {
     this.steps = {};
     this.router = new Navigo('/', true);
-    this.steps = questions.map((question) => {
-      return new Question(question, this)
+    this.steps = questions.map((question, i) => {
+      let props = question;
+      if (i + 1 === questions.length) {
+         props = Object.assign({}, props, {
+           final: true
+         });
+      }
+      return new Question(props, this)
     });
     try {
       this.state = localStorage.getItem('survey_state') ? JSON.parse(localStorage.getItem('survey_state')) : {};
@@ -22848,6 +22858,10 @@ class Survey {
   navigate() {
     const next = parseInt(this.router.lastRouteResolved().params.step, 10) + 1;
     this.router.navigate(`/survey/${next}`);
+  }
+
+  submit() {
+    console.log(this.state);
   }
 
   setState(newState) {

@@ -452,203 +452,12 @@ Navigo.REPLACE_WILDCARD = '(?:.*)';
 Navigo.FOLLOWED_BY_SLASH_REGEXP = '(?:\/$|$)';
 Navigo.MATCH_REGEXP_FLAGS = '';
 
-const types = {
-  LATLNG: 'LATLNG',
-  STRING: 'STRING',
-  TEXT: 'TEXT',
-  NUMBER: 'NUMBER',
-  ARRAY: 'ARRAY',
-  DATETIME: 'DATETIME',
-  IMAGE: 'IMAGE',
-};
-
-const questions = [
-  {
-    key: 'target_location',
-    type: types.LATLNG,
-    heading: 'Where were you trying to go?',
-    text: 'Tell us where you were trying to go or where you tried to park',
-    required: true
-  },
-  {
-    key: 'problem_type',
-    type: types.ARRAY,
-    heading: 'What was the problem here?',
-    text: 'select all that apply',
-    required: true,
-    values: [
-      {
-        key: 'full',
-        text: 'All nearby bike racks were full'
-      },
-      {
-        key: 'difficult',
-        text: 'Difficult to locate bike racks'
-      },
-      {
-        key: 'absent',
-        text: 'No nearby bike racks'
-      }
-    ]
-  },
-  {
-    key: 'report_time',
-    type: types.DATETIME,
-    required: true,
-    heading: 'When did you identify the problem?',
-    text: 'Specify the time and date',
-    default: new Date() 
-  },
-  {
-    key: 'duration',
-    type: types.STRING,
-    heading: 'How long were you planning to lock your bike?',
-    required: true,
-    text: '',
-    values: [
-      {
-        key: 'short',
-        text: 'Less than 1 hour'
-      },
-      {
-        key: 'med',
-        text: 'Up to 8 hours'
-      },
-      {
-        key: 'long',
-        text: 'Overnight'
-      }
-    ]
-  },
-  {
-    key: 'comment',
-    type: types.TEXT,
-    heading: 'Anything else?',
-    text: 'Please leave a short comment',
-  },
-  {
-    key: 'photo',
-    type: types.IMAGE,
-    heading: 'Upload a picture',
-    text: 'Optionally upload an image of a problem'
-  },
-  {
-    key: 'email',
-    type: types.STRING,
-    heading: 'Let\'s keep in touch',
-    text: 'Sign up to receive updates'
-  }
-];
-
-class Home {
-  constructor(survey) {
-    this.survey = survey;
-  }
-
-  render() {
-    this.el = this.el || document.getElementById('render');
-    this.el.innerHTML = this.template();
-    this.bind();
-  }
-  
-  bind() {
-    document.getElementById('button').addEventListener('click', (event) => {
-      this.survey.router.navigate(`/survey/1`);
-    });
-  }
-  
-  template() {
-    return (
-      `
-      <div class="View">
-        <div class="Step home">
-          <h1 class="Step__heading">Bike Parking</h1>
-          <p class="Step__text">Start Now</p>
-          <button id="button">Start Now</button>
-        </div>
-      </div>
-      `
-    )
-  }
-}
-
-class Input {
-  constructor(props, question) {
-    this.props = props;
-    this.submit = question.submit;
-    this.onError = question.onError;
-    this.onMessage = question.onMessage;
-    this.router = question.router;
-  }
-
-  bind() {
-    document.getElementById('button').addEventListener('click', (event) => {
-      const value = document.getElementById('input').value;
-      this.submit(value);
-    });
-    if (!this.props.required) {
-      document.getElementById('skip').addEventListener('click', (event) => {
-        this.submit(null);
-      });
-    }
-  }
-}
-
-class TextInput extends Input {
-  get template() {
-    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
-    return (`
-      <div className="question">
-        <textarea name=${this.props.key} id="input"></textarea>
-        <button id="button">Submit</button>
-        ${skipButton}
-      </div>
-      `
-    )
-  }
-}
-
-class StringInput extends Input {
-  get template() {
-    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
-    return (`
-      <div className="question">
-        <input type="text" name=${this.props.key} id="input" />
-        <button id="button">Submit</button>
-        ${skipButton}
-      </div>
-      `
-    )
-  }
-}
-
-function pad(val) {
-  return val < 10 ? `0${val}` : val;
-}
-
-class DateTimeInput extends Input {
-  get template() {
-    const date = new Date();
-    const month = pad(date.getMonth() + 1);
-    const day = pad(date.getDate());
-    const hour = pad(date.getHours());
-    const minutes = pad(date.getMinutes());
-    const dateString = `${date.getFullYear()}-${month}-${day}T${hour}:${minutes}`;
-    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
-    return (`
-      <div className="question">
-        <input type="datetime-local" value="${dateString}" name=${this.props.key} id="input" />
-        <button id="button">Submit</button>
-        ${skipButton}
-      </div>
-      `
-    )
-  }
-}
-
 var global$1 = typeof global !== "undefined" ? global :
             typeof self !== "undefined" ? self :
             typeof window !== "undefined" ? window : {};
+
+// shim for using process in browser
+// based off https://github.com/defunctzombie/node-process/blob/master/browser.js
 
 function defaultSetTimout() {
     throw new Error('setTimeout has not been defined');
@@ -869,6 +678,17 @@ var process = {
   config: config,
   uptime: uptime
 };
+
+/*
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
 
 var NODE_ENV = process.env.NODE_ENV;
 
@@ -2075,7 +1895,7 @@ return Promise$2;
 
 })));
 
-//# sourceMappingURL=es6-promise.map
+
 });
 
 var promise = createCommonjsModule(function (module) {
@@ -2097,6 +1917,13 @@ module.export = Promise;
  * @author Scott Andrews
  */
 
+/**
+ * Add common helper methods to a client impl
+ *
+ * @param {function} impl the client implementation
+ * @param {Client} [target] target of this client, used when wrapping other clients
+ * @returns {Client} the client impl with additional methods
+ */
 var client$3 = function client(impl, target) {
 
 	if (target) {
@@ -2135,6 +1962,62 @@ var client$3 = function client(impl, target) {
 	return impl;
 
 };
+
+/**
+ * Plain JS Object containing properties that represent an HTTP request.
+ *
+ * Depending on the capabilities of the underlying client, a request
+ * may be cancelable. If a request may be canceled, the client will add
+ * a canceled flag and cancel function to the request object. Canceling
+ * the request will put the response into an error state.
+ *
+ * @field {string} [method='GET'] HTTP method, commonly GET, POST, PUT, DELETE or HEAD
+ * @field {string|UrlBuilder} [path=''] path template with optional path variables
+ * @field {Object} [params] parameters for the path template and query string
+ * @field {Object} [headers] custom HTTP headers to send, in addition to the clients default headers
+ * @field [entity] the HTTP entity, common for POST or PUT requests
+ * @field {boolean} [canceled] true if the request has been canceled, set by the client
+ * @field {Function} [cancel] cancels the request if invoked, provided by the client
+ * @field {Client} [originator] the client that first handled this request, provided by the interceptor
+ *
+ * @class Request
+ */
+
+/**
+ * Plain JS Object containing properties that represent an HTTP response
+ *
+ * @field {Object} [request] the request object as received by the root client
+ * @field {Object} [raw] the underlying request object, like XmlHttpRequest in a browser
+ * @field {number} [status.code] status code of the response (i.e. 200, 404)
+ * @field {string} [status.text] status phrase of the response
+ * @field {Object] [headers] response headers hash of normalized name, value pairs
+ * @field [entity] the response body
+ *
+ * @class Response
+ */
+
+/**
+ * HTTP client particularly suited for RESTful operations.
+ *
+ * @field {function} wrap wraps this client with a new interceptor returning the wrapped client
+ *
+ * @param {Request} the HTTP request
+ * @returns {ResponsePromise<Response>} a promise the resolves to the HTTP response
+ *
+ * @class Client
+ */
+
+ /**
+  * Extended when.js Promises/A+ promise with HTTP specific helpers
+  *q
+  * @method entity promise for the HTTP entity
+  * @method status promise for the HTTP status code
+  * @method headers promise for the HTTP response headers
+  * @method header promise for a specific HTTP response header
+  *
+  * @class ResponsePromise
+  * @extends Promise
+  */
 
 var client$2;
 var target;
@@ -2197,6 +2080,17 @@ var _default = client$2(defaultClient);
  * @author Scott Andrews
  */
 
+/**
+ * Normalize HTTP header names using the pseudo camel case.
+ *
+ * For example:
+ *   content-type         -> Content-Type
+ *   accepts              -> Accepts
+ *   x-custom-header-name -> X-Custom-Header-Name
+ *
+ * @param {string} name the raw header name
+ * @return {string} the normalized header name
+ */
 function normalizeHeaderName$1(name) {
 	return name.toLowerCase()
 		.split('-')
@@ -2205,6 +2099,10 @@ function normalizeHeaderName$1(name) {
 }
 
 var normalizeHeaderName_1 = normalizeHeaderName$1;
+
+/*jshint latedef: nofunc */
+
+
 
 function property(promise, name) {
 	return promise.then(
@@ -3041,6 +2939,17 @@ var pathPrefix = interceptor$3({
 * @author Scott Andrews
 */
 
+/**
+ * Parse a MIME type into it's constituent parts
+ *
+ * @param {string} mime MIME type to parse
+ * @return {{
+ *   {string} raw the original MIME type
+ *   {string} type the type and subtype
+ *   {string} [suffix] mime suffix, including the plus, if any
+ *   {Object} params key/value pair of attributes
+ * }}
+ */
 function parse(mime) {
 	var params, type;
 
@@ -3463,6 +3372,14 @@ var find$1 = {
  * @author Scott Andrews
  */
 
+/**
+ * Attempt to invoke a function capturing the resulting value as a Promise
+ *
+ * If the method throws, the caught value used to reject the Promise.
+ *
+ * @param {function} work function to invoke
+ * @returns {Promise} Promise for the output of the work function
+ */
 function attempt$1(work) {
 	try {
 		return Promise.resolve(work());
@@ -3474,6 +3391,16 @@ function attempt$1(work) {
 
 var attempt_1 = attempt$1;
 
+/**
+ * Create a promise whose work is started only when a handler is registered.
+ *
+ * The work function will be invoked at most once. Thrown values will result
+ * in promise rejection.
+ *
+ * @param {Function} work function whose ouput is used to resolve the
+ *   returned promise.
+ * @returns {Promise} a lazy promise
+ */
 function lazyPromise$1(work) {
 	var started, resolver, promise, then;
 
@@ -3631,6 +3558,17 @@ var hal = {
  * @author Scott Andrews
  */
 
+/**
+ * Create a new JSON converter with custom reviver/replacer.
+ *
+ * The extended converter must be published to a MIME registry in order
+ * to be used. The existing converter will not be modified.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON
+ *
+ * @param {function} [reviver=undefined] custom JSON.parse reviver
+ * @param {function|Array} [replacer=undefined] custom JSON.stringify replacer
+ */
 function createConverter(reviver, replacer) {
 	return {
 
@@ -5174,7 +5112,6 @@ var initialBias = 72;
 var initialN = 128; // 0x80
 var delimiter = '-'; // '\x2D'
 
-/** Regular expressions */
 var regexNonASCII = /[^\x20-\x7E]/; // unprintable ASCII chars + non-ASCII chars
 var regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g; // RFC 3490 separators
 
@@ -5723,6 +5660,15 @@ var isArray$1 = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+/* eslint-disable no-proto */
+
+
 var INSPECT_MAX_BYTES = 50;
 
 /**
@@ -5753,9 +5699,6 @@ Buffer.TYPED_ARRAY_SUPPORT = global$1.TYPED_ARRAY_SUPPORT !== undefined
   ? global$1.TYPED_ARRAY_SUPPORT
   : true;
 
-/*
- * Export kMaxLength after typed array support is determined.
- */
 function kMaxLength () {
   return Buffer.TYPED_ARRAY_SUPPORT
     ? 0x7fffffff
@@ -7520,6 +7463,29 @@ if (typeof Object.create === 'function'){
   };
 }
 
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
 // Mark that a method should not be used.
 // Returns a modified function which warns once by default.
 // If --no-deprecation is set, then it is a no-op.
@@ -7539,7 +7505,8 @@ if (typeof Object.create === 'function'){
 /* legacy: obj, showHidden, depth, colors*/
 
 
-// http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
+// NOTE: These type checking functions intentionally don't use `instanceof`
+// because it is fragile and can be easily faked with `Object.create()`.
 
 
 
@@ -7578,6 +7545,7 @@ function isObject(arg) {
 
 
 
+// log is just a thin wrapper to console.log that prepends a timestamp
 
 
 
@@ -8487,6 +8455,14 @@ var url$2 = ( url$1 && url ) || url$1;
 
 var querystring = ( qs$1 && qs ) || qs$1;
 
+// install ES6 Promise polyfill
+
+
+
+
+
+
+
 var paginator = interceptor_1({
   success: function (response, config) {
     var link = response && response.headers && response.headers.Link;
@@ -8535,6 +8511,11 @@ function transform(response) {
 
 var standard_response = standardResponse;
 
+// install ES6 Promise polyfill
+
+
+
+
 var callbackify = interceptor_1({
   success: function (response) {
     var callback = response && response.callback;
@@ -8560,6 +8541,12 @@ var callbackify = interceptor_1({
 
 var callbackify_1 = callbackify;
 
+// install ES6 Promise polyfill
+
+
+
+
+// rest.js client with MIME support
 var client = function(config) {
   return browser_1
     .wrap(errorCode)
@@ -8602,6 +8589,8 @@ var client = function(config) {
  *
  * Linter refinement by Scott Andrews
  */
+
+/*jshint bitwise: false */
 
 var digits = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
@@ -8717,6 +8706,16 @@ var base64 = {
 	decode: base64Decode
 };
 
+/**
+ * Access tokens actually are data, and using them we can derive
+ * a user's username. This method attempts to do just that,
+ * decoding the part of the token after the first `.` into
+ * a username.
+ *
+ * @private
+ * @param {string} token an access token
+ * @return {string} username
+ */
 function getUser(token) {
   var data = token.split('.')[1];
   if (!data) return null;
@@ -8736,6 +8735,17 @@ function getUser(token) {
 
 var get_user = getUser;
 
+/**
+ * Services all have the same constructor pattern: you initialize them
+ * with an access token and options, and they validate those arguments
+ * in a predictable way. This is a constructor-generator that makes
+ * it possible to require each service's API individually.
+ *
+ * @private
+ * @param {string} name the name of the Mapbox API this class will access:
+ * this is set to the name of the function so it will show up in tracebacks
+ * @returns {Function} constructor function
+ */
 function makeService(name) {
 
   function service(accessToken, options) {
@@ -22591,15 +22601,177 @@ exports.Map = Map;
 exports.map = createMap;
 
 })));
-//# sourceMappingURL=leaflet-src.js.map
+
 });
 
-const TILE_URL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
-const ATTRIBUTION = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>';
-const TOKEN$1 = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
+const types = {
+  LATLNG: 'LATLNG',
+  STRING: 'STRING',
+  TEXT: 'TEXT',
+  NUMBER: 'NUMBER',
+  ARRAY: 'ARRAY',
+  DATETIME: 'DATETIME',
+  IMAGE: 'IMAGE'
+};
 
-const icon = window.ASSETS_PATH + 'marker-icon.png';
-const iconShadow = window.ASSETS_PATH + 'marker-shadow.png';
+const questions = [
+  {
+    key: 'target_location',
+    type: types.LATLNG,
+    heading: 'Where were you trying to go?',
+    text: 'Tell us where you were trying to go or where you tried to park',
+    required: true
+  },
+  {
+    key: 'problem_type',
+    type: types.ARRAY,
+    heading: 'What was the problem here?',
+    text: 'select all that apply',
+    required: true,
+    values: [
+      {
+        key: 'full',
+        text: 'All nearby bike racks were full'
+      },
+      {
+        key: 'difficult',
+        text: 'Difficult to locate bike racks'
+      },
+      {
+        key: 'absent',
+        text: 'No nearby bike racks'
+      }
+    ]
+  },
+  {
+    key: 'report_time',
+    type: types.DATETIME,
+    required: true,
+    heading: 'When did you identify the problem?',
+    text: 'Specify the time and date',
+    default: new Date() 
+  },
+  {
+    key: 'duration',
+    type: types.STRING,
+    heading: 'How long were you planning to lock your bike?',
+    required: true,
+    text: '',
+    values: [
+      {
+        key: 'short',
+        text: 'Less than 1 hour'
+      },
+      {
+        key: 'med',
+        text: 'Up to 8 hours'
+      },
+      {
+        key: 'long',
+        text: 'Overnight'
+      }
+    ]
+  },
+  {
+    key: 'comment',
+    type: types.TEXT,
+    heading: 'Anything else?',
+    text: 'Please leave a short comment',
+  },
+  {
+    key: 'photo',
+    type: types.IMAGE,
+    heading: 'Upload a picture',
+    text: 'Optionally upload an image of a problem'
+  },
+  {
+    key: 'email',
+    type: types.STRING,
+    heading: 'Let\'s keep in touch',
+    text: 'Sign up to receive updates'
+  }
+];
+
+class Input {
+  constructor(props, question) {
+    this.props = props;
+    this.submit = question.submit;
+    this.onError = question.onError;
+    this.onMessage = question.onMessage;
+    this.router = question.router;
+  }
+
+  bind() {
+    document.getElementById('button').addEventListener('click', (event) => {
+      const value = document.getElementById('input').value;
+      this.submit(value);
+    });
+    if (!this.props.required) {
+      document.getElementById('skip').addEventListener('click', (event) => {
+        this.submit(null);
+      });
+    }
+  }
+}
+
+class TextInput extends Input {
+  get template() {
+    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
+    return (`
+      <div className="question">
+        <textarea name=${this.props.key} id="input"></textarea>
+        <button id="button">Submit</button>
+        ${skipButton}
+      </div>
+      `
+    )
+  }
+}
+
+class StringInput extends Input {
+  get template() {
+    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
+    return (`
+      <div className="question">
+        <input type="text" name=${this.props.key} id="input" />
+        <button id="button">Submit</button>
+        ${skipButton}
+      </div>
+      `
+    )
+  }
+}
+
+function pad$2(val) {
+  return val < 10 ? `0${val}` : val;
+}
+
+class DateTimeInput extends Input {
+  get template() {
+    const date = new Date();
+    const month = pad$2(date.getMonth() + 1);
+    const day = pad$2(date.getDate());
+    const hour = pad$2(date.getHours());
+    const minutes = pad$2(date.getMinutes());
+    const dateString = `${date.getFullYear()}-${month}-${day}T${hour}:${minutes}`;
+    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
+    return (`
+      <div className="question">
+        <input type="datetime-local" value="${dateString}" name=${this.props.key} id="input" />
+        <button id="button">Submit</button>
+        ${skipButton}
+      </div>
+      `
+    )
+  }
+}
+
+const TILE_URL$1 = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
+const ATTRIBUTION$1 = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>';
+const TOKEN$3 = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
+
+const icon = 'leaflet/dist/images/marker-icon.png';
+const iconShadow = 'leaflet/dist/images/marker-shadow.png';
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -22609,7 +22781,7 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 class Map {
-  constructor(latlng, onSelect) {
+  constructor(latlng) {
     const [lat, lng] = latlng;
     this.lat = lat;
     this.lng = lng;
@@ -22619,7 +22791,6 @@ class Map {
       lat: this.lat,
       lng: this.lng
     };
-    this.onSelect = onSelect;
     this.mapEl = null;
   }
 
@@ -22666,10 +22837,12 @@ class Map {
 
   selectLocation() {
     if (this.selectedLatLng) {
+      this.survey.setState({
+        latlng: this.selectedLatLng
+      });
       this.map.remove();
       this.map = null;
       this.mapEl.classList.remove('active');
-      this.onSelect(this.selectedLatLng);
     }
   }
 
@@ -22681,16 +22854,16 @@ class Map {
   }
 
   initTiles() {
-    leafletSrc.tileLayer(TILE_URL, {
-      attribution: ATTRIBUTION,
+    leafletSrc.tileLayer(TILE_URL$1, {
+      attribution: ATTRIBUTION$1,
       maxZoom: 18,
       id: 'mapbox.streets',
-      accessToken: TOKEN$1
+      accessToken: TOKEN$3
     }).addTo(this.map);
   }
 }
 
-const TOKEN = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
+const TOKEN$2 = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
 class LatLngInput extends Input {
   constructor() {
     super(...arguments);
@@ -22699,7 +22872,7 @@ class LatLngInput extends Input {
       lng: null
     };
     this.map = null;
-    this.mapBoxClient = new geocoding(TOKEN);
+    this.mapBoxClient = new geocoding(TOKEN$2);
     this.output = null;
   }
 
@@ -22745,12 +22918,8 @@ class LatLngInput extends Input {
         lng: position.coords.longitude
       });
     }
-    this.map = new Map([position.coords.latitude, position.coords.longitude], this.onSelect.bind(this));
+    this.map = new Map([position.coords.latitude, position.coords.longitude]);
     this.renderMap();
-  }
-
-  onSelect(latlng) {
-    this.submit(latlng);
   }
 
   renderMap() {
@@ -22811,10 +22980,6 @@ class Question {
       this.survey.setState({
         [this.props.key]: value
       });
-    }
-    if (this.props.final) {
-      this.survey.submit();
-    } else if (value) {
       this.survey.navigate();
     } else {
       if (this.props.required) {
@@ -22866,16 +23031,9 @@ class Survey {
   constructor() {
     this.steps = {};
     this.router = new Navigo('/', true);
-    this.steps = questions.map((question, i) => {
-      let props = question;
-      if (i + 1 === questions.length) {
-         props = Object.assign({}, props, {
-           final: true
-         });
-      }
-      return new Question(props, this)
+    this.steps = questions.map((question) => {
+      return new Question(question, this)
     });
-    this.home = new Home(this);
     try {
       this.state = localStorage.getItem('survey_state') ? JSON.parse(localStorage.getItem('survey_state')) : {};
     } catch (err) {
@@ -22885,9 +23043,6 @@ class Survey {
       'survey/:step': (params, query) => {
         this.renderStep(params, query);
       },
-      '*': () => {
-        this.renderHome();
-      }
     }).resolve();
   }
 
@@ -22896,22 +23051,14 @@ class Survey {
     this.router.navigate(`/survey/${next}`);
   }
 
-  submit() {
-    console.log(this.state);
-  }
-
   setState(newState) {
     this.state = Object.assign({}, this.state, newState);
     localStorage.setItem('survey_state', JSON.stringify(this.state));
   }
 
   renderStep(params, query) {
-    let step = parseInt(params.step);
-    this.steps[step - 1].render();
-  }
-
-  renderHome() {
-    this.home.render();
+    let step = params.step;
+    this.steps[step].render();
   }
 }
 

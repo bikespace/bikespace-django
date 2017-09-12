@@ -1,15 +1,18 @@
 {% load staticfiles %}
 <html>
     <head>
-        <title>Toronto Bicycle Parking Project</title>
+    <title>Toronto Bicycle Parking Project</title>
+        <link href="https://npmcdn.com/leaflet@1.0.0-rc.1/dist/leaflet.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
         <script type="text/template" id="step">
         </script>
         <div class="app">
             <div id="render"></div>
-            <div id="map"></div>
         </div>
+        <script>
+            window.ASSETS_PATH = '{% static images %}'; 
+        </script>
         <script src="{% static 'main.js' %}"></script>
     </body>
 </html>

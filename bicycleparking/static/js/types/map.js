@@ -4,8 +4,8 @@ const TILE_URL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_to
 const ATTRIBUTION = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>';
 const TOKEN = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
 
-const icon = window.ASSETS_PATH + 'images/marker-icon.png';
-const iconShadow = window.ASSETS_PATH + 'images/marker-shadow.png';
+const icon = window.ASSETS_PATH + 'marker-icon.png';
+const iconShadow = window.ASSETS_PATH + 'marker-shadow.png';
 
 let DefaultIcon = L.icon({
     iconUrl: icon,

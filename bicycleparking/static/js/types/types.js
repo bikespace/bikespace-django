@@ -5,7 +5,7 @@ const types = {
   NUMBER: 'NUMBER',
   ARRAY: 'ARRAY',
   DATETIME: 'DATETIME',
-  IMAGE: 'IMAGE'
+  IMAGE: 'IMAGE',
 }
 
 export default types;

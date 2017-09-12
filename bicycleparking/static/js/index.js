@@ -1,5 +1,6 @@
 import Navigo from 'navigo';
 import questions from './survey-questions';
+import Home from './home';
 import Question from './question';
 import '../css/app.css';
 
@@ -15,7 +16,8 @@ class Survey {
          })
       }
       return new Question(props, this)
-    })
+    });
+    this.home = new Home(this);
     try {
       this.state = localStorage.getItem('survey_state') ? JSON.parse(localStorage.getItem('survey_state')) : {};
     } catch (err) {
@@ -25,6 +27,9 @@ class Survey {
       'survey/:step': (params, query) => {
         this.renderStep(params, query)
       },
+      '*': () => {
+        this.renderHome();
+      }
     }).resolve();
   }
 
@@ -43,8 +48,12 @@ class Survey {
   }
 
   renderStep(params, query) {
-    let step = params.step;
-    this.steps[step].render();
+    let step = parseInt(params.step);
+    this.steps[step - 1].render();
+  }
+
+  renderHome() {
+    this.home.render();
   }
 }
 

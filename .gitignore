@@ -60,7 +60,7 @@ node_modules/
 
 # User-uploaded media
 bike_parking_toronto/media/
-
+geocoded.xml
 
 # MailHog binary
 mailhog

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<data>
+   <place><name>Rouge Hill Go</name> <code>M1C 5G5</code> <lat>43.780319</lat> <long>-79.130228</long></place>
+   <place><name>Centennial Park</name> <code>M9C5N3</code> <lat>43.651983</lat> <long>-79.589117</long></place>
+   <place><name>CN Tower</name> <code>M5V2T6</code> <lat>43.642588</lat> <long>-79.387046</long></place>
+   <place><name>Long Branch GO</name> <code>M8W1R3</code> <lat>43.590963</lat> <long>-79.545468</long></place>
+   <place><name>North York Civic Centre</name> <code>M2N5V7</code> <lat>43.767218</lat> <long>-79.414696</long></place>
+   <place><name>New Spiceland</name> <code>M1X0A6</code> <lat>43.836533</lat> <long>-79.248569</long></place>
+</data>

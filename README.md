@@ -1,5 +1,6 @@
 # Toronto Bike Parking Project
 
+Note: This is a debgging branch and should NOT be merged with the master until and unless the code is updated and stable.
 
 ## Local Development
 

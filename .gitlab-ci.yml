@@ -19,14 +19,10 @@ staging:
   script:
   - apt-get update -qy
   - apt-get install -y ruby-dev
-  - apt-get install apt-transport-https
-  - echo "deb https://cli-assets.heroku.com/branches/stable/apt ./" > /etc/apt/sources.list.d/heroku.list
-  - wget -O- https://cli-assets.heroku.com/apt/release.key | apt-key add -
-  - apt-get install -y heroku
   - gem install dpl
   - dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
-  - heroku run python manage.py makemigrations --exit-code --app torontobikeparking-staging
-  - heroku run python manage.py migrate --exit-code --app torontobikeparking-staging
+  - python manage.py makermigrations
+  - python manage.py migrate
   only:
   - master
 

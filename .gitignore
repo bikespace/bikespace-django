@@ -72,3 +72,4 @@ staticfiles/
 
 venv/
 
+bicycleparking/static/main.js

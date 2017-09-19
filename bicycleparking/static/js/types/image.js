@@ -1,4 +1,5 @@
 import Input from './input';
+const URL = '';
 
 export default class ImageInput extends Input {
   constructor() {
@@ -8,10 +9,23 @@ export default class ImageInput extends Input {
 
   bind() {
     document.getElementById('input').addEventListener('change', (event) => {
-      let files = evt.target.files;
+      let files = event.target.files;
       const file = files[0];
       this.file = file;
     });
+    document.getElementById('button').addEventListener('click', (event) => {
+      this.uploadDummy().then((response) => {
+        this.submit(response);
+      });
+    });
+  }
+
+  uploadDummy() {
+    return new Promise((resolve, reject) => {
+      window.setTimeout(() => {
+        resolve({url: 'testurl'})
+      }, 1000);
+    })
   }
 
   upload() {
@@ -31,7 +45,7 @@ export default class ImageInput extends Input {
         }
       };
 
-      xhr.open('POST', this.url, true);
+      xhr.open('POST', URL, true);
       xhr.send(formData);
     });
   }

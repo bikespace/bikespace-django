@@ -40,6 +40,23 @@ class Survey {
 
   submit() {
     console.log(this.state)
+
+    // Marshall the state into API fields
+    var body = {
+      'latitude': this.state.target_location.lat,
+      'longitude': this.state.target_location.lng,
+      'comments': this.state.comment,
+      'point_timestamp': this.state.report_time,
+      'survey': this.state
+    };
+
+    fetch(`${document.location.origin}/api/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
   }
 
   setState(newState) {

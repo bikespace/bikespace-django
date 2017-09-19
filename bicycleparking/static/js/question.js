@@ -2,6 +2,9 @@ import TextInput from './types/text';
 import StringInput from './types/string';
 import DateTimeInput from './types/date';
 import LatLngInput from './types/latlng';
+import ArrayInput from './types/array';
+import SelectInput from './types/select';
+import ImageInput from './types/image';
 import types from './types/types';
 
 export default class Question {
@@ -14,14 +17,20 @@ export default class Question {
       onMessage: this.onMessage.bind(this),
       router: this.survey.router
     }
-    if (this.props.type === 'DATETIME') {
+    if (this.props.type === types.DATETIME) {
       this.input = new DateTimeInput(props, question)
-    } else if (this.props.type === 'TEXT') {
-      this.input = new TextInput(props, question)
+    } else if (this.props.type === types.TEXT) {
+      this.input = new TextInput(props, question);
     } else if (this.props.type === types.LATLNG) {
-      this.input = new LatLngInput(props, question)
+      this.input = new LatLngInput(props, question);
+    } else if (this.props.type === types.ARRAY) {
+      this.input = new ArrayInput(props, question);
+    } else if (this.props.type === types.IMAGE) {
+      this.input = new ImageInput(props, question);
+    } else if (this.props.type === types.STRING && this.props.values && this.props.values.length) {
+      this.input = new SelectInput(props, question);
     } else {
-      this.input = new StringInput(props, question)
+      this.input = new StringInput(props, question);
     }
   }
 

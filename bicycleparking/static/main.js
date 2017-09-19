@@ -870,6 +870,19 @@ var process = {
   uptime: uptime
 };
 
+'use strict';
+
+/*
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
 var NODE_ENV = process.env.NODE_ENV;
 
 var invariant = function(condition, format, a, b, c, d, e, f) {
@@ -2097,6 +2110,15 @@ module.export = Promise;
  * @author Scott Andrews
  */
 
+'use strict';
+
+/**
+ * Add common helper methods to a client impl
+ *
+ * @param {function} impl the client implementation
+ * @param {Client} [target] target of this client, used when wrapping other clients
+ * @returns {Client} the client impl with additional methods
+ */
 var client$3 = function client(impl, target) {
 
 	if (target) {
@@ -2135,6 +2157,64 @@ var client$3 = function client(impl, target) {
 	return impl;
 
 };
+
+'use strict';
+
+/**
+ * Plain JS Object containing properties that represent an HTTP request.
+ *
+ * Depending on the capabilities of the underlying client, a request
+ * may be cancelable. If a request may be canceled, the client will add
+ * a canceled flag and cancel function to the request object. Canceling
+ * the request will put the response into an error state.
+ *
+ * @field {string} [method='GET'] HTTP method, commonly GET, POST, PUT, DELETE or HEAD
+ * @field {string|UrlBuilder} [path=''] path template with optional path variables
+ * @field {Object} [params] parameters for the path template and query string
+ * @field {Object} [headers] custom HTTP headers to send, in addition to the clients default headers
+ * @field [entity] the HTTP entity, common for POST or PUT requests
+ * @field {boolean} [canceled] true if the request has been canceled, set by the client
+ * @field {Function} [cancel] cancels the request if invoked, provided by the client
+ * @field {Client} [originator] the client that first handled this request, provided by the interceptor
+ *
+ * @class Request
+ */
+
+/**
+ * Plain JS Object containing properties that represent an HTTP response
+ *
+ * @field {Object} [request] the request object as received by the root client
+ * @field {Object} [raw] the underlying request object, like XmlHttpRequest in a browser
+ * @field {number} [status.code] status code of the response (i.e. 200, 404)
+ * @field {string} [status.text] status phrase of the response
+ * @field {Object] [headers] response headers hash of normalized name, value pairs
+ * @field [entity] the response body
+ *
+ * @class Response
+ */
+
+/**
+ * HTTP client particularly suited for RESTful operations.
+ *
+ * @field {function} wrap wraps this client with a new interceptor returning the wrapped client
+ *
+ * @param {Request} the HTTP request
+ * @returns {ResponsePromise<Response>} a promise the resolves to the HTTP response
+ *
+ * @class Client
+ */
+
+ /**
+  * Extended when.js Promises/A+ promise with HTTP specific helpers
+  *q
+  * @method entity promise for the HTTP entity
+  * @method status promise for the HTTP status code
+  * @method headers promise for the HTTP response headers
+  * @method header promise for a specific HTTP response header
+  *
+  * @class ResponsePromise
+  * @extends Promise
+  */
 
 var client$2;
 var target;
@@ -2197,6 +2277,19 @@ var _default = client$2(defaultClient);
  * @author Scott Andrews
  */
 
+'use strict';
+
+/**
+ * Normalize HTTP header names using the pseudo camel case.
+ *
+ * For example:
+ *   content-type         -> Content-Type
+ *   accepts              -> Accepts
+ *   x-custom-header-name -> X-Custom-Header-Name
+ *
+ * @param {string} name the raw header name
+ * @return {string} the normalized header name
+ */
 function normalizeHeaderName$1(name) {
 	return name.toLowerCase()
 		.split('-')
@@ -2205,6 +2298,12 @@ function normalizeHeaderName$1(name) {
 }
 
 var normalizeHeaderName_1 = normalizeHeaderName$1;
+
+'use strict';
+
+/*jshint latedef: nofunc */
+
+
 
 function property(promise, name) {
 	return promise.then(
@@ -2327,6 +2426,8 @@ responsePromise$1.promise = function (func) {
 };
 
 var responsePromise_1 = responsePromise$1;
+
+'use strict';
 
 var normalizeHeaderName;
 var responsePromise;
@@ -2490,6 +2591,10 @@ var xhr = client$5(function xhr(request) {
 	});
 });
 
+'use strict';
+
+
+
 _default.setPlatformDefaultClient(xhr);
 
 var browser_1 = _default;
@@ -2500,6 +2605,8 @@ var browser_1 = _default;
  *
  * @author Scott Andrews
  */
+
+'use strict';
 
 var empty = {};
 
@@ -2529,6 +2636,8 @@ function mixin$1(dest /*, sources... */) {
 }
 
 var mixin_1 = mixin$1;
+
+'use strict';
 
 var defaultClient$1;
 var mixin;
@@ -2670,6 +2779,8 @@ interceptor$1.ComplexRequest = ComplexRequest;
 
 var interceptor_1 = interceptor$1;
 
+'use strict';
+
 var interceptor;
 
 interceptor = interceptor_1;
@@ -2704,6 +2815,8 @@ var errorCode = interceptor({
  *
  * @author Scott Andrews
  */
+
+'use strict';
 
 var encodedSpaceRE;
 var urlEncodedSpaceRE;
@@ -2778,6 +2891,8 @@ var xWwwFormUrlencoded = {
 	}
 
 };
+
+'use strict';
 
 var mixin$2;
 var xWWWFormURLEncoder;
@@ -2992,6 +3107,8 @@ origin = typeof location !== 'undefined' ? new UrlBuilder$1(location.href).parts
 
 var UrlBuilder_1 = UrlBuilder$1;
 
+'use strict';
+
 var interceptor$3;
 var UrlBuilder;
 
@@ -3041,6 +3158,19 @@ var pathPrefix = interceptor$3({
 * @author Scott Andrews
 */
 
+'use strict';
+
+/**
+ * Parse a MIME type into it's constituent parts
+ *
+ * @param {string} mime MIME type to parse
+ * @return {{
+ *   {string} raw the original MIME type
+ *   {string} type the type and subtype
+ *   {string} [suffix] mime suffix, including the plus, if any
+ *   {Object} params key/value pair of attributes
+ * }}
+ */
 function parse(mime) {
 	var params, type;
 
@@ -3069,6 +3199,8 @@ var mime$1 = {
  *
  * @author Scott Andrews
  */
+
+'use strict';
 
 var charMap;
 
@@ -3232,6 +3364,8 @@ var uriEncoder$1 = {
 
 };
 
+'use strict';
+
 var uriEncoder;
 var operations;
 var prefixRE;
@@ -3386,6 +3520,8 @@ var uriTemplate$1 = {
 
 };
 
+'use strict';
+
 var interceptor$5;
 var uriTemplate;
 var mixin$3;
@@ -3433,6 +3569,8 @@ var template$1 = interceptor$5({
  * @author Scott Andrews
  */
 
+'use strict';
+
 var find$1 = {
 
 	/**
@@ -3463,6 +3601,16 @@ var find$1 = {
  * @author Scott Andrews
  */
 
+'use strict';
+
+/**
+ * Attempt to invoke a function capturing the resulting value as a Promise
+ *
+ * If the method throws, the caught value used to reject the Promise.
+ *
+ * @param {function} work function to invoke
+ * @returns {Promise} Promise for the output of the work function
+ */
 function attempt$1(work) {
 	try {
 		return Promise.resolve(work());
@@ -3474,6 +3622,20 @@ function attempt$1(work) {
 
 var attempt_1 = attempt$1;
 
+'use strict';
+
+
+
+/**
+ * Create a promise whose work is started only when a handler is registered.
+ *
+ * The work function will be invoked at most once. Thrown values will result
+ * in promise rejection.
+ *
+ * @param {Function} work function whose ouput is used to resolve the
+ *   returned promise.
+ * @returns {Promise} a lazy promise
+ */
 function lazyPromise$1(work) {
 	var started, resolver, promise, then;
 
@@ -3499,6 +3661,8 @@ function lazyPromise$1(work) {
 }
 
 var lazyPromise_1 = lazyPromise$1;
+
+'use strict';
 
 var pathPrefix$2;
 var template;
@@ -3631,6 +3795,19 @@ var hal = {
  * @author Scott Andrews
  */
 
+'use strict';
+
+/**
+ * Create a new JSON converter with custom reviver/replacer.
+ *
+ * The extended converter must be published to a MIME registry in order
+ * to be used. The existing converter will not be modified.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON
+ *
+ * @param {function} [reviver=undefined] custom JSON.parse reviver
+ * @param {function|Array} [replacer=undefined] custom JSON.stringify replacer
+ */
 function createConverter(reviver, replacer) {
 	return {
 
@@ -3657,6 +3834,8 @@ var json = createConverter();
  */
 
 /* global FormData, File, Blob */
+
+'use strict';
 
 function isFormElement(object) {
 	return object &&
@@ -3719,6 +3898,8 @@ var formData = {
  * @author Scott Andrews
  */
 
+'use strict';
+
 var plain = {
 
 	read: function (str) {
@@ -3730,6 +3911,8 @@ var plain = {
 	}
 
 };
+
+'use strict';
 
 var mime$3;
 var registry$1;
@@ -3827,6 +4010,8 @@ registry$1.register('text/plain', plain);
 registry$1.register('+json', registry$1.delegate('application/json'));
 
 var registry_1 = registry$1;
+
+'use strict';
 
 var interceptor$4;
 var mime;
@@ -3933,6 +4118,8 @@ var mime_1 = interceptor$4({
 		});
 	}
 });
+
+'use strict';
 
 var interceptor$6;
 var mixinUtil;
@@ -5292,52 +5479,6 @@ function ucs2decode(string) {
  * @param {Array} codePoints The array of numeric code points.
  * @returns {String} The new Unicode string (UCS-2).
  */
-function ucs2encode(array) {
-  return map(array, function(value) {
-    var output = '';
-    if (value > 0xFFFF) {
-      value -= 0x10000;
-      output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
-      value = 0xDC00 | value & 0x3FF;
-    }
-    output += stringFromCharCode(value);
-    return output;
-  }).join('');
-}
-
-/**
- * Converts a basic code point into a digit/integer.
- * @see `digitToBasic()`
- * @private
- * @param {Number} codePoint The basic numeric code point value.
- * @returns {Number} The numeric value of a basic code point (for use in
- * representing integers) in the range `0` to `base - 1`, or `base` if
- * the code point does not represent a value.
- */
-function basicToDigit(codePoint) {
-  if (codePoint - 48 < 10) {
-    return codePoint - 22;
-  }
-  if (codePoint - 65 < 26) {
-    return codePoint - 65;
-  }
-  if (codePoint - 97 < 26) {
-    return codePoint - 97;
-  }
-  return base;
-}
-
-/**
- * Converts a digit/integer into a basic code point.
- * @see `basicToDigit()`
- * @private
- * @param {Number} digit The numeric value of a basic code point.
- * @returns {Number} The basic code point whose value (when used for
- * representing integers) is `digit`, which needs to be in the range
- * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
- * used; else, the lowercase form is used. The behavior is undefined
- * if `flag` is non-zero and `digit` has no uppercase form.
- */
 function digitToBasic(digit, flag) {
   //  0..25 map to ASCII a..z or A..Z
   // 26..35 map to ASCII 0..9
@@ -5756,6 +5897,7 @@ Buffer.TYPED_ARRAY_SUPPORT = global$1.TYPED_ARRAY_SUPPORT !== undefined
 /*
  * Export kMaxLength after typed array support is determined.
  */
+var _kMaxLength = kMaxLength();
 function kMaxLength () {
   return Buffer.TYPED_ARRAY_SUPPORT
     ? 0x7fffffff
@@ -5847,14 +5989,7 @@ Buffer.from = function (value, encodingOrOffset, length) {
 if (Buffer.TYPED_ARRAY_SUPPORT) {
   Buffer.prototype.__proto__ = Uint8Array.prototype;
   Buffer.__proto__ = Uint8Array;
-  if (typeof Symbol !== 'undefined' && Symbol.species &&
-      Buffer[Symbol.species] === Buffer) {
-    // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
-    // Object.defineProperty(Buffer, Symbol.species, {
-    //   value: null,
-    //   configurable: true
-    // })
-  }
+  
 }
 
 function assertSize (size) {
@@ -7496,30 +7631,6 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isFastBuffer(obj.slice(0, 0))
 }
 
-var inherits;
-if (typeof Object.create === 'function'){
-  inherits = function inherits(ctor, superCtor) {
-    // implementation from standard node.js 'util' module
-    ctor.super_ = superCtor;
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  inherits = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor;
-    var TempCtor = function () {};
-    TempCtor.prototype = superCtor.prototype;
-    ctor.prototype = new TempCtor();
-    ctor.prototype.constructor = ctor;
-  };
-}
-
 // Mark that a method should not be used.
 // Returns a modified function which warns once by default.
 // If --no-deprecation is set, then it is a no-op.
@@ -8487,6 +8598,16 @@ var url$2 = ( url$1 && url ) || url$1;
 
 var querystring = ( qs$1 && qs ) || qs$1;
 
+'use strict';
+
+// install ES6 Promise polyfill
+
+
+
+
+
+
+
 var paginator = interceptor_1({
   success: function (response, config) {
     var link = response && response.headers && response.headers.Link;
@@ -8535,6 +8656,13 @@ function transform(response) {
 
 var standard_response = standardResponse;
 
+'use strict';
+
+// install ES6 Promise polyfill
+
+
+
+
 var callbackify = interceptor_1({
   success: function (response) {
     var callback = response && response.callback;
@@ -8560,6 +8688,14 @@ var callbackify = interceptor_1({
 
 var callbackify_1 = callbackify;
 
+'use strict';
+
+// install ES6 Promise polyfill
+
+
+
+
+// rest.js client with MIME support
 var client = function(config) {
   return browser_1
     .wrap(errorCode)
@@ -8602,6 +8738,10 @@ var client = function(config) {
  *
  * Linter refinement by Scott Andrews
  */
+
+'use strict';
+
+/*jshint bitwise: false */
 
 var digits = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
@@ -8717,6 +8857,20 @@ var base64 = {
 	decode: base64Decode
 };
 
+'use strict';
+
+
+
+/**
+ * Access tokens actually are data, and using them we can derive
+ * a user's username. This method attempts to do just that,
+ * decoding the part of the token after the first `.` into
+ * a username.
+ *
+ * @private
+ * @param {string} token an access token
+ * @return {string} username
+ */
 function getUser(token) {
   var data = token.split('.')[1];
   if (!data) return null;
@@ -8736,6 +8890,24 @@ function getUser(token) {
 
 var get_user = getUser;
 
+'use strict';
+
+
+
+
+
+
+/**
+ * Services all have the same constructor pattern: you initialize them
+ * with an access token and options, and they validate those arguments
+ * in a predictable way. This is a constructor-generator that makes
+ * it possible to require each service's API individually.
+ *
+ * @private
+ * @param {string} name the name of the Mapbox API this class will access:
+ * this is set to the name of the function so it will show up in tracebacks
+ * @returns {Function} constructor function
+ */
 function makeService(name) {
 
   function service(accessToken, options) {
@@ -8774,6 +8946,11 @@ function makeService(name) {
 }
 
 var make_service = makeService;
+
+'use strict';
+
+
+
 
 var MapboxGeocoding = make_service('MapboxGeocoding');
 
@@ -9008,7 +9185,7 @@ MapboxGeocoding.prototype.geocodeReverse = function(location, options, callback)
   });
 };
 
-var geocoding = MapboxGeocoding;
+var geocoding$1 = MapboxGeocoding;
 
 var leafletSrc = createCommonjsModule(function (module, exports) {
 /*
@@ -22699,7 +22876,7 @@ class LatLngInput extends Input {
       lng: null
     };
     this.map = null;
-    this.mapBoxClient = new geocoding(TOKEN);
+    this.mapBoxClient = new geocoding$1(TOKEN);
     this.output = null;
   }
 
@@ -22785,6 +22962,144 @@ class LatLngInput extends Input {
   }
 }
 
+class ArrayInput extends Input {
+  constructor() {
+    super(...arguments);
+    this.values = [];
+  }
+
+  onSelect(event) {
+    if (event.target.checked) {
+      this.values.push(event.target.value);
+    } else {
+      this.values.splice(this.values.indexOf(event.target.value), 1);
+    }
+  }
+
+  bind() {
+    document.getElementById('button').addEventListener('click', (event) => {
+      this.submit(this.values);
+    });
+    [...document.querySelectorAll('input')].forEach(el => {
+      el.onchange = this.onSelect.bind(this);
+    });
+  }
+
+  get template() {
+    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
+    const options = this.props.values.reduce((memo, value) => {
+      memo += `<p><label><input type="checkbox" value="${value.key}" name="problem" />${value.text}</label></p>`;
+      return memo;
+    }, '');
+    return (`
+      <div className="question">
+        ${options}
+        <button id="button">Submit</button>
+        ${skipButton}
+      </div>
+      `
+    )
+  }
+}
+
+class Select extends Input {
+  constructor() {
+    super(...arguments);
+    this.value = null;
+  }
+
+  onSelect(event) {
+    this.value = event.target.value;
+  }
+
+  bind() {
+    document.getElementById('button').addEventListener('click', (event) => {
+      this.submit(this.value);
+    });
+    [...document.querySelectorAll('input')].forEach(el => {
+      el.onchange = this.onSelect.bind(this);
+    });
+  }
+
+  get template() {
+    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
+    const options = this.props.values.reduce((memo, value) => {
+      memo += `<p><label><input name="string-select" type="radio" value="${value.key}" name="problem" />${value.text}</label></p>`;
+      return memo;
+    }, '');
+    return (`
+      <div className="question">
+        ${options}
+        <button id="button">Submit</button>
+        ${skipButton}
+      </div>
+      `
+    )
+  }
+}
+
+const URL = '';
+
+class ImageInput extends Input {
+  constructor() {
+    super(...arguments);
+    this.file = null;
+  }
+
+  bind() {
+    document.getElementById('input').addEventListener('change', (event) => {
+      let files = event.target.files;
+      const file = files[0];
+      this.file = file;
+    });
+    document.getElementById('button').addEventListener('click', (event) => {
+      this.uploadDummy().then((response) => {
+        this.submit(response);
+      });
+    });
+  }
+
+  uploadDummy() {
+    return new Promise((resolve, reject) => {
+      window.setTimeout(() => {
+        resolve({url: 'testurl'});
+      }, 1000);
+    })
+  }
+
+  upload() {
+    return new Promise((resolve, reject) => {
+      let formData = new FormData();
+      let xhr = new XMLHttpRequest();
+
+      formData.append(this.props.key, this.file, this.file.name);
+
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            resolve(JSON.parse(xhr.response));
+          } else {
+            reject(xhr.response);
+          }
+        }
+      };
+
+      xhr.open('POST', URL, true);
+      xhr.send(formData);
+    });
+  }
+
+  get template() {
+    return (`
+      <div className="question">
+        <input type="file" id="input" />
+        <button id="button">Submit</button>
+      </div>
+      `
+    )
+  }
+}
+
 class Question {
   constructor(props, survey) {
     this.props = props;
@@ -22795,12 +23110,18 @@ class Question {
       onMessage: this.onMessage.bind(this),
       router: this.survey.router
     };
-    if (this.props.type === 'DATETIME') {
+    if (this.props.type === types.DATETIME) {
       this.input = new DateTimeInput(props, question);
-    } else if (this.props.type === 'TEXT') {
+    } else if (this.props.type === types.TEXT) {
       this.input = new TextInput(props, question);
     } else if (this.props.type === types.LATLNG) {
       this.input = new LatLngInput(props, question);
+    } else if (this.props.type === types.ARRAY) {
+      this.input = new ArrayInput(props, question);
+    } else if (this.props.type === types.IMAGE) {
+      this.input = new ImageInput(props, question);
+    } else if (this.props.type === types.STRING && this.props.values && this.props.values.length) {
+      this.input = new Select(props, question);
     } else {
       this.input = new StringInput(props, question);
     }
@@ -22898,6 +23219,23 @@ class Survey {
 
   submit() {
     console.log(this.state);
+
+    // Marshall the state into API fields
+    var body = {
+      'latitude': this.state.target_location.lat,
+      'longitude': this.state.target_location.lng,
+      'comments': this.state.comment,
+      'point_timestamp': this.state.report_time,
+      'survey': this.state
+    };
+
+    fetch(`${document.location.origin}/api/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
   }
 
   setState(newState) {

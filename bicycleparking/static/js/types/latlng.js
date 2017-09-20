@@ -62,7 +62,12 @@ export default class LatLngInput extends Input {
     this.renderMap();
   }
 
+  get value() {
+    return this.latlng;
+  }
+
   onSelect(latlng) {
+    this.latlng = latlng;
     this.submit(latlng);
   }
 

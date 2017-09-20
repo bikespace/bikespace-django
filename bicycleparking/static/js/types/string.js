@@ -2,12 +2,10 @@ import Input from './input';
 
 export default class StringInput extends Input {
   get template() {
-    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
     return (`
       <div className="question">
+        <label class="Step__text">${this.props.text}</label>
         <input type="text" name=${this.props.key} id="input" />
-        <button id="button">Submit</button>
-        ${skipButton}
       </div>
       `
     )

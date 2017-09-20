@@ -1,21 +1,21 @@
 import Navigo from 'navigo';
 import questions from './survey-questions';
 import Home from './home';
-import Question from './question';
+import Pane from './pane';
 import '../css/app.css';
 
 class Survey {
   constructor() {
-    this.steps = {};
+    this.panes = {};
     this.router = new Navigo('/', true);
-    this.steps = questions.map((question, i) => {
+    this.panes = questions.map((question, i) => {
       let props = question;
       if (i + 1 === questions.length) {
          props = Object.assign({}, props, {
            final: true
          })
       }
-      return new Question(props, this)
+      return new Pane(props, this)
     });
     this.home = new Home(this);
     try {
@@ -24,8 +24,8 @@ class Survey {
       this.state = {};
     }
     this.router.on({
-      'survey/:step': (params, query) => {
-        this.renderStep(params, query)
+      'survey/:pane': (params, query) => {
+        this.renderPane(params, query)
       },
       '*': () => {
         this.renderHome();
@@ -34,12 +34,12 @@ class Survey {
   }
 
   navigate() {
-    const next = parseInt(this.router.lastRouteResolved().params.step, 10) + 1;
+    const next = parseInt(this.router.lastRouteResolved().params.pane, 10) + 1;
     this.router.navigate(`/survey/${next}`)
   }
 
   submit() {
-    console.log(this.state)
+    console.log('submitting', this.state)
 
     // Marshall the state into API fields
     var body = {
@@ -64,9 +64,9 @@ class Survey {
     localStorage.setItem('survey_state', JSON.stringify(this.state));
   }
 
-  renderStep(params, query) {
-    let step = parseInt(params.step);
-    this.steps[step - 1].render();
+  renderPane(params, query) {
+    let pane = parseInt(params.pane);
+    this.pane[pane - 1].render();
   }
 
   renderHome() {

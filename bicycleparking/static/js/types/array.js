@@ -6,6 +6,10 @@ export default class ArrayInput extends Input {
     this.values = [];
   }
 
+  get value() {
+    return this.values;
+  }
+
   onSelect(event) {
     if (event.target.checked) {
       this.values.push(event.target.value);
@@ -15,9 +19,6 @@ export default class ArrayInput extends Input {
   }
 
   bind() {
-    document.getElementById('button').addEventListener('click', (event) => {
-      this.submit(this.values);
-    });
     [...document.querySelectorAll('input')].forEach(el => {
       el.onchange = this.onSelect.bind(this);
     })
@@ -31,9 +32,8 @@ export default class ArrayInput extends Input {
     }, '');
     return (`
       <div className="question">
+        <label class="Step__text">${this.props.text}</label>
         ${options}
-        <button id="button">Submit</button>
-        ${skipButton}
       </div>
       `
     )

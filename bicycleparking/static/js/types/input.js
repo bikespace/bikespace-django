@@ -6,16 +6,10 @@ export default class Input {
     this.onMessage = question.onMessage;
     this.router = question.router;
   }
-
-  bind() {
-    document.getElementById('button').addEventListener('click', (event) => {
-      const value = document.getElementById('input').value;
-      this.submit(value);
-    });
-    if (!this.props.required) {
-      document.getElementById('skip').addEventListener('click', (event) => {
-        this.submit(null);
-      });
-    }
+  
+  get value() {
+    return document.getElementById('input').value;
   }
+
+  bind() {}
 }

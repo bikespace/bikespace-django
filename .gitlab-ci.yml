@@ -19,7 +19,7 @@ staging:
   script:
   - apt-get update -qy
   - apt-get install -y ruby-dev
-  - apt-get install -y node
+  - apt-get install -y nodejs
   - gem install dpl
   - cd bicycleparking && npm install && npm run build
   - cd .. && dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY

@@ -13,11 +13,6 @@ export default class ImageInput extends Input {
       const file = files[0];
       this.file = file;
     });
-    document.getElementById('button').addEventListener('click', (event) => {
-      this.uploadDummy().then((response) => {
-        this.submit(response);
-      });
-    });
   }
 
   uploadDummy() {
@@ -26,6 +21,10 @@ export default class ImageInput extends Input {
         resolve({url: 'testurl'})
       }, 1000);
     })
+  }
+
+  get value() {
+    return this.file;
   }
 
   upload() {
@@ -54,7 +53,6 @@ export default class ImageInput extends Input {
     return (`
       <div className="question">
         <input type="file" id="input" />
-        <button id="button">Submit</button>
       </div>
       `
     )

@@ -12,12 +12,10 @@ export default class DateTimeInput extends Input {
     const hour = pad(date.getHours());
     const minutes = pad(date.getMinutes());
     const dateString = `${date.getFullYear()}-${month}-${day}T${hour}:${minutes}`;
-    const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
     return (`
       <div className="question">
+        <label class="Step__text">${this.props.text}</label>
         <input type="datetime-local" value="${dateString}" name=${this.props.key} id="input" />
-        <button id="button">Submit</button>
-        ${skipButton}
       </div>
       `
     )

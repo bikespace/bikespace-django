@@ -18,8 +18,7 @@ staging:
   type: deploy
   script:
   - apt-get update -qy
-  - apt-get install -y ruby-dev
-  - apt-get install -y nodejs
+  - apt-get install -y ruby-dev && nodejs
   - gem install dpl
   - cd bicycleparking && npm install && npm run build
   - cd .. && dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
@@ -30,9 +29,8 @@ production:
   type: deploy
   script:
   - apt-get update -qy
-  - apt-get install -y ruby-dev
+  - apt-get install -y ruby-dev && nodejs
   - gem install dpl
-  - apt-get install -y node
   - cd bicycleparking && npm install && npm run build
   - cd .. && dpl --provider=heroku --app=torontobikeparking --api-key=$HEROKU_PRODUCTION_API_KEY
   only:

@@ -19,11 +19,10 @@ staging:
   script:
   - apt-get update -qy
   - apt-get install -y ruby-dev
-  - apt-get install node
+  - apt-get install -y node
   - gem install dpl
-  - npm install
-  - npm run build 
-  - dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
+  - cd bicycleparking && npm install && npm run build
+  - cd .. && dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
   only:
   - master
 
@@ -33,6 +32,8 @@ production:
   - apt-get update -qy
   - apt-get install -y ruby-dev
   - gem install dpl
-  - dpl --provider=heroku --app=torontobikeparking --api-key=$HEROKU_PRODUCTION_API_KEY
+  - apt-get install -y node
+  - cd bicycleparking && npm install && npm run build
+  - cd .. && dpl --provider=heroku --app=torontobikeparking --api-key=$HEROKU_PRODUCTION_API_KEY
   only:
   - tags

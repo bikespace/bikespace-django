@@ -19,10 +19,11 @@ staging:
   script:
   - apt-get update -qy
   - apt-get install -y ruby-dev
+  - apt-get install node
   - gem install dpl
+  - npm install
+  - npm run build 
   - dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
-  - python manage.py makermigrations
-  - python manage.py migrate
   only:
   - master
 

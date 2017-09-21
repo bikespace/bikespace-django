@@ -18,7 +18,10 @@ staging:
   type: deploy
   script:
   - apt-get update -qy
+  - apt-get install curl
+  - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
   - apt-get install -y -qq ruby-dev nodejs npm
+  - ln -s /usr/bin/nodejs /usr/bin/node
   - node -v && npm -v
   - gem install dpl
   - cd bicycleparking && npm install && npm run build

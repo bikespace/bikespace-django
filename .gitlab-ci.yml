@@ -9,6 +9,7 @@ before_script:
     - node -v
     - npm -v
     - gem install dpl
+    - npm install -g rollup
     - cd bicycleparking && npm install && npm run build && rollup -c
     
 services:

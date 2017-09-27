@@ -1,3 +1,21 @@
+cache:
+    paths:
+    - bicycleparking/node_modules/
+
+before_script:
+    - ruby -v
+    - apt-get update -qy
+    - apt-get install -y libssl-dev build-essential wget ruby-dev
+    - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
+    - source /root/.bashrc
+    - nvm install 6.6.0
+    - nvm use 6.6.0
+    - node -v
+    - npm -v
+    - gem install dpl
+    - cd bicycleparking && npm install &&
+    - rollup -c
+    
 services:
   - postgres:latest
 
@@ -17,14 +35,6 @@ test:
 staging:
   type: deploy
   script:
-  - apt-get update -qy
-  - apt-get install curl && curl -sL https://deb.nodesource.com/setup_8.x | bash -
-  - sudo apt-get install -y -qq ruby-dev nodejs npm
-  - ln -s /usr/bin/nodejs /usr/bin/node
-  - node -v && npm -v
-  - gem install dpl
-  - cd bicycleparking && npm install &&
-  - rollup -c
   - cd .. && dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
   only:
   - master

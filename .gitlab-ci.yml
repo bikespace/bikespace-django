@@ -1,5 +1,3 @@
-image: node:latest
-
 services:
   - postgres:latest
 
@@ -20,7 +18,10 @@ staging:
   type: deploy
   script:
   - apt-get update -qy
-  - apt-get install -y -qq ruby-dev
+  - apt-get install curl
+  - curl -sL https://deb.nodesource.com/setup_8.x | bash
+  - apt-get install -y -qq ruby-dev nodejs npm
+  - ln -s /usr/bin/nodejs /usr/bin/node
   - node -v && npm -v
   - gem install dpl
   - cd bicycleparking && npm install && npm run build

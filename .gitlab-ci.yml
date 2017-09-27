@@ -10,7 +10,7 @@ before_script:
     - npm -v
     - gem install dpl
     - npm install -g rollup
-    - cd bicycleparking && npm install && npm run build && rollup -c
+    - cd bicycleparking && npm install && npm run build && rollup -c && cd ..
     
 services:
   - postgres:latest
@@ -31,7 +31,7 @@ test:
 staging:
   type: deploy
   script:
-  - cd .. && dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
+  - dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
   only:
   - master
 

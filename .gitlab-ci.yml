@@ -1,7 +1,3 @@
-cache:
-    paths:
-    - bicycleparking/node_modules/
-
 before_script:
     - ruby -v
     - apt-get update -qy

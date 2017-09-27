@@ -1,3 +1,5 @@
+image: node:latest
+
 services:
   - postgres:latest
 
@@ -18,8 +20,7 @@ staging:
   type: deploy
   script:
   - apt-get update -qy
-  - apt-get install -y -qq ruby-dev nodejs npm
-  - ln -s /usr/bin/nodejs /usr/bin/node
+  - apt-get install -y -qq ruby-dev
   - node -v && npm -v
   - gem install dpl
   - cd bicycleparking && npm install && npm run build

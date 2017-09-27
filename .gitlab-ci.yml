@@ -18,13 +18,13 @@ staging:
   type: deploy
   script:
   - apt-get update -qy
-  - apt-get install curl
-  - curl -sL https://deb.nodesource.com/setup_8.x | bash
+  - apt-get install curl && curl -sL https://deb.nodesource.com/setup_8.x | bash -
   - apt-get install -y -qq ruby-dev nodejs npm
   - ln -s /usr/bin/nodejs /usr/bin/node
   - node -v && npm -v
   - gem install dpl
-  - cd bicycleparking && npm install && npm run build
+  - cd bicycleparking && npm install &&
+  - rollup -c
   - cd .. && dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
   only:
   - master

@@ -9,8 +9,7 @@ before_script:
     - node -v
     - npm -v
     - gem install dpl
-    - cd bicycleparking && npm install &&
-    - rollup -c
+    - cd bicycleparking && npm install && npm run build && rollup -c
     
 services:
   - postgres:latest

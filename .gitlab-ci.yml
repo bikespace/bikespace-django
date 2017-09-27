@@ -1,7 +1,9 @@
 before_script:
     - ruby -v
+    - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
+    - wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
     - apt-get update -qy
-    - apt-get install -y libssl-dev build-essential wget ruby-dev
+    - apt-get install -y libssl-dev build-essential wget ruby-dev heroku-toolbelt
     - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
     - source /root/.bashrc
     - nvm install 6.6.0
@@ -32,6 +34,7 @@ staging:
   type: deploy
   script:
   - dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
+  - heroku run cd bicycleparking && npm install && npm run build && rollup -c --exit-code --app torontobikeparking-staging
   only:
   - master
 

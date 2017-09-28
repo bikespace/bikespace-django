@@ -34,7 +34,6 @@ staging:
   type: deploy
   script:
   - dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
-  - heroku run cd bicycleparking && npm install && npm run build && rollup -c --exit-code --app torontobikeparking-staging
   only:
   - master
 

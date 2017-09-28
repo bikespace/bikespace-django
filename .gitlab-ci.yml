@@ -12,7 +12,7 @@ before_script:
     - npm -v
     - gem install dpl
     - npm install -g rollup
-    - cd bicycleparking && npm install && npm run build && rollup -c && cd ..
+    - cd bicycleparking && npm install && npm run build && cd ..
     
 services:
   - postgres:latest
@@ -40,10 +40,6 @@ staging:
 production:
   type: deploy
   script:
-  - apt-get update -qy
-  - apt-get install -y ruby-dev && nodejs
-  - gem install dpl
-  - cd bicycleparking && npm install && npm run build
-  - cd .. && dpl --provider=heroku --app=torontobikeparking --api-key=$HEROKU_PRODUCTION_API_KEY
+  - dpl --provider=heroku --app=torontobikeparking --api-key=$HEROKU_STAGING_API_KEY
   only:
   - tags

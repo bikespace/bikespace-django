@@ -4,18 +4,11 @@
     "description": "",
     "main": "src/index.js",
     "scripts": {
-      "postinstall": "cd bicycleparking && npm install && npm run build"
+      "postinstall": "cd bicycleparking && npm install && npm install --dev && npm run build"
     },
     "author": "",
     "license": "ISC",
-    "dependencies": {
-      "rollup": "^0.45.2",
-      "rollup-plugin-babel": "^2.7.1",
-      "rollup-plugin-commonjs": "^8.0.2",
-      "rollup-plugin-node-builtins": "^2.1.2",
-      "rollup-plugin-node-globals": "^1.1.0",
-      "rollup-plugin-node-resolve": "^3.0.0",
-      "rollup-watch": "^4.3.1"},
+    "dependencies": {},
     "devDependencies": {}
   }
   

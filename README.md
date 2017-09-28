@@ -151,6 +151,4 @@ rollup -c -w
 Please checkout out a new branch when working on the project and submit merge requests
 for the proposed changes to the master branch.
 
-
-
 ## License: MIT

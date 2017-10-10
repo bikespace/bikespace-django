@@ -66,7 +66,7 @@ class Survey {
 
   renderPane(params, query) {
     let pane = parseInt(params.pane);
-    this.pane[pane - 1].render();
+    this.panes[pane - 1].render();
   }
 
   renderHome() {

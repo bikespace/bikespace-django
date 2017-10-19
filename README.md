@@ -141,9 +141,7 @@ This the current project structure
 ## Client Side
 
 ```
-cd bicycleparking
 npm install
-rollup -c -w
 ```
 
 ## Pushing changes

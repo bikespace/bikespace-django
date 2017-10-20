@@ -1,10 +1,11 @@
 import Input from './input';
 import leaflet from 'leaflet';
+import MapboxClient from 'mapbox/lib/services/geocoding';
+import 'leaflet-search';
 
 const TILE_URL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
 const ATTRIBUTION = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>';
 const TOKEN = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
-import MapboxClient from 'mapbox/lib/services/geocoding';
 
 const icon = window.ASSETS_PATH + 'marker-icon.png';
 const iconShadow = window.ASSETS_PATH + 'marker-shadow.png';
@@ -19,7 +20,7 @@ export default class MapInput extends Input {
   constructor() {
     super(...arguments);
     this.values = [];
-    this.marker = null;    
+    this.marker = null;
     this.state = {
       lat: null,
       lng: null
@@ -34,10 +35,37 @@ export default class MapInput extends Input {
 
   }
 
+  formatJSON(rawjson) {
+    var json = {},
+      key;
+    for (var i in rawjson.features) {
+      key = rawjson.features[i].place_name;
+      json[key] = L.latLng(rawjson.features[i].center[1], rawjson.features[i].center[0]);
+    }
+    return json;
+  }
+
+  mapBoxGeocoding(text, callResponse) {
+    this.geocoder = new MapboxClient(TOKEN);
+    this.geocoder.geocodeForward(text, function (err, res) {
+      callResponse(res);
+    });
+  }
+
+
   locationAcquired(position) {
     this.state.lat = position.coords.latitude;
     this.state.lng = position.coords.longitude;
     this.map = leaflet.map('map').setView([this.state.lat, this.state.lng], 16);
+    this.map.addControl(new L.Control.Search({
+      sourceData: this.mapBoxGeocoding,
+      formatData: this.formatJSON,
+      markerLocation: true,
+      autoType: false,
+      autoCollapse: true,
+      minLength: 2,
+      marker: DefaultIcon
+    }));
     this.renderMap();
   }
 

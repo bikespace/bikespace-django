@@ -27,12 +27,12 @@ export default class ArrayInput extends Input {
   get template() {
     const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
     const options = this.props.values.reduce((memo, value) => {
-      memo += `<p><label><input type="checkbox" value="${value.key}" name="problem" />${value.text}</label></p>`;
+      memo += `<p><input type="checkbox" id="${value.key}" value="${value.key}" name="problem" /><label for="${value.key}">${value.text}</label></p>`
       return memo;
     }, '');
     return (`
       <div className="question">
-        <label class="Step__text">${this.props.text}</label>
+        <p>${this.props.text}</p>
         ${options}
       </div>
       `

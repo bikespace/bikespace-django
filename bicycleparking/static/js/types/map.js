@@ -1,89 +1,60 @@
+import Input from './input';
 import leaflet from 'leaflet';
+
 const TILE_URL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
 const ATTRIBUTION = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>';
 const TOKEN = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
+import MapboxClient from 'mapbox/lib/services/geocoding';
 
 const icon = window.ASSETS_PATH + 'marker-icon.png';
 const iconShadow = window.ASSETS_PATH + 'marker-shadow.png';
 
 let DefaultIcon = L.icon({
-    iconUrl: icon,
-    shadowUrl: iconShadow
+  iconUrl: icon,
+  shadowUrl: iconShadow
 });
-
 L.Marker.prototype.options.icon = DefaultIcon;
 
-export default class Map {
-  constructor(latlng, onSelect) {
-    const [lat, lng] = latlng;
-    this.lat = lat;
-    this.lng = lng;
-    this.map = null;
-    this.marker = null;
-    this.selectedLatLng = {
-      lat: this.lat,
-      lng: this.lng
-    };
-    this.onSelect = onSelect;
-    this.mapEl = null;
+export default class MapInput extends Input {
+  constructor() {
+    super(...arguments);
+    this.values = [];
+    this.marker = null;    
+    this.state = {
+      lat: null,
+      lng: null
+    }
   }
 
-  get template() {
-    return (`
-      <div class="View">
-          <button id="button" class="button">done</button>
-          <div id="map"></div>
-      </div>
-    `);
+  get value() {
+    return this.values;
   }
 
-  render() {
-    this.el = this.el || document.getElementById('render');
-    this.el.innerHTML = this.template;
-    this.mapEl = document.getElementById('map');
-    this.mapEl.classList.add('active');
-    this.map = this.map || leaflet.map('map').setView([this.lat, this.lng], 16);
+  onSelect(event) {
+
+  }
+
+  locationAcquired(position) {
+    this.state.lat = position.coords.latitude;
+    this.state.lng = position.coords.longitude;
+    this.map = leaflet.map('map').setView([this.state.lat, this.state.lng], 16);
+    this.renderMap();
+  }
+
+  renderMap() {
     this.initTiles();
-    this.bind();
     this.setPin();
   }
 
-  onMarkerMove(event) {
-    this.selectedLatLng = event.latlng;
-  }
-
-  setPin() {
-    if (this.marker) {
-      this.marker.remove();
-    }
-    this.marker = L.marker(this.selectedLatLng, {
-      draggable: true
-    });
-    this.marker.on('dragend', this.onMarkerMove.bind(this));
-    this.marker.addTo(this.map);
-
-  }
-
-  onMapClick(event) {
-    this.selectedLatLng = Object.assign({}, event.latlng);
-    this.setPin();
-  }
-
-  selectLocation() {
-    if (this.selectedLatLng) {
-      this.map.remove();
-      this.map = null;
-      this.mapEl.classList.remove('active');
-      this.onSelect(this.selectedLatLng)
+  getDeviceLocation() {
+    if ('geolocation' in navigator) {
+      this.onMessage('looking')
+      navigator.geolocation.watchPosition(this.locationAcquired.bind(this), this.locationFailed);
+    } else {
+      this.onMessage('no devie access...')
     }
   }
 
-  bind() {
-    this.map.on('click', this.onMapClick.bind(this));
-    document.getElementById('button').addEventListener('click', (evt) => {
-      this.selectLocation();
-    });
-  }
 
   initTiles() {
     leaflet.tileLayer(TILE_URL, {
@@ -93,4 +64,26 @@ export default class Map {
       accessToken: TOKEN
     }).addTo(this.map);
   }
+
+  bind() {
+    this.getDeviceLocation();
+  }
+
+  setPin() {
+    if (this.marker) {
+      this.marker.remove();
+    }
+    this.marker = L.marker(this.state, {
+      draggable: true
+    });
+    this.marker.addTo(this.map);
+  }
+
+  get template() {
+    return (`
+        <div id="map" class=""></div>    
+      `
+    )
+  }
+
 }

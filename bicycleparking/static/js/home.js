@@ -9,23 +9,20 @@ export default class Home {
     this.el.innerHTML = this.template();
     this.bind();
   }
-  
+
   bind() {
     document.getElementById('button').addEventListener('click', (event) => {
       this.survey.router.navigate(`/survey/1`);
     });
   }
-  
+
   template() {
     return (
       `
-      <div class="View">
-        <div class="Step home">
-          <h1 class="Step__heading">Bike Parking</h1>
-          <p class="Step__text">Start Now</p>
-          <button id="button">Start Now</button>
-        </div>
-      </div>
+      <h1 class="title">Bike Parking</h1>
+      <h2 class="subtitle is-1">Start Now</h2>
+      
+      <button id="button" class="waves-effect waves-light btn">Start Now</button>
       `
     )
   }

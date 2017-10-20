@@ -38,14 +38,14 @@ const questions = [
     questions: [
       {
         key: 'target_location',
-        type: types.LATLNG,
+        type: types.MAP,
         text: 'Tell us where you were trying to go or where you tried to park',
         required: true
       },
     ]
   },
   {
-    heading: 'when did you experience this?',
+    heading: 'When did you experience this?',
     questions: [
       {
         key: 'report_time',
@@ -57,24 +57,10 @@ const questions = [
       },
       {
         key: 'duration',
-        type: types.STRING,
+        type: types.TIME,
         heading: 'How long were you planning to lock your bike?',
         required: true,
-        text: '',
-        values: [
-          {
-            key: 'short',
-            text: 'Less than 1 hour'
-          },
-          {
-            key: 'med',
-            text: 'Up to 8 hours'
-          },
-          {
-            key: 'long',
-            text: 'Overnight'
-          }
-        ]
+        text: ''        
       },
     ]
   },

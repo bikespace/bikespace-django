@@ -22,7 +22,7 @@ export default class Select extends Input {
 
   get template() {
     const options = this.props.values.reduce((memo, value) => {
-      memo += `<p><label><input name="string-select" type="radio" value="${value.key}" name="problem" />${value.text}</label></p>`;
+      memo += `<label class="checkbox"><input class="checkbox" name="string-select" type="radio" value="${value.key}" name="problem" />${value.text}</label></p>`;
       return memo;
     }, '');
     return (`

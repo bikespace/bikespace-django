@@ -18,7 +18,7 @@ export default class ImageInput extends Input {
   uploadDummy() {
     return new Promise((resolve, reject) => {
       window.setTimeout(() => {
-        resolve({url: 'testurl'})
+        resolve({ url: 'testurl' })
       }, 1000);
     })
   }
@@ -51,9 +51,15 @@ export default class ImageInput extends Input {
 
   get template() {
     return (`
-      <div className="question">
-        <input type="file" id="input" />
-      </div>
+    <div class="file-field input-field">
+    <div class="btn">
+      <span>Picture</span>
+      <input id="input" type="file" accept="image/*;capture=camera">
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text">
+    </div>
+  </div>
       `
     )
   }

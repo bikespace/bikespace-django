@@ -1,7 +1,8 @@
 import TextInput from './types/text';
 import StringInput from './types/string';
 import DateTimeInput from './types/date';
-import LatLngInput from './types/latlng';
+import TimeInput from './types/time';
+import MapInput from './types/map';
 import ArrayInput from './types/array';
 import SelectInput from './types/select';
 import ImageInput from './types/image';
@@ -25,14 +26,16 @@ export default class Pane {
   createInput(props, question) {
     if (props.type === types.DATETIME) {
       return new DateTimeInput(props, question)
+    }if (props.type === types.TIME) {
+      return new TimeInput(props, question)
     } else if (props.type === types.TEXT) {
       return new TextInput(props, question);
-    } else if (props.type === types.LATLNG) {
-      return new LatLngInput(props, question);
+    } else if (props.type === types.MAP) {
+      return new MapInput(props, question);
     } else if (props.type === types.ARRAY) {
       return new ArrayInput(props, question);
     } else if (props.type === types.IMAGE) {
-      return  new ImageInput(props, question);
+      return new ImageInput(props, question);
     } else if (props.type === types.STRING && props.values && props.values.length) {
       return new SelectInput(props, question);
     } else {
@@ -73,13 +76,12 @@ export default class Pane {
   render() {
     this.el = this.el || document.getElementById('render');
     this.el.innerHTML = this.template();
-    this.el.className = '';
     this.el.classList.add(this.props.key)
     this.error = document.getElementById('error');
     this.message = document.getElementById('message');
     this.bind();
   }
-   
+
   get canSkip() {
     return this.props.questions.reduce((memo, question) => {
       if (question.required) {
@@ -88,7 +90,7 @@ export default class Pane {
       return memo;
     }, true);
   }
-  
+
   bind() {
     document.getElementById('button').addEventListener('click', (event) => {
       this.submit();
@@ -109,20 +111,16 @@ export default class Pane {
       memo += question.template;
       return memo;
     }, '')
-    const skipButton = this.canSkip ? `<button id="skip">skip</button>`  : '';
+    const skipButton = this.canSkip ? `<button id="skip">skip</button>` : '';
     return (
-      `
-      <div class="View">
-        <div class="Step ${this.props.key}">
-          <h1 class="Step__heading">${this.props.heading}</h1>
+      `<div class="field">      
+          <h3>${this.props.heading}</h3>
           ${templates}
-          <button id="button">Submit</button>
+          <button id="button" class="waves-effect waves-light btn">Next</button>
           ${skipButton} 
-          <p id="error" class="Step__error"></p>
+          <p class="help is-danger" id="error" ></p>          
           <p id="message" class="Step__message"></p>
-        </div>
-        </div>
-      `
+        </div>      `
     )
   }
 }

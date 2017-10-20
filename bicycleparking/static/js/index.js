@@ -3,6 +3,8 @@ import questions from './survey-questions';
 import Home from './home';
 import Pane from './pane';
 import '../css/app.css';
+import '../css/leaflet.css';
+import '../css/leaflet.mobile.css';
 
 class Survey {
   constructor() {

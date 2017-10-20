@@ -26,7 +26,7 @@ export default class TimeInput extends Input {
   }
   get template() {
     return (`
-        <input type="text" class="timepicker" value=${this.values} name=${this.props.key}>
+        <input type="text" class="timepicker" name=${this.props.key}>
       `
     )
   }

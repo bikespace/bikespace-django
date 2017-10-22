@@ -4,11 +4,6 @@ export default class TimeInput extends Input {
 
   constructor() {
     super(...arguments);    
-    this.values="";
-  }
-
-  get value() {
-    return this.values;
   }
   
   bind() {

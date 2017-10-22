@@ -21,14 +21,14 @@ export default class MapInput extends Input {
     super(...arguments);
     this.values = [];
     this.marker = null;
-    this.state = {
+    this.location = {
       lat: null,
       lng: null
     }
   }
 
   get value() {
-    return this.values;
+    return this.location;
   }
 
   onSelect(event) {
@@ -54,9 +54,9 @@ export default class MapInput extends Input {
 
 
   locationAcquired(position) {
-    this.state.lat = position.coords.latitude;
-    this.state.lng = position.coords.longitude;
-    this.map = leaflet.map('map').setView([this.state.lat, this.state.lng], 16);
+    this.location.lat = position.coords.latitude;
+    this.location.lng = position.coords.longitude;
+    this.map = leaflet.map('map').setView([this.location.lat, this.location.lng], 16);
     this.map.addControl(new L.Control.Search({
       sourceData: this.mapBoxGeocoding,
       formatData: this.formatJSON,
@@ -101,7 +101,7 @@ export default class MapInput extends Input {
     if (this.marker) {
       this.marker.remove();
     }
-    this.marker = L.marker(this.state, {
+    this.marker = L.marker(this.location, {
       draggable: true
     });
     this.marker.addTo(this.map);

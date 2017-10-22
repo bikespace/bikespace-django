@@ -24,7 +24,7 @@ export default class DateTimeInput extends Input {
 
   get template() {
     return (`
-        <input type="text" class="datepicker" name=${this.props.key}>
+        <input  id="input" type="text" class="datepicker" name=${this.props.key}>
       `
     )
   }

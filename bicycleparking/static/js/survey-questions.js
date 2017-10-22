@@ -37,7 +37,7 @@ const questions = [
     heading: 'Where were you going?',
     questions: [
       {
-        key: 'target_location',
+        key: 'location',
         type: types.MAP,
         text: 'Tell us where you were trying to go or where you tried to park',
         required: true

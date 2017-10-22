@@ -11,10 +11,12 @@ export default class ArrayInput extends Input {
   }
 
   onSelect(event) {
-    if (event.target.checked) {
-      this.values.push(event.target.value);
-    } else {
-      this.values.splice(this.values.indexOf(event.target.value), 1);
+    if (event.target.type === 'checkbox') {
+      if (event.target.checked) {
+        this.values.push(event.target.value);
+      } else {
+        this.values.splice(this.values.indexOf(event.target.value), 1);
+      }
     }
   }
 
@@ -27,7 +29,7 @@ export default class ArrayInput extends Input {
   get template() {
     const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
     const options = this.props.values.reduce((memo, value) => {
-      memo += `<p><input type="checkbox" id="${value.key}" value="${value.key}" name="problem" /><label for="${value.key}">${value.text}</label></p>`
+      memo += `<p><input type="checkbox"  id="${value.key}" value="${value.key}" name="problem" /><label for="${value.key}">${value.text}</label></p>`
       return memo;
     }, '');
     return (`

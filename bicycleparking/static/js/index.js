@@ -45,8 +45,8 @@ class Survey {
 
     // Marshall the state into API fields
     var body = {
-      'latitude': this.state.target_location.lat,
-      'longitude': this.state.target_location.lng,
+      'latitude': this.state.location.lat,
+      'longitude': this.state.location.lng,
       'comments': this.state.comment,
       'point_timestamp': this.state.report_time,
       'survey': this.state

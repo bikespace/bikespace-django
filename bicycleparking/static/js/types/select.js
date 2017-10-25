@@ -15,18 +15,20 @@ export default class Select extends Input {
   }
 
   bind() {
-    [...document.querySelectorAll('input')].forEach(el => {
+    [...document.querySelectorAll(`input[name=${this.props.key}]`)].forEach(el => {
       el.onchange = this.onSelect.bind(this);
     })
   }
 
   get template() {
     const options = this.props.values.reduce((memo, value) => {
-      memo += `<label class="checkbox"><input class="checkbox" name="string-select" type="radio" value="${value.key}" name="problem" />${value.text}</label></p>`;
+      memo += `<p> <input id="${value.key}" name="${this.props.key}" type="radio" value="${value.key}" /><label class="checkbox" for="${value.key}">${value.text}</label></p>`;
       return memo;
     }, '');
+    const heading = this.props.heading ? `<h4>${this.props.heading}</h4>` : '';
     return (`
       <div className="question">
+        ${heading}
         ${options}
       </div>
       `

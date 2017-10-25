@@ -6,6 +6,10 @@ export default class ArrayInput extends Input {
     this.values = [];
   }
 
+  get valid() {
+    return this.values.length > 0;
+  }
+
   get value() {
     return this.values;
   }
@@ -32,8 +36,10 @@ export default class ArrayInput extends Input {
       memo += `<p><input type="checkbox"  id="${value.key}" value="${value.key}" name="problem" /><label for="${value.key}">${value.text}</label></p>`
       return memo;
     }, '');
+    const heading = this.props.heading ? `<h4>${this.props.heading}</h4>` : '';
     return (`
       <div className="question">
+        ${heading}
         <p>${this.props.text}</p>
         ${options}
       </div>

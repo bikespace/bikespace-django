@@ -8,6 +8,10 @@ import SelectInput from './types/select';
 import ImageInput from './types/image';
 import types from './types/types';
 
+const formatKey = (key) => {
+  return key.split('_').map(string => string.charAt(0).toUpperCase() + string.slice(1)).join(' ');
+}
+
 export default class Pane {
   constructor(props, survey) {
     this.props = props;
@@ -43,6 +47,16 @@ export default class Pane {
     }
   }
 
+  get errors() {
+    return this.questions.reduce((memo, question) => {
+      if (question.props.required && !question.valid) {
+        memo = memo.concat([question])
+      }
+      return memo;
+    }, []);
+  }
+
+
   submit() {
     const values = this.questions.reduce((memo, question) => {
       memo[question.props.key] = question.value;
@@ -54,23 +68,21 @@ export default class Pane {
     }
     if (this.props.final) {
       this.survey.submit();
-    } else if (values) {
-      this.survey.navigate()
+    } else if (this.errors.length) {
+      this.error.innerHTML = this.errors.reduce((memo, err) => {
+        return memo += `Field <em>${formatKey(err.props.key)}</em> is required. <br>`
+      }, '');
     } else {
-      if (this.props.required) {
-        this.error.innerHTML = 'Please fill out this value'
-      } else {
-        this.survey.navigate()
-      }
+      this.survey.navigate()
     }
   }
 
   onError(error) {
-    this.error.text = error;
+    this.error.textContent = error;
   }
 
   onMessage(message) {
-    this.message.text = message;
+    this.message.textContent = message;
   }
 
   render() {
@@ -84,7 +96,7 @@ export default class Pane {
 
   get canSkip() {
     return this.props.questions.reduce((memo, question) => {
-      if (question.required) {
+      if (question.required || this.props.final) {
         memo = false;
       }
       return memo;
@@ -111,14 +123,16 @@ export default class Pane {
       memo += question.template;
       return memo;
     }, '')
+    const buttonText = this.props.final ? 'Submit' : 'Next';
     const skipButton = this.canSkip ? `<button id="skip">skip</button>` : '';
+    const heading = this.props.heading ? `<h3>${this.props.heading}</h3>` : '';
     return (
       `<div class="field">      
-          <h3>${this.props.heading}</h3>
+          ${heading}
           ${templates}
-          <button id="button" class="waves-effect waves-light btn">Next</button>
+          <button id="button" class="waves-effect waves-light btn">${buttonText}</button>
           ${skipButton} 
-          <p class="help is-danger" id="error" ></p>          
+          <p class="help is-danger" id="error"></p>          
           <p id="message" class="Step__message"></p>
         </div>      `
     )

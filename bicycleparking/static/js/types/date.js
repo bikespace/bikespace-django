@@ -1,25 +1,26 @@
 import Input from './input';
+import flatpickr from 'flatpickr';
 
 export default class DateTimeInput extends Input {
 
   constructor() {
-    super(...arguments);    
+    super(...arguments);
   }
 
   bind() {
-    $('.datepicker').pickadate({
-      selectMonths: true, 
-      selectYears: 15,
-      today: 'Today',
-      clear: 'Clear',
-      close: 'Ok',
-      closeOnSelect: false 
-    });
+    flatpickr(`#${this.props.key}`, {
+      enableTime: true,
+    })
   }
 
   get template() {
+    const heading = this.props.heading ? `<h4>${this.props.heading}</h4>` : '';
     return (`
-        <input  id="input" type="text" class="datepicker" name=${this.props.key}>
+      <div>
+        ${heading}
+        <label for=${this.props.key}>Date</label>
+        <input id="${this.props.key}" type="text" class="datepicker" name=${this.props.key}>
+      </div>
       `
     )
   }

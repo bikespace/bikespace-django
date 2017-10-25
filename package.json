@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "flatpickr": "^4.0.6",
     "leaflet-search": "^2.3.6"
   },
   "devDependencies": {}

@@ -8,7 +8,7 @@ export default class ImageInput extends Input {
   }
 
   bind() {
-    document.getElementById('input').addEventListener('change', (event) => {
+    document.getElementById(this.props.key).addEventListener('change', (event) => {
       let files = event.target.files;
       const file = files[0];
       this.file = file;
@@ -50,16 +50,18 @@ export default class ImageInput extends Input {
   }
 
   get template() {
+    const heading = this.props.heading ? `<h4>${this.props.heading}</h4>` : '';
     return (`
-    <div class="file-field input-field">
-    <div class="btn">
-      <span>Picture</span>
-      <input id="input" type="file" accept="image/*;capture=camera">
-    </div>
-    <div class="file-path-wrapper">
-      <input class="file-path validate" type="text">
-    </div>
-  </div>
+      <div class="file-field input-field">
+        ${heading}
+        <div class="btn">
+          <span>Picture</span>
+          <input id="${this.props.key}" type="file" accept="image/*;capture=camera">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
       `
     )
   }

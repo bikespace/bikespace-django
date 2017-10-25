@@ -6,9 +6,13 @@ export default class Input {
     this.onMessage = question.onMessage;
     this.router = question.router;
   }
+
+  get valid() {
+    return !!this.value;
+  }
   
   get value() {
-    return document.getElementById('input').value;
+    return document.getElementById(this.props.key).value;
   }
 
   bind() {}

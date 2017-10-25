@@ -2,12 +2,11 @@ import types from './types/types';
 
 const questions = [
   {
-    heading: 'What problem(s) prevented you from parking your bike?',
     questions: [
       {
         key: 'problem_type',
         type: types.ARRAY,
-        heading: 'What was the problem here?',
+        heading: 'What problem(s) prevented you from parking your bike?',
         text: 'select all that apply',
         required: true,
         values: [
@@ -45,7 +44,6 @@ const questions = [
     ]
   },
   {
-    heading: 'When did you experience this?',
     questions: [
       {
         key: 'report_time',
@@ -57,10 +55,24 @@ const questions = [
       },
       {
         key: 'duration',
-        type: types.TIME,
+        type: types.STRING,
         heading: 'How long were you planning to lock your bike?',
         required: true,
-        text: ''        
+        text: '',
+        values: [
+          {
+            key: 'short',
+            text: 'Less than 1 hour'
+          },
+          {
+            key: 'med',
+            text: 'Up to 8 hours'
+          },
+          {
+            key: 'long',
+            text: 'Overnight'
+          }
+        ]
       },
     ]
   },

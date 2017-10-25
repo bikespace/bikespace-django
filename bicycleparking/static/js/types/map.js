@@ -54,6 +54,7 @@ export default class MapInput extends Input {
 
 
   locationAcquired(position) {
+    console.log('position ')
     this.location.lat = position.coords.latitude;
     this.location.lng = position.coords.longitude;
     this.map = leaflet.map('map').setView([this.location.lat, this.location.lng], 16);
@@ -79,12 +80,13 @@ export default class MapInput extends Input {
       this.onMessage('looking')
       navigator.geolocation.watchPosition(this.locationAcquired.bind(this), this.locationFailed);
     } else {
-      this.onMessage('no devie access...')
+      this.onMessage('no device access...')
     }
   }
 
 
   initTiles() {
+    this.onMessage('');
     leaflet.tileLayer(TILE_URL, {
       attribution: ATTRIBUTION,
       maxZoom: 18,

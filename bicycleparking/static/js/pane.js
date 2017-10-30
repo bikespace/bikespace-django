@@ -94,25 +94,11 @@ export default class Pane {
     this.bind();
   }
 
-  get canSkip() {
-    return this.props.questions.reduce((memo, question) => {
-      if (question.required || this.props.final) {
-        memo = false;
-      }
-      return memo;
-    }, true);
-  }
-
   bind() {
     document.getElementById('button').addEventListener('click', (event) => {
       this.submit();
     });
 
-    if (this.canSkip) {
-      document.getElementById('skip').addEventListener('click', (event) => {
-        this.submit(null);
-      });
-    }
     this.questions.forEach((question) => {
       question.bind();
     })
@@ -124,14 +110,12 @@ export default class Pane {
       return memo;
     }, '')
     const buttonText = this.props.final ? 'Submit' : 'Next';
-    const skipButton = this.canSkip ? `<button id="skip">skip</button>` : '';
     const heading = this.props.heading ? `<h3>${this.props.heading}</h3>` : '';
     return (
       `<div class="field">      
           ${heading}
           ${templates}
           <button id="button" class="waves-effect waves-light btn">${buttonText}</button>
-          ${skipButton} 
           <p class="help is-danger" id="error"></p>          
           <p id="message" class="Step__message"></p>
         </div>      `

@@ -1,6 +1,7 @@
 import Navigo from 'navigo';
 import questions from './survey-questions';
 import Home from './home';
+import Review from './review';
 import Pane from './pane';
 import '../css/app.css';
 import '../css/leaflet.css';
@@ -28,6 +29,8 @@ class Survey {
     this.router.on({
       'survey/:pane': (params, query) => {
         this.renderPane(params, query)
+      },'review': (params, query) => {
+        this.renderReview(params, query)
       },
       '*': () => {
         this.renderHome();
@@ -58,7 +61,7 @@ class Survey {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
-    });
+    }).then(_=>{ this.router.navigate(`/review`)});
   }
 
   setState(newState) {
@@ -69,6 +72,10 @@ class Survey {
   renderPane(params, query) {
     let pane = parseInt(params.pane);
     this.panes[pane - 1].render();
+  }
+  
+  renderReview() {
+    new Review(this).render();
   }
 
   renderHome() {

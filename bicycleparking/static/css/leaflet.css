@@ -1,4 +1,6 @@
- 
+ .leaflet-top{
+	 width: 100% !important;
+ }
 .leaflet-container .leaflet-control-search {
 	position:relative;
 	float:left;
@@ -62,7 +64,7 @@
 .leaflet-control-search .search-button {
 	display:block;
 	float:left;
-	width:26px;
+	width:40vh;
 	height:26px;	
 	background: url('../search-icon.png') no-repeat 2px 2px #fff;
 	border-radius:4px;
@@ -71,16 +73,16 @@
 	background: url('../search-icon.png') no-repeat 2px -22px #fafafa;
 }
 .leaflet-control-search .search-tooltip {
-	position:absolute;
+	/*position:absolute;*/
 	top:100%;
 	left:0;
 	float:left;
 	list-style: none;
 	padding-left: 0;
-	min-width:120px;
+	max-width:50vh;
 	max-height:122px;
-	box-shadow: 1px 1px 6px rgba(0,0,0,0.4);
-	background-color: rgba(0, 0, 0, 0.25);
+	/*box-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+	background-color: rgba(0, 0, 0, 0.25);*/
 	z-index:1010;
 	overflow-y:auto;
 	overflow-x:hidden;

@@ -103,14 +103,19 @@ python manage.py createsuperuser
 This the current project structure
 ```
 .
-├── addDataToPostgres.py
 ├── bicycleparking
 │   ├── admin.py
 │   ├── apps.py
+│   ├── geocode.py
 │   ├── __init__.py
 │   ├── migrations
 │   ├── models.py
+│   ├── node_modules
+│   ├── package.json
+│   ├── package-lock.json
 │   ├── __pycache__
+│   ├── rollup.config.js
+│   ├── serializers.py
 │   ├── static
 │   ├── templates
 │   ├── tests.py
@@ -119,19 +124,32 @@ This the current project structure
 ├── Bicycle_parking
 │   ├── __init__.py
 │   ├── __pycache__
-│   ├── settings.py
+│   ├── settings
 │   ├── static
+│   ├── staticfiles
 │   ├── urls.py
 │   └── wsgi.py
 ├── db.sqlite3
+├── docker-compose.yml
 ├── LICENSE
 ├── manage.py
+├── node_modules
+│   ├── flatpickr
+│   ├── leaflet
+│   └── leaflet-search
+├── package.json
+├── package-lock.json
 ├── Procfile
 ├── README.md
-├── README.rst
 ├── requirements.txt
 ├── runtime.txt
-├── settingUpPostgres.md
+├── test
+│   └── geodata_001.xml
+└── venv
+    ├── bin
+    ├── include
+    ├── lib
+    └── pip-selfcheck.json
 ```
 
 `Bicycle_parking` is the main Django Project folder.

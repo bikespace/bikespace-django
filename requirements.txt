@@ -16,3 +16,4 @@ requests==2.18.4
 six==1.10.0
 urllib3==1.22
 whitenoise==3.2
+boto3==1.4.8

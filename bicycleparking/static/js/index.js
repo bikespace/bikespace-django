@@ -55,16 +55,12 @@ class Survey {
       'survey': this.state
     };
 
-    var picture = {
-      'file': this.state.photo
-    }
-
     fetch(`${document.location.origin}/api/upload/` + this.state.photo.name, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(picture),
+      body: this.state.photo,
     }).then(response => {
       response.json().then(json => {
         body.photo_uri = json.s3_name;

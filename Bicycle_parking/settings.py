@@ -80,14 +80,27 @@ WSGI_APPLICATION = 'Bicycle_parking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-#please fill out these settings for your own local machine!
+# Defines two databases: the recording (master) database for the application, and the
+# intersection centreline file database as published by the City of Toronto. The
+# access variables are set to look for environment variables normally set as secret 
+# variables within the deployment environment for the database endpoint, user name, 
+# and password. 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'bike_parking_toronto',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': 'postgres',
+        'USER': os.getenv ('BIKE_DB_USER', 'postgres'),
+        'PASSWORD': os.getenv ('BIKE_DB_PW', ''),
+        'HOST': os.getenv ('BIKE_DB_HOST', 'localhost'),
+        'PORT': '5432',
+    },
+    'geospatial' : {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'intersection',
+        'USER': os.getenv ('BIKE_DB_USER', 'postgres'),
+        'PASSWORD': os.getenv ('BIKE_DB_PW', ''),
+        'HOST': os.getenv ('BIKE_DB_HOST', 'localhost'),
         'PORT': '5432',
     }
 }
@@ -117,8 +130,10 @@ USE_L10N = True
 USE_TZ = True
 
 # Update database configuration with $DATABASE_URL.
+# changed 2017 11 21 -- default django database handling 
+# does not support multiple database configuration
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# DATABASES['default'].update(db_from_env)
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_SSL_REDIRECT = False
@@ -141,3 +156,10 @@ STATICFILES_DIRS = [
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# define the database routers; these objects route requests passed to the django
+# routines to update or access a table defined as a model class in python
+# to the appropriate database
+
+DATABASE_ROUTERS = [ 'bicycleparking.Routers.GeoSpatialRouting', 
+                     'bicycleparking.Routers.DefaultRouting' ]

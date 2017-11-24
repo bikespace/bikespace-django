@@ -6,7 +6,7 @@ const TOKEN = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In
 export default class Review {
   constructor(survey) {
     this.survey = survey;
-    
+
   }
 
   render() {
@@ -21,19 +21,21 @@ export default class Review {
     });
     this.createReadMap();
     this.createPicture();
-    
+
   }
 
-  createPicture(){
-    var ctx = $('#picture')[0].getContext('2d');
-    var img = new Image();
-    img.onload = function() {
-        ctx.drawImage(img, 0,0,$('#picture')[0].width,$('#picture')[0].height);
+  createPicture() {
+    if (this.survey.state.photo) {
+      var ctx = $('#picture')[0].getContext('2d');
+      var img = new Image();
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0, $('#picture')[0].width, $('#picture')[0].height);
+      }
+      img.src = URL.createObjectURL(this.survey.state.photo);
     }
-    img.src = URL.createObjectURL(this.survey.state.photo);
   }
 
-  createReadMap(){
+  createReadMap() {
     this.map = leaflet.map('map').setView([this.survey.state.location.lat, this.survey.state.location.lng], 16);
     leaflet.tileLayer(TILE_URL, {
       attribution: ATTRIBUTION,
@@ -70,7 +72,6 @@ export default class Review {
         </div>
         <div class="row col s12">
           <div class="input-field">
-            <p>Picture</p>
             <canvas id="picture"></canvas>
           </div>
         </div>

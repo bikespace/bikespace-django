@@ -1,0 +1,6 @@
+BIKE_DB_HOST="bikespaceto.cyyycjt98n81.us-east-1.rds.amazonaws.com"
+export BIKE_DB_HOST
+BIKE_DB_USER="geoiuser"
+export BIKE_DB_USER 
+BIKE_DB_PW="IU328&7t5"
+export BIKE_DB_PW

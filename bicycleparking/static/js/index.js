@@ -54,26 +54,35 @@ class Survey {
       'point_timestamp': this.state.report_time,
       'survey': this.state
     };
+    if (this.state.photo) {
+      fetch(`${document.location.origin}/api/upload/` + this.state.photo.name, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: this.state.photo,
+      }).then(response => {
+        response.json().then(json => {
+          body.photo_uri = json.s3_name;
+          fetch(`${document.location.origin}/api/survey`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+          }).then(_ => { this.router.navigate(`/review`) });
+        });
 
-    fetch(`${document.location.origin}/api/upload/` + this.state.photo.name, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: this.state.photo,
-    }).then(response => {
-      response.json().then(json => {
-        body.photo_uri = json.s3_name;
-        fetch(`${document.location.origin}/api/survey`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(body),
-        }).then(_ => { this.router.navigate(`/review`) });
       });
-
-    });
+    } else {
+      fetch(`${document.location.origin}/api/survey`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      }).then(_ => { this.router.navigate(`/review`) });
+    }
 
   }
 

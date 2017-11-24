@@ -17,7 +17,7 @@ export default class Review {
 
   bind() {
     document.getElementById('button').addEventListener('click', (event) => {
-      this.survey.router.navigate(`/home`);
+      this.survey.router.navigate(`/`);
     });
     this.createReadMap();
     this.createPicture();

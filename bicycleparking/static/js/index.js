@@ -14,9 +14,9 @@ class Survey {
     this.panes = questions.map((question, i) => {
       let props = question;
       if (i + 1 === questions.length) {
-         props = Object.assign({}, props, {
-           final: true
-         })
+        props = Object.assign({}, props, {
+          final: true
+        })
       }
       return new Pane(props, this)
     });
@@ -29,7 +29,7 @@ class Survey {
     this.router.on({
       'survey/:pane': (params, query) => {
         this.renderPane(params, query)
-      },'review': (params, query) => {
+      }, 'review': (params, query) => {
         this.renderReview(params, query)
       },
       '*': () => {
@@ -55,13 +55,26 @@ class Survey {
       'survey': this.state
     };
 
-    fetch(`${document.location.origin}/api/`, {
-      method: 'POST',
+    fetch(`${document.location.origin}/api/upload/` + this.state.photo.name, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
-    }).then(_=>{ this.router.navigate(`/review`)});
+      body: this.state.photo,
+    }).then(response => {
+      response.json().then(json => {
+        body.photo_uri = json.s3_name;
+        fetch(`${document.location.origin}/api/survey`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        }).then(_ => { this.router.navigate(`/review`) });
+      });
+
+    });
+
   }
 
   setState(newState) {
@@ -73,7 +86,7 @@ class Survey {
     let pane = parseInt(params.pane);
     this.panes[pane - 1].render();
   }
-  
+
   renderReview() {
     new Review(this).render();
   }

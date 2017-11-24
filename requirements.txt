@@ -4,6 +4,7 @@ click==6.7
 decorator==4.1.2
 dj-database-url==0.4.1
 Django==1.11.1
+django-split-settings==0.2.5
 djangorestframework==3.6.4
 geocoder==1.32.0
 gunicorn==19.6.0
@@ -15,3 +16,4 @@ requests==2.18.4
 six==1.10.0
 urllib3==1.22
 whitenoise==3.2
+boto3==1.4.8

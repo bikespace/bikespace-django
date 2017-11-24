@@ -70,8 +70,8 @@ export default class MapInput extends Input {
       moveToLocation: function(latlng, title, map) {
       	self.location.lat=latlng.lat;
         self.location.lng=latlng.lng;
-        var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-  			map.setView(latlng, zoom);
+        //var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+  			map.setView(latlng);
       }
     }));
     this.renderMap();

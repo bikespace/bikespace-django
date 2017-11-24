@@ -10,6 +10,7 @@ export default class DateTimeInput extends Input {
   bind() {
     flatpickr(`#${this.props.key}`, {
       enableTime: true,
+      defaultDate: "today"
     })
   }
 

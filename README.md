@@ -97,6 +97,19 @@ Install ngrok globally:
 which npm
 npm install ngrok -g
 ```
+### Build client side js
+
+We are using rollup to bundle the js for the client side. To compile `cd` into the `bicycleparking` and run :
+
+```shell
+npm build
+```
+
+For hot-reloading setup a watcher:
+
+```shell
+rollup -c -w
+```
 
 ### Start the Django Application
 
@@ -178,12 +191,6 @@ This is the current project structure, please note:
     ├── include
     ├── lib
     └── pip-selfcheck.json
-```
-
-## Client Side
-
-```
-npm install
 ```
 
 ## Pushing changes

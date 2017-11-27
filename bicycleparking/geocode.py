@@ -21,7 +21,7 @@ import requests
 import datetime
 from bicycleparking.models import Event
 from bicycleparking.models import Area
-from bicycleparking.models import CentrelineIntersectionWgs84
+from bicycleparking.models import Intersection2d
 from bicycleparking.models import SurveyAnswer
 from bicycleparking.intersection import Intersection
 
@@ -111,6 +111,16 @@ class Geocode :
      if self.loc != None :
         distance = self.loc.distance * 1.11E+5
      return distance
+
+  def displayErrors (self) :
+     """If the error detection routines detected any errors in execution,
+        display the diagnostic output from all errors and return a 'True'
+        value. If the error list contains no entries, return 'False'."""
+     if len (self.errors) > 0 :
+        self.display ()
+        return True
+     else :
+        return False
 
   def display (self) :
      """Displays the current status on the output as a formatted report
@@ -215,5 +225,5 @@ class Geocode :
       location = {}
       location ['lat'] = float (latt)
       location ['long'] = float (longt)
-      query = CentrelineIntersectionWgs84.objects.raw (sql, location)
+      query = Intersection2d.objects.raw (sql, location)
       return query [0]

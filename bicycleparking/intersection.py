@@ -62,4 +62,4 @@ class Intersection :
     ## private (unpublished) support routines
 
     def fetch (self) :
-       return CentrelineIntersectionWgs84.get (gid=self.ident)
+       return Intersection2d.get (gid=self.ident)

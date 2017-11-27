@@ -12,8 +12,12 @@
 # Modified 2017 11 05 
 # Purpose rename table 'Pin' to 'Area'
 #
+# Modified 2017 11 24
+# Purpose  Incorporate de-duped intersection table
+#
 # Modified 
 # Purpose   
+#
 
 from django.db import models
 from django.contrib.postgres.fields import JSONField
@@ -71,6 +75,42 @@ class Event(models.Model) :
 # do not change managed = false unless the databases have changed completely;
 # this may erase or corrupt the geographic resource tables, then the program
 # will not work.
+
+class Intersection2d (models.Model):
+  """Intersection definition table
+     Tables in the geospatial database as defined in the settings
+     for this project are not managed by django: they are loaded
+     from data supplied by the city of Toronto. The following model
+     definitions are obtained from introspecting the existing database
+     tables created by importing a shape file, and then eliminating
+     all locations duplicating the two dimensional coordinates. The 
+     application will access these values but never write to them.
+     
+     The SQL statement to create two dimensional table with no
+     elevations and no dulicated latitude and longitude values is:
+     
+     create table intersection2d 
+       as select distinct on (longitude, latitude)
+                 gid, int_id, intersec5, classifi6, classifi7, 
+                 longitude, latitude, objectid, geom
+          from centreline_intersection_wgs84
+          order by longitude, latitude, gid;"""
+
+  gid = models.AutoField(primary_key=True)
+  int_id = models.BigIntegerField(blank=True, null=True)
+  intersec5 = models.CharField(max_length=250, blank=True, null=True)
+  classifi6 = models.CharField(max_length=5, blank=True, null=True)
+  classifi7 = models.CharField(max_length=80, blank=True, null=True)
+  longitude = models.FloatField(blank=True, null=True)
+  latitude = models.FloatField(blank=True, null=True)
+  objectid = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+  # The 'geom' field contains a hex string with location data and the application will 
+  # never access it directly
+  geom = models.TextField(blank=True, null=True)  
+
+  class Meta:
+     managed = False
+     db_table = 'intersection2d'
 
 class CentrelineIntersectionWgs84(models.Model):
   """Intersection definition table

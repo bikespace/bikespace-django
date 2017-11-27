@@ -24,7 +24,7 @@ from bicycleparking.geocode import Geocode
 from bicycleparking.models import SurveyAnswer
 from bicycleparking.models import Event
 from bicycleparking.models import Area
-from bicycleparking.models import CentrelineIntersectionWgs84
+from bicycleparking.models import Intersection2d
 from bicycleparking.intersection import Intersection
 
 
@@ -60,9 +60,11 @@ class Geocodetest (TestCase) :
     
   def test_location (self) :
      """Tests the location requests without writing data to the database."""
+
      sources = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
                  'closest' : { 'gid' : 'gid' }, 'major' : { } }
      print ("\t\ttesting geocode location")
+     self.success = True
      if self.database_exists () :
         entries = self.readGeoEntries ("test/areas.xml", sources)
 
@@ -70,12 +72,14 @@ class Geocodetest (TestCase) :
            self.locate (self.makeAnswer (test), test)
      else :
         print ("No geographic database found, assuming test OK")
+     self.assertTrue (self.success)
 
   def test_record (self) :
      """Tests the process of accessing the geographic database and then 
      writing the information received and synthesized into the database."""
 
      print ("\t\ttesting geocode recording")
+     self.success = True
      sources = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
                  'closest' : { 'gid' : 'gid' }, 'major' : { 'gid' : 'major_gid' } }
 
@@ -89,7 +93,9 @@ class Geocodetest (TestCase) :
            self.findAndWrite (self.saveAnswer (test), test)
 
         for entry in entries :
-           self.verifyArea (entry) 
+           self.verifyArea (entry)
+        self.assertTrue (self.success)
+       
 
   def readGeoEntries (self, fn, sources) :
      """Reads data to test the search and database management routines."""
@@ -151,6 +157,7 @@ class Geocodetest (TestCase) :
      where = self.locate (answer, testData)
      if where != None :
         where.output ()
+        return where
 
   def locate (self, answer, location) :
      """Tests the location operation without writing any information to the database."""
@@ -164,8 +171,10 @@ class Geocodetest (TestCase) :
         result = where
      elif not 'gid' in location:
         print ("\t\texpected result not found, no verification possible")
+        self.success = false
      else : 
         self.diagnostic (where, location)
+        self.success = false
      return result
 
   def verifyArea (self, testData) :
@@ -180,8 +189,10 @@ class Geocodetest (TestCase) :
            print (tmp.format (testData ['name'], event.sourceIP, event.timeOf))
         if areaRef.major != int (testData ['major_gid']) :
            print ("\t\terror: mismatch {0} with test data {1}".format (areaRef.major, testData ['major_gid']))
+           self.success = false
      else :
         print ("\terror: {0} not found with target {1}".format (testData ['name'], int (testData ['gid']))) 
+        self.success = false
 
   def geoCompare (self, key, where) :
      """Compares the result of a lookup to the expected item as defined in the place 
@@ -189,6 +200,7 @@ class Geocodetest (TestCase) :
      try :
         return where.getClosest ().getIdent () == key
      except Exception as error :
+        self.success = false
         if where == None :
            print ('geolocation undefined for {0}'.format (key))
         else :
@@ -207,8 +219,8 @@ class Geocodetest (TestCase) :
      """Determines the validity of the centerline intersection database."""
      try :
         count = 0
-        sql = 'select gid from centreline_intersection_wgs84 limit 10;'
-        list = CentrelineIntersectionWgs84.objects.raw (sql)
+        sql = 'select gid from intersection2d limit 10;'
+        list = Intersection2d.objects.raw (sql)
         for i in list :
            count = count + 1 
         return count > 5

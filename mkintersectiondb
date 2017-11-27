@@ -1,0 +1,14 @@
+#!/bin/bash
+sed 's/db_id/intersection/' sql/makegisdb.sql | psql -U postgres -h 127.0.0.1
+sed 's/db_id/test_intersection/' sql/makegisdb.sql | psql -U postgres -h 127.0.0.1
+curl --output centreline_intersection_wgs84.zip http://opendata.toronto.ca/gcc/centreline_intersection_wgs84.zip
+unzip centreline_intersection_wgs84.zip 
+rm centreline_intersection_wgs84.zip
+shp2pgsql -I -s 4326 CENTRELINE_INTERSECTION_WGS84.shp public.centreline_intersection_wgs84 | psql -U postgres -h 127.0.0.1 -q -d intersection 
+psql -U postgres -h 127.0.0.1 -f sql/intersec2d.sql -d intersection
+psql -U postgres -h 127.0.0.1 -f sql/intersection_types.sql -d intersection
+shp2pgsql -I -s 4326 CENTRELINE_INTERSECTION_WGS84.shp public.centreline_intersection_wgs84 | psql -U postgres -h 127.0.0.1 -q -d test_intersection 
+psql -U postgres -h 127.0.0.1 -f sql/intersec2d.sql -d test_intersection
+psql -U postgres -h 127.0.0.1 -f sql/intersection_types.sql -d test_intersection
+rm CENTRELINE_INTERSECTION_WGS84.*
+rm CENTRELINE_INTERSECTION_WGS84_readme.txt

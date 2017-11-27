@@ -6,6 +6,10 @@
 #
 # Written 2017 10 17
 #
+# Modified 2017 11 25
+# Purpose  changed filter to select intersection database for de-duped 
+#          geographic table
+#
 # Modified 
 # Purpose   
 #
@@ -22,7 +26,8 @@ class GeoSpatialRouting :
   and longitude coordinates."""
 
   # models supported by the geospatial database
-  includedModels = set (['centrelineintersectionwgs84', 'spatialrefsys'])
+  includedModels = set (['centrelineintersectionwgs84', 'spatialrefsys',
+                         'intersection2d'])
 
   def db_for_read (self, model, **hints):
      """Selects the database to read from: if the caller accesses the

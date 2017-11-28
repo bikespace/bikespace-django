@@ -1,70 +1,114 @@
 # Toronto Bike Parking Project
 
-Note: This is a debgging branch and should NOT be merged with the master until and unless the code is updated and stable.
+Note: This is a debugging branch and should NOT be merged with the master until and unless the code is updated and stable.
 
 ## Local Development
 
-To use this project, follow these steps:
+To use this project, we will work though the following steps:
 
-1. Clone this repo
-2. Create a virtualenv in the project root folder
-3. Install requirements
-4. Have a local instance of postgres running
+1. Install requirements
+2. Clone this repo
+3. Create a `virtualenv` in the project root folder
+4. Have a local instance of `postgres` running
 5. Install ngrok
 6. Code away
 
-### Virtualenv
+We strongly suggest on using `virtualenv` for python development
 
-Strongly suggest on using virtualenv for local development.
+#### Next we Install python3 on your computer
 
-**Install virtualenv if not installed using**
+On mac osx
 
-```bash
-pip install virtualenv
-````
+```shell
+# On Mac OSX we suggest homebrew, also known as brew
+# please visit https://brew.sh/
+# follow the on-screen instructions of the website
 
-**Use python3 for the virtualenv**
-```bash
+# hopefully homebrew is installed
+# let us now use brew to install python3
+brew install python3
+```
+
+On windows
+
+```shell
+# On windows we suggest chocolatey, also known as choco
+# please visit https://chocolatey.org/
+# follow the on-screen instructions of the website
+
+# hopefully homebrew is installed
+# let us now use choco to install python3
+choco install python --version 3.6.3
+```
+
+##### Next we get the projects code setup to run
+
+We now will setup an environment to run the python code of
+the [https://gitlab.com/bikespace/Bicycle-parking](https://gitlab.com/bikespace/Bicycle-parking) project setup on your computer
+
+```shell
+pip3 install virtualenv
+
+# get the repository of code on your machine and change to the directory
+git clone git@gitlab.com:bikespace/Bicycle-parking.git civictechto-bicycle-parking
+
+# change to the directory
+cd civictechto-bicycle-parking
+
+# setup a virtualenv for python3
 virtualenv -p python3 venv
-```
+# note "venv" is now the name of the directory containing the python virtualenv
 
-**Start the virtualenv**
-
-```bash
+# Use the "venv" you setup earlier for your python3 project buy running the activate script
 source venv/bin/activate
-```
 
-### Install requirements
-
-Install the requirements from the supplied `requirements.txt`.
-
-```bash
-pip install -r requirements.txt
+# Install requirements
+# Install the requirements from the supplied `requirements.txt`.
+pip3 install -r requirements.txt
 ```
 
 ### Have a postgres instance running
 
-Download your OS specific postgres package running on the default 5432 port from their download [page](https://www.postgresql.org/download/)
-
 For mac OSX the easiest method is to download the [Postgres app](http://postgresapp.com/)
 
-Create a database on postgres with the name `bike_parking_toronto`
+For other OS specific postgres packages running on the default 5432 port
+Please visit the [postgres download page](https://www.postgresql.org/download/)
 
-Export your databse url on your bash, so django can just use that instead of the default sqlite.
+Create a database on postgres with the name
 
-```bash
+```
+bike_parking_toronto
+```
+
+Now we export the databse url, so django can just use that instead of the default sqlite
+
+```shell
 export DATABASE_URL=postgresql://localhost/bike_parking_toronto
 ```
 
 ### Install ngrok
 
-ngrok is needed to server the local django application over ssl.
+ngrok is needed to serve the local django application over ssl.
 To install ngrok, use [npm](https://www.npmjs.com/get-npm).
 
 Install ngrok globally:
 
-```bash
+```shell
+which npm
 npm install ngrok -g
+```
+### Build client side js
+
+We are using rollup to bundle the js for the client side. To compile `cd` into the `bicycleparking` and run :
+
+```shell
+npm build
+```
+
+For hot-reloading setup a watcher:
+
+```shell
+rollup -c -w
 ```
 
 ### Start the Django Application
@@ -76,33 +120,30 @@ Once all the above steps are complete test by running the django app.
 Run this migrate whenever the models.py for the app has been changed so the
 changes can be applied to the databases.
 
-```bash
+```shell
+# First we run the migrations for the database
 python manage.py migrate
-```
 
-**Run the django app**
-
-```bash
-python manage.py runserver
-```
-
-**Run ngrok to serve over https**
-
-```bash
-ngrok http [port_django_is_running_on]
-```
-
-**Create a superuser for admin**
-
-```bash
+# Let us first create a superuser for the admin web page
 python manage.py createsuperuser
+
+# Now we can run the django web app
+python manage.py runserver
+
+# Now run ngrok to serve over https
+# ngrok http [please_insert_port_django_is_running_on]
+# for example
+ngrok http 3000
 ```
 
 ## Project Structure
 
-This the current project structure
+This is the current project structure, please note:
+
+- the `Bicycle_parking` is the main Django Project folder
+- the `bicycleparking` dir is one of the apps for the project
+
 ```
-.
 ├── bicycleparking
 │   ├── admin.py
 │   ├── apps.py
@@ -152,19 +193,12 @@ This the current project structure
     └── pip-selfcheck.json
 ```
 
-`Bicycle_parking` is the main Django Project folder.
-
-`bicycleparking` is one of the apps for the project.
-
-## Client Side
-
-```
-npm install
-```
-
 ## Pushing changes
 
 Please checkout out a new branch when working on the project and submit merge requests
 for the proposed changes to the master branch.
 
 ## License: MIT
+
+please see the `LICENSE` file
+generated using https://choosealicense.com/licenses/mit/

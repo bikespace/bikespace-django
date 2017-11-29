@@ -25,6 +25,7 @@ from rest_framework import status
 from bicycleparking.serializers import SurveyAnswerSerializer
 from bicycleparking.models import SurveyAnswer
 from bicycleparking.uploader import Uploader
+from bicycleparking.geocode import Geocode
 
 # Create your views here.
 
@@ -38,7 +39,10 @@ class SurveyAnswerList(generics.CreateAPIView):
     serializer_class = SurveyAnswerSerializer
 
     def perform_create(self, serializer):
-        serializer.save(ip=self.request.META['REMOTE_ADDR'])
+        answer = serializer.save()
+        geocode = Geocode (answer, ip=self.request.META['REMOTE_ADDR'])
+        geocode.output ()
+        
 
 
 class UploadPicture(APIView):

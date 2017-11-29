@@ -21,6 +21,7 @@
 
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django.utils import timezone
 
 # Tables in the default database as managed by the django
 # process 
@@ -38,7 +39,6 @@ class SurveyAnswer(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     survey = JSONField(default=dict)
-    point_timestamp = models.DateTimeField (auto_now_add = True)
     comments = models.TextField(default=None, null=True)
     photo_uri = models.TextField(default=None, null=True)
     photo_desc = models.TextField(default=None, null=True)

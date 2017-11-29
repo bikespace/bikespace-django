@@ -32,7 +32,7 @@ export default class MapInput extends Input {
   }
 
   onSelect(event) {
-
+    console.log(event);
   }
 
   formatJSON(rawjson) {
@@ -57,6 +57,7 @@ export default class MapInput extends Input {
     console.log('position ')
     this.location.lat = position.coords.latitude;
     this.location.lng = position.coords.longitude;
+    var self = this;
     this.map = leaflet.map('map').setView([this.location.lat, this.location.lng], 16);
     this.map.addControl(new L.Control.Search({
       sourceData: this.mapBoxGeocoding,
@@ -65,7 +66,13 @@ export default class MapInput extends Input {
       autoType: false,
       autoCollapse: true,
       minLength: 2,
-      marker: DefaultIcon
+      marker: DefaultIcon,
+      moveToLocation: function(latlng, title, map) {
+      	self.location.lat=latlng.lat;
+        self.location.lng=latlng.lng;
+        //var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+  			map.setView(latlng);
+      }
     }));
     this.renderMap();
   }

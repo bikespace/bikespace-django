@@ -40,7 +40,7 @@ class SurveyAnswerList(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         answer = serializer.save()
-        geocode = Geocode (answer, ip=self.request.META['REMOTE_ADDR'])
+        geocode = Geocode (answer, ipAddress=self.request.META['REMOTE_ADDR'])
         geocode.output ()
         
 

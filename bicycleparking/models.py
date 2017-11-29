@@ -38,7 +38,7 @@ class SurveyAnswer(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     survey = JSONField(default=dict)
-    point_timestamp = models.DateTimeField (auto_now_add = True)
+    point_timestamp = models.DateTimeField(default=timezone.now,auto_now_add = True)
     comments = models.TextField(default=None, null=True)
     photo_uri = models.TextField(default=None, null=True)
     photo_desc = models.TextField(default=None, null=True)

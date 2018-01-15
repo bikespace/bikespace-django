@@ -19,6 +19,7 @@
 
 import requests
 import datetime
+import django.utils as utils
 from bicycleparking.models import Event
 from bicycleparking.models import Area
 from bicycleparking.models import Intersection2d
@@ -65,7 +66,7 @@ class Geocode :
         loc (raw sql record) location of the closest intersection"""
 
      self.errors = []
-     self.when = datetime.datetime.now ()
+     self.when = utils.timezone.now ()
      self.fromWhere = ipAddress
      self.survey = answer
      self.area = None

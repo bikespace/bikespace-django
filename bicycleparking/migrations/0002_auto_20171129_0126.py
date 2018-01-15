@@ -31,10 +31,4 @@ class Migration(migrations.Migration):
                 'managed': False,
             },
         ),
-        migrations.AddField(
-            model_name='surveyanswer',
-            name='point_timestamp',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
-            preserve_default=False,
-        ),
     ]

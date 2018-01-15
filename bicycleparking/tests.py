@@ -20,27 +20,13 @@ from django.test import TestCase
 import psycopg2
 import xml.etree.ElementTree as ET
 import time
+from django.db import connections
 from bicycleparking.geocode import Geocode
 from bicycleparking.models import SurveyAnswer
 from bicycleparking.models import Event
 from bicycleparking.models import Area
 from bicycleparking.models import Intersection2d
 from bicycleparking.intersection import Intersection
-
-
-""" Tests include:
-       test_location:  tests a series of geocode values read from an xml test data file,
-                       accessing the intersection database published by the City of
-                       Toronto to locate the entries in the test data and compare the 
-                       intersection data lookups with expected results.
-       test_record:    Tests the processes for writing data to he database and compares
-                       the database entries as created with the expected entries. 
-
-                       The data in the test file include both inputs and the main expected
-                       results to test against. Test output will indicate whether or not 
-                       the test execution returned the expected result, and if it does not
-                       return successfully the test system will return diagnostic 
-                       information."""
 
 class Geocodetest (TestCase) :
 
@@ -63,6 +49,8 @@ class Geocodetest (TestCase) :
 
      sources = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
                  'closest' : { 'gid' : 'gid' }, 'major' : { } }
+
+     self.load_geo_test_subset ();
      print ("\t\ttesting geocode location")
      self.success = True
      if self.database_exists () :
@@ -78,6 +66,7 @@ class Geocodetest (TestCase) :
      """Tests the process of accessing the geographic database and then 
      writing the information received and synthesized into the database."""
 
+     # self.load_geo_test_subset ();
      print ("\t\ttesting geocode recording")
      self.success = True
      sources = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
@@ -96,6 +85,89 @@ class Geocodetest (TestCase) :
            self.verifyArea (entry)
         self.assertTrue (self.success)
        
+  def load_geo_test_subset (self) :
+     """Once the django test routines have created the test databases, load the 
+        geospatial (gis) reference database with the subset of the intersections
+        and/or other elements the tests require."""
+
+     try :
+        self.makeGeoDB (connections ['geospatial'])
+        self.loadGeoData (connections ['geospatial'], "test/test_data.sql")
+     except Exception as error :
+        print (error)
+
+  def makeGeoDB (self, connection):
+     """Executes the required commands to convert an existing Postgresql 
+        database into a GIS enabled database with a GIS schema."""
+
+     make_GIS_db = ["CREATE SCHEMA postgis;",
+                    "ALTER DATABASE test_autogeo SET search_path = public, postgis, contrib;",
+                    "SET search_path = public, postgis, contrib;",
+                    "CREATE EXTENSION postgis SCHEMA postgis;", "SELECT postgis_full_version();"]
+
+     try :
+        cursor = connection.cursor ()
+        for cmd in make_GIS_db :
+           print ("executing command {0}".format (cmd))
+           cursor.execute (cmd)
+           if cursor.rowcount > 0 :
+              print (cursor.fetchone ())
+           connection.commit ()
+     except psycopg2.Warning as warning :
+        if warning.pgerror != None :
+           print (warning.pgerror)
+        else :
+           print ("unknown warning in postgres link")
+     except psycopg2.Error as error :
+        if error.pgerror != None :
+           print (error.pgerror)
+        else :
+           print ("unknown error in postgres link")
+
+  def loadGeoData (self, connection, fn) :
+     """Opens the selected input test file and reads it command 
+        by command, executing each command using a cursor generated
+        from the submitted connection to execute each command. Then
+        executes test queries of the created data to verify the status
+        of the newly created records."""
+
+     with connection.cursor () as sink :
+        print ("add test geographic data")
+        with open (fn) as sql :
+           for cmd in sql :
+              try :
+                 sink.execute (cmd)
+              except psycopg2.Warning as warning :
+                 if warning.pgerror != None :
+                    print (warning.pgerror)
+                 else :
+                    print ("unknown warning in postgres link")
+              except psycopg2.Error as error :
+                 if error.pgerror != None :
+                    print (error.pgerror)
+                 else :
+                    print ("unknown error in postgres link")
+        try :
+           sel = """select * from intersection2d where gid < 10;"""   
+           sink.execute (sel)
+           if sink.rowcount > 0 :
+              print ("printing {0} rows".format (sink.rowcount))
+              for p in sink.fetchall () :
+                 print (p)
+           else :
+              print ("no rows selected")
+           sink.execute ("select count (int_id) from intersection2d;")
+           print (sink.fetchone ())
+        except psycopg2.Warning as warning :
+           if warning.pgerror != None :
+              print (warning.pgerror)
+           else :
+              print ("unknown warning in postgres link")
+        except psycopg2.Error as error :
+           if error.pgerror != None :
+              print (error.pgerror)
+           else :
+              print ("unknown error in postgres link")
 
   def readGeoEntries (self, fn, sources) :
      """Reads data to test the search and database management routines."""
@@ -148,8 +220,7 @@ class Geocodetest (TestCase) :
 
      return SurveyAnswer (latitude = float (location ["latitude"]), 
                           longitude = float (location ["longitude"]), 
-                          survey = "{'test' : 'empty'}", comments = "",
-                          photo_uri = "", photo_desc = "")
+                          survey = "{'test' : 'empty'}", comments = "")
 
   def findAndWrite (self, answer, testData) :
      """Executes the location request, finds the data, and writes a set of test results to
@@ -171,10 +242,10 @@ class Geocodetest (TestCase) :
         result = where
      elif not 'gid' in location:
         print ("\t\texpected result not found, no verification possible")
-        self.success = false
+        self.success = False
      else : 
         self.diagnostic (where, location)
-        self.success = false
+        self.success = False
      return result
 
   def verifyArea (self, testData) :
@@ -189,10 +260,10 @@ class Geocodetest (TestCase) :
            print (tmp.format (testData ['name'], event.sourceIP, event.timeOf))
         if areaRef.major != int (testData ['major_gid']) :
            print ("\t\terror: mismatch {0} with test data {1}".format (areaRef.major, testData ['major_gid']))
-           self.success = false
+           self.success = False
      else :
         print ("\terror: {0} not found with target {1}".format (testData ['name'], int (testData ['gid']))) 
-        self.success = false
+        self.success = False
 
   def geoCompare (self, key, where) :
      """Compares the result of a lookup to the expected item as defined in the place 
@@ -200,7 +271,7 @@ class Geocodetest (TestCase) :
      try :
         return where.getClosest ().getIdent () == key
      except Exception as error :
-        self.success = false
+        self.success = False
         if where == None :
            print ('geolocation undefined for {0}'.format (key))
         else :

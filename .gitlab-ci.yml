@@ -28,7 +28,7 @@ test:
   - apt-get install -y python-dev python-pip
   - pip install -r requirements.txt
   - echo 'test keeping database(s)'
-  - python manage.py test --keepdb
+  - python manage.py test
 
 staging:
   type: deploy

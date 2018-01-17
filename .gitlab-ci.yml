@@ -28,7 +28,7 @@ test:
   - apt-get install -y python-dev python-pip
   - pip install -r requirements.txt
   - echo 'erasing databases'
-  - python removeTestDB
+  - python removeTestDB.py
   - python manage.py test
 
 staging:

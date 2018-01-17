@@ -1,6 +1,7 @@
 import psycopg2
 import sys
 import xml.etree.ElementTree as ET
+import os
 
 DB_HOST=os.getenv ('BIKE_DB_HOST', 'localhost')
 DB_USER=os.getenv ('BIKE_DB_USER', 'postgres')

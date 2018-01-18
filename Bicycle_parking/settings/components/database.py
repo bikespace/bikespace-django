@@ -8,18 +8,18 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'bike_parking_toronto',
-        'USER': os.getenv ('BIKE_DB_USER', 'postgres'),
-        'PASSWORD': os.getenv ('BIKE_DB_PW', ''),
-        #'HOST': os.getenv ('BIKE_DB_HOST', 'postgres'),
-        #'PORT': '5432',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'postgres',
+        'PORT': '5432',
     },
     'geospatial' : {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'intersection',
-        'USER': os.getenv ('BIKE_DB_USER', 'postgres'),
-        'PASSWORD': os.getenv ('BIKE_DB_PW', ''),
-        #'HOST': os.getenv ('BIKE_DB_HOST', 'postgres'),
-        #'PORT': '5432',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'postgres',
+        'PORT': '5432',
     }
 }
 

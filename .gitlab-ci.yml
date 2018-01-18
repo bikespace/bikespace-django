@@ -20,7 +20,6 @@ services:
 variables:
   POSTGRES_DB: bike_parking_toronto
   POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: ""
 
 test:
   script:

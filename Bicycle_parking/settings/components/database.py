@@ -11,7 +11,7 @@ DATABASES = {
         'USER': os.getenv ('BIKE_DB_USER', 'postgres'),
         'PASSWORD': os.getenv ('BIKE_DB_PW', ''),
         #'HOST': os.getenv ('BIKE_DB_HOST', 'postgres'),
-        'PORT': '5432',
+        #'PORT': '5432',
     },
     'geospatial' : {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -19,7 +19,7 @@ DATABASES = {
         'USER': os.getenv ('BIKE_DB_USER', 'postgres'),
         'PASSWORD': os.getenv ('BIKE_DB_PW', ''),
         #'HOST': os.getenv ('BIKE_DB_HOST', 'postgres'),
-        'PORT': '5432',
+        #'PORT': '5432',
     }
 }
 

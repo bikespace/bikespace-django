@@ -10,7 +10,7 @@ DATABASES = {
         'NAME': 'bike_parking_toronto',
         'USER': os.getenv ('POSTGRES_USER', 'postgres'),
         'PASSWORD': os.getenv ('POSTGRES_PASSWORD', ''),
-        'HOST': os.getenv ('BIKE_DB_HOST', 'localhost'),
+        'HOST': os.getenv ('BIKE_DB_HOST', 'postgres'),
         'PORT': '5432',
     },
     'geospatial' : {
@@ -18,7 +18,7 @@ DATABASES = {
         'NAME': 'intersection',
         'USER': os.getenv ('POSTGRES_USER', 'postgres'),
         'PASSWORD': os.getenv ('POSTGRES_PASSWORD', ''),
-        'HOST': os.getenv ('BIKE_DB_HOST', 'localhost'),
+        'HOST': os.getenv ('BIKE_DB_HOST', 'postgres'),
         'PORT': '5432',
     }
 }

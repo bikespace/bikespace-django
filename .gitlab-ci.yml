@@ -15,7 +15,7 @@ before_script:
     - cd bicycleparking && npm install && npm run build && cd ..
 
 services:
-  - postgres:latest
+  - mdillon/postgis
 
 variables:
   POSTGRES_DB: bike_parking_toronto

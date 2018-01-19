@@ -3,22 +3,22 @@ import dj_database_url
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-#please fill out these settings for your own local machine!
+# please fill out these settings for your own local machine!
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'bike_parking_toronto',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'postgres',
+        'USER': os.getenv('BIKE_DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('BIKE_DB_PW', 'postgres'),
+        'HOST': os.getenv('BIKE_DB_HOST', 'postgres'),
         'PORT': '5432',
     },
-    'geospatial' : {
+    'geospatial': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'intersection',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'postgres',
+        'USER': os.getenv('BIKE_DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('BIKE_DB_PW', 'postgres'),
+        'HOST': os.getenv('BIKE_DB_HOST', 'postgres'),
         'PORT': '5432',
     }
 }
@@ -33,5 +33,5 @@ DATABASES = {
 # routines to update or access a table defined as a model class in python
 # to the appropriate database
 
-DATABASE_ROUTERS = [ 'bicycleparking.Routers.GeoSpatialRouting', 
-                     'bicycleparking.Routers.DefaultRouting' ]
+DATABASE_ROUTERS = ['bicycleparking.Routers.GeoSpatialRouting',
+                    'bicycleparking.Routers.DefaultRouting']

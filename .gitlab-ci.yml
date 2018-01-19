@@ -21,6 +21,9 @@ variables:
   POSTGRES_DB: bike_parking_toronto
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: "postgres"
+  BIKE_DB_USER: postgres
+  BIKE_DB_PW: postgres
+  BIKE_DB_HOST: postgres
   
 test:
   script:

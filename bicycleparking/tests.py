@@ -101,7 +101,7 @@ class Geocodetest (TestCase) :
         database into a GIS enabled database with a GIS schema."""
 
      make_GIS_db = ["CREATE SCHEMA postgis;",
-                    "ALTER DATABASE test_autogeo SET search_path = public, postgis, contrib;",
+                    "ALTER DATABASE test_intersection SET search_path = public, postgis, contrib;",
                     "SET search_path = public, postgis, contrib;",
                     "CREATE EXTENSION postgis SCHEMA postgis;", "SELECT postgis_full_version();"]
 

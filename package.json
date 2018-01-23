@@ -12,5 +12,7 @@
     "flatpickr": "^4.0.6",
     "leaflet-search": "^2.3.6"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "rollup-plugin-multi-entry": "^2.0.2"
+  }
 }

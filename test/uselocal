@@ -1,3 +1,0 @@
-unset BIKE_DB_HOST
-unset BIKE_DB_USER 
-unset BIKE_DB_PW

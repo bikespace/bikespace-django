@@ -1,4 +1,4 @@
-BIKE_DB_HOST="postgres"
+BIKE_DB_HOST="postgis"
 export BIKE_DB_HOST
 BIKE_DB_USER="postgres"
 export BIKE_DB_USER 

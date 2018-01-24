@@ -79,25 +79,30 @@ Create a database on postgres with the name
 Create an intersection database and a test intersection database using the geographic database script:
 in linux or OSX, type:
 
-```./mkintersectiondb
+```shell
+./mkintersectiondb
 ```
 
 On linux distros, your postgresql installation must permit access from the local host using the
 default postgres database userid. If you get an access denied error from `mkintersectiondb`, 
 on Ubuntu do the following:
 
-```sudo ufw enable
+```shell
+sudo ufw enable
 sudo nano /etc/postgresql/9.6/main/pg_hba.conf 
 ```
 
 find the line with
-```# IPv4 local connections:
+```shell
+# IPv4 local connections:
 host    all             all             127.0.0.1/32            md5 (or any value but "trust')
+
 ```
 
 replace the last column with the word trust as follows:
 
-```host    all             all             127.0.0.1/32            trust
+```shell
+host    all             all             127.0.0.1/32            trust
 ```
 
 ### Install ngrok

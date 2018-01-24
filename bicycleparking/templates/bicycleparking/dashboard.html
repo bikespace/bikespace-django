@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<html>
+
+<head>
+    <title>Toronto Bicycle Parking Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='/static/css/dashboard.css' rel='stylesheet' />
+
+    <body>
+        <div id="title">
+            <object data="/static/images/BikeSpace_horz_wordmark.svg" height="100%" width="100%" type="image/svg+xml"></object>
+        </div>
+
+        <div id='map'></div>
+        <script>
+            window.ASSETS_PATH = '{% static images %}'; 
+        </script>
+        <script src="{% static 'dashboard.js' %}"></script>
+    </body>
+
+</html>

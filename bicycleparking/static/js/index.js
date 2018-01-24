@@ -51,7 +51,6 @@ class Survey {
       'latitude': this.state.location.lat,
       'longitude': this.state.location.lng,
       'comments': this.state.comment,
-      'point_timestamp': this.state.report_time,
       'survey': this.state
     };
     if (this.state.photo) {

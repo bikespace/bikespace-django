@@ -2,7 +2,8 @@
 .DS_Store
 .AppleDouble
 .LSOverride
-
+package-lock.json
+bicycleparking/package-lock.json
 ### SublimeText ###
 # cache files for sublime text
 *.tmlanguage.cache

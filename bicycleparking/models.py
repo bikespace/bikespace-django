@@ -21,6 +21,7 @@
 
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django.utils import timezone
 
 # Tables in the default database as managed by the django
 # process 

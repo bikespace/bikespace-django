@@ -9,7 +9,7 @@ import cssnext from 'postcss-cssnext';
 import csscalc from 'postcss-calc';
 import cssnano from 'cssnano';
 
-export default {
+export default [{
   entry: './static/js/index.js',
   dest: './static/main.js',
   format: 'iife',
@@ -19,20 +19,46 @@ export default {
       jsnext: true,  // Default: false
       main: true,  // Default: true
       browser: true,  // Default: false
-      extensions: [ '.js', '.json' ],  // Default: ['.js']
+      extensions: ['.js', '.json'],  // Default: ['.js']
     }),
     commonjs(),
     globals(),
     builtins(),
     postcss({
-      plugins:[
+      plugins: [
         simplevars(),
         nested(),
         cssnext({ warnForDuplicates: false }),
         cssnano(),
         csscalc()
       ],
-      extensions: [ '.css' ]
+      extensions: ['.css']
     })
   ]
-};
+}, {
+  entry: './static/js/dashboard.js',
+  dest: './static/dashboard.js',
+  format: 'iife',
+  plugins: [
+    resolve({
+      module: true, // Default: true
+      jsnext: true,  // Default: false
+      main: true,  // Default: true
+      browser: true,  // Default: false
+      extensions: ['.js', '.json'],  // Default: ['.js']
+    }),
+    commonjs(),
+    globals(),
+    builtins(),
+    postcss({
+      plugins: [
+        simplevars(),
+        nested(),
+        cssnext({ warnForDuplicates: false }),
+        cssnano(),
+        csscalc()
+      ],
+      extensions: ['.css']
+    })
+  ]
+}];

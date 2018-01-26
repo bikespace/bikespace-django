@@ -11,7 +11,7 @@ export default class Home {
   }
 
   bind() {
-    document.getElementById('button').addEventListener('click', (event) => {
+    document.getElementById('start').addEventListener('click', (event) => {
       this.survey.router.navigate(`/survey/1`);
     });
   }
@@ -19,10 +19,19 @@ export default class Home {
   template() {
     return (
       `
-      <h1 class="title">Bike Parking</h1>
-      <h2 class="subtitle is-1">Start Now</h2>
-      
-      <button id="button" class="waves-effect waves-light btn">Start Now</button>
+      <div class="row center-sm center-md center-lg">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <object data="/static/images/BikeSpace_badge_black.svg" height="50%" width="100%" type="image/svg+xml"></object>      
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h1 class="title">Bike Parking</h1>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <button id="start" class="btn lg">Let's get started</button>
+        </div>       
+      </div>
       `
     )
   }

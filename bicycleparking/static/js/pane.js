@@ -112,13 +112,22 @@ export default class Pane {
     const buttonText = this.props.final ? 'Submit' : 'Next';
     const heading = this.props.heading ? `<h3>${this.props.heading}</h3>` : '';
     return (
-      `<div class="field">      
-          ${heading}
-          ${templates}
-          <button id="button" class="waves-effect waves-light btn">${buttonText}</button>
-          <p class="help is-danger" id="error"></p>          
-          <p id="message" class="Step__message"></p>
-        </div>      `
+      `
+      <div class="row center-xs center-sm center-md center-lg">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <object data="/static/images/BikeSpace_horz_wordmark.svg" height="100%" width="100%" type="image/svg+xml"></object>      
+        </div>
+        <div class="col-xs-9 col-sm-9 col-md-6 col-lg-6">
+          
+        </div>
+        ${heading}
+        ${templates}
+        <div class="col-xs-3 col-sm-12 col-md-12 col-lg-12">
+        </div>
+        <button id="button" class="waves-effect waves-light btn">${buttonText}</button>
+
+      </div>      
+      `
     )
   }
 }

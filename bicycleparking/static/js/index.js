@@ -91,6 +91,7 @@ class Survey {
   }
 
   renderPane(params, query) {
+    document.getElementById('render').classList.remove("image");
     let pane = parseInt(params.pane);
     this.panes[pane - 1].render();
   }

@@ -74,7 +74,32 @@ For mac OSX the easiest method is to download the [Postgres app](http://postgres
 For other OS specific postgres packages running on the default 5432 port
 Please visit the [postgres download page](https://www.postgresql.org/download/)
 
-Create a database on postgres with the name
+Create a database in postgres with the name ```bike_parking_toronto```.
+The database needs the postgres user to have the password ```postgres```.
+
+In Linux:
+```
+$ sudo su - postgres
+$ psql
+$ CREATE DATABASE bike_parking_toronto;
+### The postgres user is going to already
+### BUT we need to safely set that user's password
+$ \password postgres
+Enter new password: postgres
+Enter it again: postgres
+$ GRANT ALL PRIVILEGES ON DATABASE bike_parking_toronto to postgres;
+```
+
+The PostGIS package needs to be installed and the extension enabled.
+
+Assuming postgresql version 9.6 and Linux:
+```
+$ sudo apt-get install postgresql-9.6-postgis-2.3 postgis
+$ sudo su - postgres
+$ psql
+$ \connect bike_parking_toronto
+$ CREATE EXTENSION postgis;
+```
 
 Create an intersection database and a test intersection database using the geographic database script:
 in linux or OSX, type:
@@ -82,6 +107,8 @@ in linux or OSX, type:
 ```shell
 ./mkintersectiondb
 ```
+
+The script will ask for the password a few times, enter ```postgres``` which we set up earlier.
 
 On linux distros, your postgresql installation must permit access from the local host using the
 default postgres database userid. If you get an access denied error from `mkintersectiondb`, 
@@ -112,6 +139,9 @@ To install ngrok, use [npm](https://www.npmjs.com/get-npm).
 
 Install ngrok globally:
 
+We can use npm or yarn.
+
+### With npm:
 ```shell
 which npm
 npm install ngrok -g
@@ -128,6 +158,27 @@ For hot-reloading setup a watcher:
 
 ```shell
 rollup -c -w
+```
+
+### With yarn:
+### Installing yarn and ngrok on Linux:
+```
+$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+$ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+$ sudo apt-get update && sudo apt-get install yarn
+$ sudo yarn global add ngrok
+```
+
+### Build client side js
+In the main project directory:
+```
+$ yarn postinstall
+```
+
+For hot-reloading:
+In the ```bicycleparking``` directory
+```
+$ yarn run watch
 ```
 
 ### Start the Django Application

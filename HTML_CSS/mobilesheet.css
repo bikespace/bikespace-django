@@ -1,0 +1,164 @@
+*{
+    font-family:'opensans';
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'opensans';
+    src: url('Open_Sans/OpenSans-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'opensans';
+    src: url('Open_Sans/OpenSans-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'opensans';
+    src: url('Open_Sans/OpenSans-SemiBold.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+strong {
+    font-family: 'opensans';
+    font-weight: bold;
+}
+em {
+    font-family: 'opensans';
+    font-weight: normal;
+    font-style: italic;
+    font-size: 5vw;
+}
+
+h1 {
+    font-weight: bold;
+    padding-top: 3vw;
+    margin-left: 1vw;
+    padding-bottom: 3vw;
+    font-size: 6vw;
+}
+h2 {
+    font-size: 5vw;
+    margin-left: 2vw;
+}
+
+/*___________________________________________________________*/
+
+body {
+    overflow-x: hidden;
+    margin: auto;
+    height: 100%;
+}
+.backbike {
+    background: url('background_images/yellowbike1920.jpg')no-repeat center;
+    margin: auto;
+    background-position: 0vw 10vw;
+    background-size: 147vh;
+}
+
+/*___________________________________________________________*/
+
+header{
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+}
+
+.title {
+    background: url(icons/bikespace_header.svg) no-repeat;
+    background-position: center;
+    background-size: 40vw;
+    height: 10vw;
+    margin: auto;
+    width: 40vw;
+}
+
+/*___________________________________________________________*/
+
+.screen1 {
+    padding: 3vw 3vw 3vw 3vw;
+    border-radius: 0px;
+    background-color: #fff;
+    margin-left: 3vw;
+    
+    opacity: 0.90;
+    margin-right: 3vw;
+    margin-top: 3vw;
+}
+
+.options {
+    list-style: none;
+    margin-left: -7vw;
+    padding: 2vw;
+    background: #eee;
+    height: 7vw;
+    border-radius: 9vw;
+    margin-bottom: 4vw;
+}
+
+.options li {
+    padding-top: 0vw;
+    width: 80vw;
+    padding-left: 2vw;
+}
+
+.check {    
+    margin-left: auto;
+}
+
+.on{
+    background: url(icons/check.svg) no-repeat;
+    background-size: 7vw;
+    width:7vw;
+    height: 7vw;
+    padding-right: 0.1vw;
+    margin-top: -6.83vw;
+}
+
+.off{
+    border: 0.5vw solid #ccc;
+    border-radius: 7vw;
+    width:6vw;
+    height: 6vw;
+    padding-right: 0.1vw;
+    margin-top: -6.7vw;
+}
+
+/*___________________________________________________________*/
+
+.nav {
+    margin-top: 20vw;
+}
+.back {
+    padding: 2vw;
+    border: 0.5vw solid #31C057;
+    height: 5vw;
+    width: 18.5vw;
+    border-radius: 9vw;
+    margin-bottom: 0vw;
+    text-align: center;
+}
+.back p {
+    margin: auto;
+    margin-top: -1vw;
+    color: #31C057
+    
+}
+.next {
+    padding: 2vw;
+    background: #31C057;
+    height: 6vw;
+    width: 20vw;
+    border-radius: 9vw;
+    margin-bottom: 2vw;
+    margin-left: auto;
+    margin-top: -10vw;
+    text-align: center;
+}
+.next p {
+    margin: auto;
+    margin-top: -0.5vw;
+    color: #fff
+}

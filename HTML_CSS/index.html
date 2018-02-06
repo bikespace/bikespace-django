@@ -3,9 +3,23 @@
     <head>
         
     	<meta charset="utf-8">
-        <title>Bikespace - Home</title>
-        <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 4/3)"  href="stylesheet.css"/> 
-        <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 4/3)" href="mobilesheet.css" />
+        <title>BikeSpace - Home</title>
+        <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)"  href="stylesheet.css"/> 
+        <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="mobilesheet.css" />
+        
+        <!--favicon-->
+        <link rel="icon" type="image/png" href="icons/bikespace32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="icons/bikespace16.png" />
+        
+        <!-- META Tags -->
+        <meta property="og:title" content="BikeSpace visual prototype">
+        <meta property="og:description" content="A pure HTML and CSS version of the upcoming BikeSpace app.">
+        <meta property="og:image" content="http://dav-idcox.com/bikespace/icons/media_thumb1.jpg">
+        <meta property="og:url" content="http://dav-idcox.com">
+        <meta name="twitter:card" content="summary_large_image">
+
+        <meta property="og:site_name" content="BikeSpace visual prototype">
+        <meta name="twitter:image:alt" content="The BikeSpace logo with the word HTML over top">
         
         <!--Jquery Source-->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -14,29 +28,23 @@
     
     <body class="backbike">
         
-        <header class="report">
+        <header class="clear">
             <div class="title">
             </div>
         </header>
-        <div class="screen1">
-            <h1>What was the issue?</h1>
-            <h2>Choose what applies</h2>
-            <ul>
-                <div class="options"><li><em>Couldn't find bike parking</em></li><div class="check on"></div></div>
-                <div class="options"><li><em>Nearby bike parking is full</em></li><div class="check off"></div></div>
-                <div class="options"><li><em>Bike parking is damaged</em></li><div class="check off"></div></div>
-                <div class="options"><li><em>A bike is badly parked</em></li><div class="check off"></div></div>
-                <div class="options"><li><em>Different problem</em></li><div class="check on"></div></div>
-            </ul>
-            <div class="nav">
-                <div class="back">
-                    <p><em>Back</em></p>
-                </div>
-                <div class="next">
-                    <p><em>Next</em></p>
-                </div>
+        <div class="screen1 clear">
+        </div>
+        <div >
+            <div class="logo">
+                <h1 class="maintitle tshadow">BikeSpace</h1>
             </div>
-            
         </div>
     </body>
+    <footer>
+        <div class="nav">
+                <div class="button bshadow">
+                    <a href="issue.html"><p><em>Report a parking issue</em></p></a>
+                </div>
+            </div>
+    </footer>
 </html>

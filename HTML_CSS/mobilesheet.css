@@ -2,6 +2,13 @@
     font-family:'opensans';
     font-weight: normal;
     font-style: normal;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
 }
 @font-face {
     font-family: 'opensans';
@@ -34,14 +41,36 @@ em {
 
 h1 {
     font-weight: bold;
-    padding-top: 3vw;
-    margin-left: 1vw;
-    padding-bottom: 3vw;
+    padding-top: 1vh;
+    margin-left: 3vh;
+    padding-bottom: 3vh;
     font-size: 6vw;
+}
+.maintitle {
+    font-weight: bold;
+    padding-top: 30vh;
+    text-align: center;
+    color: #fff;
+    margin-left: 0vh;
+    padding-bottom: 3vh;
+    font-size: 9vw;
 }
 h2 {
     font-size: 5vw;
-    margin-left: 2vw;
+    margin-left: 4vh;
+    padding-bottom: 2vh;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.tshadow {
+    text-shadow: 4px 4px 4px #00000099;
+}
+
+.bshadow {
+    box-shadow: 4px 4px 4px #00000099;
 }
 
 /*___________________________________________________________*/
@@ -52,50 +81,67 @@ body {
     height: 100%;
 }
 .backbike {
-    background: url('background_images/yellowbike1920.jpg')no-repeat center;
+    background: url('background_images/yellowbike1920sq.jpg')no-repeat center;
     margin: auto;
-    background-position: 0vw 10vw;
-    background-size: 147vh;
+    background-position: center 0vw;
+    background-size: 100vh;
 }
 
 /*___________________________________________________________*/
 
 header{
-    position: relative;
+    position: fixed;
     width: 100%;
+    margin-top: -13vh;
     background-color: #fff;
 }
 
 .title {
     background: url(icons/bikespace_header.svg) no-repeat;
     background-position: center;
-    background-size: 40vw;
-    height: 10vw;
+    background-size: 30vh;
+    height: 10vh;
     margin: auto;
-    width: 40vw;
+    width: 30vh;
 }
 
 /*___________________________________________________________*/
 
+.logo {
+    margin-top: -80vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50vh;
+    height: 30vh;
+    width: 100%;
+    opacity: 1;
+    background: url(icons/logo_main.svg) no-repeat;
+    background-size: 30vh 30vh;
+    background-position:center
+}
+
 .screen1 {
-    padding: 3vw 3vw 3vw 3vw;
     border-radius: 0px;
     background-color: #fff;
-    margin-left: 3vw;
-    
+    margin-left: 3vh;
+    height: 84vh;
+    margin-top: 13vh;
     opacity: 0.90;
-    margin-right: 3vw;
-    margin-top: 3vw;
+    margin-right: 3vh;
+}
+.clear {
+    opacity: 0;
 }
 
 .options {
     list-style: none;
-    margin-left: -7vw;
     padding: 2vw;
     background: #eee;
     height: 7vw;
     border-radius: 9vw;
-    margin-bottom: 4vw;
+    margin-left: 2vh;
+    margin-right: 2vh;
+    margin-bottom: 2vh;
 }
 
 .options li {
@@ -128,21 +174,31 @@ header{
 
 /*___________________________________________________________*/
 
+footer {
+    position: absolute;
+    margin-top: -4vh;
+    width: 100%;
+}
+
 .nav {
-    margin-top: 20vw;
 }
 .back {
     padding: 2vw;
     border: 0.5vw solid #31C057;
     height: 5vw;
+    margin-top: -8vw;
     width: 18.5vw;
-    border-radius: 9vw;
-    margin-bottom: 0vw;
+    border-radius: 10vw;
+    margin-left: 5vh;
     text-align: center;
 }
 .back p {
     margin: auto;
-    margin-top: -1vw;
+    padding: 1.5vw 1.75vw 2.5vw 1.75vw;
+    margin-top: -2.5vw;
+    width: 20vw;
+    height: 6vw;
+    margin-left: -2.5vw;
     color: #31C057
     
 }
@@ -151,14 +207,40 @@ header{
     background: #31C057;
     height: 6vw;
     width: 20vw;
-    border-radius: 9vw;
-    margin-bottom: 2vw;
-    margin-left: auto;
     margin-top: -10vw;
+    border-radius: 10vw;
+    margin-left: auto;
+    margin-right: 5vh;
     text-align: center;
 }
 .next p {
     margin: auto;
-    margin-top: -0.5vw;
+    padding: 1.5vw 2vw 2.5vw 2vw;
+    margin-top: -2vw;
+    width: 20vw;
+    height: 6vw;
+    margin-left: -2vw;
+    color: #fff
+}
+
+.button {
+    padding: 2vw;
+    background: #31C057;
+    height: 6vw;
+    width: 70vw;
+    margin-top: -10vw;
+    border-radius: 10vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.button p {
+    margin: auto;
+    padding: 1.5vw 2vw 2.5vw 2vw;
+    margin-top: -2vw;
+    width: 70vw;
+    height: 6vw;
+    margin-left: -2vw;
     color: #fff
 }

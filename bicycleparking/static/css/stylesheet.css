@@ -1,0 +1,159 @@
+*{
+    font-family:'opensans';
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'opensans';
+    src: url('/static/Open_Sans/OpenSans-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'opensans';
+    src: url('/static/Open_Sans/OpenSans-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'opensans';
+    src: url('/static/Open_Sans/OpenSans-SemiBold.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+strong {
+    font-family: 'opensans';
+    font-weight: bold;
+}
+em {
+    font-family: 'opensans';
+    font-weight: normal;
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+h1 {
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5px;
+    font-size: 1.6rem;
+}
+h2 {
+    font-size: 1.1rem;
+    margin-left: 10px;
+}
+
+/*___________________________________________________________*/
+
+body {
+    overflow-x: hidden;
+    margin: auto;
+    height: 100%;
+}
+.backbike {
+    background: url('/static/images/yellowbike1920.jpg')no-repeat center;
+    margin: auto;
+    background-position: 0px 40px;
+    background-size: 100vw;
+}
+
+/*___________________________________________________________*/
+
+header{
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+}
+
+.title {
+    background: url(/static/images/logo/bikespace_header.svg) no-repeat;
+    background-position: center;
+    background-size: 150px;
+    height: 45px;
+    margin: auto;
+    width: 200px;
+}
+
+/*___________________________________________________________*/
+
+.screen1 {
+    padding: 5px 20px 20px 20px;
+    border-radius: 0px;
+    background-color: #fff;
+    width: 375px;
+    opacity: 0.95;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.options {
+    list-style: none;
+    margin-left: -40px;
+    padding: 13px;
+    background: #eee;
+    height: 24px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+.options li {
+    width: 80%;
+    padding-left: 10px;
+}
+
+.check {    
+    margin-left: auto;
+}
+
+.on{
+    background: url(/static/images/logo/check.svg) no-repeat;
+    width: 30px;
+    margin-top: -26px;
+    height: 30px;
+    margin-right: -3px;
+}
+
+.off{
+    border: 3px solid #ccc;
+    border-radius: 30px;
+    width: 22px;
+    margin-top: -26px;
+    height: 22px;
+    margin-right: 1px;
+}
+/*___________________________________________________________*/
+
+.nav {
+    margin-top: 80px;
+}
+.back {
+    padding: 13px;
+    border: 3px solid #31C057;
+    height: 18px;
+    width: 20%;
+    border-radius: 30px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+.back p {
+    margin: auto;
+    margin-top: -4px;
+    color: #31C057
+    
+}
+.next {
+    padding: 13px;
+    background: #31C057;
+    height: 24px;
+    width: 20%;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-top: -100px;
+    text-align: center;
+}
+.next p {
+    margin: auto;
+    margin-top: -1px;
+    color: #fff
+}

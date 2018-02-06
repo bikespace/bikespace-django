@@ -3,6 +3,8 @@
 
 <head>
     <title>Toronto Bicycle Parking Project</title>
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="icon" href="/static/images/logo/favicon.ico" />
 
     <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -22,9 +24,17 @@
         <div id="render" class="container image">
         </div>
         <script>
-            window.ASSETS_PATH = '{% static images %}'; 
+            window.ASSETS_PATH = '{% static images %}';
         </script>
         <script src="{% static 'main.js' %}"></script>
+
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker
+                    .register('/static/sw.js')
+                    .then(function () { console.log('Service Worker Registered'); });
+            }
+        </script>
     </body>
 
 </html>

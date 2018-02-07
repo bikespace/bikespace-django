@@ -8,7 +8,7 @@ const questions = [
         type: types.ARRAY,
         heading: 'What was the issue?',
         text: 'Choose what applies',
-        required: true,
+        required: false,
         values: [
           {
             key: 'absent',

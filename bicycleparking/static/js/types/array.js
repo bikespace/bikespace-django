@@ -26,8 +26,9 @@ export default class ArrayInput extends Input {
 
   bind() {
     [...document.querySelectorAll('options')].forEach(el => {
+      console.log(el);
       el.addEventListener('click', function (event) {
-        console.log("tatq");
+        console.log("tqtq");
       });
     })
   }

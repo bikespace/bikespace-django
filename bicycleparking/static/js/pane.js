@@ -128,7 +128,7 @@ export default class Pane {
                     </a>
                 </div>
                 <div class="next">
-                    <a href="photo.html">
+                    <a id="button">
                         <p>
                             <em>Next</em>
                         </p>

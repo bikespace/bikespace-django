@@ -6,30 +6,32 @@ const questions = [
       {
         key: 'problem_type',
         type: types.ARRAY,
-        heading: 'What problem(s) prevented you from parking your bike?',
-        text: 'select all that apply',
+        heading: 'What was the issue?',
+        text: 'Choose what applies',
         required: true,
         values: [
           {
-            key: 'full',
-            text: 'All nearby bike racks were full'
-          },
-          {
-            key: 'difficult',
-            text: 'Difficult to locate bike racks'
-          },
-          {
             key: 'absent',
-            text: 'No nearby bike racks'
-          }
+            text: "Couldn't find bike parking"
+          },
+          {
+            key: 'full',
+            text: "Nearby bike parking is full"
+          },
+          {
+            key: 'damaged',
+            text: "Bike parking is damaged"
+          },
+          {
+            key: 'badly',
+            text: "A bike is badly parked"
+          },
+          {
+            key: 'other',
+            text: "Different problem"
+          } 
         ]
-      },
-      {
-        key: 'photo',
-        type: types.IMAGE,
-        heading: 'Upload a picture',
-        text: 'Optionally upload an image of a problem'
-      },
+      }
     ]
   },
   {

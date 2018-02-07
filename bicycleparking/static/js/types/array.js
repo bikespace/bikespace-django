@@ -15,7 +15,7 @@ export default class ArrayInput extends Input {
   }
 
   onSelect(event) {
-    if (event.target.type === 'checkbox') {
+    if (event.target.type === 'div') {
       if (event.target.checked) {
         this.values.push(event.target.value);
       } else {
@@ -25,23 +25,27 @@ export default class ArrayInput extends Input {
   }
 
   bind() {
-    [...document.querySelectorAll('input')].forEach(el => {
-      el.onchange = this.onSelect.bind(this);
+    [...document.querySelectorAll('options')].forEach(el => {
+      el.addEventListener('click', function (event) {
+        console.log("tatq");
+      });
     })
   }
+
 
   get template() {
     const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
     const options = this.props.values.reduce((memo, value) => {
-      memo += `<p><input type="checkbox"  id="${value.key}" value="${value.key}" name="problem" /><label for="${value.key}">${value.text}</label></p>`
+      memo += `<div class="options"><li><em>${value.text}</em></li><div class="check off"></div></div>`
       return memo;
     }, '');
-    const heading = this.props.heading ? `<h4>${this.props.heading}</h4>` : '';
     return (`
-      <div className="question">
-        ${heading}
-        <p>${this.props.text}</p>
-        ${options}
+      <div class="screen1">
+        <h1>${this.props.heading}</h1>
+        <h2>${this.props.text}</h2>
+        <ul>
+          ${options}
+        </ul>
       </div>
       `
     )

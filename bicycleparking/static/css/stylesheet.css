@@ -39,9 +39,30 @@ h1 {
     padding-left: 5px;
     font-size: 1.6rem;
 }
+.maintitle {
+    font-weight: bold;
+    padding-top: 300px;
+    text-align: center;
+    color: #fff;
+    margin-left: 0px;
+    padding-bottom: 0px;
+    font-size: 3.5rem;
+}
 h2 {
     font-size: 1.1rem;
     margin-left: 10px;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.tshadow {
+    text-shadow: 4px 4px 4px #00000099;
+}
+
+.bshadow {
+    box-shadow: 4px 4px 4px #00000099;
 }
 
 /*___________________________________________________________*/
@@ -52,9 +73,9 @@ body {
     height: 100%;
 }
 .backbike {
-    background: url('/static/images/yellowbike1920.jpg')no-repeat center;
+    background: url('/static/background_images/yellowbike1920sq.jpg')no-repeat center;
     margin: auto;
-    background-position: 0px 40px;
+    background-position: 0px 0px;
     background-size: 100vw;
 }
 
@@ -67,7 +88,7 @@ header{
 }
 
 .title {
-    background: url(/static/images/logo/bikespace_header.svg) no-repeat;
+    background: url(/static/icons/bikespace_header.svg) no-repeat;
     background-position: center;
     background-size: 150px;
     height: 45px;
@@ -77,14 +98,32 @@ header{
 
 /*___________________________________________________________*/
 
+.logo {
+    margin-top: -737px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 238px;
+    height: 300px;
+    width: 100%;
+    opacity: 1;
+    background: url(/static/icons/logo_main.svg) no-repeat;
+    background-size: 200px 200px;
+    background-position:center
+}
+
 .screen1 {
     padding: 5px 20px 20px 20px;
     border-radius: 0px;
     background-color: #fff;
     width: 375px;
+    height: 667px;
     opacity: 0.95;
     margin: auto;
     margin-top: 10px;
+    margin-bottom: 10px;
+}
+.clear {
+    opacity: 0;
 }
 
 .options {
@@ -107,7 +146,7 @@ header{
 }
 
 .on{
-    background: url(/static/images/logo/check.svg) no-repeat;
+    background: url(/static/icons/check.svg) no-repeat;
     width: 30px;
     margin-top: -26px;
     height: 30px;
@@ -122,38 +161,75 @@ header{
     height: 22px;
     margin-right: 1px;
 }
+
+.last {
+    padding-bottom: 80px;
+}
 /*___________________________________________________________*/
 
+footer {
+    overflow: hidden;
+    margin: auto;
+    margin-top: -80px;
+    width: 375px;
+    height: 50px;
+}
+
 .nav {
-    margin-top: 80px;
+    margin-top: 0px;
+    width: 375px;
+    position: absolute;
 }
 .back {
     padding: 13px;
     border: 3px solid #31C057;
     height: 18px;
-    width: 20%;
+    width: 80px;
     border-radius: 30px;
-    margin-bottom: 50px;
     text-align: center;
 }
 .back p {
     margin: auto;
-    margin-top: -4px;
+    width: 80px;
+    margin-left: -15px;
+    padding: 13px 15px 13px 15px;
+    margin-top: -17px;
     color: #31C057
-    
 }
 .next {
     padding: 13px;
+    margin-left: auto;
     background: #31C057;
     height: 24px;
-    width: 20%;
+    width: 86px;
+    margin-top: -50px;
     border-radius: 30px;
-    margin-left: auto;
-    margin-top: -100px;
     text-align: center;
 }
 .next p {
     margin: auto;
-    margin-top: -1px;
+    width: 86px;
+    margin-left: -13px;
+    padding: 13px;
+    margin-top: -13px;
+    color: #fff
+}
+.button {
+    padding: 13px;
+    margin: auto;
+    background: #31C057;
+    height: 24px;
+    width: 240px;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.button p {
+    margin: auto;
+    width: 240px;
+    margin-left: -13px;
+    padding: 13px;
+    margin-top: -13px;
     color: #fff
 }

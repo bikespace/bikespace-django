@@ -1,0 +1,20 @@
+<svg width="27" height="27" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>checkoff</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-46 -471)">
+<g id="checkoff">
+<g id="Checkbox">
+<mask id="mask0_outline_ins">
+<use xlink:href="#path0_fill" fill="white" transform="translate(46 471)"/>
+</mask>
+<g mask="url(#mask0_outline_ins)">
+<use xlink:href="#path1_stroke_2x" transform="translate(46 471)" fill="#CCCCCC"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 0 13.5C 0 6.04416 6.04416 0 13.5 0L 13.5 0C 20.9558 0 27 6.04416 27 13.5L 27 13.5C 27 20.9558 20.9558 27 13.5 27L 13.5 27C 6.04416 27 0 20.9558 0 13.5L 0 13.5Z"/>
+<path id="path1_stroke_2x" d="M 13.5 25C 7.14873 25 2 19.8513 2 13.5L -2 13.5C -2 22.0604 4.93959 29 13.5 29L 13.5 25ZM 25 13.5C 25 19.8513 19.8513 25 13.5 25L 13.5 29C 22.0604 29 29 22.0604 29 13.5L 25 13.5ZM 13.5 2C 19.8513 2 25 7.14873 25 13.5L 29 13.5C 29 4.93959 22.0604 -2 13.5 -2L 13.5 2ZM 13.5 -2C 4.93959 -2 -2 4.93959 -2 13.5L 2 13.5C 2 7.14873 7.14873 2 13.5 2L 13.5 -2Z"/>
+</defs>
+</svg>

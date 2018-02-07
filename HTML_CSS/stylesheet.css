@@ -41,7 +41,7 @@ h1 {
 }
 .maintitle {
     font-weight: bold;
-    padding-top: 300px;
+    padding-top: 280px;
     text-align: center;
     color: #fff;
     margin-left: 0px;
@@ -76,7 +76,9 @@ body {
     background: url('background_images/yellowbike1920sq.jpg')no-repeat center;
     margin: auto;
     background-position: 0px 0px;
-    background-size: 100vw;
+    background-size: cover;
+    height: 100vw;
+    max-height: 100vh;
 }
 
 /*___________________________________________________________*/
@@ -99,7 +101,7 @@ header{
 /*___________________________________________________________*/
 
 .logo {
-    margin-top: -737px;
+    margin-top: -587px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 238px;
@@ -112,11 +114,14 @@ header{
 }
 
 .screen1 {
+    
     padding: 5px 20px 20px 20px;
     border-radius: 0px;
     background-color: #fff;
     width: 375px;
-    height: 667px;
+    height: 84vh;
+    max-height: 580px; 
+    min-height: 450px;
     opacity: 0.95;
     margin: auto;
     margin-top: 10px;
@@ -146,7 +151,7 @@ header{
 }
 
 .on{
-    background: url(icons/check.svg) no-repeat;
+    background: url(icons/check_on.svg) no-repeat;
     width: 30px;
     margin-top: -26px;
     height: 30px;
@@ -154,12 +159,11 @@ header{
 }
 
 .off{
-    border: 3px solid #ccc;
-    border-radius: 30px;
-    width: 22px;
+    background: url(icons/check_off.svg) no-repeat;
+    width: 30px;
     margin-top: -26px;
-    height: 22px;
-    margin-right: 1px;
+    height: 30px;
+    margin-right: -3px;
 }
 
 .last {

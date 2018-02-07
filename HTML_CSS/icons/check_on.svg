@@ -1,0 +1,25 @@
+<svg width="27" height="27" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group 12</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-46 -471)">
+<g id="Group 12">
+<g id="Checkbox">
+<use xlink:href="#path0_fill" transform="translate(46 471)" fill="#31C057"/>
+<mask id="mask0_outline_ins">
+<use xlink:href="#path0_fill" fill="white" transform="translate(46 471)"/>
+</mask>
+<g mask="url(#mask0_outline_ins)">
+<use xlink:href="#path1_stroke_2x" transform="translate(46 471)" fill="#31C057"/>
+</g>
+</g>
+<g id="Vector">
+<use xlink:href="#path2_fill" transform="translate(51.1923 477.231)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 0 13.5C 0 6.04416 6.04416 0 13.5 0L 13.5 0C 20.9558 0 27 6.04416 27 13.5L 27 13.5C 27 20.9558 20.9558 27 13.5 27L 13.5 27C 6.04416 27 0 20.9558 0 13.5L 0 13.5Z"/>
+<path id="path1_stroke_2x" d="M 13.5 25C 7.14873 25 2 19.8513 2 13.5L -2 13.5C -2 22.0604 4.93959 29 13.5 29L 13.5 25ZM 25 13.5C 25 19.8513 19.8513 25 13.5 25L 13.5 29C 22.0604 29 29 22.0604 29 13.5L 25 13.5ZM 13.5 2C 19.8513 2 25 7.14873 25 13.5L 29 13.5C 29 4.93959 22.0604 -2 13.5 -2L 13.5 2ZM 13.5 -2C 4.93959 -2 -2 4.93959 -2 13.5L 2 13.5C 2 7.14873 7.14873 2 13.5 2L 13.5 -2Z"/>
+<path id="path2_fill" d="M 16.2303 2.53935C 16.4503 2.2603 16.6154 1.92544 16.6154 1.53477C 16.6154 0.669718 15.9277 -1.06449e-07 15.1024 -1.06449e-07C 14.5522 -1.06449e-07 14.0571 0.306954 13.782 0.781338L 6.68467 10.8271L 2.61335 6.78089C 2.61335 6.75299 2.58584 6.75299 2.55833 6.72508C 2.28324 6.47394 1.92562 6.30651 1.51299 6.30651C 0.660213 6.30651 -8.39505e-07 7.00413 -8.39505e-07 7.84128C -8.39505e-07 8.23195 0.137545 8.56681 0.357616 8.84586C 0.440143 8.92957 0.52267 9.01329 0.605197 9.097L 5.52929 13.8129C 5.8594 14.1478 6.24452 14.5385 6.82221 14.5385C 7.3999 14.5385 7.73001 14.3152 8.14264 13.7571L 16.2303 2.53935Z"/>
+</defs>
+</svg>

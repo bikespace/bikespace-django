@@ -14,30 +14,26 @@ export default class ArrayInput extends Input {
     return this.values;
   }
 
-  onSelect(event) {
-    if (event.target.type === 'div') {
-      if (event.target.checked) {
-        this.values.push(event.target.value);
-      } else {
-        this.values.splice(this.values.indexOf(event.target.value), 1);
-      }
+  onClick(event) {
+    if (event.target.classList.contains("off")) {
+      event.target.classList.replace("off", "on")
+      this.values.push(event.target.getAttribute("value"));
+    } else {
+      event.target.classList.replace("on", "off")
+      this.values.splice(this.values.indexOf(event.target.getAttribute("value")), 1);
     }
   }
 
   bind() {
-    [...document.querySelectorAll('options')].forEach(el => {
-      console.log(el);
-      el.addEventListener('click', function (event) {
-        console.log("tqtq");
-      });
+    [...document.getElementsByClassName('check')].forEach(el => {
+      el.addEventListener('click', this.onClick.bind(this));
     })
   }
-
 
   get template() {
     const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
     const options = this.props.values.reduce((memo, value) => {
-      memo += `<div class="options"><li><em>${value.text}</em></li><div class="check off"></div></div>`
+      memo += `<div class="options"><li><em>${value.text}</em></li><div class="check off" value="${value.key}"></div></div>`
       return memo;
     }, '');
     return (`

@@ -8,10 +8,6 @@ import SelectInput from './types/select';
 import ImageInput from './types/image';
 import types from './types/types';
 
-const formatKey = (key) => {
-  return key.split('_').map(string => string.charAt(0).toUpperCase() + string.slice(1)).join(' ');
-}
-
 export default class Pane {
   constructor(props, survey) {
     this.props = props;
@@ -30,7 +26,7 @@ export default class Pane {
   createInput(props, question) {
     if (props.type === types.DATETIME) {
       return new DateTimeInput(props, question)
-    }if (props.type === types.TIME) {
+    } if (props.type === types.TIME) {
       return new TimeInput(props, question)
     } else if (props.type === types.TEXT) {
       return new TextInput(props, question);
@@ -70,11 +66,15 @@ export default class Pane {
       this.survey.submit();
     } else if (this.errors.length) {
       this.error.innerHTML = this.errors.reduce((memo, err) => {
-        return memo += `Field <em>${formatKey(err.props.key)}</em> is required. <br>`
+        return memo += err.props.error;
       }, '');
     } else {
       this.survey.navigate()
     }
+  }
+
+  back() {
+    this.survey.back()
   }
 
   onError(error) {
@@ -95,8 +95,12 @@ export default class Pane {
   }
 
   bind() {
-    document.getElementById('button').addEventListener('click', (event) => {
+    document.getElementById('next').addEventListener('click', (event) => {
       this.submit();
+    });
+
+    document.getElementById('back').addEventListener('click', (event) => {
+      this.back();
     });
 
     this.questions.forEach((question) => {
@@ -117,18 +121,19 @@ export default class Pane {
           <div class="title">
           </div>
       </header>
+        <h1 id="error"></h1>
         ${templates}
         <footer>
             <div class="nav">
                 <div class="back">
-                    <a href="index.html">
+                    <a id="back">
                         <p>
                             <em>Back</em>
                         </p>
                     </a>
                 </div>
                 <div class="next">
-                    <a id="button">
+                    <a id="next">
                         <p>
                             <em>Next</em>
                         </p>

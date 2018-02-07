@@ -8,7 +8,8 @@ const questions = [
         type: types.ARRAY,
         heading: 'What was the issue?',
         text: 'Choose what applies',
-        required: false,
+        required: true,
+        error: 'Choose at least one option',
         values: [
           {
             key: 'absent',
@@ -29,7 +30,7 @@ const questions = [
           {
             key: 'other',
             text: "Different problem"
-          } 
+          }
         ]
       }
     ]
@@ -53,7 +54,7 @@ const questions = [
         required: true,
         heading: 'When did you identify the problem?',
         text: 'Specify the time and date',
-        default: new Date() 
+        default: new Date()
       },
       {
         key: 'duration',

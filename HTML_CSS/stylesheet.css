@@ -34,20 +34,13 @@ em {
 
 h1 {
     font-weight: bold;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    min-height: 20px;
+    height: 5vh;
+    max-height: 40px;
     padding-left: 5px;
     font-size: 1.6rem;
 }
-.maintitle {
-    font-weight: bold;
-    padding-top: 280px;
-    text-align: center;
-    color: #fff;
-    margin-left: 0px;
-    padding-bottom: 0px;
-    font-size: 3.5rem;
-}
+
 h2 {
     font-size: 1.1rem;
     margin-left: 10px;
@@ -70,7 +63,7 @@ a {
 body {
     overflow-x: hidden;
     margin: auto;
-    height: 100%;
+    background-color: black;
 }
 .backbike {
     background: url('background_images/yellowbike1920sq.jpg')no-repeat center;
@@ -98,7 +91,67 @@ header{
     width: 200px;
 }
 
+#error {
+    position: relative;
+    z-index: 10;
+    padding: 0px 20px 0px 20px;
+    width: 375px;
+    margin: -10px auto -55px auto;;
+    height: 45px;
+    background-color: #F24722;
+}
+
+#error h1 {
+    padding-top: 5px;
+}
+
 /*___________________________________________________________*/
+
+.progress{
+    width: 14px;
+    border-radius: 7px;
+    height: 14px;
+    margin: 8px auto 0px auto;
+}
+
+.prog1 {
+    background-color: #ccc;
+    box-shadow: -80px 0px 0px 0px #31C057,
+                -40px 0px 0px 0px #ccc,
+                40px 0px 0px 0px #ccc,
+                80px 0px 0px 0px #ccc;
+}
+.prog2 {
+    background-color: #ccc;
+    box-shadow: -80px 0px 0px 0px #31C057,
+                -40px 0px 0px 0px #31C057,
+                40px 0px 0px 0px #ccc,
+                80px 0px 0px 0px #ccc;
+}
+.prog3 {
+    background-color: #31C057;
+    box-shadow: -80px 0px 0px 0px #31C057,
+                -40px 0px 0px 0px #31C057,
+                40px 0px 0px 0px #ccc,
+                80px 0px 0px 0px #ccc;
+}
+.prog4 {
+    background-color: #31C057;
+    box-shadow: -80px 0px 0px 0px #31C057,
+                -40px 0px 0px 0px #31C057,
+                40px 0px 0px 0px #31C057,
+                80px 0px 0px 0px #ccc;
+}
+.prog5 {
+    background-color: #31C057;
+    box-shadow: -80px 0px 0px 0px #31C057,
+                -40px 0px 0px 0px #31C057,
+                40px 0px 0px 0px #31C057,
+                80px 0px 0px 0px #31C057;
+}
+
+/*___________________________________________________________*/
+
 
 .logo {
     margin-top: -587px;
@@ -113,6 +166,17 @@ header{
     background-position:center
 }
 
+.maintitle {
+    font-weight: bold;
+    padding-top: 280px;
+    text-align: center;
+    color: #fff;
+    margin-left: 0px;
+    padding-bottom: 0px;
+    font-size: 3.5rem;
+}
+/*___________________________________________________________*/
+
 .screen1 {
     
     padding: 5px 20px 20px 20px;
@@ -120,9 +184,9 @@ header{
     background-color: #fff;
     width: 375px;
     height: 84vh;
-    max-height: 580px; 
-    min-height: 450px;
-    opacity: 0.95;
+    max-height: 620px; 
+    min-height: 510px;
+    opacity: 0.92;
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -151,18 +215,20 @@ header{
 }
 
 .on{
-    background: url(icons/check_on.svg) no-repeat;
-    width: 30px;
-    margin-top: -26px;
-    height: 30px;
+    background: url(icons/check_on.svg) no-repeat center;
+    shape-rendering: geometricPrecision;
+    width: 32px;
+    margin-top: -28px;
+    height: 32px;
     margin-right: -3px;
 }
 
 .off{
-    background: url(icons/check_off.svg) no-repeat;
-    width: 30px;
-    margin-top: -26px;
-    height: 30px;
+    background: url(icons/check_off.svg) no-repeat center;
+    shape-rendering: geometricPrecision;
+    width: 32px;
+    margin-top: -28px;
+    height: 32px;
     margin-right: -3px;
 }
 

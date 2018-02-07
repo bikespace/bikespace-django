@@ -18,20 +18,26 @@ export default class Home {
 
   template() {
     return (
+
       `
-      <div class="row center-sm center-md center-lg">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <object data="/static/images/BikeSpace_badge_black.svg" height="50%" width="100%" type="image/svg+xml"></object>      
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h1 class="title">Bike Parking</h1>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-            <button id="start" class="btn lg">Let's get started</button>
-        </div>       
+      <header class="clear">
+          <div class="title">
+          </div>
+      </header>
+      <div class="screen1 clear">
       </div>
+      <div >
+          <div class="logo">
+              <h1 class="maintitle tshadow">BikeSpace</h1>
+          </div>
+      </div>
+      <footer>
+          <div class="nav">
+                  <div class="button bshadow">
+                      <a id="start"><p><em>Report a parking issue</em></p></a>
+                  </div>
+              </div>
+      </footer> 
       `
     )
   }

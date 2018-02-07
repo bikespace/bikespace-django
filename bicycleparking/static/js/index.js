@@ -34,6 +34,15 @@ class Survey {
     }).resolve();
   }
 
+  back() {
+    const back = parseInt(this.router.lastRouteResolved().params.pane, 10) - 1;
+    if (back < 1) {
+      this.renderHome();
+    } else {
+      this.router.navigate(`/survey/${back}`)
+    }
+  }
+
   navigate() {
     const next = parseInt(this.router.lastRouteResolved().params.pane, 10) + 1;
     this.router.navigate(`/survey/${next}`)

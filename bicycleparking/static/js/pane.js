@@ -113,20 +113,29 @@ export default class Pane {
     const heading = this.props.heading ? `<h3>${this.props.heading}</h3>` : '';
     return (
       `
-      <div class="row center-xs center-sm center-md center-lg">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <object data="/static/images/BikeSpace_horz_wordmark.svg" height="100%" width="100%" type="image/svg+xml"></object>      
-        </div>
-        <div class="col-xs-9 col-sm-9 col-md-6 col-lg-6">
-          
-        </div>
-        ${heading}
+      <header class="report">
+          <div class="title">
+          </div>
+      </header>
         ${templates}
-        <div class="col-xs-3 col-sm-12 col-md-12 col-lg-12">
-        </div>
-        <button id="button" class="waves-effect waves-light btn">${buttonText}</button>
-
-      </div>      
+        <footer>
+            <div class="nav">
+                <div class="back">
+                    <a href="index.html">
+                        <p>
+                            <em>Back</em>
+                        </p>
+                    </a>
+                </div>
+                <div class="next">
+                    <a href="photo.html">
+                        <p>
+                            <em>Next</em>
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </footer>   
       `
     )
   }

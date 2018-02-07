@@ -3,32 +3,42 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Bikespace - Home</title>
-    <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 4/3)" href="stylesheet.css" />
-    <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 4/3)" href="mobilesheet.css" />
-
+    <title>BikeSpace - Home</title>
     <link rel="manifest" href="/static/manifest.json">
 
-    <link rel="icon" href="/static/images/logo/favicon.ico" />
+    <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/static/css/stylesheet.css" />
+    <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/static/css/mobilesheet.css" />
 
-    <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--favicon-->
+    <link rel="icon" type="image/png" href="/static/icons/bikespace32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/static/icons/bikespace16.png" />
 
-    <body>
-        <div id="render" class="container image">
-        </div>
-        <script>
-            window.ASSETS_PATH = '{% static images %}';
-        </script>
-        <script src="{% static 'main.js' %}"></script>
+    <!-- META Tags -->
+    <meta property="og:title" content="BikeSpace visual prototype">
+    <meta property="og:description" content="A pure HTML and CSS version of the upcoming BikeSpace app.">
+    <meta property="og:image" content="/static/icons/media_thumb1.jpg">
+    <meta property="og:url" content="http://dav-idcox.com">
+    <meta name="twitter:card" content="summary_large_image">
 
-        <script>
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker
-                    .register('/static/sw.js')
-                    .then(function () { console.log('Service Worker Registered'); });
-            }
-        </script>
+    <meta property="og:site_name" content="BikeSpace visual prototype">
+    <meta name="twitter:image:alt" content="The BikeSpace logo with the word HTML over top">
+
+    <script>
+        window.ASSETS_PATH = '{% static images %}';
+    </script>
+
+    <body id="render" class="backbike">
+
     </body>
+
+    <script src="{% static 'main.js' %}"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('/static/sw.js')
+                .then(function () { console.log('Service Worker Registered'); });
+        }
+    </script>
 
 </html>

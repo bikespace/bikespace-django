@@ -32,7 +32,7 @@ from bicycleparking.geocode import Geocode
 
 
 def index(request):
-    return render(request, 'bicycleparking/landing.html', {})
+    return render(request, 'bicycleparking/home.html', {})
 
 
 def dashboard(request):

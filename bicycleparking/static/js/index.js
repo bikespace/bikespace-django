@@ -2,19 +2,19 @@ import Navigo from 'navigo';
 import questions from './survey-questions';
 import Home from './home';
 import Review from './review';
-import Pane from './pane';
-class Survey {
+import Survey from './survey';
+class Index {
   constructor() {
-    this.panes = {};
+    this.survey = {};
     this.router = new Navigo('/', true);
-    this.panes = questions.map((question, i) => {
+    this.survey = questions.map((question, i) => {
       let props = question;
       if (i + 1 === questions.length) {
         props = Object.assign({}, props, {
           final: true
         })
       }
-      return new Pane(props, this)
+      return new Survey(props, this)
     });
     this.home = new Home(this);
     try {
@@ -37,7 +37,7 @@ class Survey {
   back() {
     const back = parseInt(this.router.lastRouteResolved().params.pane, 10) - 1;
     if (back < 1) {
-      this.renderHome();
+      this.router.navigate('/');
     } else {
       this.router.navigate(`/survey/${back}`)
     }
@@ -98,7 +98,7 @@ class Survey {
   renderPane(params, query) {
     document.getElementById('render').classList.remove("image");
     let pane = parseInt(params.pane);
-    this.panes[pane - 1].render();
+    this.survey[pane - 1].render();
   }
 
   renderReview() {
@@ -110,4 +110,4 @@ class Survey {
   }
 }
 
-new Survey();
+new Index();

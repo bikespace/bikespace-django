@@ -18,7 +18,6 @@ export default class Home {
 
   template() {
     return (
-
       `
       <header class="clear">
           <div class="title">

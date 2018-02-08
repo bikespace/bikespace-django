@@ -14,7 +14,8 @@
     "leaflet": "^1.2.0",
     "leaflet-search": "^2.3.6",
     "mapbox": "^1.0.0-beta9",
-    "navigo": "^5.2.0"
+    "navigo": "^5.2.0",
+    "@google/maps": "^0.4.5"
   },
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",

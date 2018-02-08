@@ -17,7 +17,7 @@ export default class Summary extends Content {
   get template() {
     return (`
       <div class="screen1">
-        <div class="progress prog2"></div>
+        <div class="progress prog5"></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.text}</h2>
 

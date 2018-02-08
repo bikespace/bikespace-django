@@ -1,14 +1,12 @@
-import TextInput from './types/text';
-import StringInput from './types/string';
-import DateTimeInput from './types/date';
-import TimeInput from './types/time';
-import MapInput from './types/map';
-import ArrayInput from './types/array';
-import SelectInput from './types/select';
-import ImageInput from './types/image';
-import types from './types/types';
+import Issue from './contents/issue';
+import Picture from './contents/picture';
+import Map from './contents/map';
+import Happening from './contents/happening';
+import Summary from './contents/summary';
+import contents from './contents/contents';
 
-export default class Pane {
+
+export default class Survey {
   constructor(props, survey) {
     this.props = props;
     this.survey = survey;
@@ -19,27 +17,21 @@ export default class Pane {
       router: this.survey.router
     }
     this.questions = this.props.questions.map((q) => {
-      return this.createInput(q, question)
+      return this.createContent(q, question)
     });
   }
 
-  createInput(props, question) {
-    if (props.type === types.DATETIME) {
-      return new DateTimeInput(props, question)
-    } if (props.type === types.TIME) {
-      return new TimeInput(props, question)
-    } else if (props.type === types.TEXT) {
-      return new TextInput(props, question);
-    } else if (props.type === types.MAP) {
-      return new MapInput(props, question);
-    } else if (props.type === types.ARRAY) {
-      return new ArrayInput(props, question);
-    } else if (props.type === types.IMAGE) {
-      return new ImageInput(props, question);
-    } else if (props.type === types.STRING && props.values && props.values.length) {
-      return new SelectInput(props, question);
-    } else {
-      return new StringInput(props, question);
+  createContent(props, question) {
+    if (props.type === contents.ISSUES) {
+      return new Issue(props, question);
+    } else if (props.type === contents.PICTURE) {
+      return new Picture(props, question);
+    } else if (props.type === contents.MAP) {
+      return new Map(props, question);
+    } else if (props.type === contents.HAPPENING) {
+      return new Happening(props, question);
+    } else if (props.type === contents.SUMMARY) {
+      return new Summary(props, question);
     }
   }
 

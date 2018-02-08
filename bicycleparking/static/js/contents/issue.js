@@ -1,6 +1,6 @@
-import Input from './input';
+import Content from './content';
 
-export default class ArrayInput extends Input {
+export default class Issue extends Content {
   constructor() {
     super(...arguments);
     this.values = [];
@@ -38,6 +38,7 @@ export default class ArrayInput extends Input {
     }, '');
     return (`
       <div class="screen1">
+        <div class="progress prog1"></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.text}</h2>
         <ul>

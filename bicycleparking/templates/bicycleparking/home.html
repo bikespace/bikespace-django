@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>BikeSpace - Home</title>
-    <link rel="manifest" href="/static/manifest.json">
+    <!--<link rel="manifest" href="/static/manifest.json">-->
 
     <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/static/css/stylesheet.css" />
     <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/static/css/mobilesheet.css" />
@@ -26,19 +26,20 @@
     <script>
         window.ASSETS_PATH = '{% static images %}';
     </script>
+</head>
 
-    <body id="render" class="backbike">
+<body id="render" class="backbike">
 
-    </body>
+</body>
 
-    <script src="{% static 'main.js' %}"></script>
+<script src="{% static 'main.js' %}"></script>
 
-    <script>
-        if ('serviceWorker' in navigator) {
+<script>
+        /*if ('serviceWorker' in navigator) {
             navigator.serviceWorker
                 .register('/static/sw.js')
                 .then(function () { console.log('Service Worker Registered'); });
-        }
-    </script>
+        }*/
+</script>
 
 </html>

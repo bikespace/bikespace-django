@@ -20,7 +20,21 @@ export default class Picture extends Content {
         <div class="progress prog2"></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.text}</h2>
-
+        <ul>
+            <div class="doubleoption">
+                <div class="options">
+                    <li><em>test</em></li>
+                    <div></div>
+                    <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera">
+                </div>
+                <div class="options">
+                    <li><em>test</em></li>
+                    <div></div>
+                    <input id="deviceInput" class="cameraButton" type="file" accept="image/*;capture=camera">
+                </div>
+            </div>
+            <div class="last"></div>
+        </ul>      
       </div>
       `
     )

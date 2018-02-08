@@ -9,7 +9,6 @@ const questions = [
         heading: 'What was the issue?',
         text: 'Choose what applies',
         required: true,
-        index: 1,
         error: 'Choose at least one option',
         values: [
           {
@@ -33,17 +32,69 @@ const questions = [
             text: "Different problem"
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    questions: [
       {
         key: 'picture',
         type: contents.PICTURE,
         heading: 'Add a photo',
         text: 'Optional',
         required: false,
-        index: 2
-      },
+      }
     ]
-  }
+  }, {
+    questions: [
+      {
+        key: 'map',
+        type: contents.MAP,
+        heading: 'Where was the problem ?',
+        text: 'Pin the location',
+        required: false,
+      }
+    ]
+  }, {
+    questions: [
+      {
+        key: 'happening',
+        type: contents.HAPPENING,
+        heading: 'When did this happen ?',
+        text: 'Specify the date and time',
+        required: false,
+        values: [
+          {
+            key: 'minutes',
+            text: "minutes"
+          },
+          {
+            key: 'hours',
+            text: "hours"
+          },
+          {
+            key: 'overnight',
+            text: "overnight"
+          },
+          {
+            key: 'days',
+            text: "days"
+          }
+        ]
+      }
+    ]
+  }, {
+    questions: [
+      {
+        key: 'summary',
+        type: contents.SUMMARY,
+        heading: 'Summary',
+        required: false,
+        final: true
+
+      }
+    ]
+  },
 ]
 
 export default questions;

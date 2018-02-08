@@ -112,8 +112,7 @@ export default class Survey {
       <header class="report">
           <div class="title">
           </div>
-      </header>
-        <h1 id="error"></h1>
+      </header>       
         ${templates}
         <footer>
             <div class="nav">
@@ -127,7 +126,7 @@ export default class Survey {
                 <div class="next">
                     <a id="next">
                         <p>
-                            <em>Next</em>
+                            <em>${buttonText}</em>
                         </p>
                     </a>
                 </div>

@@ -13,14 +13,34 @@ export default class Happening extends Content {
   get value() {
     return this.values;
   }
+  onClick(event) {
+    if (event.target.classList.contains("off")) {
+      event.target.classList.replace("off", "on")
+      this.values.push(event.target.getAttribute("value"));
+    } else {
+      event.target.classList.replace("on", "off")
+      this.values.splice(this.values.indexOf(event.target.getAttribute("value")), 1);
+    }
+  }
 
+  bind() {
+    [...document.getElementsByClassName('check')].forEach(el => {
+      el.addEventListener('click', this.onClick.bind(this));
+    })
+  }
   get template() {
+    const options = this.props.values.reduce((memo, value) => {
+      memo += `<div class="options"><li><em>${value.text}</em></li><div class="check off" value="${value.key}"></div></div>`
+      return memo;
+    }, '');
     return (`
       <div class="screen1">
-        <div class="progress prog2"></div>
+        <div class="progress prog4"></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.text}</h2>
-
+        <ul>
+          ${options}
+        </ul>
       </div>
       `
     )

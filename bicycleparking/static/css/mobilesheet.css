@@ -141,32 +141,32 @@ header{
                 16vw 4vw 0px 0px #ccc;
 }
 .prog2 {
-    background-color: #ccc;
-    box-shadow: -80px 0px 0px 0px #31C057,
-                -40px 0px 0px 0px #31C057,
-                40px 0px 0px 0px #ccc,
-                80px 0px 0px 0px #ccc;
+    box-shadow: -16vw 4vw 0px 0px #31C057,
+                -8vw 4vw 0px 0px #31C057,
+                0vw 4vw 0px 0px #ccc,
+                8vw 4vw 0px 0px #ccc,
+                16vw 4vw 0px 0px #ccc;
 }
 .prog3 {
-    background-color: #31C057;
-    box-shadow: -80px 0px 0px 0px #31C057,
-                -40px 0px 0px 0px #31C057,
-                40px 0px 0px 0px #ccc,
-                80px 0px 0px 0px #ccc;
+    box-shadow: -16vw 4vw 0px 0px #31C057,
+                -8vw 4vw 0px 0px #31C057,
+                0vw 4vw 0px 0px #31C057,
+                8vw 4vw 0px 0px #ccc,
+                16vw 4vw 0px 0px #ccc;
 }
 .prog4 {
-    background-color: #31C057;
-    box-shadow: -80px 0px 0px 0px #31C057,
-                -40px 0px 0px 0px #31C057,
-                40px 0px 0px 0px #31C057,
-                80px 0px 0px 0px #ccc;
+    box-shadow: -16vw 4vw 0px 0px #31C057,
+                -8vw 4vw 0px 0px #31C057,
+                0vw 4vw 0px 0px #31C057,
+                8vw 4vw 0px 0px #31C057,
+                16vw 4vw 0px 0px #ccc;
 }
 .prog5 {
-    background-color: #31C057;
-    box-shadow: -80px 0px 0px 0px #31C057,
-                -40px 0px 0px 0px #31C057,
-                40px 0px 0px 0px #31C057,
-                80px 0px 0px 0px #31C057;
+    box-shadow: -16vw 4vw 0px 0px #31C057,
+                -8vw 4vw 0px 0px #31C057,
+                0vw 4vw 0px 0px #31C057,
+                8vw 4vw 0px 0px #31C057,
+                16vw 4vw 0px 0px #31C057;
 }
 
 /*___________________________________________________________*/
@@ -217,7 +217,11 @@ header{
 .doubleoption {
     
 }
-
+.cameraButton{
+    opacity: 0;
+    min-height: 100%;
+    min-width: 100%;
+}
 .check {    
     margin-left: auto;
 }

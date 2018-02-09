@@ -85,6 +85,8 @@ body {
     margin: auto;
     background-position: center 0vw;
     background-size: cover;
+    height: 100vw;
+    max-height: 100vh;
 }
 
 /*___________________________________________________________*/
@@ -315,4 +317,25 @@ footer {
     height: 6vw;
     margin-left: -2vw;
     color: #fff
+}
+
+
+/*----------------------------------------*/
+.titleSummary{
+    size: 2vh;
+}
+.summary{
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    border-radius: 2%;
+    margin: 2%;
+    height: 60vh;
+}
+.mapSummary {
+    float: right;
+    width: 50%;
+}
+.pictureSummary {
+    float: left;
+    width: 50%;
 }

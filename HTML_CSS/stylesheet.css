@@ -184,7 +184,7 @@ header{
     background-color: #fff;
     width: 375px;
     height: 84vh;
-    max-height: 620px; 
+    max-height: 620px;
     min-height: 510px;
     opacity: 0.92;
     margin: auto;
@@ -195,9 +195,12 @@ header{
     opacity: 0;
 }
 
+ul {
+    margin-left: -40px;
+}
+
 .options {
     list-style: none;
-    margin-left: -40px;
     padding: 13px;
     background: #eee;
     height: 24px;
@@ -209,6 +212,20 @@ header{
     width: 80%;
     padding-left: 10px;
 }
+
+.doubleoption {
+    position: relative;
+    opacity: 1;
+    height: calc(50px);
+}
+
+.cameraButton{
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+
 
 .check {    
     margin-left: auto;

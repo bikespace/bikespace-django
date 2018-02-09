@@ -29,20 +29,24 @@
             <div class="title">
             </div>
         </header>
-        <!--<div id="error"><h1>Choose at least one option</h1></div>-->
+        <div id="error"><h1>Choose at least one option</h1></div>
         <div class="screen1">
             <div class="progress prog2"></div>
             <h1>Add a photo</h1>
             <h2>Optional</h2>
             <ul>
                 <div class="doubleoption">
-                    <div class="options">
-                        <li><em>test</em></li>
-                        <div></div>
+                    <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
+                    <div class="imagepreview">
+                        <canvas id="picture"/>
                     </div>
                     <div class="options">
-                        <li><em>test</em></li>
-                        <div></div>
+                        <li><em>Camera</em></li>
+                        <div class="check camera"> </div>
+                    </div>
+                    <div class="options">
+                        <li><em>Upload</em></li>
+                        <div class="check upload"> </div>
                     </div>
                 </div>
                 <div class="last"></div>
@@ -51,6 +55,9 @@
     </body>
     <footer>
         <div class="nav">
+            <div class="button red">    
+                <p><em>Remove photo</em></p>
+            </div>
             <div class="back">
                 <a href="index.html"><p><em>Back</em></p></a>
             </div>

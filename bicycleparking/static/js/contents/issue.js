@@ -27,6 +27,10 @@ export default class Issue extends Content {
   bind() {
     [...document.getElementsByClassName('check')].forEach(el => {
       el.addEventListener('click', this.onClick.bind(this));
+      if(this.values.filter(value => value === el.getAttribute("value")).length>0){
+        el.classList.remove("off");
+        el.classList.add("on");
+      }
     })
   }
 

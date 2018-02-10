@@ -22,19 +22,21 @@ export default class Picture extends Content {
         <h2>${this.props.text}</h2>
         <ul>
             <div class="doubleoption">
-                <div class="options">
-                    <li><em>test</em></li>
-                    <div></div>
-                    <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera">
+                <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
+                <div class="imagepreview">
+                    <canvas id="picture"/>
                 </div>
                 <div class="options">
-                    <li><em>test</em></li>
-                    <div></div>
-                    <input id="deviceInput" class="cameraButton" type="file" accept="image/*;capture=camera">
+                    <li><em>Camera</em></li>
+                    <div class="check camera"> </div>
+                </div>
+                <div class="options">
+                    <li><em>Upload</em></li>
+                    <div class="check upload"> </div>
                 </div>
             </div>
             <div class="last"></div>
-        </ul>      
+        </ul>           
       </div>
       `
     )

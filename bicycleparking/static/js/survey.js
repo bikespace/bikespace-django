@@ -58,8 +58,9 @@ export default class Survey {
       this.survey.submit();
     } else if (this.errors.length) {
       this.error.innerHTML = this.errors.reduce((memo, err) => {
-        return memo += err.props.error;
+        return memo += '<h1>' + err.props.error + '</h1>';
       }, '');
+      this.error.classList.remove("hidden");
     } else {
       this.survey.navigate()
     }
@@ -82,7 +83,9 @@ export default class Survey {
     this.el.innerHTML = this.template();
     this.el.classList.add(this.props.key)
     this.error = document.getElementById('error');
+    this.error.classList.add("hidden");
     this.message = document.getElementById('message');
+
     this.bind();
   }
 
@@ -112,7 +115,8 @@ export default class Survey {
       <header class="report">
           <div class="title">
           </div>
-      </header>       
+      </header>     
+      <div id="error" class="hidden"></div>  
         ${templates}
         <footer>
             <div class="nav">

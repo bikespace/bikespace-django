@@ -83,7 +83,7 @@ body {
 .backbike {
     background: url('/static/background_images/yellowbike1920sq.jpg')no-repeat center;
     margin: auto;
-    background-position: center 0vw;
+    background-position: 0px 0px;
     background-size: cover;
     height: 100vw;
     max-height: 100vh;
@@ -106,7 +106,7 @@ header{
     width: 30vh;
 }
 
-.error {
+#error {
     position: fixed;
     z-index: 10;
     margin-top: -13vh;
@@ -115,7 +115,7 @@ header{
     background-color: #F24722;
 }
 
-.error h1 {
+#error h1 {
     padding-top: 2vw;
     padding-left: 6vh;
     padding-right: 3vh;
@@ -135,7 +135,6 @@ header{
     margin-bottom: 4vh;
 }
 .prog1 {
-    
     box-shadow: -16vw 4vw 0px 0px #31C057,
                 -8vw 4vw 0px 0px #ccc,
                 0vw 4vw 0px 0px #ccc,
@@ -202,8 +201,8 @@ header{
 .options {
     list-style: none;
     padding: 2vw;
-    background: #eee;
     height: 7vw;
+    border: 2px solid #ccc;
     border-radius: 9vw;
     margin-left: 2vh;
     margin-right: 2vh;
@@ -217,13 +216,18 @@ header{
 }
 
 .doubleoption {
-    
+    position: relative;
+    opacity: 1;
+    height: calc(11vw+4vh);
 }
+
 .cameraButton{
+    position: absolute;
     opacity: 0;
-    min-height: 100%;
-    min-width: 100%;
+    width: 100%;
+    height: 100%;
 }
+
 .check {    
     margin-left: auto;
 }
@@ -244,6 +248,24 @@ header{
     height: 7vw;
     padding-right: 0.1vw;
     margin-top: -6.83vw;
+}
+
+.camera{
+    background: url(/static/icons/camera.svg) no-repeat;
+    background-size: 7vw;
+    width:7vw;
+    height: 7vw;
+    padding-right: 0.5vw;
+    margin-top: -6.5vw;
+}
+
+.upload{
+    background: url(/static/icons/upload.svg) no-repeat;
+    background-size: 7vw;
+    width:7vw;
+    height: 7vw;
+    padding-right: 0.5vw;
+    margin-top: -6.5vw;
 }
 
 /*___________________________________________________________*/
@@ -302,10 +324,8 @@ footer {
     background: #31C057;
     height: 6vw;
     width: 70vw;
-    margin-top: -10vw;
+    margin: -10vw auto 0vw auto;
     border-radius: 10vw;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
 }
 
@@ -313,12 +333,15 @@ footer {
     margin: auto;
     padding: 1.5vw 2vw 2.5vw 2vw;
     margin-top: -2vw;
-    width: 70vw;
     height: 6vw;
     margin-left: -2vw;
     color: #fff
 }
-
+.red {
+    background-color: #F24722;
+    width: auto;
+    margin: -20vw 5vh 10vw 5vh;
+}
 
 /*----------------------------------------*/
 .titleSummary{
@@ -338,4 +361,7 @@ footer {
 .pictureSummary {
     float: left;
     width: 50%;
+}
+.hidden{
+    opacity: 0;
 }

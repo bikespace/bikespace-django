@@ -42,7 +42,8 @@ const questions = [
         type: contents.PICTURE,
         heading: 'Add a photo',
         text: 'Optional',
-        required: false,
+        error: 'Picture is required',
+        required: true,
       }
     ]
   }, {
@@ -62,7 +63,7 @@ const questions = [
         type: contents.HAPPENING,
         heading: 'When did this happen ?',
         text: 'Specify the date and time',
-        required: false,
+        required: true,
         values: [
           {
             key: 'minutes',

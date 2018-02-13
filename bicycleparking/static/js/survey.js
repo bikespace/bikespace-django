@@ -27,7 +27,7 @@ export default class Survey {
     } else if (props.type === contents.PICTURE) {
       return new Picture(props, question);
     } else if (props.type === contents.MAP) {
-      return new Map(props, question);
+      return new Map(props, question, this.survey);
     } else if (props.type === contents.HAPPENING) {
       return new Happening(props, question);
     } else if (props.type === contents.SUMMARY) {

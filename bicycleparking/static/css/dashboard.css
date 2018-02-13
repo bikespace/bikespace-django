@@ -45,3 +45,11 @@ body {
 #imagePopup{
     max-width: 150px;
 }
+.hiddenPicture{
+    opacity: 0 !important;
+    height: 0 !important;
+}
+#picture{
+    height: 46vh;
+    width: 81vw;
+}

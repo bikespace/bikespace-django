@@ -342,3 +342,4 @@ footer {
 .hidden{
     opacity: 0;
 }
+#mapid { height: 50vh; }

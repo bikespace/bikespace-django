@@ -11,8 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "leaflet": "^1.2.0",
-    "leaflet-search": "^2.3.6",
     "mapbox": "^1.0.0-beta9",
     "navigo": "^5.2.0"
   },

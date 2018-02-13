@@ -63,6 +63,7 @@ h2 {
 a {
     text-decoration: none;
     color: inherit;
+    color:rgb(247,246,245);
 }
 
 .tshadow {
@@ -365,3 +366,12 @@ footer {
 .hidden{
     opacity: 0;
 }
+.hiddenPicture{
+    opacity: 0 !important;
+    height: 0 !important;
+}
+#picture{
+    height: 46vh;
+    width: 81vw;
+}
+#mapid { height: 50vh; }

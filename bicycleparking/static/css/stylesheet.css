@@ -363,3 +363,9 @@ footer {
     opacity: 0;
 }
 #mapid { height: 50vh; }
+.datepicker{
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}

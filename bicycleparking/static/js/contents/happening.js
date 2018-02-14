@@ -1,4 +1,5 @@
 import Content from './content';
+import flatpickr from 'flatpickr';
 
 export default class Happening extends Content {
   constructor() {
@@ -27,6 +28,10 @@ export default class Happening extends Content {
     [...document.getElementsByClassName('check')].forEach(el => {
       el.addEventListener('click', this.onClick.bind(this));
     })
+    flatpickr(`#${this.props.key}`, {
+      enableTime: true,
+      defaultDate: "today"
+    })
   }
   get template() {
     const options = this.props.values.reduce((memo, value) => {
@@ -40,7 +45,7 @@ export default class Happening extends Content {
         <h2>${this.props.subtitle1}</h2>
         <ul>
               <div class="doubleoption">
-                  <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
+                  <input id="${this.props.key}" type="text" class="datepicker" name=${this.props.key}>
                   <div class="options">
                       <li><em>Camera</em></li>
                       <div class="check camera"> </div>

@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "mapbox": "^1.0.0-beta9",
-    "navigo": "^5.2.0"
+    "navigo": "^5.2.0",
+    "@google/maps": "^0.4.5"
   },
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",

@@ -186,7 +186,7 @@ header{
 }
 
 .visible {
-    background-color: #fff;
+    background-color: #ffffffee;
 }
 
 ul {
@@ -360,7 +360,12 @@ footer {
 .hidden{
     opacity: 0;
 }
-#mapid { height: 50vw; }
+#mapid {
+    min-height: 320px;
+    height: 54vh;
+    max-height: 400px;
+    background-color: #eee;
+}
 
 /*___________________________________________________________*/
 
@@ -387,4 +392,24 @@ footer {
     width: 150px;
     margin-top: -70px;
     margin-left: auto;
+}
+.success {
+    height: 120px;
+    background-color: #31C057bb;
+    background-image: url(icons/success.svg);
+    background-position: center 62px; 
+    background-repeat: no-repeat;
+    background-size: 45px;
+    margin-top: -60px;
+    margin-left: 60px;
+    margin-right: 60px;
+    border-radius: 30px;
+    margin-bottom: -40px;
+}
+.success h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5em;
+    padding-left: 0px;
+    padding-top: 5px;
 }

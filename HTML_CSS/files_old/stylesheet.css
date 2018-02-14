@@ -61,11 +61,17 @@ a {
 /*___________________________________________________________*/
 
 body {
-    background: url('background_images/yellowbike1920sq.jpg') 100% / cover;
-    background-position: center;
     overflow-x: hidden;
-    min-height: 100vh;
     margin: auto;
+    background-color: black;
+}
+.backbike {
+    background: url('background_images/yellowbike1920sq.jpg')no-repeat center;
+    margin: auto;
+    background-position: 0px 0px;
+    background-size: cover;
+    height: 100vw;
+    max-height: 100vh;
 }
 
 /*___________________________________________________________*/
@@ -102,9 +108,9 @@ header{
 /*___________________________________________________________*/
 
 .progress{
-    width: 16px;
-    border-radius: 10px;
-    height: 16px;
+    width: 14px;
+    border-radius: 7px;
+    height: 14px;
     margin: 8px auto 0px auto;
 }
 
@@ -148,9 +154,11 @@ header{
 
 
 .logo {
+    margin-top: -587px;
     margin-left: auto;
     margin-right: auto;
-    max-height: 300px;
+    margin-bottom: 238px;
+    height: 300px;
     width: 100%;
     opacity: 1;
     background: url(icons/logo_main.svg) no-repeat;
@@ -160,7 +168,7 @@ header{
 
 .maintitle {
     font-weight: bold;
-    padding-top: 270px;
+    padding-top: 280px;
     text-align: center;
     color: #fff;
     margin-left: 0px;
@@ -173,10 +181,12 @@ header{
     
     padding: 5px 20px 20px 20px;
     border-radius: 0px;
+    background-color: #fff;
     width: 375px;
     height: 84vh;
     max-height: 620px;
     min-height: 510px;
+    opacity: 0.92;
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -185,15 +195,11 @@ header{
     opacity: 0;
 }
 
-.visible {
-    background-color: #fff;
-}
-
 ul {
     margin-left: -40px;
 }
 
-ul .options {
+.options {
     list-style: none;
     padding: 13px;
     background: #eee;
@@ -209,11 +215,8 @@ ul .options {
 
 .doubleoption {
     position: relative;
-}
-
-.doubleoption .options{
-    background-color: #fff;
-    box-shadow:0px 0px 0px 2px #ddd inset;
+    opacity: 1;
+    height: calc(50px);
 }
 
 .cameraButton{
@@ -246,24 +249,9 @@ ul .options {
     margin-right: -3px;
 }
 
-.camera{
-    background: url(icons/camera.svg) no-repeat;
-    background-size: 28px;
-    width:28px;
-    height: 28px;
-    padding-right: 4px;
-    margin-top: -24px;
+.last {
+    padding-bottom: 80px;
 }
-
-.upload{
-    background: url(icons/upload.svg) no-repeat;
-    background-size: 24px;
-    width: 24px;
-    height: 24px;
-    padding-right: 6px;
-    margin-top: -25px;
-}
-
 /*___________________________________________________________*/
 
 footer {
@@ -271,6 +259,7 @@ footer {
     margin: auto;
     margin-top: -80px;
     width: 375px;
+    height: 50px;
 }
 
 .nav {
@@ -280,18 +269,18 @@ footer {
 }
 .back {
     padding: 13px;
-    box-shadow: 0px 0px 0px 3px #31C057 inset;
-    height: 24px;
-    width: 86px;
+    border: 3px solid #31C057;
+    height: 18px;
+    width: 80px;
     border-radius: 30px;
     text-align: center;
 }
 .back p {
     margin: auto;
-    width: 86px;
-    margin-left: -13px;
-    padding: 13px;
-    margin-top: -13px;
+    width: 80px;
+    margin-left: -15px;
+    padding: 13px 15px 13px 15px;
+    margin-top: -17px;
     color: #31C057
 }
 .next {
@@ -315,8 +304,6 @@ footer {
 .button {
     padding: 13px;
     margin: auto;
-    margin-top: -70px;
-    margin-bottom: 20px;
     background: #31C057;
     height: 24px;
     width: 240px;
@@ -331,60 +318,4 @@ footer {
     padding: 13px;
     margin-top: -13px;
     color: #fff
-}
-
-.red {
-    background-color: #F24722;
-}
-
-/*___________________________________________________________*/
-
-.titleSummary{
-    size: 2vh;
-}
-.summary{
-    border: 2px solid #ccc;
-    border-radius: 25px;
-    border-radius: 2%;
-    margin: 2%;
-    height: 60vh;
-}
-.mapSummary {
-    float: right;
-    width: 50%;
-}
-.pictureSummary {
-    float: left;
-    width: 50%;
-}
-.hidden{
-    opacity: 0;
-}
-#mapid { height: 50vw; }
-
-/*___________________________________________________________*/
-
-.calendar {
-    background: url(icons/calendar.svg) no-repeat;
-    background-size: 24px;
-    width: 24px;
-    height: 24px;
-    padding-right: 6px;
-    margin-top: -24px;
-}
-.clock {
-    background: url(icons/clock.svg) no-repeat;
-    background-size: 24px;
-    width: 24px;
-    height: 24px;
-    padding-right: 6px;
-    margin-top: -23px;
-}
-.half1 {
-    width: 150px;
-}
-.half2 {
-    width: 150px;
-    margin-top: -70px;
-    margin-left: auto;
 }

@@ -4,8 +4,8 @@
         
     	<meta charset="utf-8">
         <title>BikeSpace - Home</title>
-        <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 4/5)"  href="stylesheet.css"/> 
-        <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 4/5)" href="mobilesheet.css"/>
+        <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)"  href="stylesheet.css"/> 
+        <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="mobilesheet.css" />
         
         <!--favicon-->
         <link rel="icon" type="image/png" href="icons/bikespace32.png" sizes="32x32" />
@@ -13,7 +13,6 @@
         
         <!-- META Tags -->
         <meta property="og:title" content="BikeSpace visual prototype">
-        <meta property="og:type" content="website">
         <meta property="og:description" content="A pure HTML and CSS version of the upcoming BikeSpace app.">
         <meta property="og:image" content="http://dav-idcox.com/bikespace/icons/media_thumb1.jpg">
         <meta property="og:url" content="http://dav-idcox.com">
@@ -28,22 +27,27 @@
     </head>
     
     <body class="backbike">
-        
-        <header class="clear">
-            <div class="title"></div>
-            <div class="alert"></div>
-        </header>
-        <div class="screen1">
-            <div class="logo">
-                <h1 class="maintitle tshadow">BikeSpace</h1>
-            </div>
+        <h1> Thanks !</h1>
+      <div class="row">
+        <form class="col s12">
+        <div class="row col s12">
+          <p>Thank you for your involvement.</p>
+          <p>You want to park your bike on ${this.survey.state.report_date} a ${this.survey.state.report_time} for a ${this.survey.state.duration} time</p>      
         </div>
+        <div class="row col s12">
+          <div class="input-field">
+            <p>Desired location</p>
+            <div id="map" class=""></div>    
+          </div>
+        </div>
+        <div class="row col s12">
+          <div class="input-field">
+            <canvas id="picture"></canvas>
+          </div>
+        </div>
+        <button id="button" class="waves-effect waves-light btn">Come back to home</button>
+
+        </form>
+      </div>
     </body>
-    <footer>
-        <div class="nav">
-                <div class="button bshadow">
-                    <a href="issue.html"><p><em>Report a parking issue</em></p></a>
-                </div>
-            </div>
-    </footer>
 </html>

@@ -42,23 +42,22 @@ em {
 h1 {
     font-weight: bold;
     height: 4vh;
-    padding-left: 4vw;
+    padding-left: 3vh;
     padding-bottom: 3vh;
     font-size: 6vw;
 }
 .maintitle {
     font-weight: bold;
-    padding-top: 50vh;
+    padding-top: 30vh;
     text-align: center;
     color: #fff;
-    padding-left: 0vh;
     margin-left: 0vh;
     padding-bottom: 3vh;
-    font-size: calc(9vw + 3vh);
+    font-size: 9vw;
 }
 h2 {
     font-size: 5vw;
-    margin-left: 5vw;
+    margin-left: 4vh;
     padding-bottom: 2vh;
 }
 a {
@@ -77,12 +76,15 @@ a {
 /*___________________________________________________________*/
 
 body {
-    background: url('background_images/yellowbike1920sq.jpg') 100% / cover;
-    background-position: center;
     overflow-x: hidden;
-    overflow-y: hidden;
-    min-height: 87vh;
     margin: auto;
+    height: 100%;
+}
+.backbike {
+    background: url('background_images/yellowbike1920sq.jpg')no-repeat center;
+    margin: auto;
+    background-position: center 0vw;
+    background-size: 100vh;
 }
 
 /*___________________________________________________________*/
@@ -169,30 +171,36 @@ header{
 /*___________________________________________________________*/
 
 .logo {
-    height: 80vw;
+    margin-top: -80vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50vh;
+    height: 30vh;
+    width: 100%;
+    opacity: 1;
     background: url(icons/logo_main.svg) no-repeat;
-    background-size: calc(30vw + 10vh);
+    background-size: 30vh 30vh;
     background-position:center
 }
 
 .screen1 {
+    border-radius: 0px;
+    background-color: #fff;
     margin-left: 3vh;
     height: 84vh;
     margin-top: 13vh;
+    opacity: 0.90;
     margin-right: 3vh;
 }
 .clear {
     opacity: 0;
 }
-.visible {
-    background-color: #fff;
-}
 
 .options {
     list-style: none;
     padding: 2vw;
-    background-color: #eee;
     height: 7vw;
+    border: 2px solid #ccc;
     border-radius: 9vw;
     margin-left: 2vh;
     margin-right: 2vh;
@@ -207,12 +215,8 @@ header{
 
 .doubleoption {
     position: relative;
+    opacity: 1;
     height: calc(11vw+4vh);
-}
-
-.doubleoption .options{
-    background-color: #fff;
-    box-shadow:0px 0px 0px 0.3vw #ddd inset;
 }
 
 .cameraButton{
@@ -246,20 +250,20 @@ header{
 
 .camera{
     background: url(icons/camera.svg) no-repeat;
-    background-size: 6vw;
+    background-size: 7vw;
     width:7vw;
     height: 7vw;
     padding-right: 0.5vw;
-    margin-top: -5.75vw;
+    margin-top: -6.5vw;
 }
 
 .upload{
     background: url(icons/upload.svg) no-repeat;
-    background-size: 5vw;
+    background-size: 7vw;
     width:7vw;
     height: 7vw;
-    padding-right: 0vw;
-    margin-top: -6vw;
+    padding-right: 0.5vw;
+    margin-top: -6.5vw;
 }
 
 /*___________________________________________________________*/
@@ -274,21 +278,21 @@ footer {
 }
 .back {
     padding: 2vw;
-    box-shadow: 0px 0px 0px 0.6vw #31C057 inset;
-    height: 6vw;
-    width: 20vw;
+    border: 0.5vw solid #31C057;
+    height: 5vw;
     margin-top: -8vw;
+    width: 18.5vw;
     border-radius: 10vw;
     margin-left: 5vh;
     text-align: center;
 }
 .back p {
     margin: auto;
-    padding: 1.5vw 2vw 2.5vw 2vw;
-    margin-top: -2vw;
+    padding: 1.5vw 1.75vw 2.5vw 1.75vw;
+    margin-top: -2.5vw;
     width: 20vw;
     height: 6vw;
-    margin-left: -2vw;
+    margin-left: -2.5vw;
     color: #31C057
     
 }
@@ -334,81 +338,5 @@ footer {
 .red {
     background-color: #F24722;
     width: auto;
-    margin: -20.5vw 5vh 10.5vw 5vh;
-}
-
-/*___________________________________________________________*/
-
-.mapSummary {
-    float: right;
-    width: 50%;
-}
-.pictureSummary {
-    float: left;
-    width: 50%;
-}
-.hidden{
-    opacity: 0;
-}
-.hiddenPicture{
-    opacity: 0 !important;
-    height: 0 !important;
-}
-#picture{
-    height: 46vh;
-    width: 81vw;
-}
-#mapid {
-    height: calc(100vh - 58%);
-    margin-left: 2vw;
-    margin-right: 2vw;
-    background-color: #eee;
-}
-
-/*___________________________________________________________*/
-
-
-.calendar {
-    background: url(icons/calendar.svg) no-repeat;
-    background-size: 5vw;
-    width:7vw;
-    height: 7vw;
-    padding-right: 0vw;
-    margin-top: -6vw;
-}
-
-.clock {
-    background: url(icons/clock.svg) no-repeat;
-    background-size: 5vw;
-    width:7vw;
-    height: 7vw;
-    padding-right: 0vw;
-    margin-top: -5.6vw;
-}
-.halved {
-    
-}
-.half1 {
-    width: calc(42vw - 4vh);
-    margin-bottom: 0vh;
-}
-.half2 {
-    width: calc(42vw - 4vh);
-    margin-top: -11vw;
-    margin-left: auto;
-    margin-bottom: 2vh;
-}
-.third12 {
-    width: calc(44vw - 4vh);
-    margin-bottom: 0vh;
-    padding-right: 2vh;
-}
-
-.third3 {
-    width: calc(32vw - 4vh);
-    margin-top: -11vw;
-    margin-left: auto;
-    margin-bottom: 2vh;
-    
-    padding-right: 2vh;
+    margin: -20vw 5vh 10vw 5vh;
 }

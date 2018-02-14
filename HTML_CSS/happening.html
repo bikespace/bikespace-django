@@ -4,8 +4,8 @@
         
     	<meta charset="utf-8">
         <title>BikeSpace - Home</title>
-        <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)"  href="stylesheet.css"/> 
-        <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="mobilesheet.css" />
+        <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 4/5)"  href="stylesheet.css"/> 
+        <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 4/5)" href="mobilesheet.css"/>
         
         <!--favicon-->
         <link rel="icon" type="image/png" href="icons/bikespace32.png" sizes="32x32" />
@@ -29,23 +29,41 @@
             </div>
         </header>
         <!--<div id="error"><h1>Choose at least one option</h1></div>-->
-        <div class="screen1">
+        <div class="screen1 visible">
         <div class="progress prog4"></div>
-        <h1>${this.props.heading}</h1>
-        <h2>${this.props.subtitle1}</h2>
-            <ul>
-                <div class="doubleoption">
-                    <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
-                    <div class="options">
-                        <li><em>Camera</em></li>
-                        <div class="check camera"> </div>
-                    </div>
-                </div>
-                <div class="last"></div>
-            </ul>  
-            <h2>${this.props.subtitle2}</h2>
+        <h1>When did this happen?</h1>
+        <h2>Date and time</h2>
         <ul>
-          ${options}
+              <div class="doubleoption">
+                  <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
+                  <div class="options">
+                      <li><em>January 12, 2018</em></li>
+                      <div class="check calendar"> </div>
+                  </div>
+                  <div class="options">
+                      <li><em>12:45 PM</em></li>
+                      <div class="check clock"> </div>
+                  </div>
+              </div>
+          </ul>  
+          <h2>How long did you need to park?</h2>
+        <ul>
+            <div class="options half1">
+                <li><em>minutes</em></li>
+                <div class="check on"></div>
+            </div>
+            <div class="options half2">
+                <li><em>hours</em></li>
+                <div class="check off"></div>
+            </div>
+            <div class="options half1">
+                <li><em>overnight</em></li>
+                <div class="check off"></div>
+            </div>
+            <div class="options half2">
+                <li><em>days</em></li>
+                <div class="check off"></div>
+            </div>
         </ul>
       </div>
         <footer>

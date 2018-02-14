@@ -37,7 +37,18 @@ export default class Happening extends Content {
       <div class="screen1">
         <div class="progress prog4"></div>
         <h1>${this.props.heading}</h1>
-        <h2>${this.props.text}</h2>
+        <h2>${this.props.subtitle1}</h2>
+        <ul>
+              <div class="doubleoption">
+                  <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
+                  <div class="options">
+                      <li><em>Camera</em></li>
+                      <div class="check camera"> </div>
+                  </div>                  
+              </div>
+              <div class="last"></div>
+          </ul>  
+          <h2>${this.props.subtitle2}</h2>
         <ul>
           ${options}
         </ul>

@@ -62,7 +62,8 @@ const questions = [
         key: 'happening',
         type: contents.HAPPENING,
         heading: 'When did this happen ?',
-        text: 'Specify the date and time',
+        subtitle1: 'Date',
+        subtitle2 : 'How long did you need to park ?',
         required: true,
         values: [
           {

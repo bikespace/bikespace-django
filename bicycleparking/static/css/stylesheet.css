@@ -17,7 +17,7 @@
 }
 @font-face {
     font-family: 'opensans';
-    src: url('Open_Sans/OpenSans-SemiBold.ttf');
+    src: url('/static/Open_Sans/OpenSans-SemiBold.ttf');
     font-weight: normal;
     font-style: italic;
 }
@@ -66,7 +66,7 @@ body {
     background-color: black;
 }
 .backbike {
-    background: url('background_images/yellowbike1920sq.jpg')no-repeat center;
+    background: url('/static/background_images/yellowbike1920sq.jpg')no-repeat center;
     margin: auto;
     background-position: 0px 0px;
     background-size: cover;
@@ -83,7 +83,7 @@ header{
 }
 
 .title {
-    background: url(icons/bikespace_header.svg) no-repeat;
+    background: url(/static/icons/bikespace_header.svg) no-repeat;
     background-position: center;
     background-size: 150px;
     height: 45px;
@@ -161,7 +161,7 @@ header{
     height: 300px;
     width: 100%;
     opacity: 1;
-    background: url(icons/logo_main.svg) no-repeat;
+    background: url(/static/icons/logo_main.svg) no-repeat;
     background-size: 200px 200px;
     background-position:center
 }
@@ -232,7 +232,7 @@ ul {
 }
 
 .on{
-    background: url(icons/check_on.svg) no-repeat center;
+    background: url(/static/icons/check_on.svg) no-repeat center;
     shape-rendering: geometricPrecision;
     width: 32px;
     margin-top: -28px;
@@ -250,7 +250,7 @@ ul {
 }
 
 .camera{
-    background: url(icons/camera.svg) no-repeat;
+    background: url(/static/icons/camera.svg) no-repeat;
     background-size: 28px;
     width:28px;
     height: 28px;
@@ -259,7 +259,7 @@ ul {
 }
 
 .upload{
-    background: url(icons/upload.svg) no-repeat;
+    background: url(/static/icons/upload.svg) no-repeat;
     background-size: 24px;
     width: 24px;
     height: 24px;

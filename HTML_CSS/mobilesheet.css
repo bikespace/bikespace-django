@@ -340,3 +340,35 @@ footer {
     width: auto;
     margin: -20vw 5vh 10vw 5vh;
 }
+
+/*----------------------------------------*/
+.titleSummary{
+    size: 2vh;
+}
+.summary{
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    border-radius: 2%;
+    margin: 2%;
+    height: 60vh;
+}
+.mapSummary {
+    float: right;
+    width: 50%;
+}
+.pictureSummary {
+    float: left;
+    width: 50%;
+}
+.hidden{
+    opacity: 0;
+}
+.hiddenPicture{
+    opacity: 0 !important;
+    height: 0 !important;
+}
+#picture{
+    height: 46vh;
+    width: 81vw;
+}
+#mapid { height: 50vh; }

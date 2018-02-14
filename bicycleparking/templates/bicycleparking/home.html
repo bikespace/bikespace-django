@@ -3,11 +3,15 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>BikeSpace - Home</title>
     <!--<link rel="manifest" href="/static/manifest.json">-->
 
     <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/static/css/stylesheet.css" />
     <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/static/css/mobilesheet.css" />
+    <link type="text/css" rel="stylesheet" href="/static/css/leaflet.css" />
+    <link type="text/css" rel="stylesheet" href="/static/css/leaflet-search.css" />
+
 
     <!--favicon-->
     <link rel="icon" type="image/png" href="/static/icons/bikespace32.png" sizes="32x32" />
@@ -30,7 +34,7 @@
     integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
     crossorigin=""></script>
     <script>
-        window.ASSETS_PATH = '{% static images %}';
+        window.ASSETS_PATH = '{% static images%}images/'; // for leaflet and leaflet-search
     </script>
 </head>
 

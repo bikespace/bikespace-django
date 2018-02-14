@@ -185,7 +185,7 @@ header{
     opacity: 0;
 }
 .visible {
-    background-color: #fff;
+    background-color: #ffffffee;
 }
 
 .options {
@@ -411,4 +411,23 @@ footer {
     margin-bottom: 2vh;
     
     padding-right: 2vh;
+}
+.success {
+    height: 12vh;
+    width: 70vw;
+    background-color: #31C057bb;
+    background-image: url(icons/success.svg);
+    background-position: center 6vh; 
+    background-repeat: no-repeat;
+    background-size: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6vw;
+    margin-bottom: -12vw;
+}
+.success h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 7vw;
+    padding-left: 0vw;
 }

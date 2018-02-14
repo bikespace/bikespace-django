@@ -42,7 +42,7 @@ em {
 h1 {
     font-weight: bold;
     height: 4vh;
-    padding-left: 3vh;
+    padding-left: 4vw;
     padding-bottom: 3vh;
     font-size: 6vw;
 }
@@ -57,7 +57,7 @@ h1 {
 }
 h2 {
     font-size: 5vw;
-    margin-left: 4vh;
+    margin-left: 5vw;
     padding-bottom: 2vh;
 }
 a {
@@ -76,15 +76,11 @@ a {
 /*___________________________________________________________*/
 
 body {
+    background: url('background_images/yellowbike1920sq.jpg') 100% / cover;
+    background-position: center;
     overflow-x: hidden;
+    min-height: 87vh;
     margin: auto;
-    height: 100%;
-}
-.backbike {
-    background: url('background_images/yellowbike1920sq.jpg')no-repeat center;
-    margin: auto;
-    background-position: center 0vw;
-    background-size: 100vh;
 }
 
 /*___________________________________________________________*/
@@ -184,12 +180,10 @@ header{
 }
 
 .screen1 {
-    border-radius: 0px;
     background-color: #fff;
     margin-left: 3vh;
     height: 84vh;
     margin-top: 13vh;
-    opacity: 0.90;
     margin-right: 3vh;
 }
 .clear {
@@ -199,8 +193,8 @@ header{
 .options {
     list-style: none;
     padding: 2vw;
+    background-color: #eee;
     height: 7vw;
-    border: 2px solid #ccc;
     border-radius: 9vw;
     margin-left: 2vh;
     margin-right: 2vh;
@@ -215,8 +209,12 @@ header{
 
 .doubleoption {
     position: relative;
-    opacity: 1;
     height: calc(11vw+4vh);
+}
+
+.doubleoption .options{
+    background-color: #fff;
+    box-shadow:0px 0px 0px 0.3vw #ddd inset;
 }
 
 .cameraButton{
@@ -250,20 +248,20 @@ header{
 
 .camera{
     background: url(icons/camera.svg) no-repeat;
-    background-size: 7vw;
+    background-size: 6vw;
     width:7vw;
     height: 7vw;
     padding-right: 0.5vw;
-    margin-top: -6.5vw;
+    margin-top: -5.75vw;
 }
 
 .upload{
     background: url(icons/upload.svg) no-repeat;
-    background-size: 7vw;
+    background-size: 5vw;
     width:7vw;
     height: 7vw;
-    padding-right: 0.5vw;
-    margin-top: -6.5vw;
+    padding-right: 0vw;
+    margin-top: -6vw;
 }
 
 /*___________________________________________________________*/
@@ -278,21 +276,21 @@ footer {
 }
 .back {
     padding: 2vw;
-    border: 0.5vw solid #31C057;
-    height: 5vw;
+    box-shadow: 0px 0px 0px 0.6vw #31C057 inset;
+    height: 6vw;
+    width: 20vw;
     margin-top: -8vw;
-    width: 18.5vw;
     border-radius: 10vw;
     margin-left: 5vh;
     text-align: center;
 }
 .back p {
     margin: auto;
-    padding: 1.5vw 1.75vw 2.5vw 1.75vw;
-    margin-top: -2.5vw;
+    padding: 1.5vw 2vw 2.5vw 2vw;
+    margin-top: -2vw;
     width: 20vw;
     height: 6vw;
-    margin-left: -2.5vw;
+    margin-left: -2vw;
     color: #31C057
     
 }
@@ -338,10 +336,10 @@ footer {
 .red {
     background-color: #F24722;
     width: auto;
-    margin: -20vw 5vh 10vw 5vh;
+    margin: -20.5vw 5vh 10.5vw 5vh;
 }
 
-/*----------------------------------------*/
+/*___________________________________________________________*/
 .titleSummary{
     size: 2vh;
 }
@@ -371,4 +369,12 @@ footer {
     height: 46vh;
     width: 81vw;
 }
-#mapid { height: 50vh; }
+#mapid {
+    height: calc(100vh - 58%);
+    margin-left: 2vw;
+    margin-right: 2vw;
+    background-color: #333;
+}
+
+/*___________________________________________________________*/
+

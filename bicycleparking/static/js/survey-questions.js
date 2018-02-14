@@ -42,7 +42,7 @@ const questions = [
         type: contents.PICTURE,
         heading: 'Add a photo',
         text: 'Optional',
-        error: 'Picture is required',
+        error: 'Picture is wrong format',
         required: true,
       }
     ]
@@ -51,7 +51,7 @@ const questions = [
       {
         key: 'map',
         type: contents.MAP,
-        heading: 'Where was the problem ?',
+        heading: 'Where was the problem?',
         text: 'Pin the location',
         required: false,
       }
@@ -61,9 +61,9 @@ const questions = [
       {
         key: 'happening',
         type: contents.HAPPENING,
-        heading: 'When did this happen ?',
+        heading: 'When did this happen?',
         subtitle1: 'Date',
-        subtitle2 : 'How long did you need to park ?',
+        subtitle2 : 'How long did you need to park?',
         required: true,
         values: [
           {

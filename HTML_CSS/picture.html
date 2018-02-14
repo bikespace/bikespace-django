@@ -3,7 +3,7 @@
     <head>
         
     	<meta charset="utf-8">
-        <title>Bikespace - Report a parking issue</title>
+        <title>BikeSpace - Home</title>
         <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)"  href="stylesheet.css"/> 
         <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="mobilesheet.css" />
         
@@ -24,49 +24,44 @@
     </head>
     
     <body class="backbike">
-        
         <header class="report">
             <div class="title">
             </div>
         </header>
         <!--<div id="error"><h1>Choose at least one option</h1></div>-->
         <div class="screen1">
-            <div class="progress prog1"></div>
-            <h1>What was the issue?</h1>
-            <h2>Choose what applies</h2>
+          <div class="progress prog2"></div>
+          <h1>${this.props.heading}</h1>
+          <h2>${this.props.text}</h2>
             <ul>
-                <div class="options">
-                    <li><em>Couldn't find bike parking</em></li>
-                    <div class="check on"></div>
-                </div>
-                <div class="options">
-                    <li><em>Nearby bike parking is full</em></li>
-                    <div class="check off"></div>
-                </div>
-                <div class="options">
-                    <li><em>Bike parking is damaged</em></li>
-                    <div class="check off"></div>
-                </div>
-                <div class="options">
-                    <li><em>A bike is badly parked</em></li>
-                    <div class="check off"></div>
-                </div>
-                <div class="options">
-                    <li><em>Different problem</em></li>
-                    <div class="check on"></div>
+                <div class="doubleoption">
+                    <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
+                    <div class="imagepreview">
+                    </div>
+                    <div class="options">
+                        <li><em>Camera</em></li>
+                        <div class="check camera"> </div>
+                    </div>
+                    <div class="options">
+                        <li><em>Upload</em></li>
+                        <div class="check upload"> </div>
+                    </div>
                 </div>
                 <div class="last"></div>
             </ul>            
         </div>
+        <footer>
+            <div class="nav">
+                <div id="buttonRed" class="button red">    
+                    <p><em>Remove photo</em></p>
+                </div>
+                <div class="back">
+                    <a href="index.html"><p><em>Back</em></p></a>
+                </div>
+                <div class="next">
+                    <a href="photo.html"><p><em>Next</em></p></a>
+                </div>
+            </div>
+        </footer>
     </body>
-    <footer>
-        <div class="nav">
-            <div class="back">
-                <a href="index.html"><p><em>Back</em></p></a>
-            </div>
-            <div class="next">
-                <a href="photo.html"><p><em>Next</em></p></a>
-            </div>
-        </div>
-    </footer>
 </html>

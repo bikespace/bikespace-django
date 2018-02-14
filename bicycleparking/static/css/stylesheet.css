@@ -5,19 +5,19 @@
 }
 @font-face {
     font-family: 'opensans';
-    src: url('/static/Open_Sans/OpenSans-Regular.ttf');
+    src: url('Open_Sans/OpenSans-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'opensans';
-    src: url('/static/Open_Sans/OpenSans-Bold.ttf');
+    src: url('Open_Sans/OpenSans-Bold.ttf');
     font-weight: bold;
     font-style: normal;
 }
 @font-face {
     font-family: 'opensans';
-    src: url('/static/Open_Sans/OpenSans-SemiBold.ttf');
+    src: url('Open_Sans/OpenSans-SemiBold.ttf');
     font-weight: normal;
     font-style: italic;
 }
@@ -66,7 +66,7 @@ body {
     background-color: black;
 }
 .backbike {
-    background: url('/static/background_images/yellowbike1920sq.jpg')no-repeat center;
+    background: url('background_images/yellowbike1920sq.jpg')no-repeat center;
     margin: auto;
     background-position: 0px 0px;
     background-size: cover;
@@ -83,7 +83,7 @@ header{
 }
 
 .title {
-    background: url(/static/icons/bikespace_header.svg) no-repeat;
+    background: url(icons/bikespace_header.svg) no-repeat;
     background-position: center;
     background-size: 150px;
     height: 45px;
@@ -108,9 +108,9 @@ header{
 /*___________________________________________________________*/
 
 .progress{
-    width: 14px;
-    border-radius: 7px;
-    height: 14px;
+    width: 16px;
+    border-radius: 10px;
+    height: 16px;
     margin: 8px auto 0px auto;
 }
 
@@ -161,7 +161,7 @@ header{
     height: 300px;
     width: 100%;
     opacity: 1;
-    background: url(/static/icons/logo_main.svg) no-repeat;
+    background: url(icons/logo_main.svg) no-repeat;
     background-size: 200px 200px;
     background-position:center
 }
@@ -232,7 +232,7 @@ ul {
 }
 
 .on{
-    background: url(/static/icons/check_on.svg) no-repeat center;
+    background: url(icons/check_on.svg) no-repeat center;
     shape-rendering: geometricPrecision;
     width: 32px;
     margin-top: -28px;
@@ -241,12 +241,30 @@ ul {
 }
 
 .off{
-    background: url(/static/icons/check_off.svg) no-repeat center;
+    background: url(icons/check_off.svg) no-repeat center;
     shape-rendering: geometricPrecision;
     width: 32px;
     margin-top: -28px;
     height: 32px;
     margin-right: -3px;
+}
+
+.camera{
+    background: url(icons/camera.svg) no-repeat;
+    background-size: 28px;
+    width:28px;
+    height: 28px;
+    padding-right: 4px;
+    margin-top: -25px;
+}
+
+.upload{
+    background: url(icons/upload.svg) no-repeat;
+    background-size: 24px;
+    width: 24px;
+    height: 24px;
+    padding-right: 6px;
+    margin-top: -25px;
 }
 
 .last {
@@ -304,6 +322,8 @@ footer {
 .button {
     padding: 13px;
     margin: auto;
+    margin-top: -70px;
+    margin-bottom: 20px;
     background: #31C057;
     height: 24px;
     width: 240px;

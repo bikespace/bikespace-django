@@ -73,4 +73,9 @@ staticfiles/
 
 venv/
 
-bicycleparking/static/main.js
+#bicycleparking/static/main.js
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

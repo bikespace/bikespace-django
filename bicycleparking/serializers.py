@@ -6,4 +6,4 @@ from bicycleparking.models import Picture
 class SurveyAnswerSerializer (serializers.ModelSerializer):
     class Meta:
         model = SurveyAnswer
-        fields = ('latitude', 'longitude', 'survey', 'comments')
+        fields = ('latitude', 'longitude', 'survey', 'photo_uri')

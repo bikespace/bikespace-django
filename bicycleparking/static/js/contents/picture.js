@@ -27,17 +27,17 @@ export default class Picture extends Content {
       let files = event.target.files;
       const file = files[0];
       this.file = file;
-      var ctx = document.getElementById('picture').getContext('2d');
-      var img = new Image;
-      img.onload = function () {
-        ctx.drawImage(img, 0, 0);
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        document.getElementById('picture').src = e.target.result
         document.getElementsByClassName("options")[0].classList.add('hiddenPicture');
         document.getElementsByClassName("options")[1].classList.add('hiddenPicture');
         document.getElementById("picture").classList.remove('hiddenPicture');
-        document.getElementById("buttonRed").classList.remove('hiddenPicture');
-
+        document.getElementById("buttonRed").classList.remove('hiddenPicture');;
       }
-      img.src = URL.createObjectURL(this.file);
+      reader.readAsDataURL(file);
+
 
     });
     document.getElementById("picture").classList.add('hiddenPicture');
@@ -46,7 +46,7 @@ export default class Picture extends Content {
 
   get template() {
     return (`
-        <div class="screen1">
+        <div class="screen1 visible">
           <div class="progress prog2"></div>
           <h1>${this.props.heading}</h1>
           <h2>${this.props.text}</h2>
@@ -54,7 +54,7 @@ export default class Picture extends Content {
                 <div class="doubleoption">
                     <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
                     <div class="imagepreview">
-                        <canvas id="picture"/>
+                        <img id="picture" src="#" />
                     </div>
                     <div class="options">
                         <li><em>Camera</em></li>
@@ -65,7 +65,6 @@ export default class Picture extends Content {
                         <div class="check upload"> </div>
                     </div>
                 </div>
-                <div class="last"></div>
             </ul>            
         </div>
     <footer>

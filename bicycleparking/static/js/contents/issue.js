@@ -41,7 +41,7 @@ export default class Issue extends Content {
       return memo;
     }, '');
     return (`
-      <div class="screen1">
+      <div class="screen1 visible">
         <div class="progress prog1"></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.text}</h2>

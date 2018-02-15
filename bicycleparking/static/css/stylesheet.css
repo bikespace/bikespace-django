@@ -360,6 +360,24 @@ footer {
 .hidden{
     opacity: 0;
 }
+.hiddenPicture{
+    opacity: 0 !important;
+    height: 0 !important;
+}
+.imagepreview {
+    min-height: 255px;
+    height: calc(-140px + 65vh);
+    max-height: 350px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    position: relative;
+    
+}
+#picture{
+    height: auto;
+    max-width: 100%;
+}
+
 #mapid {
     min-height: 320px;
     height: 54vh;
@@ -412,11 +430,4 @@ footer {
     font-size: 2.5em;
     padding-left: 0px;
     padding-top: 5px;
-}
-
-.datepicker{
-    position: absolute;
-    opacity: 100;
-    width: 100%;
-    height: 100%;
 }

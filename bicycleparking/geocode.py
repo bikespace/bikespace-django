@@ -191,7 +191,7 @@ class Geocode :
      record, returns None."""
      result = None
      if loc != None and Area.objects.filter (closest = loc.gid) :
-        result = Area.get (closest = loc.gid)
+        result = Area.objects.get (closest = loc.gid)
      return result 
 
   def makeArea (self) :

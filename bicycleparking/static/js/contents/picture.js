@@ -21,6 +21,7 @@ export default class Picture extends Content {
       document.getElementsByClassName("options")[0].classList.remove('hiddenPicture');
       document.getElementsByClassName("options")[1].classList.remove('hiddenPicture');
       document.getElementById("picture").classList.add('hiddenPicture');
+      document.getElementById("preview").classList.add('hiddenPicture');
       document.getElementById("buttonRed").classList.add('hiddenPicture');
     });
     document.getElementById("deviceCamera").addEventListener('change', (event) => {
@@ -35,6 +36,7 @@ export default class Picture extends Content {
         document.getElementsByClassName("options")[1].classList.add('hiddenPicture');
         document.getElementById("picture").classList.remove('hiddenPicture');
         document.getElementById("buttonRed").classList.remove('hiddenPicture');;
+        document.getElementById("preview").classList.remove('hiddenPicture');
       }
       reader.readAsDataURL(file);
 
@@ -42,6 +44,7 @@ export default class Picture extends Content {
     });
     document.getElementById("picture").classList.add('hiddenPicture');
     document.getElementById("buttonRed").classList.add('hiddenPicture');
+    document.getElementById("preview").classList.add('hiddenPicture');
   }
 
   get template() {
@@ -53,9 +56,10 @@ export default class Picture extends Content {
             <ul>
                 <div class="doubleoption">
                     <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
-                    <div class="imagepreview">
+                    <div id="preview" class="imagepreview hiddenPicture">
                         <img id="picture" src="#" />
                     </div>
+                    
                     <div class="options">
                         <li><em>Camera</em></li>
                         <div class="check camera"> </div>

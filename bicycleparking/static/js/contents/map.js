@@ -36,6 +36,7 @@ export default class Map extends Content {
   }
 
   get value() {
+    this.values.push([this.location.lat, this.location.lng])
     return this.values;
   }
 

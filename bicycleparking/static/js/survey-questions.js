@@ -64,6 +64,7 @@ const questions = [
         heading: 'When did this happen?',
         subtitle1: 'Date',
         subtitle2 : 'How long did you need to park?',
+        error: 'Choose an option',
         required: true,
         values: [
           {

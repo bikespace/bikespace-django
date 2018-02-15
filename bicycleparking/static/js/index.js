@@ -53,18 +53,17 @@ class Index {
 
     // Marshall the state into API fields
     var body = {
-      'latitude': this.state.location.lat,
-      'longitude': this.state.location.lng,
-      'comments': this.state.comment,
+      'latitude': this.state.map[0][0],
+      'longitude': this.state.map[0][1],
       'survey': this.state
     };
-    if (this.state.photo) {
+    if (this.state.picture) {
       fetch(`${document.location.origin}/api/upload/` + this.state.photo.name, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: this.state.photo,
+        body: this.state.picture,
       }).then(response => {
         response.json().then(json => {
           body.photo_uri = json.s3_name;

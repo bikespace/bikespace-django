@@ -40,6 +40,7 @@ class SurveyAnswer(models.Model):
     longitude = models.FloatField()
     survey = JSONField(default=dict)
     comments = models.TextField(default=None, null=True)
+    photo_uri = models.TextField(default=None, null=True)
 
 class Picture (models.Model) :  
     """Contains the definition of a photograph uploaded by the user of the 

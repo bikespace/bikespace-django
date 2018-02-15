@@ -68,19 +68,23 @@ const questions = [
         values: [
           {
             key: 'minutes',
-            text: "minutes"
+            text: "minutes",
+            class: 'half1'
           },
           {
             key: 'hours',
-            text: "hours"
+            text: "hours",
+            class: 'half2'
           },
           {
             key: 'overnight',
-            text: "overnight"
+            text: "overnight",
+            class: 'half1'
           },
           {
             key: 'days',
-            text: "days"
+            text: "days",
+            class: 'half2'
           }
         ]
       }

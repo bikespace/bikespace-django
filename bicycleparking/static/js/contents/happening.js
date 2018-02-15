@@ -1,9 +1,12 @@
 import Content from './content';
+import flatpickr from 'flatpickr';
 
 export default class Happening extends Content {
   constructor() {
     super(...arguments);
     this.values = [];
+    this.date = new Date();
+    this.fp = null;
   }
 
   get valid() {
@@ -23,31 +26,46 @@ export default class Happening extends Content {
     }
   }
 
+  openCalendar(event) {
+    console.log("tata");
+  }
+
   bind() {
+    //const fp = flatpickr(document.querySelector("#flatpickr"), {}); // flatpickr
+    flatpickr('#calendar', {
+    });
     [...document.getElementsByClassName('check')].forEach(el => {
       el.addEventListener('click', this.onClick.bind(this));
     })
+    document.getElementById('date').innerHTML = this.date.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+    document.getElementById('clock').innerHTML = this.date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+    //document.getElementById('flatpickr').addEventListener('click', this.openCalendar.bind(this));
   }
   get template() {
     const options = this.props.values.reduce((memo, value) => {
-      memo += `<div class="options"><li><em>${value.text}</em></li><div class="check off" value="${value.key}"></div></div>`
+
+      memo += `<div class="options ${value.class}"><li><em>${value.text}</em></li><div class="check off" value="${value.key}"></div></div>`
       return memo;
     }, '');
     return (`
-      <div class="screen1">
+      <div class="screen1 visible">
         <div class="progress prog4"></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.subtitle1}</h2>
+    
         <ul>
-              <div class="doubleoption">
-                  <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
+            <div class="doubleoption">
+              <input id="calendar" class="datepicker" type="text" name="calendar" />
+                <div class="options">
+                      <li><em id="date"></em></li>
+                      <div class="check calendar"> </div>
+                  </div>
                   <div class="options">
-                      <li><em>Camera</em></li>
-                      <div class="check camera"> </div>
-                  </div>                  
+                      <li><em id="clock"></em></li>
+                      <div class="check clock"> </div>
+                  </div>
               </div>
-              <div class="last"></div>
-          </ul>  
+          </ul> 
           <h2>${this.props.subtitle2}</h2>
         <ul>
           ${options}

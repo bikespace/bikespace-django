@@ -8,8 +8,8 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY
 const TILE_URL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
 const ATTRIBUTION = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>';
 
-const icon = window.ASSETS_PATH + 'marker-icon.png';
-const iconShadow = window.ASSETS_PATH + 'marker-shadow.png';
+const icon = '/static/images/marker-icon.png';
+const iconShadow = '/static/images/marker-shadow.png';
 
 
 let DefaultIcon = L.icon({
@@ -51,13 +51,13 @@ export default class Map extends Content {
     return json;
   }
 
-   geocoding(text, callResponse) {
+  geocoding(text, callResponse) {
     googleMapsClient.geocode({
       address: text,
       components: {
         country: 'CA',
       }
-    }, function(err, response) {
+    }, function (err, response) {
       if (!err) {
         callResponse(response);
       }
@@ -74,14 +74,14 @@ export default class Map extends Content {
 
   getDeviceLocation() {
     if ('geolocation' in navigator) {
-      this.watchId = navigator.geolocation.watchPosition(this.locationAcquired.bind(this), this.locationFailed.bind(this), {timeout: 10 * 1000});
+      this.watchId = navigator.geolocation.watchPosition(this.locationAcquired.bind(this), this.locationFailed.bind(this), { timeout: 10 * 1000 });
       console.log(this.watchId);
     } else {
       this.buildMap();
     }
   }
 
-  locationFailed(){
+  locationFailed() {
     this.buildMap();
   }
 
@@ -94,34 +94,34 @@ export default class Map extends Content {
     var zoom_level = 13; // general view if there's no location
     if (this.haveLocation) { zoom_level = 16; }
     if (typeof this.map === 'undefined') {
-        this.map = leaflet.map('map').setView([this.location.lat, this.location.lng], zoom_level);
+      this.map = leaflet.map('map').setView([this.location.lat, this.location.lng], zoom_level);
 
-        var searchControl = new L.Control.Search({
-          sourceData: this.geocoding,
-          formatData: this.formatJSON,
-          filterData: (text, records) => records, // don't filter
-          markerLocation: true,
-          autoType: false,
-          autoCollapse: true,
-          minLength: 2,
-          marker: DefaultIcon,
-          moveToLocation: function (latlng, title, map) {
-            if(this.watchId !== null) {
-              navigator.geolocation.clearWatch(self.watchId); // stop updating location
-            }
-            self.location.lat = latlng.lat;
-            self.location.lng = latlng.lng;
-            map.setView(latlng);
-        }
-        })
-
-        searchControl.on('search:locationfound', function(e) {
-          if(this.watchId !== null) {
-              navigator.geolocation.clearWatch(this.watchId);
+      var searchControl = new L.Control.Search({
+        sourceData: this.geocoding,
+        formatData: this.formatJSON,
+        filterData: (text, records) => records, // don't filter
+        markerLocation: true,
+        autoType: false,
+        autoCollapse: true,
+        minLength: 2,
+        marker: DefaultIcon,
+        moveToLocation: function (latlng, title, map) {
+          if (this.watchId !== null) {
+            navigator.geolocation.clearWatch(self.watchId); // stop updating location
           }
-        });
+          self.location.lat = latlng.lat;
+          self.location.lng = latlng.lng;
+          map.setView(latlng);
+        }
+      })
 
-        this.map.addControl(searchControl);
+      searchControl.on('search:locationfound', function (e) {
+        if (this.watchId !== null) {
+          navigator.geolocation.clearWatch(this.watchId);
+        }
+      });
+
+      this.map.addControl(searchControl);
     } else {
       this.map.panTo([this.location.lat, this.location.lng]);
       this.map.setZoom(zoom_level);
@@ -160,7 +160,7 @@ export default class Map extends Content {
 
   get template() {
     return (`
-      <div class="screen1">
+      <div class="screen1 visible">
         <div class="progress prog3"></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.text}</h2>

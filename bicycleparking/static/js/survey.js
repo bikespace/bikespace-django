@@ -90,6 +90,7 @@ export default class Survey {
   }
 
   bind() {
+    const state = this.survey.state;
     document.getElementById('next').addEventListener('click', (event) => {
       this.submit();
     });
@@ -99,7 +100,7 @@ export default class Survey {
     });
 
     this.questions.forEach((question) => {
-      question.bind();
+      question.bind(state);
     })
   }
 

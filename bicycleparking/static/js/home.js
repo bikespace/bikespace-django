@@ -11,6 +11,10 @@ export default class Home {
   }
 
   bind() {
+    if (this.survey.state && this.survey.state.finish) {
+      document.getElementById('finish').classList.remove('hidden');
+      this.survey.state = null;
+    }
     document.getElementById('start').addEventListener('click', (event) => {
       this.survey.router.navigate(`/survey/1`);
     });
@@ -24,6 +28,9 @@ export default class Home {
         </div>
       </header>
       <div class="screen1">
+        <div id="finish" class="success hidden">
+            <h1>Thank you</h1>
+        </div>
           <div class="logo">
               <h1 class="maintitle tshadow">BikeSpace</h1>
           </div>

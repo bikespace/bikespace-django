@@ -6,32 +6,28 @@ export default class Happening extends Content {
     super(...arguments);
     this.values = [];
     this.date = new Date();
-    this.fp = null;
+    this.values.push({ 'date': this.date, 'time': [] });
   }
 
   get valid() {
-    return this.values.length > 0;
+    return this.values[0].time.length > 0;
   }
 
   get value() {
     return this.values;
   }
+
   onClick(event) {
     if (event.target.classList.contains("off")) {
       event.target.classList.replace("off", "on")
-      this.values.push(event.target.getAttribute("value"));
+      this.values[0].time.push(event.target.getAttribute("value"));
     } else {
       event.target.classList.replace("on", "off")
-      this.values.splice(this.values.indexOf(event.target.getAttribute("value")), 1);
+      this.values[0].time.splice(this.values.indexOf(event.target.getAttribute("value")), 1);
     }
   }
 
-  openCalendar(event) {
-    console.log("tata");
-  }
-
   bind() {
-    //const fp = flatpickr(document.querySelector("#flatpickr"), {}); // flatpickr
     flatpickr('#calendar', {
     });
     [...document.getElementsByClassName('check')].forEach(el => {
@@ -39,7 +35,6 @@ export default class Happening extends Content {
     })
     document.getElementById('date').innerHTML = this.date.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
     document.getElementById('clock').innerHTML = this.date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-    //document.getElementById('flatpickr').addEventListener('click', this.openCalendar.bind(this));
   }
   get template() {
     const options = this.props.values.reduce((memo, value) => {

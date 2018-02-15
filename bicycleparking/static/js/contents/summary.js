@@ -12,14 +12,14 @@ export default class Summary extends Content {
     }
 
     get value() {
-        return this.values;
+        return this.location;
     }
 
     bind(state) {
         this.state = state;
         var questions = this.questions;
         var problems = this.state.problem_type.reduce((memo, value) => {
-            memo += '<li><em>' + questions[0].questions[0].values.find(entry => entry.key === value).text + '</em></li>'
+            memo += '<div class="options"><li><em>' + questions[0].questions[0].values.find(entry => entry.key === value).text + '</em></li></div>'
             return memo;
         }, '');
         document.getElementById('problems').innerHTML = problems;
@@ -36,8 +36,9 @@ export default class Summary extends Content {
           <h1>${this.props.heading}</h1>
                       <div class="summary">
                 <h2>Problems</h2>
-                <div id="problems" class="options">                
+                <div id="problems">                
                 </div>
+                <div class="linebreak"></div>
                 <h2>Date and time</h2>
                 <div class="options third12">
                     <li><em id="date"></em></li>
@@ -45,12 +46,15 @@ export default class Summary extends Content {
                 <div class="options third3">
                     <li><em id="clock"></em></li>
                 </div>
-                <div>
-                    <div class="mapSummary">
-                        <h2>Location</h2>
-                    </div>            
-                    <div class="pictureSummary">
-                        <h2>Photo</h2>
+                <div class="linebreak"></div>
+                <div>         
+                    <div class="options half1">
+                        <li><em>Photo</em></li>
+                        <div class="check on"></div>
+                    </div>
+                    <div class="options half2">
+                        <li><em>Location</em></li>
+                        <div class="check on"></div>
                     </div>
                 </div>
             </div>        

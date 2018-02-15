@@ -74,7 +74,10 @@ class Index {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(body),
-          }).then(_ => { this.router.navigate(`/review`) });
+          }).then(_ => {
+            this.state.finish = true;
+            this.router.navigate(`/home`)
+          });
         });
 
       });
@@ -85,7 +88,10 @@ class Index {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
-      }).then(_ => { this.router.navigate(`/review`) });
+      }).then(_ => {
+        this.state.finish = true;
+        this.router.navigate(`/home`)
+      });
     }
 
   }

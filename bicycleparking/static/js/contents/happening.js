@@ -28,8 +28,6 @@ export default class Happening extends Content {
   }
 
   bind() {
-    flatpickr('#calendar', {
-    });
     [...document.getElementsByClassName('check')].forEach(el => {
       el.addEventListener('click', this.onClick.bind(this));
     })
@@ -50,7 +48,6 @@ export default class Happening extends Content {
     
         <ul>
             <div class="doubleoption">
-              <input id="calendar" class="datepicker" type="text" name="calendar" />
                 <div class="options">
                       <li><em id="date"></em></li>
                       <div class="check calendar"> </div>

@@ -43,7 +43,7 @@ const questions = [
         heading: 'Add a photo',
         text: 'Optional',
         error: 'Picture is wrong format',
-        required: true,
+        required: false,
       }
     ]
   }, {

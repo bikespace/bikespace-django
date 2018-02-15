@@ -5,13 +5,13 @@
 }
 @font-face {
     font-family: 'opensans';
-    src: url('Open_Sans/OpenSans-Regular.ttf');
+    src: url('/static/Open_Sans/OpenSans-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'opensans';
-    src: url('Open_Sans/OpenSans-Bold.ttf');
+    src: url('/static/Open_Sans/OpenSans-Bold.ttf');
     font-weight: bold;
     font-style: normal;
 }
@@ -61,17 +61,11 @@ a {
 /*___________________________________________________________*/
 
 body {
+    background: url('/static/background_images/yellowbike1920sq.jpg') 100% / cover;
+    background-position: center;
     overflow-x: hidden;
+    min-height: 100vh;
     margin: auto;
-    background-color: black;
-}
-.backbike {
-    background: url('/static/background_images/yellowbike1920sq.jpg')no-repeat center;
-    margin: auto;
-    background-position: 0px 0px;
-    background-size: cover;
-    height: 100vw;
-    max-height: 100vh;
 }
 
 /*___________________________________________________________*/
@@ -154,11 +148,9 @@ header{
 
 
 .logo {
-    margin-top: -587px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 238px;
-    height: 300px;
+    max-height: 300px;
     width: 100%;
     opacity: 1;
     background: url(/static/icons/logo_main.svg) no-repeat;
@@ -168,7 +160,7 @@ header{
 
 .maintitle {
     font-weight: bold;
-    padding-top: 280px;
+    padding-top: 270px;
     text-align: center;
     color: #fff;
     margin-left: 0px;
@@ -181,12 +173,10 @@ header{
     
     padding: 5px 20px 20px 20px;
     border-radius: 0px;
-    background-color: #fff;
     width: 375px;
     height: 84vh;
     max-height: 620px;
     min-height: 510px;
-    opacity: 0.92;
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -195,11 +185,15 @@ header{
     opacity: 0;
 }
 
+.visible {
+    background-color: #ffffffee;
+}
+
 ul {
     margin-left: -40px;
 }
 
-.options {
+ul .options {
     list-style: none;
     padding: 13px;
     background: #eee;
@@ -215,8 +209,11 @@ ul {
 
 .doubleoption {
     position: relative;
-    opacity: 1;
-    height: calc(50px);
+}
+
+.doubleoption .options{
+    background-color: #fff;
+    box-shadow:0px 0px 0px 2px #ddd inset;
 }
 
 .cameraButton{
@@ -241,7 +238,7 @@ ul {
 }
 
 .off{
-    background: url(icons/check_off.svg) no-repeat center;
+    background: url(/static/icons/check_off.svg) no-repeat center;
     shape-rendering: geometricPrecision;
     width: 32px;
     margin-top: -28px;
@@ -255,7 +252,7 @@ ul {
     width:28px;
     height: 28px;
     padding-right: 4px;
-    margin-top: -25px;
+    margin-top: -24px;
 }
 
 .upload{
@@ -267,9 +264,6 @@ ul {
     margin-top: -25px;
 }
 
-.last {
-    padding-bottom: 80px;
-}
 /*___________________________________________________________*/
 
 footer {
@@ -277,7 +271,6 @@ footer {
     margin: auto;
     margin-top: -80px;
     width: 375px;
-    height: 50px;
 }
 
 .nav {
@@ -287,18 +280,18 @@ footer {
 }
 .back {
     padding: 13px;
-    border: 3px solid #31C057;
-    height: 18px;
-    width: 80px;
+    box-shadow: 0px 0px 0px 3px #31C057 inset;
+    height: 24px;
+    width: 86px;
     border-radius: 30px;
     text-align: center;
 }
 .back p {
     margin: auto;
-    width: 80px;
-    margin-left: -15px;
-    padding: 13px 15px 13px 15px;
-    margin-top: -17px;
+    width: 86px;
+    margin-left: -13px;
+    padding: 13px;
+    margin-top: -13px;
     color: #31C057
 }
 .next {
@@ -340,6 +333,11 @@ footer {
     color: #fff
 }
 
+.red {
+    background-color: #F24722;
+}
+
+/*___________________________________________________________*/
 
 .titleSummary{
     size: 2vh;
@@ -362,10 +360,63 @@ footer {
 .hidden{
     opacity: 0;
 }
-#mapid { height: 50vh; }
+#mapid {
+    min-height: 320px;
+    height: 54vh;
+    max-height: 400px;
+    background-color: #eee;
+}
+
+/*___________________________________________________________*/
+
+.calendar {
+    background: url(/static/icons/calendar.svg) no-repeat;
+    background-size: 24px;
+    width: 24px;
+    height: 24px;
+    padding-right: 6px;
+    margin-top: -24px;
+}
+.clock {
+    background: url(/static/icons/clock.svg) no-repeat;
+    background-size: 24px;
+    width: 24px;
+    height: 24px;
+    padding-right: 6px;
+    margin-top: -23px;
+}
+.half1 {
+    width: 150px;
+}
+.half2 {
+    width: 150px;
+    margin-top: -70px;
+    margin-left: auto;
+}
+.success {
+    height: 120px;
+    background-color: #31C057bb;
+    background-image: url(/static/icons/success.svg);
+    background-position: center 62px; 
+    background-repeat: no-repeat;
+    background-size: 45px;
+    margin-top: -60px;
+    margin-left: 60px;
+    margin-right: 60px;
+    border-radius: 30px;
+    margin-bottom: -40px;
+}
+.success h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5em;
+    padding-left: 0px;
+    padding-top: 5px;
+}
+
 .datepicker{
     position: absolute;
-    opacity: 0;
+    opacity: 100;
     width: 100%;
     height: 100%;
 }

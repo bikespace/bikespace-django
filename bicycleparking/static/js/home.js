@@ -20,12 +20,10 @@ export default class Home {
     return (
       `
       <header class="clear">
-          <div class="title">
-          </div>
+        <div class="title">
+        </div>
       </header>
-      <div class="screen1 clear">
-      </div>
-      <div >
+      <div class="screen1">
           <div class="logo">
               <h1 class="maintitle tshadow">BikeSpace</h1>
           </div>

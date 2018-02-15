@@ -361,13 +361,13 @@ footer {
     max-height: calc(100vh);
     overflow-y: hidden;
     overflow-x: hidden;
-    display: block;
     
 }
 #picture{
-    height: calc(70vh - 40vw);
-    min-width: 85vw;
-    display: block;
+    height: calc(70vh);
+    width: calc(70vh);
+    margin-left: -0vh;
+    margin-top: -0vh;
 }
 #mapid {
     height: calc(100vh - 58%);

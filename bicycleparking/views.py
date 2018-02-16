@@ -25,7 +25,7 @@ from rest_framework import status
 
 from bicycleparking.serializers import SurveyAnswerSerializer
 from bicycleparking.models import SurveyAnswer
-from bicycleparking.uploader import Upload     er
+from bicycleparking.uploader import Uploader
 from bicycleparking.geocode import Geocode
 
 # Create your views here.

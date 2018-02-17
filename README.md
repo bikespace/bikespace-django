@@ -227,17 +227,19 @@ This is the current project structure, please note:
 │   ├── apps.py
 │   ├── geocode.py
 │   ├── __init__.py
+│   ├── intersection.py
 │   ├── migrations
 │   ├── models.py
 │   ├── node_modules
 │   ├── package.json
-│   ├── package-lock.json
 │   ├── __pycache__
 │   ├── rollup.config.js
+│   ├── Routers.py
 │   ├── serializers.py
 │   ├── static
 │   ├── templates
 │   ├── tests.py
+│   ├── uploader.py
 │   ├── urls.py
 │   └── views.py
 ├── Bicycle_parking
@@ -245,13 +247,31 @@ This is the current project structure, please note:
 │   ├── __pycache__
 │   ├── settings
 │   ├── static
-│   ├── staticfiles
 │   ├── urls.py
 │   └── wsgi.py
+├── CONTRIBUTING.md
 ├── db.sqlite3
 ├── docker-compose.yml
+├── HTML_CSS
+│   ├── background_images
+│   ├── files_old
+│   ├── flatpickr.css
+│   ├── happening.html
+│   ├── icons
+│   ├── index.html
+│   ├── issue.html
+│   ├── map.html
+│   ├── mobilesheet.css
+│   ├── Open_Sans
+│   ├── picture.html
+│   ├── stylesheet2.css
+│   ├── stylesheet.css
+│   ├── success.html
+│   └── summary.html
 ├── LICENSE
 ├── manage.py
+├── mkaddressdb
+├── mkintersectiondb
 ├── node_modules
 │   ├── flatpickr
 │   ├── leaflet
@@ -262,13 +282,30 @@ This is the current project structure, please note:
 ├── README.md
 ├── requirements.txt
 ├── runtime.txt
+├── sql
+│   ├── intersec2d.sql
+│   ├── intersection_types.sql
+│   ├── makegisdb.sql
+│   └── visit_address.sql
 ├── test
-│   └── geodata_001.xml
+│   ├── areas.xml
+│   ├── geodata_001.xml
+│   ├── intersection_test.cpg
+│   ├── intersection_test.dbf
+│   ├── intersection_test.prj
+│   ├── intersection_test.shp
+│   ├── intersection_test.shx
+│   ├── makeAreas.py
+│   ├── removeTestDB.py
+│   ├── test_data.sql
+│   ├── useaws
+│   └── useci
 └── venv
     ├── bin
     ├── include
     ├── lib
-    └── pip-selfcheck.json
+    ├── pip-selfcheck.json
+    └── share
 ```
 
 ## License: MIT

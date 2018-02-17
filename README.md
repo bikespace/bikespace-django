@@ -1,3 +1,7 @@
+[![pipeline status](https://gitlab.com/bikespace/Bicycle-parking/badges/master/pipeline.svg)](https://gitlab.com/bikespace/Bicycle-parking/commits/master)
+
+[![coverage report](https://gitlab.com/bikespace/Bicycle-parking/badges/master/coverage.svg)](https://gitlab.com/bikespace/Bicycle-parking/commits/master)
+
 # Toronto Bike Parking Project
 
 Note: This is a debugging branch and should NOT be merged with the master until and unless the code is updated and stable.

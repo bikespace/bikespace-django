@@ -210,6 +210,10 @@ python manage.py runserver
 ngrok http 3000
 ```
 
+## Contributing
+
+See our [contributing guidelines](https://gitlab.com/bikespace/Bicycle-parking/blob/readmeContributing/CONTRIBUTING.md)
+
 ## Project Structure
 
 This is the current project structure, please note:
@@ -266,11 +270,6 @@ This is the current project structure, please note:
     ├── lib
     └── pip-selfcheck.json
 ```
-
-## Pushing changes
-
-Please checkout out a new branch when working on the project and submit merge requests
-for the proposed changes to the master branch.
 
 ## License: MIT
 

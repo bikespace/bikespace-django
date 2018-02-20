@@ -74,7 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Bicycle_parking.wsgi.application'
 
-REST_FRAMEWORK = {
+REST_FRAMEWORK = { 
     'DEFAULT_THROTTLE_CLASSES': 
     (
         'rest_framework.throttling.AnonRateThrottle',

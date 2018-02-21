@@ -1,31 +1,22 @@
 (function () {
 'use strict';
 
-function __$styleInject(css, ref) {
-  if ( ref === void 0 ) ref = {};
-  var insertAt = ref.insertAt;
-
-  if (!css || typeof document === 'undefined') { return; }
-
+function __$styleInject(css, returnValue) {
+  if (typeof document === 'undefined') {
+    return returnValue;
+  }
+  css = css || '';
   var head = document.head || document.getElementsByTagName('head')[0];
   var style = document.createElement('style');
   style.type = 'text/css';
-
-  if (insertAt === 'top') {
-    if (head.firstChild) {
-      head.insertBefore(style, head.firstChild);
-    } else {
-      head.appendChild(style);
-    }
-  } else {
-    head.appendChild(style);
-  }
-
-  if (style.styleSheet) {
+  head.appendChild(style);
+  
+  if (style.styleSheet){
     style.styleSheet.cssText = css;
   } else {
     style.appendChild(document.createTextNode(css));
   }
+  return returnValue;
 }
 
 const TOKEN = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
@@ -52,12 +43,29 @@ class Dashboard {
                     var el = document.createElement('div');
                     el.className = 'marker';
 
+                    var html = '<div class="summary"><h2>Problems</h2>\
+                                <div id="problems">\
+                                </div>\
+                                <div class="linebreak"></div>\
+                                <h2>Date and time</h2>\
+                                <div class="options third12">\
+                                    <li><em id="date"></em></li>\
+                                </div>\
+                                <div class="options third3">\
+                                    <li><em id="clock"></em></li>\
+                                </div>\
+                                <div class="linebreak"></div>\
+                                <img id="imagePopup" src="/api/pictures/'
+                        + element.photo_uri + '">';
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat([element.longitude, element.latitude])
                         .setPopup(new mapboxgl.Popup({ offset: 25 })
-                        .setHTML('<h3>' + element.survey.report_date + '</h3><img id="imagePopup" src="/api/pictures/'+element.photo_uri + '">'))
+                            .setHTML(html))
                         .addTo(map);
+
+
+
                 });
             });
 

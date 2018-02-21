@@ -27,10 +27,10 @@ body {
 }
 
 .marker {
-    background-image: url('/static/images/mapbox-icon.png');
+    background-image: url('/static/icons/logo.svg');
     background-size: cover;
-    width: 50px;
-    height: 50px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -52,4 +52,19 @@ body {
 #picture{
     height: 46vh;
     width: 81vw;
+}
+.screen1 {
+    padding: 5px 20px 20px 20px;
+    border-radius: 0px;
+    height: 84vh;
+    max-height: 620px;
+    min-height: 510px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width:auto;
+}
+.mapboxgl-popup{
+    max-width: 300px;
+    width: 300px;
 }

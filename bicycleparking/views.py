@@ -38,7 +38,6 @@ def index(request):
 def dashboard(request):
     return render(request, 'bicycleparking/dashboard.html', {})
 
-
 class SurveyAnswerList(generics.ListCreateAPIView):
     queryset = SurveyAnswer.objects.all()
     serializer_class = SurveyAnswerSerializer

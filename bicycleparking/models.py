@@ -66,7 +66,7 @@ class Event(models.Model) :
     """The event table ties the request together. Request information falls into
     three broad categories: information generated from the user, either as input 
     or based on user actions; this information resides in the SurveyAnswer table,
-    linked as the answer field in the Event table/class. Inormation from the
+    linked as the answer field in the Event table/class. Information from the
     second category, information derived from the transaction itself, such as the
     originating IP address and the timestamp of the request, resides in the Event
     table. Finally, information relating the request to an aggregated geographic 

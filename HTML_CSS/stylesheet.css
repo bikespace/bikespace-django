@@ -90,7 +90,7 @@ header{
     z-index: 10;
     padding: 0px 20px 0px 20px;
     width: 375px;
-    margin: -10px auto -55px auto;;
+    margin: -10px auto -55px auto;
     height: 45px;
     background-color: #F24722;
 }
@@ -193,7 +193,7 @@ ul {
     margin-left: -40px;
 }
 
-ul .options {
+.options {
     list-style: none;
     padding: 13px;
     background: #eee;

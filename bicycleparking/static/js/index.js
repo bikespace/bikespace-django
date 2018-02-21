@@ -1,7 +1,6 @@
 import Navigo from 'navigo';
 import questions from './survey-questions';
 import Home from './home';
-import Review from './review';
 import Survey from './survey';
 class Index {
   constructor() {
@@ -25,10 +24,7 @@ class Index {
     this.router.on({
       'survey/:pane': (params, query) => {
         this.renderPane(params, query)
-      }, 'review': (params, query) => {
-        this.renderReview(params, query)
-      },
-      '*': () => {
+      }, '*': () => {
         this.renderHome();
       }
     }).resolve();
@@ -104,10 +100,6 @@ class Index {
     document.getElementById('render').classList.remove("image");
     let pane = parseInt(params.pane);
     this.survey[pane - 1].render();
-  }
-
-  renderReview() {
-    new Review(this).render();
   }
 
   renderHome() {

@@ -23,12 +23,29 @@ class Dashboard {
                     var el = document.createElement('div');
                     el.className = 'marker';
 
+                    var html = '<div class="summary"><h2>Problems</h2>\
+                                <div id="problems">\
+                                </div>\
+                                <div class="linebreak"></div>\
+                                <h2>Date and time</h2>\
+                                <div class="options third12">\
+                                    <li><em id="date"></em></li>\
+                                </div>\
+                                <div class="options third3">\
+                                    <li><em id="clock"></em></li>\
+                                </div>\
+                                <div class="linebreak"></div>\
+                                <img id="imagePopup" src="/api/pictures/'
+                        + element.photo_uri + '">'
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat([element.longitude, element.latitude])
                         .setPopup(new mapboxgl.Popup({ offset: 25 })
-                        .setHTML('<h3>' + element.survey.report_date + '</h3><img id="imagePopup" src="/api/pictures/'+element.photo_uri + '">'))
+                            .setHTML(html))
                         .addTo(map);
+
+
+
                 });
             });
 

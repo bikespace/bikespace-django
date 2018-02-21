@@ -19,9 +19,122 @@ function __$styleInject(css, returnValue) {
   return returnValue;
 }
 
+const contents = {
+  ISSUES: 'ISSUES',
+  PICTURE: 'PICTURE',
+  MAP: 'MAP',
+  HAPPENING: 'HAPPENING',
+  SUMMARY: 'SUMMARY',
+};
+
+const questions = [
+  {
+    questions: [
+      {
+        key: 'problem_type',
+        type: contents.ISSUES,
+        heading: 'What was the issue?',
+        text: 'Choose what applies',
+        required: true,
+        error: 'Choose at least one option',
+        values: [
+          {
+            key: 'absent',
+            text: "Couldn't find bike parking"
+          },
+          {
+            key: 'full',
+            text: "Nearby bike parking is full"
+          },
+          {
+            key: 'damaged',
+            text: "Bike parking is damaged"
+          },
+          {
+            key: 'badly',
+            text: "A bike is badly parked"
+          },
+          {
+            key: 'other',
+            text: "Different problem"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    questions: [
+      {
+        key: 'picture',
+        type: contents.PICTURE,
+        heading: 'Add a photo',
+        text: 'Optional',
+        error: 'Picture is wrong format',
+        required: false,
+      }
+    ]
+  }, {
+    questions: [
+      {
+        key: 'map',
+        type: contents.MAP,
+        heading: 'Where was the problem?',
+        text: 'Pin the location',
+        required: false,
+      }
+    ]
+  }, {
+    questions: [
+      {
+        key: 'happening',
+        type: contents.HAPPENING,
+        heading: 'When did this happen?',
+        subtitle1: 'Date',
+        subtitle2 : 'How long did you need to park?',
+        error: 'Choose an option',
+        required: true,
+        values: [
+          {
+            key: 'minutes',
+            text: "minutes",
+            class: 'half1'
+          },
+          {
+            key: 'hours',
+            text: "hours",
+            class: 'half2'
+          },
+          {
+            key: 'overnight',
+            text: "overnight",
+            class: 'half1'
+          },
+          {
+            key: 'days',
+            text: "days",
+            class: 'half2'
+          }
+        ]
+      }
+    ]
+  }, {
+    questions: [
+      {
+        key: 'summary',
+        type: contents.SUMMARY,
+        heading: 'Summary',
+        required: false,
+        final: true
+
+      }
+    ]
+  },
+];
+
 const TOKEN = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
 
 class Dashboard {
+
     constructor() {
         console.log('Start dashboard ...');
         mapboxgl.accessToken = TOKEN;
@@ -31,6 +144,7 @@ class Dashboard {
             center: [-79.402, 43.663],
             zoom: 12
         });
+        this.questions = questions;
         fetch(`${document.location.origin}/api/survey`, {
             method: 'GET',
             headers: {
@@ -42,9 +156,16 @@ class Dashboard {
                     console.log(element);
                     var el = document.createElement('div');
                     el.className = 'marker';
+                    var questions$$1 = this.questions;
+                    console.log(questions$$1);
+                    var problems = element.survey.problem_type.reduce((memo, value) => {
+                        memo += '<div class="options"><li><em>' + questions$$1[0].questions[0].values.find(entry => entry.key === value).text + '</em></li></div>';
+                        return memo;
+                    }, '');
 
                     var html = '<div class="summary"><h2>Problems</h2>\
-                                <div id="problems">\
+                                <div id="problems">'+
+                                problems + '\
                                 </div>\
                                 <div class="linebreak"></div>\
                                 <h2>Date and time</h2>\
@@ -73,7 +194,6 @@ class Dashboard {
 
     }
 }
-
 new Dashboard();
 
 }());

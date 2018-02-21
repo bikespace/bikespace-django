@@ -1,7 +1,10 @@
 
 const TOKEN = 'pk.eyJ1IjoidGVzc2FsdCIsImEiOiJjajU0ZGk4OTQwZDlxMzNvYWgwZmY4ZjJ2In0.zhNa8fmnHmA0d9WKY1aTjg';
 
+import questions from './survey-questions';
+
 class Dashboard {
+
     constructor() {
         console.log('Start dashboard ...')
         mapboxgl.accessToken = TOKEN
@@ -11,6 +14,7 @@ class Dashboard {
             center: [-79.402, 43.663],
             zoom: 12
         });
+        this.questions = questions;
         fetch(`${document.location.origin}/api/survey`, {
             method: 'GET',
             headers: {
@@ -22,9 +26,16 @@ class Dashboard {
                     console.log(element);
                     var el = document.createElement('div');
                     el.className = 'marker';
+                    var questions = this.questions;
+                    console.log(questions)
+                    var problems = element.survey.problem_type.reduce((memo, value) => {
+                        memo += '<div class="options"><li><em>' + questions[0].questions[0].values.find(entry => entry.key === value).text + '</em></li></div>'
+                        return memo;
+                    }, '');
 
                     var html = '<div class="summary"><h2>Problems</h2>\
-                                <div id="problems">\
+                                <div id="problems">'+
+                                problems + '\
                                 </div>\
                                 <div class="linebreak"></div>\
                                 <h2>Date and time</h2>\
@@ -53,5 +64,4 @@ class Dashboard {
 
     }
 }
-
 new Dashboard();

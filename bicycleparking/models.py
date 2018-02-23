@@ -15,6 +15,9 @@
 # Modified 2017 11 24
 # Purpose  Incorporate de-duped intersection table
 #
+# Modified 2018 02 23
+# Purpose  separate picture file reference into separate table
+#
 # Modified 
 # Purpose   
 #
@@ -40,7 +43,6 @@ class SurveyAnswer(models.Model):
     longitude = models.FloatField()
     survey = JSONField(default=dict)
     comments = models.TextField(default=None, null=True)
-    photo_uri = models.TextField(default=None, null=True)
 
 class Picture (models.Model) :  
     """Contains the definition of a photograph uploaded by the user of the 

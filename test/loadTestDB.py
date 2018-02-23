@@ -1,3 +1,18 @@
+# MIT License
+# Copyright 2017,Code 4 Canada
+# written by and for the bicycle parking project, a joint project of 
+# Civic Tech Toronto, Cycle Toronto, Code 4 Canada, and the 
+# City of Toronto
+#
+# Constructor for a test database. Constructs a standard request recording 
+# database to test programs and functions designed to access records from
+# the request recording data. This permits programmers to test functions against
+# a standard set of request records, which will return a set of expected 
+# results to compare with the actual test output.
+#
+# Modified 
+# Purpose 
+#
 import psycopg2
 import sys
 import xml.etree.ElementTree as ET

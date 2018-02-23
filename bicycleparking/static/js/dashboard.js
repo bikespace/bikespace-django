@@ -29,21 +29,25 @@ class Dashboard {
                     var questions = this.questions;
                     console.log(questions)
                     var problems = element.survey.problem_type.reduce((memo, value) => {
-                        memo += '<div class="options"><li><em>' + questions[0].questions[0].values.find(entry => entry.key === value).text + '</em></li></div>'
+                        value = questions[0].questions[0].values.find(entry => entry.key === value)
+                        if (value) {
+                            memo += '<div class="options"><li><em>' + value.text + '</em></li></div>'
+                        }
                         return memo;
                     }, '');
-
-                    var html = '<div class="summary"><h2>Problems</h2>\
+                    var date = element.survey.happening ? new Date(element.survey.happening[0].date).toLocaleString('en-US', { month: 'long', day: 'numeric' }) : '';
+                    var clock = element.survey.happening ? new Date(element.survey.happening[0].date).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) : '';
+                    var html = '<div class="popup"><h2>Problems</h2>\
                                 <div id="problems">'+
-                                problems + '\
+                        problems + '\
                                 </div>\
                                 <div class="linebreak"></div>\
                                 <h2>Date and time</h2>\
                                 <div class="options third12">\
-                                    <li><em id="date"></em></li>\
+                                    <li><em id="date">'+ date + '</em></li>\
                                 </div>\
                                 <div class="options third3">\
-                                    <li><em id="clock"></em></li>\
+                                    <li><em id="clock">'+ clock + '</em></li>\
                                 </div>\
                                 <div class="linebreak"></div>\
                                 <img id="imagePopup" src="/api/pictures/'

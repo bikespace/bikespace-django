@@ -2,10 +2,6 @@ import psycopg2
 import sys
 import xml.etree.ElementTree as ET
 
-# DB_HOST="bikespaceto.cyyycjt98n81.us-east-1.rds.amazonaws.com"
-# DB_USER="geoiuser"
-# DB_PW="IU328&7t5"
-
 DB_HOST="127.0.0.1"
 DB_USER="postgres"
 DB_PW=""

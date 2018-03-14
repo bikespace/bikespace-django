@@ -61,7 +61,7 @@ a {
 /*___________________________________________________________*/
 
 body {
-    background: url('/static/background_images/yellowbike1920sq.jpg') 100% / cover;
+    background: url('/static/background_images/tobike1920sq.jpg') 100% / cover;
     background-position: center;
     overflow-x: hidden;
     min-height: 100vh;

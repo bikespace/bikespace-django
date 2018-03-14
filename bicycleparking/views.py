@@ -7,6 +7,9 @@
 # Modified 2017 10 28
 # Purpose add geocode to view
 #
+# Modified 2018 02 27
+# Purpose added code to write to separate picture table
+#
 # Modified
 # Purpose
 #
@@ -39,6 +42,10 @@ def dashboard(request):
     return render(request, 'bicycleparking/dashboard.html', {})
 
 class SurveyAnswerList(generics.ListCreateAPIView):
+    """Generates the main table entries from the user's survey input, generates
+    the geographical aggregation data (closest and closest major intersection), 
+    and accesses the survey data to obtain the URI for a picture submitted and
+    stored separately."""
     queryset = SurveyAnswer.objects.all()
     serializer_class = SurveyAnswerSerializer
 
@@ -46,7 +53,11 @@ class SurveyAnswerList(generics.ListCreateAPIView):
         answer = serializer.save()
         geocode = Geocode(answer, ipAddress=self.request.META['REMOTE_ADDR'])
         geocode.output()
-
+        surveyDict = serializer.validated_data ['survey']
+        picId = surveyDict ['picture']
+        if picId != None :
+            pic = Picture (photo_uri = picId, answer = answer)
+            pic.save ()
 
 class DownloadPicture(APIView):
     uploader = Uploader()

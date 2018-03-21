@@ -6,12 +6,11 @@ before_script:
     - apt-get install -y libssl-dev build-essential wget ruby-dev heroku-toolbelt
     - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
     - source /root/.bashrc
-    - nvm install 6.6.0
-    - nvm use 6.6.0
+    - nvm install node
+    - nvm use node
     - node -v
     - npm -v
     - gem install dpl
-    - npm install -g rollup
     - cd bicycleparking && npm install && npm run build && cd ..
 
 services:

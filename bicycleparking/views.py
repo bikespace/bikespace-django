@@ -28,6 +28,7 @@ from rest_framework import status
 
 from bicycleparking.serializers import SurveyAnswerSerializer
 from bicycleparking.models import SurveyAnswer
+from bicycleparking.models import Picture
 from bicycleparking.uploader import Uploader
 from bicycleparking.geocode import Geocode
 
@@ -50,14 +51,14 @@ class SurveyAnswerList(generics.ListCreateAPIView):
     serializer_class = SurveyAnswerSerializer
 
     def perform_create(self, serializer):
+        """Executes the HTTP POST request by creating four objects: the survey
+        answer using the serializer, the aggregate geographic data (Geocode)
+        and event record using the geocode class, and the picture record."""
         answer = serializer.save()
+        pic = Picture (answer = answer, photo_uri = self.request.data ['photo_uri'])
+        pic.save ()
         geocode = Geocode(answer, ipAddress=self.request.META['REMOTE_ADDR'])
-        geocode.output()
-        surveyDict = serializer.validated_data ['survey']
-        picId = surveyDict ['picture']
-        if picId != None :
-            pic = Picture (photo_uri = picId, answer = answer)
-            pic.save ()
+        geocode.output()         
 
 class DownloadPicture(APIView):
     uploader = Uploader()

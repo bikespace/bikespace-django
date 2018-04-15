@@ -25,7 +25,20 @@ export default class Summary extends Content {
         document.getElementById('problems').innerHTML = problems;
         document.getElementById('date').innerHTML = new Date(this.state.happening[0].date).toLocaleString('en-US', { month: 'long', day: 'numeric' })
         document.getElementById('clock').innerHTML = new Date(this.state.happening[0].date).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-
+        if(this.state.picture){            
+            document.getElementById('checkPhoto').classList.remove("off");
+            document.getElementById('checkPhoto').classList.add("on");
+        }else{
+            document.getElementById('checkPhoto').classList.remove("on");
+            document.getElementById('checkPhoto').classList.add("off");
+        }
+        if(this.state.map){
+            document.getElementById('checkMap').classList.remove("off");
+            document.getElementById('checkMap').classList.add("on");
+        }else{
+            document.getElementById('checkMap').classList.remove("on");
+            document.getElementById('checkMap').classList.add("off");
+        }
     }
 
     get template() {
@@ -50,11 +63,11 @@ export default class Summary extends Content {
                 <div>         
                     <div class="options half1">
                         <li><em>Photo</em></li>
-                        <div class="check on"></div>
+                        <div id="checkPhoto" class="check"></div>
                     </div>
                     <div class="options half2">
                         <li><em>Location</em></li>
-                        <div class="check on"></div>
+                        <div id="checkMap" class="check"></div>
                     </div>
                 </div>
             </div>        

@@ -1,6 +1,7 @@
 import Navigo from 'navigo';
 import questions from './survey-questions';
 import Home from './home';
+import Beta from './beta';
 import Survey from './survey';
 class Index {
   constructor() {
@@ -16,6 +17,7 @@ class Index {
       return new Survey(props, this)
     });
     this.home = new Home(this);
+    this.beta = new Beta(this);
     try {
       this.state = localStorage.getItem('survey_state') ? JSON.parse(localStorage.getItem('survey_state')) : {};
     } catch (err) {
@@ -24,6 +26,10 @@ class Index {
     this.router.on({
       'survey/:pane': (params, query) => {
         this.renderPane(params, query)
+      }, 'start': () => {
+        this.renderStart();
+      }, 'beta': () => {
+        this.renderBeta();
       }, '*': () => {
         this.renderHome();
       }
@@ -54,6 +60,7 @@ class Index {
       'survey': this.state
     };
     if (this.state.picture && this.state.picture.name) {
+
       fetch(`${document.location.origin}/api/upload/` + this.state.picture.name, {
         method: 'PUT',
         headers: {
@@ -70,8 +77,9 @@ class Index {
             },
             body: JSON.stringify(body),
           }).then(_ => {
-            this.state.finish = true;
-            this.router.navigate(`/home`)
+            this.router.navigate(`/beta`)
+          }).catch(_ => {
+            this.router.navigate(`/beta`)
           });
         });
 
@@ -84,8 +92,9 @@ class Index {
         },
         body: JSON.stringify(body),
       }).then(_ => {
-        this.state.finish = true;
-        this.router.navigate(`/home`)
+        this.router.navigate(`/beta`)
+      }).catch(_ => {
+        this.router.navigate(`/beta`)
       });
     }
 
@@ -102,6 +111,15 @@ class Index {
     this.survey[pane - 1].render();
   }
 
+  renderStart(){
+    this.survey.state= {}
+    localStorage.removeItem('survey_state')
+    this.router.navigate(`/survey/1`)
+  }
+
+  renderBeta() {
+    this.beta.render();
+  }
   renderHome() {
     this.home.render();
   }

@@ -438,3 +438,13 @@ footer {
     padding-left: 0px;
     padding-top: 5px;
 }
+
+.comments{
+    width: 100%;
+    font-weight: initial;
+    height: 50vh;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-bottom: 3vh;
+    font-size: 4vw;
+}

@@ -11,12 +11,12 @@ export default class Home {
   }
 
   bind() {
-    if (this.survey.state && this.survey.state.finish) {
+    this.state = localStorage.getItem('survey_state') ? JSON.parse(localStorage.getItem('survey_state')) : {};
+    if (this.state && this.state.finish) {
       document.getElementById('finish').classList.remove('hidden');
-      this.survey.state = null;
     }
     document.getElementById('start').addEventListener('click', (event) => {
-      this.survey.router.navigate(`/survey/1`);
+      this.survey.router.navigate(`/start`);
     });
   }
 

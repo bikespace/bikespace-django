@@ -454,11 +454,13 @@ footer {
     height: 100%;
 }
 .comments{
-    width: 100%;
+    width: 90%;
     font-weight: initial;
     height: 50vh;
     padding-left: 4vw;
     padding-right: 4vw;
     padding-bottom: 3vh;
-    font-size: 4vw;
+    margin-right: 5%;
+    margin-left: 5%;
+    background-color: white;
 }

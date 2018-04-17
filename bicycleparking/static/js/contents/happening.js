@@ -1,5 +1,6 @@
 import Content from './content';
-import flatpickr from 'flatpickr';
+
+import flatpickr from "flatpickr";
 
 export default class Happening extends Content {
   constructor() {
@@ -14,6 +15,13 @@ export default class Happening extends Content {
   }
 
   get value() {
+    this.values[0].date = new Date(
+      this.flatpickrdate.latestSelectedDateObj.getFullYear(),
+      this.flatpickrdate.latestSelectedDateObj.getMonth(),
+      this.flatpickrdate.latestSelectedDateObj.getDate(),
+      this.flatpickrtime.latestSelectedDateObj.getHours(),
+      this.flatpickrtime.latestSelectedDateObj.getMinutes(),
+      this.flatpickrtime.latestSelectedDateObj.getSeconds())
     return this.values;
   }
 
@@ -28,11 +36,22 @@ export default class Happening extends Content {
   }
 
   bind() {
+    this.flatpickrdate = flatpickr("#date", {
+      wrap: true, altInput: true,
+      altFormat: "F j, Y",
+      dateFormat: "Y-m-d", defaultDate: new Date(),
+    });
+    this.flatpickrtime = flatpickr("#time", {
+      wrap: true, enableTime: true,
+      noCalendar: true,
+      dateFormat: "h:i K", time_24hr: false, defaultDate: new Date(),
+      onChange: function (selectedDates, dateStr, instance) {
+        console.log(selectedDates)
+      },
+    });
     [...document.getElementsByClassName('check')].forEach(el => {
       el.addEventListener('click', this.onClick.bind(this));
     })
-    document.getElementById('date').innerHTML = this.date.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-    document.getElementById('clock').innerHTML = this.date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
   }
   get template() {
     const options = this.props.values.reduce((memo, value) => {
@@ -48,16 +67,22 @@ export default class Happening extends Content {
     
         <ul>
             <div class="doubleoption">
-                <div class="options">
-                      <li><em id="date"></em></li>
-                      <div class="check calendar"> </div>
-                  </div>
-                  <div class="options">
-                      <li><em id="clock"></em></li>
-                      <div class="check clock"> </div>
-                  </div>
-              </div>
-          </ul> 
+                <div id=date class=options>
+                    <li><em><input type="text" placeholder="Select Date.." data-input></em></li> <!-- input is mandatory -->
+                    <div class="check calendar" data-toggle> </div>
+                    <a class="input-button" title="clear" data-clear>
+                        <i class="icon-close"></i>
+                    </a>
+                </div>
+                <div id=time class=options>
+                    <li><em><input type="text" placeholder="Select Date.." data-input></em></li> <!-- input is mandatory -->
+                    <div class="check clock" data-toggle> </div>
+                    <a class="input-button" title="clear" data-clear>
+                        <i class="icon-close"></i>
+                    </a>
+                </div>          
+            </div>            
+        </ul> 
           <h2>${this.props.subtitle2}</h2>
         <ul>
           ${options}

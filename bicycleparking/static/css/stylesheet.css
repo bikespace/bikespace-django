@@ -272,7 +272,11 @@ footer {
     margin-top: -80px;
     width: 375px;
 }
-
+.remove_button {
+    overflow: hidden;
+    margin: auto;
+    width: 375px;
+}
 .nav {
     margin-top: 0px;
     width: 375px;

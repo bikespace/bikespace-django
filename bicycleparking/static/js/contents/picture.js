@@ -190,15 +190,15 @@ export default class Picture extends Content {
                         <div class="check upload"> </div>
                     </div>
                 </div>
-            </ul>            
+            </ul>
+            <div class="remove_button">
+                <div class="nav">
+                    <div id="buttonRed" class="button red">    
+                        <p><em>Remove photo</em></p>
+                    </div>
+                </div>
+            </div>            
         </div>
-    <footer>
-        <div class="nav">
-            <div id="buttonRed" class="button red">    
-                <p><em>Remove photo</em></p>
-            </div>
-        </div>
-    </footer>
       `
     )
   }

@@ -270,6 +270,15 @@ footer {
     width: 100%;
 }
 
+.remove_button {
+    position: fixed;
+    margin-top: -4vh;
+    width: 100%;
+    bottom: 7vh;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
 .nav {
 }
 .back {
@@ -369,7 +378,7 @@ footer {
     max-height: 100%;
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: 10vh;
     left: 0;
     right: 0;
     margin: auto;

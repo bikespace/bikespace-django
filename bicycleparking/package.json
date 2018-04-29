@@ -5,17 +5,17 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "node node_modules/rollup/bin/rollup -c -w",
-    "build": "node node_modules/rollup/bin/rollup -c"
+    "watch": "rollup -c -w",
+    "build": "rollup -c"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mapbox": "1.0.0-beta9",
-    "navigo": "5.2.0",
-    "@google/maps": "0.4.5",
-    "flatpickr": "4.0.6",
-    "leaflet-search": "2.3.6"
+    "mapbox": "^1.0.0-beta9",
+    "navigo": "^5.2.0",
+    "@google/maps": "^0.4.5",
+    "flatpickr": "^4.0.6",
+    "leaflet-search": "^2.3.6"
   },
   "devDependencies": {
     "babel-plugin-external-helpers": "6.22.0",

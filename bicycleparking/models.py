@@ -51,9 +51,6 @@ class Picture (models.Model) :
     photo_desc = models.TextField(default=None, null=True)
     answer = models.ForeignKey (SurveyAnswer, related_name = 'photo', on_delete = models.PROTECT, default = DEFAULT_LINK)
 
-#    class Meta :
-#        unique_together = ('answer', 'photo_uri')
-
 class Area (models.Model) :
     """Area of the parking request identified by the closest intersection and the
     closest major intersection. For the sake of consistency in defining areas, the
@@ -82,6 +79,14 @@ class Event(models.Model) :
     answer = models.ForeignKey (SurveyAnswer, on_delete = models.PROTECT, default = DEFAULT_LINK)
     timeOf = models.DateTimeField (auto_now_add = True)
     distance = models.BigIntegerField (blank = True, null = True)
+
+class Approval (models.Model) :
+    """The entries in this table link to events approved for display or release 
+    to the general public by a moderator."""
+
+    timeOfApproval = models.DateTimeField (auto_now_add = True)
+    moderatorId = models.TextField(default=None, null=True)
+    approved = models.ForeignKey (Event, on_delete = models.PROTECT, default = DEFAULT_LINK)
 
 # other database tables NOT managed by django -- not managed = false setting
 # do not change managed = false unless the databases have changed completely;

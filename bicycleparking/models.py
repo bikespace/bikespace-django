@@ -49,7 +49,7 @@ class Picture (models.Model) :
        selected parking problem."""
     photo_uri = models.TextField(default=None, null=True)
     photo_desc = models.TextField(default=None, null=True)
-    answer = models.ForeignKey (SurveyAnswer, related_name = 'photo', on_delete = models.PROTECT, default = DEFAULT_LINK)
+    answer = models.ForeignKey (SurveyAnswer, on_delete = models.PROTECT, default = DEFAULT_LINK)
 
 class Area (models.Model) :
     """Area of the parking request identified by the closest intersection and the

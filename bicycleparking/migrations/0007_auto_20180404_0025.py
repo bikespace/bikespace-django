@@ -18,8 +18,4 @@ class Migration(migrations.Migration):
             name='answer',
             field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, related_name='photo', to='bicycleparking.SurveyAnswer'),
         ),
-        migrations.AlterUniqueTogether(
-            name='picture',
-            unique_together=set([('answer', 'photo_uri')]),
-        ),
     ]

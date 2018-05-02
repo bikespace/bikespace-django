@@ -22,8 +22,4 @@ class Migration(migrations.Migration):
                 ('approved', models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='bicycleparking.Event')),
             ],
         ),
-        migrations.AlterUniqueTogether(
-            name='picture',
-            unique_together=set([]),
-        ),
     ]

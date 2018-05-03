@@ -10,6 +10,9 @@
 # Modified 2018 02 27
 # Purpose added code to write to separate picture table
 #
+# Modified 2018 05 03
+# Purpose added endpoint to handle beta user comment submission
+#
 # Modified
 # Purpose
 #
@@ -27,8 +30,10 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from bicycleparking.serializers import SurveyAnswerSerializer
+from bicycleparking.serializers import BetaCommentSerializer
 from bicycleparking.models import SurveyAnswer
 from bicycleparking.models import Picture
+from bicycleparking.models import BetaComments
 from bicycleparking.uploader import Uploader
 from bicycleparking.geocode import Geocode
 
@@ -58,6 +63,20 @@ class SurveyAnswerList(generics.ListCreateAPIView):
         pic.save ()
         geocode = Geocode(answer, ipAddress=self.request.META['REMOTE_ADDR'])
         geocode.output()         
+
+class BetaCommentList(generics.ListCreateAPIView):
+    """Generates the main table entries from the user's survey input, generates
+    the geographical aggregation data (closest and closest major intersection), 
+    and accesses the survey data to obtain the URI for a picture submitted and
+    stored separately."""
+    queryset = BetaComments.objects.all()
+    serializer_class = BetaCommentSerializer
+
+    def perform_create(self, serializer):
+        """Executes the HTTP POST request by creating four objects: the survey
+        answer using the serializer, the aggregate geographic data (Geocode)
+        and event record using the geocode class, and the picture record."""
+        serializer.save()
 
 class DownloadPicture(APIView):
     uploader = Uploader()

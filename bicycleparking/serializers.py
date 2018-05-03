@@ -8,3 +8,9 @@ class SurveyAnswerSerializer (serializers.ModelSerializer) :
     class Meta:
         model = SurveyAnswer
         fields = ('latitude', 'longitude', 'survey')
+
+class BetaCommentSerializer (serializers.ModelSerializer) :
+    
+    class Meta:
+        model = SurveyAnswer
+        fields = ('latitude', 'longitude', 'survey')

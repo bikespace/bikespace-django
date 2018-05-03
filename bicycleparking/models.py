@@ -18,6 +18,9 @@
 # Modified 2018 02 23
 # Purpose  separate picture file reference into separate table
 #
+# Modified 2018 05 03 
+# Purpose  added beta user comment table
+#
 # Modified 
 # Purpose   
 #

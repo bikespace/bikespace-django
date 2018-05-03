@@ -34,7 +34,6 @@ from bicycleparking.geocode import Geocode
 
 # Create your views here.
 
-
 def index(request):
     return render(request, 'bicycleparking/home.html', {})
 

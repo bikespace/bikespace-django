@@ -88,6 +88,11 @@ class Approval (models.Model) :
     moderatorId = models.TextField(default=None, null=True)
     approved = models.ForeignKey (Event, on_delete = models.PROTECT, default = DEFAULT_LINK)
 
+class BetaComments (models.Model) :
+    """Contain comments made by users of the beta version -- delete after beta completed."""
+
+    comment = models.TextField (default = none, null = True)
+
 # other database tables NOT managed by django -- not managed = false setting
 # do not change managed = false unless the databases have changed completely;
 # this may erase or corrupt the geographic resource tables, then the program

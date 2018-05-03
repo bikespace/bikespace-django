@@ -99,5 +99,7 @@ class UploadPicture(APIView):
 
     def put(self, request, filename, format=None):
         file_obj = request.data['file']
-        content = {'s3_name': self.uploader.toS3(filename, file_obj)}
+        # dummy for test run -- remove before push
+        # content = {'s3_name': self.uploader.toS3(filename, file_obj)}
+        content = {'s3_name': 'dummy/dummyfile'}
         return Response(content)

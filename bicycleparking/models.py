@@ -94,7 +94,7 @@ class Approval (models.Model) :
 class BetaComments (models.Model) :
     """Contain comments made by users of the beta version -- delete after beta completed."""
 
-    comment = models.TextField (default = none, null = True)
+    comment = models.TextField (default = None, null = True)
 
 # other database tables NOT managed by django -- not managed = false setting
 # do not change managed = false unless the databases have changed completely;

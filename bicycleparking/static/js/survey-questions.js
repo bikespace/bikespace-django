@@ -7,29 +7,37 @@ const questions = [
         key: 'problem_type',
         type: contents.ISSUES,
         heading: 'What was the issue?',
-        text: 'Choose what applies',
+        text: 'Choose whichever applies',
         required: true,
         error: 'Choose at least one option',
         values: [
           {
             key: 'absent',
-            text: "Couldn't find bike parking"
+            text: "No bike parking nearby"
           },
           {
             key: 'full',
             text: "Nearby bike parking is full"
           },
           {
-            key: 'damaged',
-            text: "Bike parking is damaged"
+            key: 'broken',
+            text: "Bike parking is broken"
           },
           {
-            key: 'badly',
-            text: "A bike is badly parked"
+            key: 'unusable',
+            text: "Bike parking is inaccessible or unusable"
           },
           {
-            key: 'other',
-            text: "Different problem"
+            key: 'abandoned',
+            text: "Report an abandoned bike"
+          },
+          {
+            key: 'vandalized',
+            text: "My bike was vandalized"
+          },
+          {
+            key: 'stolen',
+            text: "My bike was stolen"
           }
         ]
       }
@@ -68,23 +76,23 @@ const questions = [
         required: true,
         values: [
           {
-            key: 'minutes',
-            text: "minutes",
+            key: '>1hour',
+            text: "Less than 1 hour",
             class: 'half1'
           },
           {
-            key: 'hours',
-            text: "hours",
+            key: '1-2hours',
+            text: "1 to 2 hours",
             class: 'half2'
           },
           {
-            key: 'overnight',
-            text: "overnight",
+            key: '4-8hours',
+            text: "4 to 8 hours",
             class: 'half1'
           },
           {
-            key: 'days',
-            text: "days",
+            key: 'overnight+',
+            text: "Overnight or longer",
             class: 'half2'
           }
         ]

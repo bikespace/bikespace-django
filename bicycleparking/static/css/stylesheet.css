@@ -6,7 +6,7 @@
 @font-face {
     font-family: 'opensans';
     src: url('/static/Open_Sans/OpenSans-Regular.ttf');
-    font-weight: normal;
+    font-weight: thin;
     font-style: normal;
 }
 @font-face {
@@ -18,8 +18,7 @@
 @font-face {
     font-family: 'opensans';
     src: url('/static/Open_Sans/OpenSans-SemiBold.ttf');
-    font-weight: normal;
-    font-style: italic;
+    font-style: normal;
 }
 strong {
     font-family: 'opensans';
@@ -27,9 +26,7 @@ strong {
 }
 em {
     font-family: 'opensans';
-    font-weight: normal;
-    font-style: italic;
-    font-size: 1.1rem;
+    font-size: 1em;
 }
 
 h1 {
@@ -196,7 +193,7 @@ ul {
 .options {
     list-style: none;
     padding: 13px;
-    background: #eee;
+    background: #ddd;
     height: 24px;
     border-radius: 30px;
     margin-bottom: 20px;
@@ -205,6 +202,7 @@ ul {
 .options li {
     width: 80%;
     padding-left: 10px;
+    font-size: 1.1em;
 }
 
 .doubleoption {
@@ -213,7 +211,7 @@ ul {
 
 .doubleoption .options{
     background-color: #fff;
-    box-shadow:0px 0px 0px 2px #ddd inset;
+    box-shadow:0px 0px 0px 2px #ccc inset;
 }
 
 .cameraButton{
@@ -269,16 +267,11 @@ ul {
 footer {
     overflow: hidden;
     margin: auto;
-    margin-top: -80px;
     width: 375px;
 }
-.remove_button {
-    overflow: hidden;
-    margin: auto;
-    width: 375px;
-}
+
 .nav {
-    margin-top: 0px;
+    margin-top: -80px;
     width: 375px;
     position: absolute;
 }
@@ -347,9 +340,6 @@ footer {
     size: 2vh;
 }
 .summary{
-    border: 2px solid #ccc;
-    border-radius: 25px;
-    border-radius: 2%;
     margin: 2%;
     height: 60vh;
 }
@@ -367,6 +357,7 @@ footer {
 .hiddenPicture{
     opacity: 0 !important;
     height: 0 !important;
+    display: none;
 }
 .imagepreview {
     min-height: 255px;
@@ -393,26 +384,45 @@ footer {
     min-height: 320px;
     height: 54vh;
     max-height: 400px;
-    background-color: #eee;
+    background-color: #ddd;
 }
 
 /*___________________________________________________________*/
 
+input{
+    width: 100%;
+    font-size: 1.1em;
+    padding: 13px 13px 13px 23px;
+    background: #ddd;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    border: none;
+    font-style: normal;
+    font-size: 1.1em;
+    background-color: #fff;
+    box-shadow:0px 0px 0px 2px #ccc inset;
+    
+}
+
 .calendar {
+    position: absolute;
     background: url(/static/icons/calendar.svg) no-repeat;
     background-size: 24px;
     width: 24px;
     height: 24px;
-    padding-right: 6px;
-    margin-top: -24px;
+    margin-top: -57px;
+    margin-left: 332px;
+    cursor: pointer
 }
 .clock {
+    position: absolute;
     background: url(/static/icons/clock.svg) no-repeat;
     background-size: 24px;
     width: 24px;
     height: 24px;
-    padding-right: 6px;
-    margin-top: -23px;
+    margin-top: -57px;
+    margin-left: 332px;
+    cursor: pointer
 }
 .half1 {
     width: 150px;

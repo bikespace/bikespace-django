@@ -66,23 +66,21 @@ export default class Happening extends Content {
         <h2>${this.props.subtitle1}</h2>
     
         <ul>
-            <div class="doubleoption">
-                <div id=date class=options>
-                    <li><em><input type="text" placeholder="Select Date.." data-input></em></li> <!-- input is mandatory -->
-                    <div class="check calendar" data-toggle> </div>
-                    <a class="input-button" title="clear" data-clear>
-                        <i class="icon-close"></i>
-                    </a>
+            <div id=date>
+                <div class="holder">
+                    <input type="text" placeholder="Select Date.." data-input>
+                    <div class="calendar" data-toggle></div>
                 </div>
-                <div id=time class=options>
-                    <li><em><input type="text" placeholder="Select Date.." data-input></em></li> <!-- input is mandatory -->
-                    <div class="check clock" data-toggle> </div>
-                    <a class="input-button" title="clear" data-clear>
-                        <i class="icon-close"></i>
-                    </a>
-                </div>          
-            </div>            
-        </ul> 
+            </div>
+                
+            <div id=time>
+                <div class="holder">
+                    <input type="text" placeholder="Select Date.." data-input>
+                    <div class="clock" data-toggle></div>
+                </div>
+            </div>          
+        </ul>
+
           <h2>${this.props.subtitle2}</h2>
         <ul>
           ${options}

@@ -65,10 +65,9 @@ class SurveyAnswerList(generics.ListCreateAPIView):
         geocode.output()         
 
 class BetaCommentList(generics.ListCreateAPIView):
-    """Generates the main table entries from the user's survey input, generates
-    the geographical aggregation data (closest and closest major intersection), 
-    and accesses the survey data to obtain the URI for a picture submitted and
-    stored separately."""
+    """Generic comments section for the beta release of the application.
+    Users can submit any comments about the application.
+    """
     queryset = BetaComments.objects.all()
     serializer_class = BetaCommentSerializer
 
@@ -99,7 +98,5 @@ class UploadPicture(APIView):
 
     def put(self, request, filename, format=None):
         file_obj = request.data['file']
-        # dummy for test run -- remove before push
-        # content = {'s3_name': self.uploader.toS3(filename, file_obj)}
-        content = {'s3_name': 'dummy/dummyfile'}
+        content = {'s3_name': self.uploader.toS3(filename, file_obj)}
         return Response(content)

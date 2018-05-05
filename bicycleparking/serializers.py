@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.postgres.fields import JSONField
 from bicycleparking.models import SurveyAnswer
 from bicycleparking.models import Picture
+from bicycleparking.models import BetaComments
 
 class SurveyAnswerSerializer (serializers.ModelSerializer) :
 
@@ -12,5 +13,5 @@ class SurveyAnswerSerializer (serializers.ModelSerializer) :
 class BetaCommentSerializer (serializers.ModelSerializer) :
     
     class Meta:
-        model = SurveyAnswer
-        fields = ('latitude', 'longitude', 'survey')
+        model = BetaComments
+        fields = ("comment",)

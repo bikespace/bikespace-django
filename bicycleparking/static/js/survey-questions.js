@@ -25,20 +25,12 @@ const questions = [
           },
           {
             key: 'unusable',
-            text: "Bike parking is inaccessible or unusable"
+            text: "Bike parking is unusable"
           },
           {
             key: 'abandoned',
-            text: "Report an abandoned bike"
+            text: "There's an abandoned bike"
           },
-          {
-            key: 'vandalized',
-            text: "My bike was vandalized"
-          },
-          {
-            key: 'stolen',
-            text: "My bike was stolen"
-          }
         ]
       }
     ]
@@ -77,22 +69,22 @@ const questions = [
         values: [
           {
             key: '>1hour',
-            text: "Less than 1 hour",
+            text: "< 1 hour",
             class: 'half1'
           },
           {
             key: '1-2hours',
-            text: "1 to 2 hours",
+            text: "1 - 2 hrs",
             class: 'half2'
           },
           {
             key: '4-8hours',
-            text: "4 to 8 hours",
+            text: "4 - 8 hrs",
             class: 'half1'
           },
           {
             key: 'overnight+',
-            text: "Overnight or longer",
+            text: "Overnight",
             class: 'half2'
           }
         ]

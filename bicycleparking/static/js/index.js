@@ -36,6 +36,10 @@ class Index {
     }).resolve();
   }
 
+  locationAcquired(position) {
+    localStorage.setItem('my_localisation', JSON.stringify({ lat: position.coords.latitude, lng: position.coords.longitude }));
+  }
+
   back() {
     const back = parseInt(this.router.lastRouteResolved().params.pane, 10) - 1;
     if (back < 1) {
@@ -111,8 +115,8 @@ class Index {
     this.survey[pane - 1].render();
   }
 
-  renderStart(){
-    this.survey.state= {}
+  renderStart() {
+    this.survey.state = {}
     localStorage.removeItem('survey_state')
     this.router.navigate(`/survey/1`)
   }
@@ -121,6 +125,11 @@ class Index {
     this.beta.render();
   }
   renderHome() {
+    if ('geolocation' in navigator) {
+      this.watchId = navigator.geolocation.watchPosition(this.locationAcquired);
+      console.log(this.watchId);
+    }
+
     this.home.render();
   }
 }

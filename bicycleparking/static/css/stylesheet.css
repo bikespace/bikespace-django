@@ -5,19 +5,19 @@
 }
 @font-face {
     font-family: 'opensans';
-    src: url('/static/Open_Sans/OpenSans-Regular.ttf');
+    src: url('../Open_Sans/OpenSans-Regular.ttf');
     font-weight: thin;
     font-style: normal;
 }
 @font-face {
     font-family: 'opensans';
-    src: url('/static/Open_Sans/OpenSans-Bold.ttf');
+    src: url('../Open_Sans/OpenSans-Bold.ttf');
     font-weight: bold;
     font-style: normal;
 }
 @font-face {
     font-family: 'opensans';
-    src: url('/static/Open_Sans/OpenSans-SemiBold.ttf');
+    src: url('../Open_Sans/OpenSans-SemiBold.ttf');
     font-style: normal;
 }
 strong {
@@ -58,7 +58,7 @@ a {
 /*___________________________________________________________*/
 
 body {
-    background: url('/static/background_images/tobike1920sq.jpg') 100% / cover;
+    background: url('../background_images/tobike1920sq.jpg') 100% / cover;
     background-position: center;
     overflow-x: hidden;
     min-height: 100vh;
@@ -74,7 +74,7 @@ header{
 }
 
 .title {
-    background: url(/static/icons/bikespace_header.svg) no-repeat;
+    background: url('../icons/bikespace_header.svg') no-repeat;
     background-position: center;
     background-size: 150px;
     height: 45px;
@@ -150,7 +150,7 @@ header{
     max-height: 300px;
     width: 100%;
     opacity: 1;
-    background: url(/static/icons/logo_main.svg) no-repeat;
+    background: url('../icons/logo_main.svg') no-repeat;
     background-size: 200px 200px;
     background-position:center
 }
@@ -227,7 +227,7 @@ ul {
 }
 
 .on{
-    background: url(/static/icons/check_on.svg) no-repeat center;
+    background: url('../icons/check_on.svg') no-repeat center;
     shape-rendering: geometricPrecision;
     width: 32px;
     margin-top: -28px;
@@ -236,7 +236,7 @@ ul {
 }
 
 .off{
-    background: url(/static/icons/check_off.svg) no-repeat center;
+    background: url('../icons/check_off.svg') no-repeat center;
     shape-rendering: geometricPrecision;
     width: 32px;
     margin-top: -28px;
@@ -245,7 +245,7 @@ ul {
 }
 
 .camera{
-    background: url(/static/icons/camera.svg) no-repeat;
+    background: url('../icons/camera.svg') no-repeat;
     background-size: 28px;
     width:28px;
     height: 28px;
@@ -254,7 +254,7 @@ ul {
 }
 
 .upload{
-    background: url(/static/icons/upload.svg) no-repeat;
+    background: url('../icons/upload.svg') no-repeat;
     background-size: 24px;
     width: 24px;
     height: 24px;
@@ -406,7 +406,7 @@ input{
 
 .calendar {
     position: absolute;
-    background: url(/static/icons/calendar.svg) no-repeat;
+    background: url('../icons/calendar.svg') no-repeat;
     background-size: 24px;
     width: 24px;
     height: 24px;
@@ -416,7 +416,7 @@ input{
 }
 .clock {
     position: absolute;
-    background: url(/static/icons/clock.svg) no-repeat;
+    background: url('../icons/clock.svg') no-repeat;
     background-size: 24px;
     width: 24px;
     height: 24px;
@@ -435,7 +435,7 @@ input{
 .success {
     height: 120px;
     background-color: #31C057bb;
-    background-image: url(/static/icons/success.svg);
+    background-image: url('../icons/success.svg');
     background-position: center 62px; 
     background-repeat: no-repeat;
     background-size: 45px;

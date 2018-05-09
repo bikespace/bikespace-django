@@ -27,7 +27,7 @@ body {
 }
 
 .marker {
-    background-image: url('/static/icons/logo.svg');
+    background-image: url('../icons/logo.svg');
     background-size: cover;
     width: 32px;
     height: 32px;

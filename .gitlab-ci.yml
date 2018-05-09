@@ -39,6 +39,6 @@ staging:
 production:
   type: deploy
   script:
-  - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key=$AWS_SECRET_ACCESS_KEY --app="bikespace" --env="bikespace-env" --region="us-east-1"
+  - dpl --provider=elasticbeanstalk --access-key-id="$AWS_ACCESS_KEY_ID" --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-env" --region="us-east-1"
   only:
   - tags

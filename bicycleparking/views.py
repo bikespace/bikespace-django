@@ -98,5 +98,10 @@ class UploadPicture(APIView):
 
     def put(self, request, filename, format=None):
         file_obj = request.data['file']
-        content = {'s3_name': self.uploader.toS3(filename, file_obj)}
+        ipAddress = request.META['REMOTE_ADDR']
+        print ("upload source address = {0}".format (ipAddress))
+        if ipAddress != "127.0.0.1" :
+           content = {'s3_name': self.uploader.toS3(filename, file_obj)}
+        else :
+            content = { 's3_name' : 'test/picture'}
         return Response(content)

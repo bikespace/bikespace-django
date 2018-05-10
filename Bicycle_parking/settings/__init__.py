@@ -22,8 +22,7 @@ base_settings = [
     'environments/%s.py' % ENV,
 
     # Optionally override some settings:
-    optional('environments/local.py'),
+    #optional('environments/local.py'),
 ]
-
 # Include settings:
 include(*base_settings)

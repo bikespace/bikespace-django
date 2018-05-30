@@ -1,28 +1,26 @@
-{% load staticfiles %}
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>BikeSpace - Home</title>
-    <!--link rel="manifest" href="/static/manifest.json"-->
-    <link rel="manifest" href="{% static 'manifest.json' %}"/>
+    <link rel="manifest" href="manifest.json">
 
-    <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="{% static 'css/stylesheet.css' %}" />
-    <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="{% static 'css/mobilesheet.css' %}" />
-    <link type="text/css" rel="stylesheet" href="{% static 'css/flatpickr.min.css' %}" />
-    <link type="text/css" rel="stylesheet" href="{% static 'css/leaflet.css' %} " />
-    <link type="text/css" rel="stylesheet" href="{% static 'css/leaflet-search.css' %}" />
+    <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="style/stylesheet.css" />
+    <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="style/mobilesheet.css" />
+    <link type="text/css" rel="stylesheet" href="style/flatpickr.min.css" />
+    <link type="text/css" rel="stylesheet" href="style/leaflet.css" />
+    <link type="text/css" rel="stylesheet" href="style/leaflet-search.css" />
 
 
     <!--favicon-->
-    <link rel="icon" type="image/png" href="{% static 'icons/bikespace32.png' %}" sizes="32x32" />
-    <link rel="icon" type="image/png" href="{% static 'icons/bikespace16.png' %}" />
+    <link rel="icon" type="image/png" href="assets/icons/bikespace32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="assets/icons/bikespace16.png" />
 
     <!-- META Tags -->
     <meta property="og:title" content="Bikespace">
     <meta property="og:description" content="Report bike parking issues in Toronto.">
-    <meta property="og:image" content="{% static 'icons/media_thumb1.jpg' %}">
+    <meta property="og:image" content="assets/icons/media_thumb1.jpg">
     <meta name="twitter:card" content="summary_large_image">
 
     <meta property="og:site_name" content="BikeSpace visual prototype">
@@ -37,12 +35,12 @@
     </script>
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
-        w[l] = w[l] || []; w[l].push({
-            'gtm.start':
-                new Date().getTime(), event: 'gtm.js'        
-}); var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-W63KRL3');</script>
     <!-- End Google Tag Manager -->
 </head>
@@ -53,19 +51,18 @@
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W63KRL3" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <div id="render" class="backbike">
 
-<div id="render" class="backbike"></div>
+    </div>
+
 </body>
-
-<script src="{% static 'main.js' %}"></script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3HcEXo5I-XxTyZPf34c6gTw20zBWFiNg">
 </script>
-
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
-            .register('/static/sw.js')
+            .register('sw.js')
             .then(function () { console.log('Service Worker Registered'); });
     }
 </script>

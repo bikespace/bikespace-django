@@ -12,19 +12,19 @@
 }
 @font-face {
     font-family: 'opensans';
-    src: url('/static/Open_Sans/OpenSans-Regular.ttf');
+    src: url('assets/Open_Sans/OpenSans-Regular.ttf');
     font-weight: thin;
     font-style: normal;
 }
 @font-face {
     font-family: 'opensans';
-    src: url('/static/Open_Sans/OpenSans-Bold.ttf');
+    src: url('assets/Open_Sans/OpenSans-Bold.ttf');
     font-weight: bold;
     font-style: normal;
 }
 @font-face {
     font-family: 'opensans';
-    src: url('/static/Open_Sans/OpenSans-SemiBold.ttf');
+    src: url('assets/Open_Sans/OpenSans-SemiBold.ttf');
     font-weight: normal;
 }
 strong {
@@ -74,7 +74,7 @@ a {
 /*___________________________________________________________*/
 
 body {
-    background: url('/static/background_images/tobike1920sq.jpg') 100% / cover;
+    background: url('assets/background_images/tobike1920sq.jpg') 100% / cover;
     background-position: center;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -92,7 +92,7 @@ header{
 }
 
 .title {
-    background: url(/static/icons/bikespace_header.svg) no-repeat center center;
+    background: url(assets/icons/bikespace_header.svg) no-repeat center center;
     background-size: 30vh;
     height: 10vh;
     margin: auto;
@@ -167,7 +167,7 @@ header{
 
 .logo {
     height: 80vw;
-    background: url(/static/icons/logo_main.svg) no-repeat;
+    background: url(assets/icons/logo_main.svg) no-repeat;
     background-size: calc(30vw + 10vh);
     background-position:center
 }
@@ -224,7 +224,7 @@ header{
 }
 
 .on{
-    background: url(/static/icons/check_on.svg) no-repeat;
+    background: url(assets/icons/check_on.svg) no-repeat;
     background-size: 7vw;
     width:7vw;
     height: 7vw;
@@ -233,7 +233,7 @@ header{
 }
 
 .off{
-    background: url(/static/icons/check_off.svg) no-repeat;
+    background: url(assets/icons/check_off.svg) no-repeat;
     background-size: 7vw;
     width:7vw;
     height: 7vw;
@@ -242,7 +242,7 @@ header{
 }
 
 .camera{
-    background: url(/static/icons/camera.svg) no-repeat;
+    background: url(assets/icons/camera.svg) no-repeat;
     background-size: 6vw;
     width:7vw;
     height: 7vw;
@@ -251,7 +251,7 @@ header{
 }
 
 .upload{
-    background: url(/static/icons/upload.svg) no-repeat;
+    background: url(assets/icons/upload.svg) no-repeat;
     background-size: 5vw;
     width:7vw;
     height: 7vw;
@@ -422,9 +422,11 @@ input{
     margin-right: 2vh;
     margin-bottom: 2vh;
 }
-
+#dst-cvs{
+    display: none;
+}
 .calendar {
-    background: url(/static/icons/calendar.svg) no-repeat;
+    background: url(assets/icons/calendar.svg) no-repeat;
     background-size: 5vw;
     width:5vw;
     height: 5vw;
@@ -435,7 +437,7 @@ input{
 }
 
 .clock {
-    background: url(/static/icons/clock.svg) no-repeat;
+    background: url(assets/icons/clock.svg) no-repeat;
     background-size: 5vw;
     width:5vw;
     height: 5vw;
@@ -474,7 +476,7 @@ input{
     height: 12vh;
     width: 70vw;
     background-color: #31C057bb;
-    background-image: url(/static/icons/success.svg);
+    background-image: url(assets/icons/success.svg);
     background-position: center 6vh; 
     background-repeat: no-repeat;
     background-size: 5vh;

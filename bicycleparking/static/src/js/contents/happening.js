@@ -81,7 +81,7 @@ export default class Happening extends Content {
             </div>          
         </ul>
 
-          <h2>${this.props.subtitle2}</h2>
+        <h2>${this.props.subtitle2}</h2>
         <ul>
           ${options}
         </ul>

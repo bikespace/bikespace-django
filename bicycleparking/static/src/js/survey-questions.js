@@ -7,30 +7,30 @@ const questions = [
         key: 'problem_type',
         type: contents.ISSUES,
         heading: 'What was the issue?',
-        text: 'Choose whichever applies',
+        text: 'Choose what applies',
         required: true,
         error: 'Choose at least one option',
         values: [
           {
             key: 'absent',
-            text: "No bike parking nearby"
+            text: "Couldn't find bike parking"
           },
           {
             key: 'full',
             text: "Nearby bike parking is full"
           },
           {
-            key: 'broken',
-            text: "Bike parking is broken"
+            key: 'damaged',
+            text: "Bike parking is damaged"
           },
           {
-            key: 'unusable',
-            text: "Bike parking is unusable"
+            key: 'badly',
+            text: "A bike is badly parked"
           },
           {
-            key: 'abandoned',
-            text: "There's an abandoned bike"
-          },
+            key: 'other',
+            text: "Different problem"
+          }
         ]
       }
     ]
@@ -68,23 +68,23 @@ const questions = [
         required: true,
         values: [
           {
-            key: '>1hour',
-            text: "< 1 hour",
+            key: 'minutes',
+            text: "minutes",
             class: 'half1'
           },
           {
-            key: '1-2hours',
-            text: "1 - 2 hrs",
+            key: 'hours',
+            text: "hours",
             class: 'half2'
           },
           {
-            key: '4-8hours',
-            text: "4 - 8 hrs",
+            key: 'overnight',
+            text: "overnight",
             class: 'half1'
           },
           {
-            key: 'overnight+',
-            text: "Overnight",
+            key: 'days',
+            text: "days",
             class: 'half2'
           }
         ]

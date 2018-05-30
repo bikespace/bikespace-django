@@ -3,7 +3,9 @@ import questions from './survey-questions';
 import Home from './home';
 import Beta from './beta';
 import Survey from './survey';
+
 class Index {
+
   constructor() {
     this.survey = {};
     this.router = new Navigo('/', true);
@@ -129,7 +131,6 @@ class Index {
       this.watchId = navigator.geolocation.watchPosition(this.locationAcquired);
       console.log(this.watchId);
     }
-
     this.home.render();
   }
 }

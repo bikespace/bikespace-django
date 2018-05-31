@@ -40,7 +40,7 @@ from bicycleparking.geocode import Geocode
 # Create your views here.
 
 def index(request):
-    return render(request, 'bicycleparking/home.html', {})
+    return render(request, 'bicycleparking/index.html', {})
 
 
 def dashboard(request):

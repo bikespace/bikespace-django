@@ -66,7 +66,6 @@ class Index {
       'survey': this.state
     };
     if (this.state.picture) {
-      console.log("UPLOAD YO");
       fetch(`${document.location.origin}/api/upload/pictures`, {
         method: 'PUT',
         headers: {

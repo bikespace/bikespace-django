@@ -6,21 +6,21 @@
     <title>BikeSpace - Home</title>
     <link rel="manifest" href="manifest.json">
 
-    <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/static/style/stylesheet.css" />
-    <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/static/style/mobilesheet.css" />
-    <link type="text/css" rel="stylesheet" href="/static/style/flatpickr.min.css" />
-    <link type="text/css" rel="stylesheet" href="/static/style/leaflet.css" />
-    <link type="text/css" rel="stylesheet" href="/static/style/leaflet-search.css" />
+    <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="style/stylesheet.css" />
+    <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="style/mobilesheet.css" />
+    <link type="text/css" rel="stylesheet" href="style/flatpickr.min.css" />
+    <link type="text/css" rel="stylesheet" href="style/leaflet.css" />
+    <link type="text/css" rel="stylesheet" href="style/leaflet-search.css" />
 
 
     <!--favicon-->
-    <link rel="icon" type="image/png" href="/static/assets/icons/bikespace32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/static/assets/icons/bikespace16.png" />
+    <link rel="icon" type="image/png" href="assets/icons/bikespace32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="assets/icons/bikespace16.png" />
 
     <!-- META Tags -->
     <meta property="og:title" content="Bikespace">
     <meta property="og:description" content="Report bike parking issues in Toronto.">
-    <meta property="og:image" content="/static/assets/icons/media_thumb1.jpg">
+    <meta property="og:image" content="assets/icons/media_thumb1.jpg">
     <meta name="twitter:card" content="summary_large_image">
 
     <meta property="og:site_name" content="BikeSpace visual prototype">
@@ -30,7 +30,9 @@
         crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
         crossorigin=""></script>
-
+    <script>
+        window.ASSETS_PATH = '{% static images%}'; // for leaflet and leaflet-search
+    </script>
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
@@ -53,9 +55,16 @@
 
     </div>
 
-<script type="text/javascript" src="/static/bundle.js"></script></body>
+<script type="text/javascript" src="./bundle.js"></script></body>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3HcEXo5I-XxTyZPf34c6gTw20zBWFiNg">
+</script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+            .register('sw.js')
+            .then(function () { console.log('Service Worker Registered'); });
+    }
 </script>
 
 </html>

@@ -57,5 +57,12 @@
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3HcEXo5I-XxTyZPf34c6gTw20zBWFiNg">
 </script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+            .register('sw.js')
+            .then(function () { console.log('Service Worker Registered'); });
+    }
+</script>
 
 </html>

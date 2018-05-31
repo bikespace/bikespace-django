@@ -1,0 +1,514 @@
+*{
+    font-family:'opensans';
+    font-weight: normal;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+@font-face {
+    font-family: 'opensans';
+    src: url('assets/Open_Sans/OpenSans-Regular.ttf');
+    font-weight: thin;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'opensans';
+    src: url('assets/Open_Sans/OpenSans-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'opensans';
+    src: url('assets/Open_Sans/OpenSans-SemiBold.ttf');
+    font-weight: normal;
+}
+strong {
+    font-family: 'opensans';
+    font-weight: bold;
+}
+em {
+    font-family: 'opensans';
+    font-size: 5vw;
+}
+
+h1 {
+    font-weight: bold;
+    height: 4vh;
+    padding-left: 4vw;
+    padding-bottom: 3vh;
+    font-size: 6vw;
+}
+.maintitle {
+    font-weight: bold;
+    padding-top: 50vh;
+    text-align: center;
+    color: #fff;
+    padding-left: 0vh;
+    margin-left: 0vh;
+    padding-bottom: 3vh;
+    font-size: calc(9vw + 3vh);
+}
+h2 {
+    font-size: 5vw;
+    margin-left: 5vw;
+    padding-bottom: 2vh;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.tshadow {
+    text-shadow: 4px 4px 4px #00000099;
+}
+
+.bshadow {
+    box-shadow: 4px 4px 4px #00000099;
+}
+
+/*___________________________________________________________*/
+
+body {
+    background: url('assets/background_images/tobike1920sq.jpg') 100% / cover;
+    background-position: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    min-height: 87vh;
+    margin: auto;
+}
+
+/*___________________________________________________________*/
+
+header{
+    position: fixed;
+    width: 100%;
+    margin-top: -13vh;
+    background-color: #fff;
+}
+
+.title {
+    background: url(assets/icons/bikespace_header.svg) no-repeat center center;
+    background-size: 30vh;
+    height: 10vh;
+    margin: auto;
+    width: 30vh;
+}
+
+#error {
+    position: fixed;
+    z-index: 10;
+    margin-top: -13vh;
+    width: 100%;
+    height: 10vh;
+    background-color: #F24722;
+}
+
+#error h1 {
+    padding-top: 2vw;
+    padding-left: 6vh;
+    padding-right: 3vh;
+    font-size: calc(20px + 2.5vw);
+    line-height: calc(17px + 3.5vw);
+}
+
+
+/*___________________________________________________________*/
+
+.progress{
+    position: relative;
+    width: 3vw;
+    margin: auto;
+    border-radius: 1.5vw;
+    height: 3vw;
+    margin-bottom: 4vh;
+}
+.prog1 {
+    box-shadow: -16vw 4vw 0px 0px #31C057,
+                -8vw 4vw 0px 0px #ccc,
+                0vw 4vw 0px 0px #ccc,
+                8vw 4vw 0px 0px #ccc,
+                16vw 4vw 0px 0px #ccc;
+}
+.prog2 {
+    box-shadow: -16vw 4vw 0px 0px #31C057,
+                -8vw 4vw 0px 0px #31C057,
+                0vw 4vw 0px 0px #ccc,
+                8vw 4vw 0px 0px #ccc,
+                16vw 4vw 0px 0px #ccc;
+}
+.prog3 {
+    box-shadow: -16vw 4vw 0px 0px #31C057,
+                -8vw 4vw 0px 0px #31C057,
+                0vw 4vw 0px 0px #31C057,
+                8vw 4vw 0px 0px #ccc,
+                16vw 4vw 0px 0px #ccc;
+}
+.prog4 {
+    box-shadow: -16vw 4vw 0px 0px #31C057,
+                -8vw 4vw 0px 0px #31C057,
+                0vw 4vw 0px 0px #31C057,
+                8vw 4vw 0px 0px #31C057,
+                16vw 4vw 0px 0px #ccc;
+}
+.prog5 {
+    box-shadow: -16vw 4vw 0px 0px #31C057,
+                -8vw 4vw 0px 0px #31C057,
+                0vw 4vw 0px 0px #31C057,
+                8vw 4vw 0px 0px #31C057,
+                16vw 4vw 0px 0px #31C057;
+}
+
+/*___________________________________________________________*/
+
+.logo {
+    height: 80vw;
+    background: url(assets/icons/logo_main.svg) no-repeat;
+    background-size: calc(30vw + 10vh);
+    background-position:center
+}
+
+.screen1 {
+    margin-left: 3vh;
+    height: 84vh;
+    margin-top: 13vh;
+    margin-right: 3vh;
+}
+.clear {
+    opacity: 0;
+}
+.visible {
+    background-color: #ffffffee;
+}
+
+.options {
+    list-style: none;
+    padding: 2vw;
+    background-color: #ddd;
+    height: 7vw;
+    border-radius: 9vw;
+    margin-left: 2vh;
+    margin-right: 2vh;
+    margin-bottom: 2vh;
+}
+
+.options li {
+    padding-top: 0vw;
+    width: 80vw;
+    padding-left: 2vw;
+}
+
+.doubleoption {
+    position: relative;
+    height: calc(11vw+4vh);
+}
+
+.doubleoption .options{
+    background-color: #fff;
+    box-shadow:0px 0px 0px 0.3vw #ccc inset;
+}
+
+.cameraButton{
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.check {    
+    margin-left: auto;
+}
+
+.on{
+    background: url(assets/icons/check_on.svg) no-repeat;
+    background-size: 7vw;
+    width:7vw;
+    height: 7vw;
+    padding-right: 0.1vw;
+    margin-top: -6.83vw;
+}
+
+.off{
+    background: url(assets/icons/check_off.svg) no-repeat;
+    background-size: 7vw;
+    width:7vw;
+    height: 7vw;
+    padding-right: 0.1vw;
+    margin-top: -6.83vw;
+}
+
+.camera{
+    background: url(assets/icons/camera.svg) no-repeat;
+    background-size: 6vw;
+    width:7vw;
+    height: 7vw;
+    padding-right: 0.5vw;
+    margin-top: -5.75vw;
+}
+
+.upload{
+    background: url(assets/icons/upload.svg) no-repeat;
+    background-size: 5vw;
+    width:7vw;
+    height: 7vw;
+    padding-right: 0vw;
+    margin-top: -6vw;
+}
+
+/*___________________________________________________________*/
+
+footer {
+    position: absolute;
+    margin-top: -4vh;
+    width: 100%;
+}
+
+/* David Cox: I don't know what this does.
+
+.remove_button {
+    position: fixed;
+    margin-top: -4vh;
+    width: 100%;
+    bottom: 7vh;
+    left: 50%;
+    transform: translateX(-50%)
+}*/
+
+.nav {
+}
+.back {
+    padding: 2vw;
+    box-shadow: 0px 0px 0px 0.6vw #31C057 inset;
+    height: 6vw;
+    width: 20vw;
+    margin-top: -8vw;
+    border-radius: 10vw;
+    margin-left: 5vh;
+    text-align: center;
+}
+.back p {
+    margin: auto;
+    padding: 1.5vw 2vw 2.5vw 2vw;
+    margin-top: -2vw;
+    width: 20vw;
+    height: 6vw;
+    margin-left: -2vw;
+    color: #31C057
+    
+}
+.next {
+    padding: 2vw;
+    background: #31C057;
+    height: 6vw;
+    width: 20vw;
+    margin-top: -10vw;
+    border-radius: 10vw;
+    margin-left: auto;
+    margin-right: 5vh;
+    text-align: center;
+}
+.next p {
+    margin: auto;
+    padding: 1.5vw 2vw 2.5vw 2vw;
+    margin-top: -2vw;
+    width: 20vw;
+    height: 6vw;
+    margin-left: -2vw;
+    color: #fff
+}
+
+.button {
+    padding: 2vw;
+    background: #31C057;
+    height: 6vw;
+    width: 70vw;
+    margin: -10vw auto 0vw auto;
+    border-radius: 10vw;
+    text-align: center;
+}
+
+.button p {
+    margin: auto;
+    padding: 1.5vw 2vw 2.5vw 2vw;
+    margin-top: -2vw;
+    height: 6vw;
+    margin-left: -2vw;
+    color: #fff
+}
+.red {
+    background-color: #F24722;
+    width: auto;
+    margin: -20.5vw 5vh 10.5vw 5vh;
+}
+
+/*___________________________________________________________*/
+
+.mapSummary {
+    float: right;
+    width: 50%;
+}
+.pictureSummary {
+    float: left;
+    width: 50%;
+}
+.hidden{
+    opacity: 0;
+}
+.hiddenPicture{
+    opacity: 0 !important;
+    height: 0 !important;
+}
+.imagepreview {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    height: calc(70vh - 40vw);
+    max-height: calc(100vh);
+    overflow-y: hidden;
+    overflow-x: hidden;
+    
+}
+
+#picture{
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 10vh;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+/* David Cox: David's code for picture. Not sure if it fixes anything that was wrong in the above code.
+#picture{
+    height: calc(70vh);
+    width: calc(70vh);
+    margin-left: -0vh;
+    margin-top: -0vh;
+}
+*/
+#mapid {
+    height: calc(100vh - 58%);
+    margin-left: 2vw;
+    margin-right: 2vw;
+    background-color: #ddd;
+}
+
+/*___________________________________________________________*/
+
+input{
+    height: 7vw;
+    font-size: 5vw;
+    border-radius: 9vw;
+    margin-left: 2vh;
+    width: 100%;
+    margin-right: 2vh;
+    margin-bottom: 2vh;
+}
+
+.holder{
+    background-color: #fff;
+    box-shadow:0px 0px 0px 0.3vw #ccc inset;
+    list-style: none;
+    padding: 2vw;
+    height: 7vw;
+    border-radius: 9vw;
+    margin-left: 2vh;
+    margin-right: 2vh;
+    margin-bottom: 2vh;
+}
+#dst-cvs{
+    display: none;
+}
+.calendar {
+    background: url(assets/icons/calendar.svg) no-repeat;
+    background-size: 5vw;
+    width:5vw;
+    height: 5vw;
+    padding-right: 2vw;
+    margin-top: -8.5vw;
+    margin-left: auto;
+    cursor: pointer
+}
+
+.clock {
+    background: url(assets/icons/clock.svg) no-repeat;
+    background-size: 5vw;
+    width:5vw;
+    height: 5vw;
+    padding-right: 2vw;
+    margin-top: -8.5vw;
+    margin-left: auto;
+    cursor: pointer
+}
+.halved {
+    
+}
+.half1 {
+    width: calc(42vw - 4vh);
+    margin-bottom: 0vh;
+}
+.half2 {
+    width: calc(42vw - 4vh);
+    margin-top: -11vw;
+    margin-left: auto;
+    margin-bottom: 2vh;
+}
+.third12 {
+    width: calc(44vw - 4vh);
+    margin-bottom: 0vh;
+    padding-right: 2vh;
+}
+
+.third3 {
+    width: calc(32vw - 4vh);
+    margin-top: -11vw;
+    margin-left: auto;
+    margin-bottom: 2vh;
+    padding-right: 2vh;
+}
+.success {
+    height: 12vh;
+    width: 70vw;
+    background-color: #31C057bb;
+    background-image: url(assets/icons/success.svg);
+    background-position: center 6vh; 
+    background-repeat: no-repeat;
+    background-size: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6vw;
+    margin-bottom: -12vw;
+}
+.success h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 7vw;
+    padding-left: 0vw;
+}
+
+/* David Cox: I think this is part of the code that was broken. commenting out for now.
+
+.datepicker{
+    opacity: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}*/
+.comments{
+    width: 90%;
+    font-weight: thin;
+    font-size: 4vw;
+    height: 50vh;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-bottom: 3vh;
+    margin-right: 5%;
+    margin-left: 5%;
+    background-color: white;
+}

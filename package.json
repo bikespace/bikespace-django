@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "postinstall": "cd bicycleparking/static && npm install && npm run prod"
+    "postinstall": "cd bicycleparking/static && npm install && npm install --dev && npm run prod"
   },
   "author": "",
   "license": "ISC",

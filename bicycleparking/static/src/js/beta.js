@@ -40,12 +40,13 @@ export default class Beta {
     template() {
         return (`
         <header class="report">
-        <div class="title">
-        </div>
-    </header>    
+        <div class="title"></div>
+        <h2 class="betaBeaker">beta</h2>
+      </header>  
+      <div id="error" class="hidden"></div>   
     <div class="screen1 visible">
           <div class="progLine hidden"><div class="progress prog1"></div></div>
-          <h1>Beta Tester Comments :</h1>
+          <h1>Beta Tester Comments</h1>
           <textarea class="comments" rows="20" placeholder="You can write your comment here."></textarea>
         </div>   
       </div>

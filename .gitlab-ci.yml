@@ -11,7 +11,7 @@ before_script:
     - node -v
     - npm -v
     - gem install dpl
-    - cd bicycleparking && npm install && npm run build && cd ..
+    - cd bicycleparking/static/ && npm install && npm run prod && cd ../../
 
 services:
   - name: mdillon/postgis

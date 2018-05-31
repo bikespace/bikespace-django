@@ -65,9 +65,9 @@ class Index {
       'longitude': this.state.map[0][1],
       'survey': this.state
     };
-    if (this.state.picture && this.state.picture.name) {
-
-      fetch(`${document.location.origin}/api/upload/` + this.state.picture.name, {
+    if (this.state.picture) {
+      console.log("UPLOAD YO");
+      fetch(`${document.location.origin}/api/upload/pictures`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

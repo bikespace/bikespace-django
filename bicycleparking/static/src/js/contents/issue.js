@@ -42,7 +42,7 @@ export default class Issue extends Content {
     }, '');
     return (`
       <div class="screen1 visible">
-        <div class="progress prog1"></div>
+        <div class="progLine"><div class="progress prog1"></div></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.text}</h2>
         <ul>

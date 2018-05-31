@@ -44,7 +44,7 @@ export default class Beta {
         </div>
     </header>    
     <div class="screen1 visible">
-          <div class="progress prog5"></div>
+          <div class="progLine hidden"><div class="progress prog1"></div></div>
           <h1>Beta Tester Comments :</h1>
           <textarea class="comments" rows="20" placeholder="You can write your comment here."></textarea>
         </div>   

@@ -37,6 +37,8 @@ export default class Picture extends Content {
             document.getElementById("picture").classList.add('hiddenPicture');
             document.getElementById("preview").classList.add('hiddenPicture');
             document.getElementById("buttonRed").classList.add('hiddenPicture');
+            document.getElementById("deviceCamera").classList.remove('displayNone');
+            document.getElementById("pictureText").classList.remove('displayNone');
         });
 
         document.getElementById("deviceCamera").addEventListener('change', (event) => {
@@ -46,8 +48,9 @@ export default class Picture extends Content {
                 document.getElementsByClassName("options")[1].classList.add('hiddenPicture');
                 document.getElementById("picture").classList.remove('hiddenPicture');
                 document.getElementById("buttonRed").classList.remove('hiddenPicture');;
-                document.getElementById("preview").classList.remove('hiddenPicture');
-
+                document.getElementById("preview").classList.remove('hiddenPicture'); 
+                 
+                
                 var src = document.getElementById('picture');
                 src.width = img.width;
                 src.height = img.height;
@@ -61,6 +64,9 @@ export default class Picture extends Content {
 
                 ctx = dst.getContext("2d")
                 ctx.drawImage(img, 0, 0, dst.width, dst.height);
+                document.getElementById("deviceCamera").classList.add('displayNone');
+                 document.getElementById("pictureText").classList.add('displayNone');
+                
             }
 
             img.src = window.URL.createObjectURL(event.target.files[0]);
@@ -75,9 +81,9 @@ export default class Picture extends Content {
     get template() {
         return (`
         <div class="screen1 visible">
-          <div class="progress prog2"></div>
+          <div class="progLine"><div class="progress prog2"></div></div>
           <h1>${this.props.heading}</h1>
-          <h2>${this.props.text}</h2>
+          <h2 id="pictureText" class="">${this.props.text}</h2>
             <ul>
                 <div class="doubleoption">
                     <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
@@ -94,11 +100,11 @@ export default class Picture extends Content {
                         <div class="check upload"> </div>
                     </div>
                 </div>
-            </ul>            
+            </ul>
         </div>
             <footer>
             <div class="nav">
-                <div id="buttonRed" class="button red">    
+                <div id="buttonRed" class="button red">
                     <p><em>Remove photo</em></p>
                 </div>
             </div>

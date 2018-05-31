@@ -282,6 +282,7 @@ footer {
     width: 86px;
     border-radius: 30px;
     text-align: center;
+    cursor: pointer;
 }
 .back p {
     margin: auto;
@@ -300,6 +301,7 @@ footer {
     margin-top: -50px;
     border-radius: 30px;
     text-align: center;
+    cursor: pointer;
 }
 .next p {
     margin: auto;
@@ -319,6 +321,7 @@ footer {
     width: 240px;
     border-radius: 30px;
     text-align: center;
+    cursor: pointer;
 }
 
 .button p {
@@ -334,7 +337,7 @@ footer {
     background-color: #F24722;
 }
 
-/*___________________________________________________________*/
+/*SUMMARY___________________________________________________________*/
 
 .titleSummary{
     size: 2vh;
@@ -354,6 +357,9 @@ footer {
 .hidden{
     opacity: 0;
 }
+
+/*PICTURE___________________________________________________________*/
+
 .hiddenPicture{
     opacity: 0 !important;
     height: 0 !important;
@@ -363,6 +369,7 @@ footer {
     min-height: 255px;
     height: calc(-140px + 65vh);
     max-height: 350px;
+    width: 5000px;
     overflow-y: hidden;
     overflow-x: hidden;
     position: relative;
@@ -383,8 +390,14 @@ footer {
     display: none;
 }
 #dst-cvs{
+    
+}
+
+.displayNone {
     display: none;
 }
+
+/*MAP___________________________________________________________*/
 
 #mapid {
     min-height: 320px;
@@ -418,7 +431,7 @@ input{
     height: 24px;
     margin-top: -57px;
     margin-left: 332px;
-    cursor: pointer
+    cursor: pointer;
 }
 .clock {
     position: absolute;
@@ -428,7 +441,7 @@ input{
     height: 24px;
     margin-top: -57px;
     margin-left: 332px;
-    cursor: pointer
+    cursor: pointer;
 }
 .half1 {
     width: 150px;

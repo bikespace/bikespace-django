@@ -32,7 +32,7 @@ export default class Home {
             <h1>Thank you</h1>
         </div>
           <div class="logo">
-              <h1 class="maintitle tshadow">BikeSpace</h1>
+            <h1 class="maintitle tshadow">BikeSpace</h1>
           </div>
       </div>
       <footer>

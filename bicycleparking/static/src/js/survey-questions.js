@@ -9,7 +9,7 @@ const questions = [
         heading: 'What was the issue?',
         text: 'Choose what applies',
         required: true,
-        error: 'Choose at least one option',
+        error: 'Choose at least one',
         values: [
           {
             key: 'absent',

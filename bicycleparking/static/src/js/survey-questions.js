@@ -13,23 +13,23 @@ const questions = [
         values: [
           {
             key: 'absent',
-            text: "Couldn't find bike parking"
+            text: "Bike parking is <strong>not provided</strong>"
           },
           {
             key: 'full',
-            text: "Nearby bike parking is full"
+            text: "Bike parking is <strong>full</strong>"
           },
           {
             key: 'damaged',
-            text: "Bike parking is damaged"
+            text: "Bike parking is <strong>damaged</strong>"
           },
           {
             key: 'badly',
-            text: "A bike is badly parked"
+            text: "A bike is <strong>abandoned</strong>"
           },
           {
             key: 'other',
-            text: "Different problem"
+            text: "Something else"
           }
         ]
       }

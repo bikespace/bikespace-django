@@ -24,23 +24,53 @@ strong {
     font-family: 'opensans';
     font-weight: bold;
 }
-em {
-    font-family: 'opensans';
-    font-size: 1em;
+
+/*BETA_LABELS___________________________________________________________*/
+
+.betaMain {
+    font-weight: bold;
+    margin: 15vh auto 0vh auto;
+    width: 70vw;
+    background-image: url(assets/icons/beaker.png);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 2.5vw) center;
+    background-size: 4vh;
+    text-align: left;
+    background-color: #f3b82b;
+    color: #000;
+    padding-bottom: 0vh;
+    padding-left: 4vw;
+    font-size: calc(2vw + 3vh);
 }
+
+.betaBeaker {
+    width: 100px;
+    height: 40px;
+    font-size: 1.6rem;
+    background-color: #f3b82b;
+    padding: 5px 0vh 3px 0vh;
+    margin: -48px 0px 0px auto;
+    text-align: center;
+}
+
+/*FONT_STYLING___________________________________________________________*/
 
 h1 {
     font-weight: bold;
     min-height: 20px;
+    padding-top: 10px;
     height: 5vh;
     max-height: 40px;
     padding-left: 5px;
     font-size: 1.6rem;
 }
-
 h2 {
     font-size: 1.1rem;
     margin-left: 10px;
+}
+em {
+    font-family: 'opensans';
+    font-size: 1.1rem;
 }
 a {
     text-decoration: none;
@@ -82,18 +112,24 @@ header{
     width: 200px;
 }
 
+/*ERROR_MESSAGES___________________________________________________________*/
+
 #error {
     position: relative;
     z-index: 10;
-    padding: 0px 20px 0px 20px;
-    width: 375px;
-    margin: -10px auto -55px auto;
-    height: 45px;
-    background-color: #F24722;
+    padding: 0px 0px 0px 0px;
+    width: 400px;
+    margin: 15px auto -80px auto;
+    height: 30px;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #ed145b;
+    border-width: 8px;
 }
 
 #error h1 {
-    padding-top: 5px;
+    margin-top: -12px;
+    text-align: center;
 }
 
 /*___________________________________________________________*/
@@ -102,51 +138,63 @@ header{
     width: 16px;
     border-radius: 10px;
     height: 16px;
-    margin: 8px auto 0px auto;
+    margin: -4px auto 0px auto;
 }
 
 .prog1 {
-    background-color: #ccc;
-    box-shadow: -80px 0px 0px 0px #31C057,
-                -40px 0px 0px 0px #ccc,
-                40px 0px 0px 0px #ccc,
-                80px 0px 0px 0px #ccc;
+    box-shadow: 
+        -180px 16px 0px 0px #31C057,
+        -90px 16px 0px 0px #ccc,
+        0px 16px 0px 0px #ccc,
+        90px 16px 0px 0px #ccc,
+        180px 16px 0px 0px #ccc;
 }
 .prog2 {
-    background-color: #ccc;
-    box-shadow: -80px 0px 0px 0px #31C057,
-                -40px 0px 0px 0px #31C057,
-                40px 0px 0px 0px #ccc,
-                80px 0px 0px 0px #ccc;
+    box-shadow: 
+        -180px 16px 0px 0px #ccc,
+        -90px 16px 0px 0px #31C057,
+        0px 16px 0px 0px #ccc,
+        90px 16px 0px 0px #ccc,
+        180px 16px 0px 0px #ccc;
 }
 .prog3 {
-    background-color: #31C057;
-    box-shadow: -80px 0px 0px 0px #31C057,
-                -40px 0px 0px 0px #31C057,
-                40px 0px 0px 0px #ccc,
-                80px 0px 0px 0px #ccc;
+    box-shadow: 
+        -180px 16px 0px 0px #ccc,
+        -90px 16px 0px 0px #ccc,
+        0px 16px 0px 0px #31C057,
+        90px 16px 0px 0px #ccc,
+        180px 16px 0px 0px #ccc;
 }
 .prog4 {
-    background-color: #31C057;
-    box-shadow: -80px 0px 0px 0px #31C057,
-                -40px 0px 0px 0px #31C057,
-                40px 0px 0px 0px #31C057,
-                80px 0px 0px 0px #ccc;
+    box-shadow: 
+        -180px 16px 0px 0px #ccc,
+        -90px 16px 0px 0px #ccc,
+        0px 16px 0px 0px #ccc,
+        90px 16px 0px 0px #31C057,
+        180px 16px 0px 0px #ccc;
 }
 .prog5 {
-    background-color: #31C057;
-    box-shadow: -80px 0px 0px 0px #31C057,
-                -40px 0px 0px 0px #31C057,
-                40px 0px 0px 0px #31C057,
-                80px 0px 0px 0px #31C057;
+    box-shadow: 
+        -180px 16px 0px 0px #ccc,
+        -90px 16px 0px 0px #ccc,
+        0px 16px 0px 0px #ccc,
+        90px 16px 0px 0px #ccc,
+        180px 16px 0px 0px #31C057;
 }
-
+.progLine {
+    position: relative;
+    width: 365px;
+    margin: 0px auto 30px auto;
+    height: 4px;
+    box-shadow: 0px 22px 0px 0px #ddd;
+}
 /*___________________________________________________________*/
 
 
 .logo {
     margin-left: auto;
     margin-right: auto;
+    margin-top: -70px;
     max-height: 300px;
     width: 100%;
     opacity: 1;
@@ -157,7 +205,7 @@ header{
 
 .maintitle {
     font-weight: bold;
-    padding-top: 270px;
+    padding-top: 250px;
     text-align: center;
     color: #fff;
     margin-left: 0px;
@@ -196,7 +244,7 @@ ul {
     background: #ddd;
     height: 24px;
     border-radius: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .options li {
@@ -290,7 +338,7 @@ footer {
     margin-left: -13px;
     padding: 13px;
     margin-top: -13px;
-    color: #31C057
+    color: #31C057;
 }
 .next {
     padding: 13px;
@@ -309,7 +357,7 @@ footer {
     margin-left: -13px;
     padding: 13px;
     margin-top: -13px;
-    color: #fff
+    color: #fff;
 }
 .button {
     padding: 13px;
@@ -330,7 +378,7 @@ footer {
     margin-left: -13px;
     padding: 13px;
     margin-top: -13px;
-    color: #fff
+    color: #fff;
 }
 
 .red {
@@ -366,31 +414,19 @@ footer {
     display: none;
 }
 .imagepreview {
-    min-height: 255px;
-    height: calc(-140px + 65vh);
-    max-height: 350px;
-    width: 5000px;
+    height: 50vh;
+    min-height: 292px;
+    max-height: 400px;
     overflow-y: hidden;
     overflow-x: hidden;
-    position: relative;
-    
+    width: 100%;
 }
 #picture{
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    opacity: 0 !important;
-    height: 0 !important;
-    display: none;
+    width: 100%;
+    
 }
 #dst-cvs{
-    
+    display: none;
 }
 
 .displayNone {
@@ -448,7 +484,7 @@ input{
 }
 .half2 {
     width: 150px;
-    margin-top: -70px;
+    margin-top: -66px;
     margin-left: auto;
 }
 .success {
@@ -472,12 +508,16 @@ input{
     padding-top: 5px;
 }
 
+/*COMMENT_BOXES___________________________________________________________*/
+
 .comments{
     width: 100%;
     font-weight: initial;
     height: 50vh;
-    padding-left: 4vw;
-    padding-right: 4vw;
-    padding-bottom: 3vh;
-    font-size: 4vw;
+    padding: 8px 16px 3vh 16px;
+    font-size: 1.3rem;
+    border-color: #ccc;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 0px;
 }

@@ -50,7 +50,6 @@ export default class Survey {
       memo[question.props.key] = question.value;
       return memo;
     }, {})
-
     if (values) {
       this.survey.setState(values)
     }

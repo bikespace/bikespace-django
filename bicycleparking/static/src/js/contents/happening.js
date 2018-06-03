@@ -36,27 +36,32 @@ export default class Happening extends Content {
   }
 
   bind() {
+    var date = new Date(this.values[0].date);
     this.flatpickrdate = flatpickr("#date", {
       wrap: true, altInput: true,
       altFormat: "F j, Y",
-      dateFormat: "Y-m-d", defaultDate: new Date(),
+      dateFormat: "Y-m-d", defaultDate: date,
     });
     this.flatpickrtime = flatpickr("#time", {
       wrap: true, enableTime: true,
       noCalendar: true,
-      dateFormat: "h:i K", time_24hr: false, defaultDate: new Date(),
-      onChange: function (selectedDates, dateStr, instance) {
-        console.log(selectedDates)
-      },
+      dateFormat: "h:i K", time_24hr: false, defaultDate: date
     });
     [...document.getElementsByClassName('check')].forEach(el => {
       el.addEventListener('click', this.onClick.bind(this));
     })
+
   }
   get template() {
     const options = this.props.values.reduce((memo, value) => {
-
-      memo += `<div class="options ${value.class}"><li><em>${value.text}</em></li><div class="check off" value="${value.key}"></div></div>`
+      var cssClass = "check off"
+      if (this.values[0].time) {
+        console.log(this.values[0].time.includes(value.key))
+        if (this.values[0].time.includes(value.key)) {
+          cssClass = "check on"
+        }
+      }
+      memo += `<div class="options ${value.class}"><li><em>${value.text}</em></li><div class="${cssClass}" value="${value.key}"></div></div>`
       return memo;
     }, '');
     return (`

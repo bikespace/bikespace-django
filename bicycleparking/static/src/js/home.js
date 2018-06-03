@@ -1,3 +1,4 @@
+import StateSession from './state-session';
 
 export default class Home {
   constructor(survey) {
@@ -11,9 +12,10 @@ export default class Home {
   }
 
   bind() {
-    this.state = localStorage.getItem('survey_state') ? JSON.parse(localStorage.getItem('survey_state')) : {};
-    if (this.state && this.state.finish) {
+    var state = StateSession.getInstance().get();
+    if (state && state.finish) {
       document.getElementById('finish').classList.remove('hidden');
+      StateSession.getInstance().destroy();
     }
     document.getElementById('start').addEventListener('click', (event) => {
       this.survey.router.navigate(`/start`);

@@ -4,32 +4,41 @@ const pica = require('pica/dist/pica')({ features: ['js', 'ww', 'cib'] })
 export default class Picture extends Content {
     constructor() {
         super(...arguments);
-        this.file = null;
+        this.dataURL = null;
+        this.originalDataURL = null;
         this.values = [];
-    }
-
-    get valid() {
-        return this.file !== null;
+        this.imageSelected = false;
     }
 
     get value() {
-        var dataURL = document.getElementById('dst-cvs').toDataURL();
-        var blobBin = atob(dataURL.split(',')[1]);
-        var array = [];
-        for (var i = 0; i < blobBin.length; i++) {
-            array.push(blobBin.charCodeAt(i));
+        this.originalDataURL = document.getElementById('picture').toDataURL();
+        this.dataURL = document.getElementById('dst-cvs').toDataURL();
+        if (!this.imageSelected) {
+            this.originalDataURL = null;
+            this.dataURL = null;
         }
-        this.file = new Blob([new Uint8Array(array)], { type: 'image/png' });
-        return this.file;
+        this.values = this.dataURL;
+        return this.values;
     }
 
     bind() {
-        if (this.file) {
-            var src = document.getElementById('picture');
-            src.width = img.width;
-            src.height = img.height;
-            var ctx = src.getContext("2d");
-            ctx.drawImage(img, 0, 0);
+        if (this.originalDataURL) {
+            var img = new Image;
+            img.onload = function () {
+                var src = document.getElementById('picture');
+                src.width = img.width;
+                src.height = img.height;
+                var ctx = src.getContext("2d");
+                ctx.drawImage(img, 0, 0);
+                document.getElementsByClassName("options")[0].classList.add('hiddenPicture');
+                document.getElementsByClassName("options")[1].classList.add('hiddenPicture');
+                document.getElementById("picture").classList.remove('hiddenPicture');
+                document.getElementById("buttonRed").classList.remove('hiddenPicture');;
+                document.getElementById("preview").classList.remove('hiddenPicture');
+                document.getElementById("deviceCamera").classList.add('displayNone');
+                document.getElementById("pictureText").classList.add('displayNone');
+            };
+            img.src = this.originalDataURL;
         }
         document.getElementById("buttonRed").addEventListener('click', (event) => {
             document.getElementsByClassName("options")[0].classList.remove('hiddenPicture');
@@ -39,6 +48,9 @@ export default class Picture extends Content {
             document.getElementById("buttonRed").classList.add('hiddenPicture');
             document.getElementById("deviceCamera").classList.remove('displayNone');
             document.getElementById("pictureText").classList.remove('displayNone');
+            this.dataURL = null;
+            this.originalDataURL = null;
+            this.imageSelected = false;
         });
 
         document.getElementById("deviceCamera").addEventListener('change', (event) => {
@@ -48,9 +60,9 @@ export default class Picture extends Content {
                 document.getElementsByClassName("options")[1].classList.add('hiddenPicture');
                 document.getElementById("picture").classList.remove('hiddenPicture');
                 document.getElementById("buttonRed").classList.remove('hiddenPicture');;
-                document.getElementById("preview").classList.remove('hiddenPicture'); 
-                 
-                
+                document.getElementById("preview").classList.remove('hiddenPicture');
+
+
                 var src = document.getElementById('picture');
                 src.width = img.width;
                 src.height = img.height;
@@ -65,11 +77,11 @@ export default class Picture extends Content {
                 ctx = dst.getContext("2d")
                 ctx.drawImage(img, 0, 0, dst.width, dst.height);
                 document.getElementById("deviceCamera").classList.add('displayNone');
-                 document.getElementById("pictureText").classList.add('displayNone');
-                
+                document.getElementById("pictureText").classList.add('displayNone');
             }
 
             img.src = window.URL.createObjectURL(event.target.files[0]);
+            this.imageSelected = true;
         });
 
         document.getElementById("picture").classList.add('hiddenPicture');

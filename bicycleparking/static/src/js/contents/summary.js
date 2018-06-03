@@ -1,5 +1,6 @@
 import Content from './content';
 import questions from '../survey-questions';
+import StateSession from '../state-session';
 
 export default class Summary extends Content {
     constructor(survey) {
@@ -16,23 +17,23 @@ export default class Summary extends Content {
     }
 
     bind(state) {
-        this.state = state;
+        var state = StateSession.getInstance().get();
         var questions = this.questions;
-        var problems = this.state.problem_type.reduce((memo, value) => {
+        var problems = state.problem_type.reduce((memo, value) => {
             memo += '<div class="options"><li><em>' + questions[0].questions[0].values.find(entry => entry.key === value).text + '</em></li></div>'
             return memo;
         }, '');
         document.getElementById('problems').innerHTML = problems;
-        document.getElementById('date').innerHTML = new Date(this.state.happening[0].date).toLocaleString('en-US', { month: 'long', day: 'numeric' })
-        document.getElementById('clock').innerHTML = new Date(this.state.happening[0].date).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-        if(this.state.picture){            
+        document.getElementById('date').innerHTML = new Date(state.happening[0].date).toLocaleString('en-US', { month: 'long', day: 'numeric' })
+        document.getElementById('clock').innerHTML = new Date(state.happening[0].date).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+        if(state.picture){            
             document.getElementById('checkPhoto').classList.remove("off");
             document.getElementById('checkPhoto').classList.add("on");
         }else{
             document.getElementById('checkPhoto').classList.remove("on");
             document.getElementById('checkPhoto').classList.add("off");
         }
-        if(this.state.map){
+        if(state.map){
             document.getElementById('checkMap').classList.remove("off");
             document.getElementById('checkMap').classList.add("on");
         }else{

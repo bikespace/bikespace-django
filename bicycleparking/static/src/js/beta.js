@@ -1,8 +1,8 @@
+import StateSession from './state-session';
 
 export default class Beta {
     constructor(index) {
         this.router = index.router;
-        this.state = localStorage.getItem('survey_state') ? JSON.parse(localStorage.getItem('survey_state')) : {};
     }
 
 
@@ -22,12 +22,14 @@ export default class Beta {
             },
             body: JSON.stringify(comment),
         }).then(_ => {
-            this.state.finish = true;
-            localStorage.setItem('survey_state',JSON.stringify(this.state));
+            var state = StateSession.getInstance().get();
+            state.finish = true;
+            var state = StateSession.getInstance().save(state);
             this.router.navigate(`/home`)
         }).catch(_ => {
-            this.state.finish = true;
-            localStorage.setItem('survey_state',JSON.stringify(this.state));
+            var state = StateSession.getInstance().get();
+            state.finish = true;
+            var state = StateSession.getInstance().save(state);
             this.router.navigate(`/home`)
         });
     }

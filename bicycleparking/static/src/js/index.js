@@ -3,11 +3,13 @@ import questions from './survey-questions';
 import Home from './home';
 import Beta from './beta';
 import Survey from './survey';
+import StateSession from './state-session';
 
 class Index {
 
   constructor() {
     this.survey = {};
+    StateSession.getInstance().destroy();
     this.router = new Navigo('/', true);
     this.survey = questions.map((question, i) => {
       let props = question;
@@ -20,11 +22,6 @@ class Index {
     });
     this.home = new Home(this);
     this.beta = new Beta(this);
-    try {
-      this.state = localStorage.getItem('survey_state') ? JSON.parse(localStorage.getItem('survey_state')) : {};
-    } catch (err) {
-      this.state = {};
-    }
     this.router.on({
       'survey/:pane': (params, query) => {
         this.renderPane(params, query)
@@ -57,21 +54,21 @@ class Index {
   }
 
   submit() {
-    console.log('submitting', this.state)
+    var state = StateSession.getInstance().get();
 
     // Marshall the state into API fields
     var body = {
-      'latitude': this.state.map[0][0],
-      'longitude': this.state.map[0][1],
-      'survey': this.state
+      'latitude': state.map[0][0],
+      'longitude': state.map[0][1],
+      'survey': state
     };
-    if (this.state.picture) {
+    if (state.picture) {
       fetch(`${document.location.origin}/api/upload/pictures`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: this.state.picture,
+        body: state.picture,
       }).then(response => {
         response.json().then(json => {
           body.photo_uri = json.s3_name;
@@ -106,9 +103,10 @@ class Index {
   }
 
   setState(newState) {
-    this.state = Object.assign({}, this.state, newState);
-    localStorage.setItem('survey_state', JSON.stringify(this.state));
+    var state = Object.assign({}, StateSession.getInstance().get(), newState);
+    StateSession.getInstance().save(state);
   }
+
 
   renderPane(params, query) {
     document.getElementById('render').classList.remove("image");
@@ -117,8 +115,6 @@ class Index {
   }
 
   renderStart() {
-    this.survey.state = {}
-    localStorage.removeItem('survey_state')
     this.router.navigate(`/survey/1`)
   }
 
@@ -128,7 +124,6 @@ class Index {
   renderHome() {
     if ('geolocation' in navigator) {
       this.watchId = navigator.geolocation.watchPosition(this.locationAcquired);
-      console.log(this.watchId);
     }
     this.home.render();
   }

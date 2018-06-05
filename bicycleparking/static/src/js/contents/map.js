@@ -21,7 +21,7 @@ export default class Map extends Content {
   }
 
   bind() {
-    this.values = [];
+    this.values = this.getDataFromSession(this.props['key']);
     this.buildMap();
   }
 

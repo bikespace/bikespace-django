@@ -22,6 +22,7 @@ export default class Picture extends Content {
     }
 
     bind() {
+        this.values = this.getDataFromSession(this.props['key']);
         if (this.originalDataURL) {
             var img = new Image;
             img.onload = function () {

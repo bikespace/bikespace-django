@@ -6,8 +6,6 @@ export default class Happening extends Content {
   constructor() {
     super(...arguments);
     this.values = [];
-    this.date = new Date();
-    this.values.push({ 'date': this.date, 'time': [] });
   }
 
   get valid() {
@@ -36,6 +34,11 @@ export default class Happening extends Content {
   }
 
   bind() {
+    this.values = this.getDataFromSession(this.props['key']);
+    if (this.values.length == 0) {
+      this.date = new Date();
+      this.values.push({ 'date': this.date, 'time': [] });
+    }
     var date = new Date(this.values[0].date);
     this.flatpickrdate = flatpickr("#date", {
       wrap: true, altInput: true,
@@ -55,8 +58,7 @@ export default class Happening extends Content {
   get template() {
     const options = this.props.values.reduce((memo, value) => {
       var cssClass = "check off"
-      if (this.values[0].time) {
-        console.log(this.values[0].time.includes(value.key))
+      if (this.values.length > 0 && this.values[0].time) {
         if (this.values[0].time.includes(value.key)) {
           cssClass = "check on"
         }

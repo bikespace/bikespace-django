@@ -25,6 +25,7 @@ export default class Issue extends Content {
   }
 
   bind() {
+    this.values = this.getDataFromSession(this.props['key']);
     [...document.getElementsByClassName('check')].forEach(el => {
       el.addEventListener('click', this.onClick.bind(this));
       if(this.values.filter(value => value === el.getAttribute("value")).length>0){

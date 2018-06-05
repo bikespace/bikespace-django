@@ -14,7 +14,6 @@ export default class Beta {
 
     submit() {
         var comment = { "comment": document.getElementsByClassName('comments')[0].value }
-        console.log(comment);
         fetch(`${document.location.origin}/api/comments`, {
             method: 'POST',
             headers: {

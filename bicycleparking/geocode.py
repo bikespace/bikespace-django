@@ -16,10 +16,16 @@
 #         closest to request location to the major intersection closest 
 #         to the closest intersection  
 #
+# Modified 2018 05 30
+# Purpose Separate out the location access calculations from the overall
+#         database management, to permit requests for nearest locations
+#         to be processed.
+#
 
 import requests
 import datetime
 import django.utils as utils
+from bicycleparking.LocationData import LocationData
 from bicycleparking.models import Event
 from bicycleparking.models import Area
 from bicycleparking.models import Intersection2d
@@ -37,23 +43,6 @@ class Geocode :
   relate it to a pin in the pin table and the survey answer in the 
   survey table."""
 
-  latLimits = (43.58149, 43.886692)
-  longLimits = (-79.61179, -79.114705)
-  key = "*** reserved for future use"
-  majorSQL = """SELECT gid, int_id, intersec5, classifi6, classifi7, 
-                       longitude, latitude, objectid, geom,
-                       geom <-> st_setsrid(st_makepoint(%(long)s,%(lat)s),4326) as distance
-                FROM intersection2d
-                WHERE classifi6 = 'MJRSL' or classifi6 = 'MJRML'
-                ORDER BY distance
-                LIMIT 1;"""
-  closestSQL = """SELECT gid, int_id, intersec5, classifi6, classifi7, 
-                         longitude, latitude, objectid, geom,
-                         geom <-> st_setsrid(st_makepoint(%(long)s,%(lat)s),4326) as distance
-                  FROM intersection2d
-                  ORDER BY distance 
-                  LIMIT 1;"""
-
   ##  public (published) methods
 
   def __init__ (self, answer, ipAddress) :
@@ -68,18 +57,21 @@ class Geocode :
      self.errors = []
      self.when = utils.timezone.now ()
      self.fromWhere = ipAddress
-     self.survey = answer
-     self.area = None
-
-     self.loc = self.getIntersectionData ()
-     if self.loc != None :
-        self.area = self.getArea (self.loc)
+     self.survey = answer     
+     self.loc = LocationData (self.survey.latitude, self.survey.longitude)
+     if self.loc.isValid () :
+        self.area = self.loc.getArea ()
+     else :
+        self.area = None
 
   def isValid (self) :
      """Determines whether or not the latitde and longitude provided refer
      to a valid location, and whether or not the intersection lookup found
      valid intersection data."""
-     return self.loc != None
+     if self.loc != None :
+        return self.loc.isValid ()
+     else :
+        return False
 
   def getTime (self) :
      """Gets the date and time the caller submitted the request."""
@@ -92,7 +84,7 @@ class Geocode :
   def getClosest (self) :
      """Gets the intersection closest to the location."""
      if self.isValid () :
-        return Intersection (self.loc.gid)
+        return Intersection (self.loc.getLocationCode ())
      else :
         return None
 
@@ -100,7 +92,7 @@ class Geocode :
      """Gets the major intersection closest to the location."""
      result = None
      if self.isValid () and self.area == None :
-        result = Intersection (self.getMajorId (self.loc))
+        result = Intersection (self.loc.getMajor ().gid)
      elif self.isValid () :
         result = Intersection (self.area.major)
      return result
@@ -108,10 +100,10 @@ class Geocode :
   def getDistance (self) :
      """Gets the approximate distance from the supplied coordinates to the 
      intersection in meters"""
-     distance = None
      if self.loc != None :
-        distance = self.loc.distance * 1.11E+5
-     return distance
+        return self.loc.getDistance ()
+     else:
+        return None
 
   def displayErrors (self) :
      """If the error detection routines detected any errors in execution,
@@ -129,7 +121,7 @@ class Geocode :
      tmp = ("\t\tfrom: {ip}\n\t\tintersection: {gid}\n\t\tcoord: ({lat}, {lng})\n",
             "\t\tdistance: {dist}\n\t\ttime: {t}\n")
      if self.isValid () :
-        closest = self.loc.gid;
+        closest = self.loc.getLocationCode ();
      else : 
         closest = 'undefined'
 
@@ -149,82 +141,13 @@ class Geocode :
      does not exist for the closest intersection."""
 
      if self.isValid () and self.area == None:
-        self.area = self.makeArea ()
+        self.area = self.loc.makeArea ()
 
      if self.area != None :
         inserted = Event (sourceIP = self.fromWhere, area = self.area, 
-                          distance = self.loc.distance, timeOf = self.when, 
+                          distance = self.loc.getDistance (), timeOf = self.when, 
                           answer = self.survey)
         inserted.save ()
         return True
      else :
-        return False   
-
-  ##  private (unpublished) methods
-
-  def getIntersectionData (self) :
-     """Prepares the request to the geocode database of intersections;
-     if the database contains the supplied latitude and longitude, look
-     up the nearest intersection and the nearest minor intersection,
-     and stores both in the object. This method filters the latitude 
-     and longitude data submitted to a bounding box. If the latitude 
-     does not fall in this box, the method sets the geographic data to 
-     empty, which the test in isValid will reject."""
-
-     dlat = self.survey.latitude
-     dlong = self.survey.longitude
-     inLat = Geocode.latLimits [0] < dlat < Geocode.latLimits [1]
-     inLong = Geocode.longLimits [0] < dlong < Geocode.longLimits [1]
-     result = None
-
-     try :
-        if inLat and inLong :
-           result = self.lookupIntersection (Geocode.closestSQL, dlat, dlong)
-     except Exception as error:
-        self.errors.append (error)
-
-     return result
-
-  def getArea (self, loc) :
-     """Reads Area database record that goes with the intersection closest to the
-     selected point, and returns it. If the database does not yet contain such a 
-     record, returns None."""
-     result = None
-     if loc != None and Area.objects.filter (closest = loc.gid) :
-        result = Area.objects.get (closest = loc.gid)
-     return result 
-
-  def makeArea (self) :
-     """Creates and returns the area definition object. Calling this method will
-     create a row in the Area table in the database."""
-     return Area.objects.create (closest = self.loc.gid, 
-                                 major = self.getMajorId (self.loc))
-
-  def getMajorId (self, loc) :
-      """Gets and returns the location of the major intersection nearest to the
-      closest intersection. This method determines whether the closest intersection 
-      is itself a major intersection. Ifso, it simply returns the identifier of the
-      closest intersection. If the closest intersection is not a major intersection,
-      it issues a request against the geographic database to find the nearest major
-      intersection to the current intersection and returns the resulting identifier. 
-      This method assumes a valid location input parameter; if the caller passes in 
-      an invalid location, the method will throw."""
-
-      if loc.classifi6 == 'MJRSL' or loc.classifi6 == 'MJRML' :
-         return loc.gid
-      else :
-         majorLoc = self.lookupIntersection (Geocode.majorSQL, 
-                                             loc.latitude, loc.longitude)
-         if majorLoc != None :
-            return majorLoc.gid
-         else:
-            return None
-    
-  def lookupIntersection (self, sql, latt, longt) :
-      """Translates the selected data into a django data database request."""
-
-      location = {}
-      location ['lat'] = float (latt)
-      location ['long'] = float (longt)
-      query = Intersection2d.objects.raw (sql, location)
-      return query [0]
+        return False

@@ -13,10 +13,14 @@
 # Modified 2018 05 03
 # Purpose added endpoint to handle beta user comment submission
 #
+# Modified 2018 06 01 
+# Purpose add location endpoint
+#
 # Modified
 # Purpose
 #
 
+import json
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.http import HttpResponse
@@ -36,15 +40,27 @@ from bicycleparking.models import Picture
 from bicycleparking.models import BetaComments
 from bicycleparking.uploader import Uploader
 from bicycleparking.geocode import Geocode
+from bicycleparking.LocationData import LocationData
 
 # Create your views here.
 
 def index(request):
     return render(request, 'bicycleparking/index.html', {})
 
-
 def dashboard(request):
     return render(request, 'bicycleparking/dashboard.html', {})
+
+def locationNames (request) :
+    """Takes a set of GET or POST parameters containing the  and returns a JSON
+    string containing the """
+    if request.method == "GET" :
+       param = request.GET
+    elif request.POST :
+        param = request.POST
+    else :
+        param = json.loads (request.body)
+    data = LocationData (param ['latitude'], param ['longitude'])
+    return JsonResponse (data.getIntersectionNames ())
 
 class SurveyAnswerList(generics.ListCreateAPIView):
     """Generates the main table entries from the user's survey input, generates

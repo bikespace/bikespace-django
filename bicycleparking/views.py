@@ -29,7 +29,6 @@ from rest_framework.parsers import FileUploadParser
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
 import os.path
-from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -51,7 +50,6 @@ def index(request):
 def dashboard(request):
     return render(request, 'bicycleparking/dashboard.html', {})
 
-@csrf_exempt
 def locationNames (request) :
     """Takes a set of GET or POST parameters containing the  and returns a JSON
     string containing the """

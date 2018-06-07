@@ -63,8 +63,8 @@ class LocationData (object):
      intersections."""
      self.getIntersectionData ()
      result = {}
-     if closest != None :
-        result ['closest']  = closest.intersec5 
+     if self.closest != None :
+        result ['closest']  = self.closest.intersec5 
         result ['major'] = self.getMajor ().intersec5
      return result
 

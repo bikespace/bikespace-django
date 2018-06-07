@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^api/comments$', views.BetaCommentList.as_view()),
     url(r'^api/upload/(?P<filename>[^/]+)$', views.UploadPicture.as_view()),
     url(r'^api/pictures/(?P<filename>[^/]+)$', views.DownloadPicture.as_view()),
-    url(r'^api/intersection$', views.locationNames.as_view()),
+    url(r'^api/intersection$', views.locationNames, name='locationNames'),
 ]

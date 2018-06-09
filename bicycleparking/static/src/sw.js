@@ -35,4 +35,4 @@ self.addEventListener('activate', function(e) {
   );
   return self.clients.claim();
 });
-
+let deferredPrompt;

@@ -2,6 +2,12 @@
 var dataCacheName = 'bikespace-v1';
 var cacheName = 'bikespace';
 var filesToCache = [
+  'https://s3.amazonaws.com/bikespace-static/dist/bundle.js',
+  'https://s3.amazonaws.com/bikespace-static/dist/style/stylesheet.css',
+  'https://s3.amazonaws.com/bikespace-static/dist/style/mobilesheet.css',
+  'https://s3.amazonaws.com/bikespace-static/dist/style/flatpickr.min.css',
+  'https://s3.amazonaws.com/bikespace-static/dist/style/leaflet.css',
+  'https://s3.amazonaws.com/bikespace-static/dist/style/leaflet-search.css',
   '/'
 ];
 

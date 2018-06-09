@@ -13,11 +13,11 @@
             "sizes": "256x256"
         },
         {
-            "src": "https://s3.amazonaws.com/bikespace-static/dist/style/assets/icons/favicon-16x16.png",
+            "src": "https://s3.amazonaws.com/bikespace-static/dist/style/assets/icons/bikespace16.png",
             "sizes": "16x16"
         },
         {
-            "src": "https://s3.amazonaws.com/bikespace-static/dist/style/assets/icons/favicon-32x32.png",
+            "src": "https://s3.amazonaws.com/bikespace-static/dist/style/assets/icons/bikespace32.png",
             "sizes": "32x32"
         },
         {

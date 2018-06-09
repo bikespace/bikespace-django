@@ -60,7 +60,7 @@
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
-            .register('https://s3.amazonaws.com/bikespace-static/dist/sw.js')
+            .register('sw.js')
             .then(function () { console.log('Service Worker Registered'); });
     }
 </script>

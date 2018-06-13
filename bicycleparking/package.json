@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --env.STATIC_PATH=./ --config webpack.config.js --watch true",
-    "prod": "webpack --env.STATIC_PATH=https://s3.amazonaws.com/bikespace-static/dist/  --config webpack.config.js  && ./copy.sh"
+    "prod": "webpack --env.STATIC_PATH=https://s3.amazonaws.com/bikespace-static/dist/  --config webpack.config.js  && ./copy.sh",
+    "django": "webpack --env.STATIC_PATH=/static/  --config webpack.config.js  && ./copy.sh"
   },
   "author": "",
   "license": "ISC",

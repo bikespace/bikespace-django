@@ -64,11 +64,11 @@ class Index {
     };
     if (state.picture) {
       fetch(`${document.location.origin}/api/upload/pictures`, {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: state.picture,
+        body: JSON.stringify({ 'picture': state.picture }),
       }).then(response => {
         response.json().then(json => {
           body.photo_uri = json.s3_name;

@@ -26,6 +26,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.core.files.base import ContentFile
+from datetime import datetime
 
 from rest_framework import generics
 from rest_framework.parsers import FileUploadParser
@@ -111,12 +112,11 @@ class DownloadPicture(APIView):
 
 
 class UploadPicture(APIView):
-    parser_classes = (FileUploadParser,)
     renderer_classes = (JSONRenderer, )
     uploader = Uploader()
 
-    def put(self, request, filename, format=None):
-        file_obj = request.data['file']
+    def post(self, request, filename, format=None):
+        file_obj = self.request.data['picture']
         ipAddress = request.META['REMOTE_ADDR']
 
         format, imgstr = file_obj.split(';base64,') 
@@ -124,6 +124,7 @@ class UploadPicture(APIView):
 
         file = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
         print ("upload source address = {0}".format (ipAddress))
+
         if ipAddress != "127.0.0.1" :
            content = {'s3_name': self.uploader.toS3(filename, file)}
         else :

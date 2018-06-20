@@ -54,17 +54,6 @@ def index(request):
 def dashboard(request):
     return render(request, 'bicycleparking/dashboard.html', {})
 
-def locationNames (request) :
-    """Takes a set of GET or POST parameters containing the  and returns a JSON
-    string containing the """
-    if request.method == "GET" :
-       param = request.GET
-    elif request.POST :
-        param = request.POST
-    else :
-        param = json.loads (request.body.decode('utf-8'))
-    data = LocationData (param ['latitude'], param ['longitude'])
-    return JsonResponse (data.getIntersectionNames ())
 
 class SurveyAnswerList(generics.ListCreateAPIView):
     """Generates the main table entries from the user's survey input, generates
@@ -96,6 +85,21 @@ class BetaCommentList(generics.ListCreateAPIView):
         answer using the serializer, the aggregate geographic data (Geocode)
         and event record using the geocode class, and the picture record."""
         serializer.save()
+
+class LocationNameRequest (APIView) :
+    
+    def get (self, request) :
+        """Takes a set of GET or POST parameters containing the  and returns a JSON
+        string containing the """
+        if request.method == "GET" :
+            param = request.GET
+        elif request.POST :
+            param = request.POST
+        else :
+            param = json.loads (request.body)
+        data = LocationData (param ['latitude'], param ['longitude'])
+        return JsonResponse (data.getIntersectionNames ())
+           
 
 class DownloadPicture(APIView):
     uploader = Uploader()

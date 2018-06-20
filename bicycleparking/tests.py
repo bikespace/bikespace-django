@@ -22,6 +22,7 @@ import xml.etree.ElementTree as ET
 import time
 from django.db import connections
 from bicycleparking.geocode import Geocode
+from bicycleparking.LocationData import LocationData
 from bicycleparking.models import SurveyAnswer
 from bicycleparking.models import Event
 from bicycleparking.models import Area
@@ -62,6 +63,20 @@ class Geocodetest (TestCase) :
         print ("No geographic database found, assuming test OK")
      self.assertTrue (self.success)
 
+  def test_names_lookup (self) :
+     """Tests the names lookup method by accessing the lookup and 
+     comparing the names with the string defined in the text element entry."""
+     print ("\t\ttesting geocode location")
+     self.success = True
+     if self.database_exists () :
+        entries = self.readGeoEntries ("test/areas.xml", sources)
+
+        for test in entries :
+           self.nameLookup (test)
+     else :
+            print ("No geographic database found, assuming test OK")
+     self.assertTrue (self.success)
+        
   def test_record (self) :
      """Tests the process of accessing the geographic database and then 
      writing the information received and synthesized into the database."""
@@ -84,7 +99,32 @@ class Geocodetest (TestCase) :
         for entry in entries :
            self.verifyArea (entry)
         self.assertTrue (self.success)
+        
+  def nameLookup (self, entry) :
+     sources = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
+                 'closest' : { 'gid' : 'gid' 'name' : 'closestname'}, 
+                 'major' : { 'name' : 'majorname, gid' : 'major_gid' } }
+
+     entries = self.readGeoEntries ("test/areas.xml", sources)
        
+     for test in entries :
+        success = True
+        location = LocationData (test ['latitude'], test ['longitude'])
+        result = location.getIntersectionNames ()
+
+        if (result ['closest'] == test ['closestname']) :
+           print ('OK: {0}'.format (result ['closest']))
+        else :
+           success = False
+           print ('error: {0} <> {1}'.format (result ['closest'], test ['closestname'])) 
+
+        if result ['major'] == test ['majorname'] :
+           print ('OK: {0}'.format (result ['closest']))
+        else :
+           success = False
+           print ('error: {0} <> {1}'.format (result ['closest'], test ['closestname'])) 
+                
+        
   def load_geo_test_subset (self) :
      """Once the django test routines have created the test databases, load the 
         geospatial (gis) reference database with the subset of the intersections

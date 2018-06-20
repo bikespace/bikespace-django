@@ -66,15 +66,13 @@ class Geocodetest (TestCase) :
   def test_names_lookup (self) :
      """Tests the names lookup method by accessing the lookup and 
      comparing the names with the string defined in the text element entry."""
+
      print ("\t\ttesting geocode location")
      self.success = True
      if self.database_exists () :
-        entries = self.readGeoEntries ("test/areas.xml", sources)
-
-        for test in entries :
-           self.nameLookup (test)
+         self.nameLookup ()
      else :
-            print ("No geographic database found, assuming test OK")
+         print ("No geographic database found, assuming test OK")
      self.assertTrue (self.success)
         
   def test_record (self) :
@@ -100,16 +98,16 @@ class Geocodetest (TestCase) :
            self.verifyArea (entry)
         self.assertTrue (self.success)
         
-  def nameLookup (self, entry) :
+  def nameLookup (self) :
      sources = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
                  'closest' : { 'gid' : 'gid', 'name' : 'closestname'}, 
-                 'major' : { 'name' : 'majorname, gid' : 'major_gid' } }
+                 'major' : { 'name' : 'majorname', 'gid' : 'major_gid' } }
 
      entries = self.readGeoEntries ("test/areas.xml", sources)
        
      for test in entries :
         success = True
-        location = LocationData (test ['latitude'], test ['longitude'])
+        location = LocationData (float (test ['latitude']), float (test ['longitude']))
         result = location.getIntersectionNames ()
 
         if (result ['closest'] == test ['closestname']) :

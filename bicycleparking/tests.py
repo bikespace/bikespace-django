@@ -102,7 +102,7 @@ class Geocodetest (TestCase) :
         
   def nameLookup (self, entry) :
      sources = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
-                 'closest' : { 'gid' : 'gid' 'name' : 'closestname'}, 
+                 'closest' : { 'gid' : 'gid', 'name' : 'closestname'}, 
                  'major' : { 'name' : 'majorname, gid' : 'major_gid' } }
 
      entries = self.readGeoEntries ("test/areas.xml", sources)

@@ -116,20 +116,18 @@ header{
 
 #error {
     position: relative;
-    z-index: 10;
-    padding: 0px 0px 0px 0px;
-    width: 400px;
-    margin: 15px auto -80px auto;
+    z-index: 100;
+    padding: 16px 0px 0px 0px;
+    width: 416px;
+    margin: 8px auto -80px auto;
     height: 30px;
-    background-color: #fff;
-    border-style: solid;
-    border-color: #ed145b;
-    border-width: 8px;
 }
 
 #error h1 {
-    margin-top: -12px;
+    margin-top: -22px;
     text-align: center;
+    font-weight: normal;
+    color: #fff;
 }
 
 /*___________________________________________________________*/
@@ -143,7 +141,7 @@ header{
 
 .prog1 {
     box-shadow: 
-        -180px 16px 0px 0px #31C057,
+        -180px 16px 0px 0px #25c252,
         -90px 16px 0px 0px #ccc,
         0px 16px 0px 0px #ccc,
         90px 16px 0px 0px #ccc,
@@ -152,7 +150,7 @@ header{
 .prog2 {
     box-shadow: 
         -180px 16px 0px 0px #ccc,
-        -90px 16px 0px 0px #31C057,
+        -90px 16px 0px 0px #25c252,
         0px 16px 0px 0px #ccc,
         90px 16px 0px 0px #ccc,
         180px 16px 0px 0px #ccc;
@@ -161,7 +159,7 @@ header{
     box-shadow: 
         -180px 16px 0px 0px #ccc,
         -90px 16px 0px 0px #ccc,
-        0px 16px 0px 0px #31C057,
+        0px 16px 0px 0px #25c252,
         90px 16px 0px 0px #ccc,
         180px 16px 0px 0px #ccc;
 }
@@ -170,7 +168,7 @@ header{
         -180px 16px 0px 0px #ccc,
         -90px 16px 0px 0px #ccc,
         0px 16px 0px 0px #ccc,
-        90px 16px 0px 0px #31C057,
+        90px 16px 0px 0px #25c252,
         180px 16px 0px 0px #ccc;
 }
 .prog5 {
@@ -179,7 +177,7 @@ header{
         -90px 16px 0px 0px #ccc,
         0px 16px 0px 0px #ccc,
         90px 16px 0px 0px #ccc,
-        180px 16px 0px 0px #31C057;
+        180px 16px 0px 0px #25c252;
 }
 .progLine {
     position: relative;
@@ -325,7 +323,7 @@ footer {
 }
 .back {
     padding: 13px;
-    box-shadow: 0px 0px 0px 3px #31C057 inset;
+    box-shadow: 0px 0px 0px 3px #25c252 inset;
     height: 24px;
     width: 86px;
     border-radius: 30px;
@@ -338,12 +336,12 @@ footer {
     margin-left: -13px;
     padding: 13px;
     margin-top: -13px;
-    color: #31C057;
+    color: #25c252;
 }
 .next {
     padding: 13px;
     margin-left: auto;
-    background: #31C057;
+    background: #25c252;
     height: 24px;
     width: 86px;
     margin-top: -50px;
@@ -364,7 +362,7 @@ footer {
     margin: auto;
     margin-top: -70px;
     margin-bottom: 20px;
-    background: #31C057;
+    background: #25c252;
     height: 24px;
     width: 240px;
     border-radius: 30px;
@@ -382,7 +380,7 @@ footer {
 }
 
 .red {
-    background-color: #F24722;
+    background-color: #ed145b;
 }
 
 /*SUMMARY___________________________________________________________*/
@@ -489,7 +487,7 @@ input{
 }
 .success {
     height: 120px;
-    background-color: #31C057bb;
+    background-color: #25c252bb;
     background-image: url(assets/icons/success.svg);
     background-position: center 62px; 
     background-repeat: no-repeat;

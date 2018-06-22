@@ -53,7 +53,7 @@ export default class Beta {
       </div>
       <footer>
         <div class="nav">
-                <div class="button bshadow">
+                <div class="button">
                     <a id="submitBetaComment"><p><em>Send your comment</em></p></a>
                 </div>
             </div>

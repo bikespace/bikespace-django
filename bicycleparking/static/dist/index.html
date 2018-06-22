@@ -4,23 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>BikeSpace - Home</title>
-    <link rel="manifest" href="https://s3.amazonaws.com/bikespace-static/dist/manifest.json">
+    <link rel="manifest" href="./manifest.json">
 
-    <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="https://s3.amazonaws.com/bikespace-static/dist/style/stylesheet.css" />
-    <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="https://s3.amazonaws.com/bikespace-static/dist/style/mobilesheet.css" />
-    <link type="text/css" rel="stylesheet" href="https://s3.amazonaws.com/bikespace-static/dist/style/flatpickr.min.css" />
-    <link type="text/css" rel="stylesheet" href="https://s3.amazonaws.com/bikespace-static/dist/style/leaflet.css" />
-    <link type="text/css" rel="stylesheet" href="https://s3.amazonaws.com/bikespace-static/dist/style/leaflet-search.css" />
+    <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="./style/stylesheet.css" />
+    <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="./style/mobilesheet.css" />
+    <link type="text/css" rel="stylesheet" href="./style/flatpickr.min.css" />
+    <link type="text/css" rel="stylesheet" href="./style/leaflet.css" />
+    <link type="text/css" rel="stylesheet" href="./style/leaflet-search.css" />
 
 
     <!--favicon-->
-    <link rel="icon" type="image/png" href="https://s3.amazonaws.com/bikespace-static/dist/style/assets/icons/bikespace32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="https://s3.amazonaws.com/bikespace-static/dist/style/assets/icons/bikespace16.png" />
+    <link rel="icon" type="image/png" href="./style/assets/icons/bikespace32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="./style/assets/icons/bikespace16.png" />
 
     <!-- META Tags -->
     <meta property="og:title" content="Bikespace">
     <meta property="og:description" content="Report bike parking issues in Toronto.">
-    <meta property="og:image" content="https://s3.amazonaws.com/bikespace-static/dist/assets/icons/media_thumb1.jpg">
+    <meta property="og:image" content="./assets/icons/media_thumb1.jpg">
     <meta name="twitter:card" content="summary_large_image">
 
     <meta property="og:site_name" content="BikeSpace visual prototype">
@@ -53,14 +53,14 @@
 
     </div>
 
-<script type="text/javascript" src="https://s3.amazonaws.com/bikespace-static/dist/bundle.js"></script></body>
+<script type="text/javascript" src="./bundle.js"></script></body>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3HcEXo5I-XxTyZPf34c6gTw20zBWFiNg">
 </script>
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
-            .register('https://s3.amazonaws.com/bikespace-static/dist/sw.js')
+            .register('./sw.js')
             .then(function () { console.log('Service Worker Registered'); });
     }
 </script>

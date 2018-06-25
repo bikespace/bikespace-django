@@ -46,7 +46,18 @@ const questions = [
         required: false,
       }
     ]
-  }, {
+  },{
+    questions: [
+      {
+        key: 'comments',
+        type: contents.COMMENT,
+        heading: 'Add a photo',
+        text: 'Optional',
+        error: 'Picture is wrong format',
+        required: false,
+      }
+    ]
+  },{
     questions: [
       {
         key: 'map',

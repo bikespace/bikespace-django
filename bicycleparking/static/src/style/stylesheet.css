@@ -238,6 +238,7 @@ ul {
 
 .options {
     list-style: none;
+    cursor: pointer;
     padding: 13px;
     background: #ddd;
     height: 24px;
@@ -252,6 +253,7 @@ ul {
 }
 
 .doubleoption {
+    cursor: pointer;
     position: relative;
 }
 
@@ -261,6 +263,7 @@ ul {
 }
 
 .cameraButton{
+    cursor: pointer;
     position: absolute;
     opacity: 0;
     width: 100%;

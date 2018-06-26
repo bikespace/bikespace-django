@@ -171,41 +171,55 @@ header{
 .prog1 {
     box-shadow:
         0vw 4vw 0px 0px #31C057,
-        20vw 4vw 0px 0px #ccc,
-        40vw 4vw 0px 0px #ccc,
-        60vw 4vw 0px 0px #ccc,
+        16vw 4vw 0px 0px #ccc,
+        32vw 4vw 0px 0px #ccc,
+        48vw 4vw 0px 0px #ccc,
+        64vw 4vw 0px 0px #ccc,
         80vw 4vw 0px 0px #ccc; 
 }
 .prog2 {
     box-shadow:
         0vw 4vw 0px 0px #ccc,
-        20vw 4vw 0px 0px #31C057,
-        40vw 4vw 0px 0px #ccc,
-        60vw 4vw 0px 0px #ccc,
-        80vw 4vw 0px 0px #ccc;
+        16vw 4vw 0px 0px #31C057,
+        32vw 4vw 0px 0px #ccc,
+        48vw 4vw 0px 0px #ccc,
+        64vw 4vw 0px 0px #ccc,
+        80vw 4vw 0px 0px #ccc; 
 }
 .prog3 {
     box-shadow:
         0vw 4vw 0px 0px #ccc,
-        20vw 4vw 0px 0px #ccc,
-        40vw 4vw 0px 0px #31C057,
-        60vw 4vw 0px 0px #ccc,
-        80vw 4vw 0px 0px #ccc;
+        16vw 4vw 0px 0px #ccc,
+        32vw 4vw 0px 0px #31C057,
+        48vw 4vw 0px 0px #ccc,
+        64vw 4vw 0px 0px #ccc,
+        80vw 4vw 0px 0px #ccc; 
 }
 .prog4 {
     box-shadow:
         0vw 4vw 0px 0px #ccc,
-        20vw 4vw 0px 0px #ccc,
-        40vw 4vw 0px 0px #ccc,
-        60vw 4vw 0px 0px #31C057,
-        80vw 4vw 0px 0px #ccc;
+        16vw 4vw 0px 0px #ccc,
+        32vw 4vw 0px 0px #ccc,
+        48vw 4vw 0px 0px #31C057,
+        64vw 4vw 0px 0px #ccc,
+        80vw 4vw 0px 0px #ccc; 
 }
 .prog5 {
     box-shadow:
         0vw 4vw 0px 0px #ccc,
-        20vw 4vw 0px 0px #ccc,
-        40vw 4vw 0px 0px #ccc,
-        60vw 4vw 0px 0px #ccc,
+        16vw 4vw 0px 0px #ccc,
+        32vw 4vw 0px 0px #ccc,
+        48vw 4vw 0px 0px #ccc,
+        64vw 4vw 0px 0px #31C057,
+        80vw 4vw 0px 0px #ccc; 
+}
+.prog6 {
+    box-shadow:
+        0vw 4vw 0px 0px #ccc,
+        16vw 4vw 0px 0px #ccc,
+        32vw 4vw 0px 0px #ccc,
+        48vw 4vw 0px 0px #ccc,
+        64vw 4vw 0px 0px #ccc,
         80vw 4vw 0px 0px #31C057; 
 }
 .progLine {

@@ -76,7 +76,7 @@ export default class Happening extends Content {
     }, '');
     return (`
       <div class="screen1 visible">
-        <div class="progLine"><div class="progress prog4"></div></div>
+        <div class="progLine"><div class="progress prog3"></div></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.subtitle1}</h2>
     

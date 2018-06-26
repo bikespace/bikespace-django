@@ -34,30 +34,7 @@ const questions = [
         ]
       }
     ]
-  },
-  {
-    questions: [
-      {
-        key: 'picture',
-        type: contents.PICTURE,
-        heading: 'Add a photo',
-        text: 'Optional',
-        error: 'Picture is wrong format',
-        required: false,
-      }
-    ]
-  },{
-    questions: [
-      {
-        key: 'comments',
-        type: contents.COMMENT,
-        heading: 'Add a photo',
-        text: 'Optional',
-        error: 'Picture is wrong format',
-        required: false,
-      }
-    ]
-  },{
+  }, {
     questions: [
       {
         key: 'map',
@@ -99,6 +76,27 @@ const questions = [
             class: 'half2'
           }
         ]
+      }
+    ]
+  }, {
+    questions: [
+      {
+        key: 'picture',
+        type: contents.PICTURE,
+        heading: 'Add a photo',
+        text: 'Optional',
+        error: 'Picture is wrong format',
+        required: false,
+      }
+    ]
+  }, {
+    questions: [
+      {
+        key: 'comments',
+        type: contents.COMMENTS,
+        heading: 'Add a comment',
+        text: 'Optional',
+        required: false,
       }
     ]
   }, {

@@ -94,7 +94,7 @@ export default class Picture extends Content {
     get template() {
         return (`
         <div class="screen1 visible">
-          <div class="progLine"><div class="progress prog2"></div></div>
+          <div class="progLine"><div class="progress prog4"></div></div>
           <h1>${this.props.heading}</h1>
           <h2 id="pictureText" class="">${this.props.text}</h2>
             <ul>

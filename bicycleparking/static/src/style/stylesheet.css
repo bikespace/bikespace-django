@@ -143,43 +143,57 @@ header{
 
 .prog1 {
     box-shadow: 
-        -180px 16px 0px 0px #31C057,
-        -90px 16px 0px 0px #ccc,
-        0px 16px 0px 0px #ccc,
-        90px 16px 0px 0px #ccc,
-        180px 16px 0px 0px #ccc;
+        -175px 16px 0px 0px #31C057,
+        -105px 16px 0px 0px #ccc,
+        -35px 16px 0px 0px #ccc,
+        35px 16px 0px 0px #ccc,
+        105px 16px 0px 0px #ccc,
+        175px 16px 0px 0px #ccc;
 }
 .prog2 {
     box-shadow: 
-        -180px 16px 0px 0px #ccc,
-        -90px 16px 0px 0px #31C057,
-        0px 16px 0px 0px #ccc,
-        90px 16px 0px 0px #ccc,
-        180px 16px 0px 0px #ccc;
+        -175px 16px 0px 0px #ccc,
+        -105px 16px 0px 0px #31C057,
+        -35px 16px 0px 0px #ccc,
+        35px 16px 0px 0px #ccc,
+        105px 16px 0px 0px #ccc,
+        175px 16px 0px 0px #ccc;
 }
 .prog3 {
     box-shadow: 
-        -180px 16px 0px 0px #ccc,
-        -90px 16px 0px 0px #ccc,
-        0px 16px 0px 0px #31C057,
-        90px 16px 0px 0px #ccc,
-        180px 16px 0px 0px #ccc;
+        -175px 16px 0px 0px #ccc,
+        -105px 16px 0px 0px #ccc,
+        -35px 16px 0px 0px #31C057,
+        35px 16px 0px 0px #ccc,
+        105px 16px 0px 0px #ccc,
+        175px 16px 0px 0px #ccc;
 }
 .prog4 {
     box-shadow: 
-        -180px 16px 0px 0px #ccc,
-        -90px 16px 0px 0px #ccc,
-        0px 16px 0px 0px #ccc,
-        90px 16px 0px 0px #31C057,
-        180px 16px 0px 0px #ccc;
+        -175px 16px 0px 0px #ccc,
+        -105px 16px 0px 0px #ccc,
+        -35px 16px 0px 0px #ccc,
+        35px 16px 0px 0px #31C057,
+        105px 16px 0px 0px #ccc,
+        175px 16px 0px 0px #ccc;
 }
 .prog5 {
     box-shadow: 
-        -180px 16px 0px 0px #ccc,
-        -90px 16px 0px 0px #ccc,
-        0px 16px 0px 0px #ccc,
-        90px 16px 0px 0px #ccc,
-        180px 16px 0px 0px #31C057;
+        -175px 16px 0px 0px #ccc,
+        -105px 16px 0px 0px #ccc,
+        -35px 16px 0px 0px #ccc,
+        35px 16px 0px 0px #ccc,
+        105px 16px 0px 0px #31C057,
+        175px 16px 0px 0px #ccc;
+}
+.prog6 {
+    box-shadow: 
+        -175px 16px 0px 0px #ccc,
+        -105px 16px 0px 0px #ccc,
+        -35px 16px 0px 0px #ccc,
+        35px 16px 0px 0px #ccc,
+        105px 16px 0px 0px #ccc,
+        175px 16px 0px 0px #31C057;
 }
 .progLine {
     position: relative;

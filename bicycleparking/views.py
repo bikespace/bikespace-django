@@ -88,15 +88,11 @@ class BetaCommentList(generics.ListCreateAPIView):
 
 class LocationNameRequest (APIView) :
     
-    def get (self, request) :
+    def post (self, request) :
         """Takes a set of GET or POST parameters containing the  and returns a JSON
         string containing the """
-        if request.method == "GET" :
-            param = request.GET
-        elif request.POST :
-            param = request.POST
-        else :
-            param = json.loads (request.body)
+        param = json.loads (request.body)
+        print(param)
         data = LocationData (param ['latitude'], param ['longitude'])
         return JsonResponse (data.getIntersectionNames ())
            

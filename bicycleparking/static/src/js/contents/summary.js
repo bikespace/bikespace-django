@@ -26,20 +26,31 @@ export default class Summary extends Content {
         document.getElementById('problems').innerHTML = problems;
         document.getElementById('date').innerHTML = new Date(state.happening[0].date).toLocaleString('en-US', { month: 'long', day: 'numeric' })
         document.getElementById('clock').innerHTML = new Date(state.happening[0].date).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-        if(state.picture){            
+        if (state.picture) {
             document.getElementById('checkPhoto').classList.remove("off");
             document.getElementById('checkPhoto').classList.add("on");
-        }else{
+        } else {
             document.getElementById('checkPhoto').classList.remove("on");
             document.getElementById('checkPhoto').classList.add("off");
         }
-        if(state.map){
+        if (state.map) {
             document.getElementById('checkMap').classList.remove("off");
             document.getElementById('checkMap').classList.add("on");
-        }else{
+        } else {
             document.getElementById('checkMap').classList.remove("on");
             document.getElementById('checkMap').classList.add("off");
         }
+        fetch(`${document.location.origin}/api/intersection`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 'latitude': state.map[0][0], 'longitude': state.map[0][1] }),
+        }).then(response => {
+            response.json().then(json => {
+                document.getElementById('intersection').innerHTML = json.major;
+            })
+        })
     }
 
     get template() {
@@ -71,6 +82,8 @@ export default class Summary extends Content {
                         <div id="checkMap" class="check"></div>
                     </div>
                 </div>
+                <div class="linebreak"></div>
+                <div id="intersection"><div>
             </div>        
         </div>   
       </div>

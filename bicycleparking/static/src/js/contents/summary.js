@@ -26,20 +26,6 @@ export default class Summary extends Content {
         document.getElementById('problems').innerHTML = problems;
         document.getElementById('date').innerHTML = new Date(state.happening[0].date).toLocaleString('en-US', { month: 'long', day: 'numeric' })
         document.getElementById('clock').innerHTML = new Date(state.happening[0].date).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-        if (state.picture) {
-            document.getElementById('checkPhoto').classList.remove("off");
-            document.getElementById('checkPhoto').classList.add("on");
-        } else {
-            document.getElementById('checkPhoto').classList.remove("on");
-            document.getElementById('checkPhoto').classList.add("off");
-        }
-        if (state.map) {
-            document.getElementById('checkMap').classList.remove("off");
-            document.getElementById('checkMap').classList.add("on");
-        } else {
-            document.getElementById('checkMap').classList.remove("on");
-            document.getElementById('checkMap').classList.add("off");
-        }
         fetch(`${document.location.origin}/api/intersection`, {
             method: 'POST',
             headers: {

@@ -24,12 +24,20 @@ export default class Happening extends Content {
   }
 
   onClick(event) {
-    if (event.target.classList.contains("off")) {
-      event.target.classList.replace("off", "on")
-      this.values[0].time.push(event.target.getAttribute("value"));
+    var id;
+    if (!event.target.getAttribute("value")) {
+      id = event.target.parentElement.getAttribute("value");
     } else {
-      event.target.classList.replace("on", "off")
-      this.values[0].time.splice(this.values.indexOf(event.target.getAttribute("value")), 1);
+      id = event.target.getAttribute("value");
+    }
+    var check = document.getElementById(id);
+
+    if (check.classList.contains("off")) {
+      check.classList.replace("off", "on")
+      this.values[0].time.forEach(id => {
+        document.getElementById(id).classList.replace("on", "off")
+      });
+      this.values[0].time = [id];
     }
   }
 
@@ -50,7 +58,7 @@ export default class Happening extends Content {
       noCalendar: true,
       dateFormat: "h:i K", time_24hr: false, defaultDate: date
     });
-    [...document.getElementsByClassName('check')].forEach(el => {
+    [...document.getElementsByClassName('options')].forEach(el => {
       el.addEventListener('click', this.onClick.bind(this));
     })
 
@@ -63,12 +71,12 @@ export default class Happening extends Content {
           cssClass = "check on"
         }
       }
-      memo += `<div class="options ${value.class}"><li><em>${value.text}</em></li><div class="${cssClass}" value="${value.key}"></div></div>`
+      memo += `<div class="options ${value.class}" value="${value.key}"><li value="${value.key}"><em value="${value.key}">${value.text}</em></li><div id="${value.key}"class="${cssClass}" value="${value.key}"></div></div>`
       return memo;
     }, '');
     return (`
       <div class="screen1 visible">
-        <div class="progLine"><div class="progress prog4"></div></div>
+        <div class="progLine"><div class="progress prog3"></div></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.subtitle1}</h2>
     

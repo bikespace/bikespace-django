@@ -31,6 +31,9 @@ export default class Map extends Content {
     if (this.haveLocation) { zoom_level = 16; }
     if (typeof this.map === 'undefined') {
       var my_localisation = JSON.parse(localStorage.getItem('my_localisation'));
+      if(!my_localisation){
+        my_localisation= this.location;
+      }
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: zoom_level,
         center: my_localisation
@@ -57,7 +60,7 @@ export default class Map extends Content {
   get template() {
     return (`
       <div class="screen1 visible">
-        <div class="progLine"><div class="progress prog3"></div></div>
+        <div class="progLine"><div class="progress prog2"></div></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.text}</h2>
         <div id="map" class=""></div>

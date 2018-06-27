@@ -1,7 +1,8 @@
 import Issue from './contents/issue';
-import Picture from './contents/picture';
 import Map from './contents/map';
 import Happening from './contents/happening';
+import Picture from './contents/picture';
+import Comments from './contents/comments';
 import Summary from './contents/summary';
 import contents from './contents/contents';
 
@@ -24,12 +25,14 @@ export default class Survey {
   createContent(props, question) {
     if (props.type === contents.ISSUES) {
       return new Issue(props, question);
-    } else if (props.type === contents.PICTURE) {
-      return new Picture(props, question);
     } else if (props.type === contents.MAP) {
       return new Map(props, question, this.survey);
     } else if (props.type === contents.HAPPENING) {
       return new Happening(props, question);
+    } else if (props.type === contents.PICTURE) {
+      return new Picture(props, question);
+    } else if (props.type === contents.COMMENTS) {
+      return new Comments(props, question);
     } else if (props.type === contents.SUMMARY) {
       return new Summary(props, question);
     }

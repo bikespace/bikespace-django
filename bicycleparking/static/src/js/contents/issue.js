@@ -15,30 +15,37 @@ export default class Issue extends Content {
   }
 
   onClick(event) {
-    if (event.target.classList.contains("off")) {
-      event.target.classList.replace("off", "on")
-      this.values.push(event.target.getAttribute("value"));
+    var id;
+    if (!event.target.getAttribute("value")) {
+      id = event.target.parentElement.getAttribute("value");
     } else {
-      event.target.classList.replace("on", "off")
-      this.values.splice(this.values.indexOf(event.target.getAttribute("value")), 1);
+      id = event.target.getAttribute("value");
+    }
+    var check = document.getElementById(id);
+    if (check.classList.contains("off")) {
+      check.classList.replace("off", "on")
+      this.values.push(id);
+    } else {
+      check.classList.replace("on", "off")
+      this.values.splice(this.values.indexOf(id), 1);
     }
   }
 
   bind() {
     this.values = this.getDataFromSession(this.props['key']);
-    [...document.getElementsByClassName('check')].forEach(el => {
+    [...document.getElementsByClassName('options')].forEach(el => {
       el.addEventListener('click', this.onClick.bind(this));
-      if(this.values.filter(value => value === el.getAttribute("value")).length>0){
-        el.classList.remove("off");
-        el.classList.add("on");
+      if (this.values.filter(value => value === el.getAttribute("value")).length > 0) {
+        document.getElementById(el.getAttribute("value")).classList.remove("off");
+        document.getElementById(el.getAttribute("value")).classList.add("on");
       }
-    })
+    });
   }
 
   get template() {
     const skipButton = this.props.required ? '' : `<button id="skip">skip</button>`;
     const options = this.props.values.reduce((memo, value) => {
-      memo += `<div class="options"><li><em>${value.text}</em></li><div class="check off" value="${value.key}"></div></div>`
+      memo += `<div class="options" value="${value.key}"><li value="${value.key}"><em value="${value.key}">${value.text}</em></li><div id="${value.key}" class="check off" value="${value.key}"></div></div>`
       return memo;
     }, '');
     return (`

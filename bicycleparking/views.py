@@ -21,9 +21,13 @@
 #
 
 import json
+import base64
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.http import HttpResponse
+from django.core.files.base import ContentFile
+from datetime import datetime
+
 from rest_framework import generics
 from rest_framework.parsers import FileUploadParser
 from rest_framework.views import APIView
@@ -50,17 +54,6 @@ def index(request):
 def dashboard(request):
     return render(request, 'bicycleparking/dashboard.html', {})
 
-def locationNames (request) :
-    """Takes a set of GET or POST parameters containing the  and returns a JSON
-    string containing the """
-    if request.method == "GET" :
-       param = request.GET
-    elif request.POST :
-        param = request.POST
-    else :
-        param = json.loads (request.body.decode('utf-8'))
-    data = LocationData (param ['latitude'], param ['longitude'])
-    return JsonResponse (data.getIntersectionNames ())
 
 class SurveyAnswerList(generics.ListCreateAPIView):
     """Generates the main table entries from the user's survey input, generates
@@ -93,6 +86,17 @@ class BetaCommentList(generics.ListCreateAPIView):
         and event record using the geocode class, and the picture record."""
         serializer.save()
 
+class LocationNameRequest (APIView) :
+    
+    def post (self, request) :
+        """Takes a set of GET or POST parameters containing the  and returns a JSON
+        string containing the """
+        param = json.loads (request.body)
+        print(param)
+        data = LocationData (param ['latitude'], param ['longitude'])
+        return JsonResponse (data.getIntersectionNames ())
+           
+
 class DownloadPicture(APIView):
     uploader = Uploader()
 
@@ -108,16 +112,21 @@ class DownloadPicture(APIView):
 
 
 class UploadPicture(APIView):
-    parser_classes = (FileUploadParser,)
     renderer_classes = (JSONRenderer, )
     uploader = Uploader()
 
-    def put(self, request, filename, format=None):
-        file_obj = request.data['file']
+    def post(self, request, filename, format=None):
+        file_obj = self.request.data['picture']
         ipAddress = request.META['REMOTE_ADDR']
+
+        format, imgstr = file_obj.split(';base64,') 
+        ext = format.split('/')[-1] 
+
+        file = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
         print ("upload source address = {0}".format (ipAddress))
+
         if ipAddress != "127.0.0.1" :
-           content = {'s3_name': self.uploader.toS3(filename, file_obj)}
+           content = {'s3_name': self.uploader.toS3(filename, file)}
         else :
             content = { 's3_name' : 'test/picture'}
         return Response(content)

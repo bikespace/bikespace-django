@@ -169,41 +169,55 @@ header{
 .prog1 {
     box-shadow:
         0vw 4vw 0px 0px #25c252,
-        20vw 4vw 0px 0px #ccc,
-        40vw 4vw 0px 0px #ccc,
-        60vw 4vw 0px 0px #ccc,
+        16vw 4vw 0px 0px #ccc,
+        32vw 4vw 0px 0px #ccc,
+        48vw 4vw 0px 0px #ccc,
+        64vw 4vw 0px 0px #ccc,
         80vw 4vw 0px 0px #ccc; 
 }
 .prog2 {
     box-shadow:
         0vw 4vw 0px 0px #ccc,
-        20vw 4vw 0px 0px #25c252,
-        40vw 4vw 0px 0px #ccc,
-        60vw 4vw 0px 0px #ccc,
-        80vw 4vw 0px 0px #ccc;
+        16vw 4vw 0px 0px #25c252,
+        32vw 4vw 0px 0px #ccc,
+        48vw 4vw 0px 0px #ccc,
+        64vw 4vw 0px 0px #ccc,
+        80vw 4vw 0px 0px #ccc; 
 }
 .prog3 {
     box-shadow:
         0vw 4vw 0px 0px #ccc,
-        20vw 4vw 0px 0px #ccc,
-        40vw 4vw 0px 0px #25c252,
-        60vw 4vw 0px 0px #ccc,
-        80vw 4vw 0px 0px #ccc;
+        16vw 4vw 0px 0px #ccc,
+        32vw 4vw 0px 0px #25c252,
+        48vw 4vw 0px 0px #ccc,
+        64vw 4vw 0px 0px #ccc,
+        80vw 4vw 0px 0px #ccc; 
 }
 .prog4 {
     box-shadow:
         0vw 4vw 0px 0px #ccc,
-        20vw 4vw 0px 0px #ccc,
-        40vw 4vw 0px 0px #ccc,
-        60vw 4vw 0px 0px #25c252,
-        80vw 4vw 0px 0px #ccc;
+        16vw 4vw 0px 0px #ccc,
+        32vw 4vw 0px 0px #ccc,
+        48vw 4vw 0px 0px #25c252,
+        64vw 4vw 0px 0px #ccc,
+        80vw 4vw 0px 0px #ccc; 
 }
 .prog5 {
     box-shadow:
         0vw 4vw 0px 0px #ccc,
-        20vw 4vw 0px 0px #ccc,
-        40vw 4vw 0px 0px #ccc,
-        60vw 4vw 0px 0px #ccc,
+        16vw 4vw 0px 0px #ccc,
+        32vw 4vw 0px 0px #ccc,
+        48vw 4vw 0px 0px #ccc,
+        64vw 4vw 0px 0px #25c252,
+        80vw 4vw 0px 0px #ccc; 
+}
+.prog6 {
+    box-shadow:
+        0vw 4vw 0px 0px #ccc,
+        16vw 4vw 0px 0px #ccc,
+        32vw 4vw 0px 0px #ccc,
+        48vw 4vw 0px 0px #ccc,
+        64vw 4vw 0px 0px #ccc,
         80vw 4vw 0px 0px #25c252; 
 }
 .progLine {
@@ -234,7 +248,7 @@ header{
     opacity: 0;
 }
 .visible {
-    background-color: #ffffffee;
+    background-color: #fffffff5;
 }
 
 .options {

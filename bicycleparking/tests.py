@@ -12,6 +12,12 @@
 # Modified 2017 11 12 
 # Purpose add recording test
 #
+# Modified 2018 06 01
+# Purpose add tests for LocationData object
+#
+# Modified 2018 06 26
+# Purpose  Amplify documentation
+#
 # Modified 
 # Purpose   
 #
@@ -32,18 +38,33 @@ from bicycleparking.intersection import Intersection
 class Geocodetest (TestCase) :
 
   """ Tests include:
-         test_location:  tests a series of geocode values read from an xml test data file,
-                         accessing the intersection database published by the City of
-                         Toronto to locate the entries in the test data and compare the 
-                         intersection data lookups with expected results.
-         test_record:    Tests the processes for writing data to he database and compares
-                         the database entries as created with the expected entries. 
+         test_location:      tests a series of geocode values read from an xml test data file,
+                             accessing the intersection database published by the City of
+                             Toronto to locate the entries in the test data and compare the 
+                             intersection data lookups with expected results.
 
-                         The data in the test file include both inputs and the main expected
-                         results to test against. Test output will indicate whether or not 
-                         the test execution returned the expected result, and if it does not
-                         return successfully the test system will return diagnostic 
-                         information."""
+         test_names_lookup:  Tests the LocationData object lookup methods and the methods to
+                             return the intersection identifiers as strings for display.
+
+         test_record:        Tests the processes for writing data to he database and compares
+                             the database entries as created with the expected entries. 
+         
+         Each of these methods uses the same test data; this consists of a dataset coded
+         in xml with specifications for a location, the (known) closest intersection to the
+         given location, and the (known) closest major intersection. Each test method defines
+         a map, consisting of an entry for the origin, closest and (closest) major. Each 
+         entry in the map in turn contains a nested map, and each entry in the nested map 
+         consists of a tag name and a field name. The field name refers to a tag within the 
+         corresponding xml specification, and the field name must contain a string unique 
+         throughout the entire map. For each test, this map converts the test location 
+         definition element to a parameter list, which the test routines will then use. 
+         See the ReadGeoEntries and its subsidiary methods for more details.
+
+         The data in the test file include both inputs and the main expected
+         results to test against. Test output will indicate whether or not 
+         the test execution returned the expected result, and if it does not
+         return successfully the test system will return diagnostic 
+         information."""
     
   def test_location (self) :
      """Tests the location requests without writing data to the database."""
@@ -67,10 +88,14 @@ class Geocodetest (TestCase) :
      """Tests the names lookup method by accessing the lookup and 
      comparing the names with the string defined in the text element entry."""
 
+     sources = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
+                 'closest' : { 'gid' : 'gid', 'name' : 'closestname'}, 
+                 'major' : { 'name' : 'majorname', 'gid' : 'major_gid' } }
+
      print ("\t\ttesting geocode location")
      self.success = True
      if self.database_exists () :
-         self.nameLookup ()
+         self.nameLookup (sources)
      else :
          print ("No geographic database found, assuming test OK")
      self.assertTrue (self.success)
@@ -98,11 +123,11 @@ class Geocodetest (TestCase) :
            self.verifyArea (entry)
         self.assertTrue (self.success)
         
-  def nameLookup (self) :
-     sources = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
-                 'closest' : { 'gid' : 'gid', 'name' : 'closestname'}, 
-                 'major' : { 'name' : 'majorname', 'gid' : 'major_gid' } }
-
+  def nameLookup (self, sources) :
+     """Tests the main names lookup functions: these lokup a given location, find the
+     closest intersection and the closest major, and return both names. The endpoint
+     that calls this method then packages the output in a JSON string and returns it 
+     to the caller."""
      entries = self.readGeoEntries ("test/areas.xml", sources)
        
      for test in entries :

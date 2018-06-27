@@ -20,7 +20,7 @@ export default class Summary extends Content {
         var state = StateSession.getInstance().get();
         var questions = this.questions;
         var problems = state.problem_type.reduce((memo, value) => {
-            memo += '<div class="options"><li><em>' + questions[0].questions[0].values.find(entry => entry.key === value).text + '</em></li></div>'
+            memo += '<li><em>' + questions[0].questions[0].values.find(entry => entry.key === value).text + '</em></li>'
             return memo;
         }, '');
         document.getElementById('problems').innerHTML = problems;
@@ -56,37 +56,38 @@ export default class Summary extends Content {
     get template() {
         var problems = this.problems;
         return (`
-    <div class="screen1 visible">
-          <div class="progLine"><div class="progress prog6"></div></div>
-          <h1>${this.props.heading}</h1>
-                      <div class="summary">
-                <h2>Problems</h2>
-                <div id="problems">                
-                </div>
+        <div class="screen1 visible">
+        <div class="progLine"><div class="progress prog5"></div></div>
+        <h1>${this.props.heading}</h1>
+            <div class="summary">
+              <h2>Problems</h2>
+              <div class="options summaryProblem"><div id="problems">
+              </div></div>
+              <div class="linebreak"></div>
+              <h2> <em>Intersection </em> </h2>
+              <div class="options summaryChange">
+                  <li><em id="intersection"></em></li>
+              </div>
                 <div class="linebreak"></div>
-                <h2>Date and time</h2>
-                <div class="options third12">
-                    <li><em id="date"></em></li>
-                </div>
-                <div class="options third3">
-                    <li><em id="clock"></em></li>
-                </div>
-                <div class="linebreak"></div>
-                <div>         
-                    <div class="options half1">
-                        <li><em>Photo</em></li>
-                        <div id="checkPhoto" class="check"></div>
-                    </div>
-                    <div class="options half2">
-                        <li><em>Location</em></li>
-                        <div id="checkMap" class="check"></div>
-                    </div>
-                </div>
-                <div class="linebreak"></div>
-                <div id="intersection"><div>
-            </div>        
-        </div>   
+              <h2>Date and time</h2>
+              <div class="options third12">
+                  <li><em id="date"></em></li>
+              </div>
+              <div class="options third3">
+                  <li><em id="clock"></em></li>
+              </div>
+              <div class="linebreak"></div>
+             <div>
+                <div class="options half1 summaryChange noPhoto">
+                     <li><em>Photo</em></li>
+                    <div id="checkPhoto" class="check"></div>
+                   </div>
+
+              </div>
+          </div>
       </div>
+    </div>
+
       `
         )
     }

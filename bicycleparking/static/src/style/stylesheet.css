@@ -260,12 +260,17 @@ ul {
     margin-bottom: 16px;
 }
 
+  
 .options li {
     width: 80%;
     padding-left: 10px;
     font-size: 1.1em;
 }
 
+.noPhoto {
+    display: none;
+  }
+  
 .doubleoption {
     cursor: pointer;
     position: relative;
@@ -409,6 +414,9 @@ footer {
     margin: 2%;
     height: 60vh;
 }
+.summaryProblem {
+    height: 122px;
+  }
 .mapSummary {
     float: right;
     width: 50%;
@@ -501,6 +509,19 @@ input{
     width: 150px;
     margin-top: -66px;
     margin-left: auto;
+}
+.third12 {
+    width: 50%;
+    margin-bottom: 0vh;
+    padding-right: 2vh;
+}
+
+.third3 {
+    width: 30%;
+    margin-top: -50px;
+    margin-left: auto;
+    margin-bottom: 2vh;
+    padding-right: 2vh;
 }
 .success {
     height: 120px;

@@ -251,6 +251,7 @@ header{
     background-color: #fffffff5;
 }
 
+
 .options {
     list-style: none;
     padding: 2vw;
@@ -411,6 +412,10 @@ footer {
 
 /*SUMMARY___________________________________________________________*/
 
+.summaryProblem {
+    height: 35vw;
+
+}
 .mapSummary {
     float: right;
     width: 50%;
@@ -533,6 +538,10 @@ input{
     margin-bottom: 2vh;
     padding-right: 2vh;
 }
+.noPhoto {
+    display: none;
+}
+
 .success {
     height: 15vh;
     width: 70vw;

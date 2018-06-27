@@ -91,8 +91,7 @@ class LocationNameRequest (APIView) :
     def post (self, request) :
         """Takes a set of GET or POST parameters containing the  and returns a JSON
         string containing the """
-        param = json.loads (request.body)
-        print(param)
+        param = json.loads (request.body.decode('utf-8'))
         data = LocationData (param ['latitude'], param ['longitude'])
         return JsonResponse (data.getIntersectionNames ())
            

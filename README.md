@@ -17,7 +17,7 @@ To use this project, we will work though the following steps:
 5. Install ngrok
 6. Code away
 
-We strongly suggest on using `virtualenv` for python development
+We strongly suggest on using `virtualenv` for python development.
 
 #### Next we Install python3 on your computer
 
@@ -40,7 +40,6 @@ On windows
 # please visit https://chocolatey.org/
 # follow the on-screen instructions of the website
 
-# hopefully homebrew is installed
 # let us now use choco to install python3
 choco install python --version 3.6.3
 ```
@@ -54,10 +53,10 @@ the [https://gitlab.com/bikespace/Bicycle-parking](https://gitlab.com/bikespace/
 pip3 install virtualenv
 
 # get the repository of code on your machine and change to the directory
-git clone git@gitlab.com:bikespace/Bicycle-parking.git civictechto-bicycle-parking
+git clone git@gitlab.com:bikespace/Bicycle-parking.git bikespace
 
 # change to the directory
-cd civictechto-bicycle-parking
+cd bikespace
 
 # setup a virtualenv for python3
 virtualenv -p python3 venv
@@ -71,9 +70,63 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-### Have a postgres instance running
+## Database
+---
 
-For mac OSX the easiest method is to download the [Postgres app](http://postgresapp.com/)
+### Docker Workflow
+
+Supplied with the repo is a `docker-compose.yml` file to get a postgres instance up and running with the
+postgis extension. The postgis extension is needed for the spatial data we use in the application.
+
+For first time setup it requires a little bit of time in the terminal, so hang in there but once setup
+it will be smooth for the rest of the development process.
+
+[Install](https://docs.docker.com/install/) docker and docker-compose for your OS.
+
+For Mac and Windows if you install docker, docker-compose is already installed
+so don't have to worry about that.
+
+#### Dependencies
+
+**For Windows/Linux**
+
+Unfortunately this setup for windows has only been tested using the Ubuntu for Windows (WSL) which provides a bash terminal for Windows.
+
+_WSL Installation_: [https://docs.microsoft.com/en-us/windows/wsl/install-win10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+
+__Expose Docker and docker-compose on your WSL terminal (Windows only):__
+
+Since WSL exposes access to both the Windows and Linux kernels you can use the docker installation on your Windows volume in the bash terminal.
+Just have to add some lines your `.bashrc` file in your home directory.
+Open your terminal for WSL, and using your favourite text editor add these lines to your `.bashrc`
+
+```shell
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="$PATH:/mnt/c/Program\ Files/Docker/Docker/resources/bin"
+alias docker=docker.exe
+alias docker-compose=docker-compose.exe
+```
+
+Reopen a new terminal window to make the changes in effect.
+
+__Install postgres and postgis CLI (Windows and Linux):__
+
+```shell
+
+# Install postgres package
+sudo apt-get install update
+sudo apt-get install postgresql postgresql-contrib
+
+# Install postgis package
+
+sudo apt-get install postgis
+```
+
+**For mac OSX**
+
+For mac OSX the easiest method is to download the [Postgres app](http://postgresapp.com/).
+There are other methods to install from source but this is the easiest method available.
+
 
 For other OS specific postgres packages running on the default 5432 port
 Please visit the [postgres download page](https://www.postgresql.org/download/)
@@ -155,13 +208,13 @@ npm install ngrok -g
 We are using rollup to bundle the js for the client side. To compile `cd` into the `bicycleparking` and run :
 
 ```shell
-npm build
+npm run local
 ```
 
 For hot-reloading setup a watcher:
 
 ```shell
-rollup -c -w
+npm run 
 ```
 
 ### With yarn:

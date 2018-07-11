@@ -7,9 +7,9 @@ const questions = [
         key: 'problem_type',
         type: contents.ISSUES,
         heading: 'What was the issue?',
-        text: 'Choose what applies',
+        text: 'Choose at least one',
         required: true,
-        error: 'Choose at least one',
+        error: 'Choose an issue',
         values: [
           {
             key: 'absent',

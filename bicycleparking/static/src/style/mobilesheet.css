@@ -126,7 +126,7 @@ header{
 
 .title {
     background: url(assets/icons/bikespace_header.svg) no-repeat center center;
-    background-size: 30vh;
+    background-size: calc(30vh);
     height: 10vh;
     margin: auto;
     width: 30vh;
@@ -491,7 +491,7 @@ input{
 #dst-cvs{
     display: none;
 }
-.calendar {
+/*.calendar {
     background: url(assets/icons/calendar.svg) no-repeat;
     background-size: 5vw;
     width:5vw;
@@ -499,10 +499,53 @@ input{
     padding-right: 2vw;
     margin-top: -8.5vw;
     margin-left: auto;
+    
+    margin-right: -20vw;
     cursor: pointer;
+}*/
+
+.calendar {
+    width: 4.5vw;
+    margin-left: auto;
+    height: 4vw;
+    margin-right: 1vw;
+    margin-top: calc(-6vw - 2vh);
+    cursor: pointer;
+    border: solid 0.4vw #000;
+    border-radius: 0.5vw;
 }
 
-.clock {
+.calendar::before {
+    content: "";
+    vertical-align: text-top;
+    font-size: 0.8vw;
+    padding-right: 0.3vw;
+    margin-left: -0.3vw;
+    box-shadow:
+        1.3vw -0.8vw 0vw #000,
+        2.4vw -0.8vw 0vw #000,
+        3.5vw -0.8vw 0vw #000;
+}
+.calendar::after {
+    content: "";
+    vertical-align: text-top;
+    font-size: 0.2vw;
+    padding-right: 0.75vw;
+    margin-left: -0.75vw;
+    box-shadow:
+        1.4vw 2.8vw 0vw #000,
+        2.6vw 2.8vw 0vw #000,
+        3.8vw 2.8vw 0vw #000,
+        1.4vw 2vw 0vw #000,
+        2.6vw 2vw 0vw #000,
+        3.8vw 2vw 0vw #000,
+        1.4vw 1.2vw 0vw #000,
+        2.6vw 1.2vw 0vw #000,
+        3.8vw 1.2vw 0vw #000;
+}
+
+
+/*.clockOld {
     background: url(assets/icons/clock.svg) no-repeat;
     background-size: 5vw;
     width:5vw;
@@ -511,7 +554,46 @@ input{
     margin-top: -8.5vw;
     margin-left: auto;
     cursor: pointer;
+}*/
+.clock {
+    width: 4.5vw;
+    margin-left: auto;
+    height: 4.5vw;
+    margin-right: 1vw;
+    margin-top: calc(-6vw - 2vh);
+    cursor: pointer;
+    border: solid 0.4vw #000;
+    border-radius: 5vw;
+    -webkit-transform: rotate(120deg);
+    -moz-transform: rotate(120deg);
+    -o-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    transform: rotate(120deg);
 }
+.clock::before {
+    content: "";
+    vertical-align: text-top;
+    font-size: 0.1vw;
+    padding-right: 2vw;
+    margin-left: -2svw;
+    box-shadow:
+        0.5vw 2.2vw 0vw #000;
+}
+.clock::after {
+    content: "";
+    vertical-align: text-top;
+    font-size: 0.8vw;
+    padding-right: 0.3vw;
+    margin-left: -0.3vw;
+    box-shadow:
+        0.5vw 1.2vw 0vw #000;
+    -webkit-transform: rotate(-30deg);
+    -moz-transform: rotate(-30deg);
+    -o-transform: rotate(50deg);
+    -ms-transform: rotate(50deg);
+    transform: rotate(50deg);
+}
+
 .halved {
     
 }

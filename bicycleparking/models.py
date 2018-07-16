@@ -77,6 +77,15 @@ class Event(models.Model) :
     table. Finally, information relating the request to an aggregated geographic 
     area resides in the area table."""
 
+    def approved (self) :
+        """Approved model property for moderation."""
+        return True
+
+    def __str__ (self) :
+        return 'time : {}, lat = {}, long = {}'.format (self.timeOf, 
+                                                        self.answer.latitude, 
+                                                        self.answer.longitude)
+
     sourceIP = models.GenericIPAddressField()
     area = models.ForeignKey (Area, on_delete = models.PROTECT, default = DEFAULT_LINK)
     answer = models.ForeignKey (SurveyAnswer, on_delete = models.PROTECT, default = DEFAULT_LINK)

@@ -4,18 +4,17 @@
 # Civic Tech Toronto, Cycle Toronto, Code 4 Canada, and the 
 # City of Toronto
 #
-# Modified 2018 05 29 
+# Created 2018 05 29 
 # Purpose derived from Geocode for separate access to location data           
+# 
+# Modified
+# Purpose 
 # 
 
 import requests
 import datetime
 import django.utils as utils
-from bicycleparking.models import Event
-from bicycleparking.models import Area
-from bicycleparking.models import Intersection2d
-from bicycleparking.models import SurveyAnswer
-from bicycleparking.intersection import Intersection
+from bicycleparking.models import Event, Area, SurveyAnswer, Intersection2d, Approval
 
 class LocationData (object):
   """Encapsulates methods for accessing the geographical databases and 

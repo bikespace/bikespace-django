@@ -62,9 +62,14 @@ class CollectedData (object):
           except Exception as err:
               errors.append (err.msg)
       result ['longitude'] = entry.answer ['longitude']    
-      result ['latitude'] = entry.answer ['latitude']    
+      result ['latitude'] = entry.answer ['latitude']   
+      result ['id'] = entry.id
+
 
   def fromSurvey (self, base, indices) :
+      """Gets the item in the survey by recursively scanning the index list until
+      the list is empty. If the index is invalid for the type of object in the
+      structure, returns empty string."""
       if len (indices) == 0 :
           return base
       else :
@@ -72,11 +77,18 @@ class CollectedData (object):
           remaining = indices [1:]
           if ((type (base) is list and type (current) is int and current < len (base)) or
               (type (base) is dict and current in base)) : 
-             return self.fromSurvey (base [indices [0]], indices [1:])
+             return self.fromSurvey (base [current, remaining)
           else :
              return "" 
       
   def bounded (self, survey) :
+      """Determines whether or not a pin falls within the boundaries associated
+      with the request."""
       return self.limits [0][0]  < survey.longitude < self.limits [1][0] and \
              self.limits [0][1] < survey.latitude < self.limits [0][1]  
-       
+
+  def getNames (self, sql, loc) :
+      """Gets the names associated with the area supplied."""
+
+      query = Intersection2d.objects.raw (sql, location)
+

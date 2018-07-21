@@ -26,14 +26,13 @@ from django.test import TestCase
 import psycopg2
 import xml.etree.ElementTree as ET
 import time
+import json
 from django.db import connections
 from bicycleparking.geocode import Geocode
 from bicycleparking.LocationData import LocationData
-from bicycleparking.models import SurveyAnswer
-from bicycleparking.models import Event
-from bicycleparking.models import Area
-from bicycleparking.models import Intersection2d
+from bicycleparking.models import SurveyAnswer, Event, Area, Intersection2d, Approval
 from bicycleparking.intersection import Intersection
+from bicycleparking.CollectedData import CollectedData
 
 class Geocodetest (TestCase) :
 
@@ -123,6 +122,34 @@ class Geocodetest (TestCase) :
            self.verifyArea (entry)
         self.assertTrue (self.success)
         
+  def test_selected (self) :
+     """Tests the call to collect data for the dashboard.
+     
+     This test collectes the entries created by the test record process and dumps
+     the resulting output."""
+
+     modSrc = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
+                'closest' : {}, 'major' : {} } 
+     sources = { 'origin' : { 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
+                 'closest' : { 'name' : 'closestname'}, 'major' : { 'name' : 'majorname' } }
+
+     print ("\t\ttesting selected and moderated dashboard output")
+     self.success = True
+     if self.database_exists () :
+        entries = self.readGeoEntries ("test/areas.xml", sources)
+        self.moderate (modSrc, 'test/areas.xml')
+        dashboard = CollectedData ()
+        list = dashboard.get ()
+
+        print ('{} entries received'.format (len (list)))
+        for item in list :
+           print (json.dumps (item, indent=4, separators=(',', ': ')))
+           # print ("""pic = {pic} duration = {duration} problem = {problem} 
+           #           latitude = {latitude} longitude = {longitude} id = {id}""".format (**item)) 
+     else :
+        print ("No geographic database found, assuming test OK")
+     self.assertTrue (self.success)
+
   def nameLookup (self, sources) :
      """Tests the main names lookup functions: these lokup a given location, find the
      closest intersection and the closest major, and return both names. The endpoint
@@ -146,7 +173,25 @@ class Geocodetest (TestCase) :
         else :
            success = False
            print ('error: {0} <> {1}'.format (result ['closest'], test ['closestname'])) 
-                
+
+  def moderate (self, toMod, fn) :
+     """Simulates the moderation process.
+     
+     Adds references to the modertion table to test the collection methods
+     for accessing the dashboard."""
+     print ('simulating moderation')
+
+     entries = self.readGeoEntries (fn, toMod)
+        
+     for test in entries :
+        answer = self.saveAnswer (test)
+        code = Geocode (answer, '192.168.1.225')
+        code.output ()
+
+     eventSet = Event.objects.all () 
+     for event in eventSet :
+        approval = Approval (approved = event, moderatorId = "testJGS")
+        approval.save ()              
         
   def load_geo_test_subset (self) :
      """Once the django test routines have created the test databases, load the 
@@ -281,9 +326,12 @@ class Geocodetest (TestCase) :
      """Constructs a dummy survey answer using the information in the location 
      element of the test data."""
 
+     surveyTest = { 'picture' : 'http:xxx.yyy.com', 'happening' : [{ 'time' : '00.00.00' }],
+                    'problem_type' : ['absent', 'full', 'damaged', 'abandoned', 'other']}
+
      return SurveyAnswer (latitude = float (location ["latitude"]), 
                           longitude = float (location ["longitude"]), 
-                          survey = "{'test' : 'empty'}", comments = "")
+                          survey = surveyTest, comments = "")
 
   def findAndWrite (self, answer, testData) :
      """Executes the location request, finds the data, and writes a set of test results to

@@ -23,48 +23,57 @@ class CollectedData (object):
 
   latLimits = (43.58149, 43.886692)
   longLimits = (-79.61179, -79.114705)
-  majorSQL = """SELECT intersec5 FROM intersection2d WHERE gid = %s;"""
-  closestSQL = """SELECT intersec5 FROM intersection2d WHERE gid = %s;"""
+  sqlStmt = """SELECT * FROM intersection2d WHERE gid = %(code)s;"""
 
   def __init__ (self, upperLeft = None, lowerRight = None) :
      """Defines the local variables: and the bounding box"""
      if (upperLeft and lowerRight) :
-        self.limits = ((lowerRight [0], upperLeft [0]), (upperLeft [1], lowerRight [1]))
+        self.limits = ((upperLeft [0], lowerRight [0]), (lowerRight [1], upperLeft [1]))
      elif (upperLeft) :
-        self.limits = ((longLimits [1], upperLeft [0]), (upperLeft [1], latLimits [1]))
+        self.limits = ((upperLeft [0], CollectedData.longLimits [1]), 
+                       (CollectedData.latLimits [0]), upperLeft [1])
      elif (lowerRight) :
-        self.limits = ((lowerRight [0], longLimits [0]), (latLimits [0], lowerRight [1]))         
+        self.limits = ((CollectedData.longLimits [0], lowerRight [0]), 
+                       (lowerRight [1], CollectedData.latLimits [1]))         
      else :
-        self.limits = (longLimits [::-1], latLimits)
+        self.limits = (CollectedData.longLimits, CollectedData.latLimits)
      self.errors = []
 
   def get (self) :
      """Gets the list of approved items from the request database""" 
 
      result = []
-     list = Approval.objects.approved;
-     for entry in list :
-         if self.bounded (entry.answer) :
-           result.append (self.accessItem (entry.area, entry.survey))
+     list = Approval.objects.all ();
 
-  def accessItem (self, area, survey) :
+     for entry in list :
+         if self.bounded (entry.approved.answer) :
+           result.append (self.accessItem (entry.approved))
+     return result
+
+  def accessItem (self, event) :
       """Takes the specifications for each individual item and constructs a single
       description object."""
+
+      answer = event.answer
       
       fromSurvey = [ { 'id' : 'pic', 'path' : ['picture']},
                      { 'id' : 'duration', 'path' : ['happening', 0, 'time'] },
-                     { 'id' : 'problem', path : ['problem_type']} ]
-      result = {}
-      survey = JSON.loads (entry.answer.survey)
+                     { 'id' : 'problem', "path" : ['problem_type']} ]
+
+      result = self.getNames (event.area)
+      survey = answer.survey
       for field in fromSurvey :
           try :
-              result [field ['id']] = self.fromSurvey (survey, field ['path'])
+              key = field ['id']
+              result [key] = self.fromSurvey (survey, field ['path'])
           except Exception as err:
               errors.append (err.msg)
-      result ['longitude'] = entry.answer ['longitude']    
-      result ['latitude'] = entry.answer ['latitude']   
-      result ['id'] = entry.id
-
+      result ['longitude'] = answer.longitude    
+      result ['latitude'] = answer.latitude
+      result ['comments'] = answer.comments
+      result ['time'] = str(event.timeOf)
+      result ['id'] = event.id
+      return result
 
   def fromSurvey (self, base, indices) :
       """Gets the item in the survey by recursively scanning the index list until
@@ -77,18 +86,28 @@ class CollectedData (object):
           remaining = indices [1:]
           if ((type (base) is list and type (current) is int and current < len (base)) or
               (type (base) is dict and current in base)) : 
-             return self.fromSurvey (base [current, remaining)
+             return self.fromSurvey (base [current], remaining)
           else :
              return "" 
       
   def bounded (self, survey) :
       """Determines whether or not a pin falls within the boundaries associated
       with the request."""
-      return self.limits [0][0]  < survey.longitude < self.limits [1][0] and \
-             self.limits [0][1] < survey.latitude < self.limits [0][1]  
 
-  def getNames (self, sql, loc) :
-      """Gets the names associated with the area supplied."""
+      return self.limits [0][0] < survey.longitude < self.limits [0][1] and \
+             self.limits [1][0] < survey.latitude < self.limits [1][1]  
 
-      query = Intersection2d.objects.raw (sql, location)
+  def getNames (self, area) :
+     """Gets the names associated with the area supplied."""
+
+     instr = [ { 'id' : 'majorIntersection', 'code' : area.major },
+               { 'id' : 'intersection', 'code' : area.closest }]
+
+     result = {}
+
+     for req in instr :
+        query = Intersection2d.objects.raw (CollectedData.sqlStmt, req)
+        entry = query [0]
+        result [req ['id']] = entry.intersec5
+     return result   
 

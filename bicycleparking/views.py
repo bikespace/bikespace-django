@@ -95,15 +95,19 @@ class DashboardRequest (APIView) :
         string containing the names of the closest and the closest major intersection;
         note, if the closest intersection is a major intersection, these fields will 
         contain the same value."""
-
         
         return self.access (json.loads (request.body))
 
     def access (self, param) :
         """Provides access to the database for both POST and GET requests."""
         # print(param)
-        data = LocationData (param ['latitude'], param ['longitude'])
-        return JsonResponse (data.getIntersectionNames ())
+        upLeft = lowRight = None
+        if 'upper_left' in param :
+            upLeft = param ['upper_left']
+        if 'lower_right' in param :
+            lowRight = param ['lower_right']
+        data = CollectedData (upLeft, lowRight)
+        return JsonResponse (data.get ())
            
 class LocationNameRequest (APIView) :
     """Wraps the location name object for retrieving data from the LocationData

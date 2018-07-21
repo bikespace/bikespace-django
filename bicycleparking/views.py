@@ -16,6 +16,9 @@
 # Modified 2018 06 01 
 # Purpose add location endpoint
 #
+# Modified 2018 07 12
+# Purpose add dashboard endpoint
+#
 # Modified
 # Purpose
 #
@@ -45,6 +48,7 @@ from bicycleparking.models import BetaComments
 from bicycleparking.uploader import Uploader
 from bicycleparking.geocode import Geocode
 from bicycleparking.LocationData import LocationData
+from bicycleparking.CollectedData import CollectedData
 
 # Create your views here.
 
@@ -53,7 +57,6 @@ def index(request):
 
 def dashboard(request):
     return render(request, 'bicycleparking/dashboard.html', {})
-
 
 class SurveyAnswerList(generics.ListCreateAPIView):
     """Generates the main table entries from the user's survey input, generates
@@ -86,12 +89,40 @@ class BetaCommentList(generics.ListCreateAPIView):
         and event record using the geocode class, and the picture record."""
         serializer.save()
 
+class DashboardRequest (APIView) :
+    """Wraps the location name object for retrieving data from the LocationData
+    object."""
+    
+    def post (self, request) :
+        """Takes a set of POST parameters containing the  and returns a JSON
+        string containing the names of the closest and the closest major intersection;
+        note, if the closest intersection is a major intersection, these fields will 
+        contain the same value."""
+        
+        return self.access (json.loads (request.body))
+
+    def access (self, param) :
+        """Provides access to the database for both POST and GET requests."""
+        # print(param)
+        upLeft = lowRight = None
+        if 'upper_left' in param :
+            upLeft = param ['upper_left']
+        if 'lower_right' in param :
+            lowRight = param ['lower_right']
+        data = CollectedData (upLeft, lowRight)
+        return JsonResponse (data.get ())
+           
 class LocationNameRequest (APIView) :
+    """Wraps the location name object for retrieving data from the LocationData
+    object."""
     
     def post (self, request) :
         """Takes a set of GET or POST parameters containing the  and returns a JSON
-        string containing the """
-        param = json.loads (request.body.decode('utf-8'))
+        string containing the names of the closest and the closest major intersection;
+        note, if the closest intersection is a major intersection, these fields will 
+        contain the same value."""
+        param = json.loads (request.body)
+        print(param)
         data = LocationData (param ['latitude'], param ['longitude'])
         return JsonResponse (data.getIntersectionNames ())
            

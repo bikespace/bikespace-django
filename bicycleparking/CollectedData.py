@@ -15,7 +15,7 @@ import requests
 import datetime
 import json
 import django.utils as utils
-from bicycleparking.models import Event, Area, SurveyAnswer, Intersection2d, Approval
+from bicycleparking.models import Event, Area, SurveyAnswer, Intersection2d, Approval, Picture
 
 class CollectedData (object):
   """Encapsulates methods for accessing the geographical databases and 
@@ -55,9 +55,8 @@ class CollectedData (object):
       description object."""
 
       answer = event.answer
-      
-      fromSurvey = [ { 'id' : 'pic', 'path' : ['picture']},
-                     { 'id' : 'duration', 'path' : ['happening', 0, 'time'] },
+
+      fromSurvey = [ { 'id' : 'duration', 'path' : ['happening', 0, 'time'] },
                      { 'id' : 'problem', "path" : ['problem_type']} ]
 
       result = self.getNames (event.area)
@@ -68,6 +67,8 @@ class CollectedData (object):
               result [key] = self.fromSurvey (survey, field ['path'])
           except Exception as err:
               errors.append (err.msg)
+                     
+      result ['pic'] = self.getPicture (answer.id)
       result ['longitude'] = answer.longitude    
       result ['latitude'] = answer.latitude
       result ['comments'] = answer.comments
@@ -109,5 +110,12 @@ class CollectedData (object):
         query = Intersection2d.objects.raw (CollectedData.sqlStmt, req)
         entry = query [0]
         result [req ['id']] = entry.intersec5
-     return result   
+     return result
 
+  def getPicture (self, id) :
+     """Gets the picture from the dedicated picture reference table """ 
+     result = []
+     picRef = Picture.objects.filter (answer__id = id)
+     for pic in picRef :
+        result.append (pic.photo_uri)
+     return result

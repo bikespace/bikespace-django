@@ -94,12 +94,23 @@ class DashboardRequest (APIView) :
     object."""
     
     def post (self, request) :
-        """Takes a set of POST parameters containing the  and returns a JSON
-        string containing the names of the closest and the closest major intersection;
-        note, if the closest intersection is a major intersection, these fields will 
-        contain the same value."""
+        """Takes a set of POST parameters containing the limits of the 
+        map viewport and returns a JSON string containing the details
+        of all the approved pins in the selected rectangle.
         
-        return self.access (json.loads (request.body))
+        The data returned by this call will depend on the settings in 
+        the CollectedData object, but they will generally include the
+        names of the closest and the closest major intersection, the
+        time of the request and the span of time requested for parking, 
+        the problem as defined by the user and a URI describing the 
+        picture (if any) associated with the request."""
+        
+        data = request.body.decode ('utf-8')
+        if data :
+           param = json.loads (data)
+        else :
+           param = {}
+        return self.access (param)
 
     def access (self, param) :
         """Provides access to the database for both POST and GET requests."""
@@ -110,7 +121,8 @@ class DashboardRequest (APIView) :
         if 'lower_right' in param :
             lowRight = param ['lower_right']
         data = CollectedData (upLeft, lowRight)
-        return JsonResponse (data.get ())
+        result = { 'dashboard' : data.get () }
+        return JsonResponse (result)
            
 class LocationNameRequest (APIView) :
     """Wraps the location name object for retrieving data from the LocationData
@@ -138,8 +150,6 @@ class DownloadPicture(APIView):
                 return HttpResponse(status=500)
         else:
             return HttpResponse(status=500)
-        
-
 
 class UploadPicture(APIView):
     renderer_classes = (JSONRenderer, )

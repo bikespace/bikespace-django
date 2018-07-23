@@ -27,10 +27,11 @@ import psycopg2
 import xml.etree.ElementTree as ET
 import time
 import json
+import random
 from django.db import connections
 from bicycleparking.geocode import Geocode
 from bicycleparking.LocationData import LocationData
-from bicycleparking.models import SurveyAnswer, Event, Area, Intersection2d, Approval
+from bicycleparking.models import SurveyAnswer, Event, Area, Intersection2d, Approval, Picture
 from bicycleparking.intersection import Intersection
 from bicycleparking.CollectedData import CollectedData
 
@@ -144,8 +145,6 @@ class Geocodetest (TestCase) :
         print ('{} entries received'.format (len (list)))
         for item in list :
            print (json.dumps (item, indent=4, separators=(',', ': ')))
-           # print ("""pic = {pic} duration = {duration} problem = {problem} 
-           #           latitude = {latitude} longitude = {longitude} id = {id}""".format (**item)) 
      else :
         print ("No geographic database found, assuming test OK")
      self.assertTrue (self.success)
@@ -177,21 +176,25 @@ class Geocodetest (TestCase) :
   def moderate (self, toMod, fn) :
      """Simulates the moderation process.
      
-     Adds references to the modertion table to test the collection methods
-     for accessing the dashboard."""
+     Adds references to the modertion table and elements to the picture table to 
+     test the collection methods for accessing the dashboard."""
+
      print ('simulating moderation')
 
      entries = self.readGeoEntries (fn, toMod)
         
      for test in entries :
         answer = self.saveAnswer (test)
+        uri = 'http://park_pic_{}.jpg'.format (answer.id)
+        pic = Picture (photo_uri = uri,  answer = answer)
+        pic.save ()
         code = Geocode (answer, '192.168.1.225')
         code.output ()
 
      eventSet = Event.objects.all () 
      for event in eventSet :
         approval = Approval (approved = event, moderatorId = "testJGS")
-        approval.save ()              
+        approval.save ()      
         
   def load_geo_test_subset (self) :
      """Once the django test routines have created the test databases, load the 
@@ -327,7 +330,7 @@ class Geocodetest (TestCase) :
      element of the test data."""
 
      surveyTest = { 'picture' : 'http:xxx.yyy.com', 'happening' : [{ 'time' : '00.00.00' }],
-                    'problem_type' : ['absent', 'full', 'damaged', 'abandoned', 'other']}
+                    'problem_type' : self.randomProblems ()}
 
      return SurveyAnswer (latitude = float (location ["latitude"]), 
                           longitude = float (location ["longitude"]), 
@@ -340,6 +343,19 @@ class Geocodetest (TestCase) :
      if where != None :
         where.output ()
         return where
+
+  def randomProblems (self) :
+     """Return a randomized list of possible problems."""
+
+     poss = ['absent', 'full', 'damaged', 'abandoned', 'other']
+
+     result = []
+     for item in poss :
+        if random.random () < 0.2 :
+            result.append (item)
+     if (len (result) == 0) :
+        result = [ random.choice (poss) ]
+     return result
 
   def locate (self, answer, location) :
      """Tests the location operation without writing any information to the database."""

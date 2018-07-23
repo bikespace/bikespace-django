@@ -1,7 +1,6 @@
 import Navigo from 'navigo';
 import questions from './survey-questions';
 import Home from './home';
-import Beta from './beta';
 import Survey from './survey';
 import StateSession from './state-session';
 
@@ -21,14 +20,11 @@ class Index {
       return new Survey(props, this)
     });
     this.home = new Home(this);
-    this.beta = new Beta(this);
     this.router.on({
       'survey/:pane': (params, query) => {
         this.renderPane(params, query)
       }, 'start': () => {
         this.renderStart();
-      }, 'beta': () => {
-        this.renderBeta();
       }, '*': () => {
         this.renderHome();
       }
@@ -79,9 +75,15 @@ class Index {
             },
             body: JSON.stringify(body),
           }).then(_ => {
-            this.router.navigate(`/beta`)
+            var state = StateSession.getInstance().get();
+            state.finish = true;
+            var state = StateSession.getInstance().save(state);
+            this.router.navigate(`/home`)
           }).catch(_ => {
-            this.router.navigate(`/beta`)
+            var state = StateSession.getInstance().get();
+            state.finish = true;
+            var state = StateSession.getInstance().save(state);
+            this.router.navigate(`/home`)
           });
         });
 
@@ -94,9 +96,15 @@ class Index {
         },
         body: JSON.stringify(body),
       }).then(_ => {
-        this.router.navigate(`/beta`)
+        var state = StateSession.getInstance().get();
+        state.finish = true;
+        var state = StateSession.getInstance().save(state);
+        this.router.navigate(`/home`)
       }).catch(_ => {
-        this.router.navigate(`/beta`)
+        var state = StateSession.getInstance().get();
+        state.finish = true;
+        var state = StateSession.getInstance().save(state);
+        this.router.navigate(`/home`)
       });
     }
 
@@ -116,10 +124,6 @@ class Index {
 
   renderStart() {
     this.router.navigate(`/survey/1`)
-  }
-
-  renderBeta() {
-    this.beta.render();
   }
   renderHome() {
     if ('geolocation' in navigator) {

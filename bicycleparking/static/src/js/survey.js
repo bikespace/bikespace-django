@@ -117,7 +117,6 @@ export default class Survey {
       `
       <header class="report">
         <div class="title"></div>
-        <h2 class="betaBeaker">beta</h2>
       </header>  
       <div id="error" class="hidden red"></div>  
         ${templates}

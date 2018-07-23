@@ -43,7 +43,7 @@ export default class Summary extends Content {
         var problems = this.problems;
         return (`
         <div class="screen1 visible">
-        <div class="progLine"><div class="progress prog5"></div></div>
+        <div class="progLine"><div class="progress prog6"></div></div>
         <h1>${this.props.heading}</h1>
             <div class="summary">
               <h2>Problems</h2>

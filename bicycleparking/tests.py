@@ -18,8 +18,14 @@
 # Modified 2018 06 26
 # Purpose  Amplify documentation
 #
-# Modified 
-# Purpose   
+# Modified 2018 07 18
+# Purpose add dashboard selector test
+#
+# Modified 2018 07 18
+# Purpose add dashboard selector test
+#
+# Modified 2018 07 23
+# Purpose add moderation test
 #
 
 from django.test import TestCase
@@ -48,6 +54,9 @@ class Geocodetest (TestCase) :
 
          test_record:        Tests the processes for writing data to he database and compares
                              the database entries as created with the expected entries. 
+
+         test_selected       Tests the process of collecting data for the dashboard. This
+                             process simulates and tests the moderation process.
          
          Each of these methods uses the same test data; this consists of a dataset coded
          in xml with specifications for a location, the (known) closest intersection to the
@@ -65,6 +74,11 @@ class Geocodetest (TestCase) :
          the test execution returned the expected result, and if it does not
          return successfully the test system will return diagnostic 
          information."""
+
+  modSrc = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
+             'closest' : {}, 'major' : {} } 
+  areas = "test/areas.xml"   
+    
     
   def test_location (self) :
      """Tests the location requests without writing data to the database."""
@@ -76,7 +90,7 @@ class Geocodetest (TestCase) :
      print ("\t\ttesting geocode location")
      self.success = True
      if self.database_exists () :
-        entries = self.readGeoEntries ("test/areas.xml", sources)
+        entries = self.readGeoEntries (sources)
 
         for test in entries :
            self.locate (self.makeAnswer (test), test)
@@ -114,7 +128,7 @@ class Geocodetest (TestCase) :
         Event.objects.all ().delete ()
         Area.objects.all ().delete ()
         SurveyAnswer.objects.all ().delete ()
-        entries = self.readGeoEntries ("test/areas.xml", sources)
+        entries = self.readGeoEntries (sources)
         
         for test in entries :
            self.findAndWrite (self.saveAnswer (test), test)
@@ -129,16 +143,14 @@ class Geocodetest (TestCase) :
      This test collectes the entries created by the test record process and dumps
      the resulting output."""
 
-     modSrc = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
-                'closest' : {}, 'major' : {} } 
      sources = { 'origin' : { 'latitude' : 'latitude', 'longitude' : 'longitude' }, 
                  'closest' : { 'name' : 'closestname'}, 'major' : { 'name' : 'majorname' } }
 
      print ("\t\ttesting selected and moderated dashboard output")
      self.success = True
      if self.database_exists () :
-        entries = self.readGeoEntries ("test/areas.xml", sources)
-        self.moderate (modSrc, 'test/areas.xml')
+        entries = self.readGeoEntries (sources)
+        self.moderate (1.1)
         dashboard = CollectedData ()
         list = dashboard.get ()
 
@@ -149,12 +161,32 @@ class Geocodetest (TestCase) :
         print ("No geographic database found, assuming test OK")
      self.assertTrue (self.success)
 
+  def test_unmoderated (self) :
+     """Tests the ability to access unmoderated requests."""
+
+     print ("\t\ttesting selection of unmoderated output for moderation process")
+     self.success = True
+     if self.database_exists () :
+        self.moderate (0.6)
+        
+        unmoderated = Event.objects.filter (approval = None)
+        for event in unmoderated :
+           link = event.answer.id
+           pictures = Picture.objects.filter (answer__id = link)
+           print ('<div>')
+           for pmod in pictures :
+              print ('<img src="{}" width="80" height="100">'.format (pmod.photo_uri))
+           print ("</div>")   
+     else :
+        print ("No geographic database found, assuming test OK")
+     self.assertTrue (self.success)   
+
   def nameLookup (self, sources) :
      """Tests the main names lookup functions: these lokup a given location, find the
      closest intersection and the closest major, and return both names. The endpoint
      that calls this method then packages the output in a JSON string and returns it 
      to the caller."""
-     entries = self.readGeoEntries ("test/areas.xml", sources)
+     entries = self.readGeoEntries (sources)
        
      for test in entries :
         success = True
@@ -173,7 +205,7 @@ class Geocodetest (TestCase) :
            success = False
            print ('error: {0} <> {1}'.format (result ['closest'], test ['closestname'])) 
 
-  def moderate (self, toMod, fn) :
+  def moderate (self, accept) :
      """Simulates the moderation process.
      
      Adds references to the modertion table and elements to the picture table to 
@@ -181,7 +213,8 @@ class Geocodetest (TestCase) :
 
      print ('simulating moderation')
 
-     entries = self.readGeoEntries (fn, toMod)
+     rejected = 0
+     entries = self.readGeoEntries (Geocodetest.modSrc)
         
      for test in entries :
         answer = self.saveAnswer (test)
@@ -193,8 +226,14 @@ class Geocodetest (TestCase) :
 
      eventSet = Event.objects.all () 
      for event in eventSet :
-        approval = Approval (approved = event, moderatorId = "testJGS")
-        approval.save ()      
+        if (random.random () < accept) :
+           approval = Approval (approved = event, moderatorId = "testJGS")
+           approval.save ()
+        else :
+           rejected = rejected + 1
+
+     if rejected > 0 :
+        print ('rejected count: {}'.format (rejected))  
         
   def load_geo_test_subset (self) :
      """Once the django test routines have created the test databases, load the 
@@ -280,11 +319,11 @@ class Geocodetest (TestCase) :
            else :
               print ("unknown error in postgres link")
 
-  def readGeoEntries (self, fn, sources) :
+  def readGeoEntries (self, sources) :
      """Reads data to test the search and database management routines."""
-     print ("Reading test source file {0}".format (fn))
+     print ("Reading test source file {0}".format (Geocodetest.areas))
      result = []
-     doc = ET.parse (fn)
+     doc = ET.parse (Geocodetest.areas)
      root = doc.getroot ()
      for element in root :
         if element.tag == "area" :

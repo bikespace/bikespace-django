@@ -28,6 +28,7 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.utils import timezone
+from django.utils.html import format_html
 
 # Tables in the default database as managed by the django
 # process 
@@ -50,6 +51,10 @@ class SurveyAnswer(models.Model):
 class Picture (models.Model) :  
     """Contains the definition of a photograph uploaded by the user of the 
        selected parking problem."""
+    
+    def __str__ (self) :
+        return format_html ('<img src="/api/picture/{}">', self.photo_uri)
+
     photo_uri = models.TextField(default=None, null=True)
     photo_desc = models.TextField(default=None, null=True)
     answer = models.ForeignKey (SurveyAnswer, on_delete = models.PROTECT, default = DEFAULT_LINK)

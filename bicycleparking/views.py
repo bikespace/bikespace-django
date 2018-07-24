@@ -129,23 +129,24 @@ class LocationNameRequest (APIView) :
     object."""
     
     def post (self, request) :
-        """Takes a set of GET or POST parameters containing the  and returns a JSON
+        """Takes a set of GET or POST parameters containing the lat/long and returns a JSON
         string containing the names of the closest and the closest major intersection;
         note, if the closest intersection is a major intersection, these fields will 
         contain the same value."""
+
         param = json.loads (request.body)
         print(param)
         data = LocationData (param ['latitude'], param ['longitude'])
         return JsonResponse (data.getIntersectionNames ())
            
-
 class DownloadPicture(APIView):
     uploader = Uploader()
 
     def get(self, request, filename, format=None):
         if filename:
             try:
-                return HttpResponse(self.uploader.fromS3(filename), content_type="image/" + os.path.splitext(filename)[1])
+               ctype = "image/" + os.path.splitext(filename)[1]
+               return HttpResponse(self.uploader.fromS3 (filename), content_type=ctype)
             except:
                 return HttpResponse(status=500)
         else:

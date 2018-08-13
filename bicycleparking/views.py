@@ -23,6 +23,7 @@
 # Purpose
 #
 
+from django.views.decorators.csrf import csrf_exempt
 import json
 import base64
 from django.shortcuts import render
@@ -123,19 +124,25 @@ class DashboardRequest (APIView) :
         data = CollectedData (upLeft, lowRight)
         result = { 'dashboard' : data.get () }
         return JsonResponse (result)
-           
+
 class LocationNameRequest (APIView) :
     """Wraps the location name object for retrieving data from the LocationData
     object."""
     
+    decorators = [ csrf_exempt ]
+
     def post (self, request) :
         """Takes a set of GET or POST parameters containing the lat/long and returns a JSON
         string containing the names of the closest and the closest major intersection;
         note, if the closest intersection is a major intersection, these fields will 
         contain the same value."""
 
-        param = json.loads (request.body)
-        print(param)
+        data = request.body.decode ('utf-8')
+        if data :
+           param = json.loads (data)
+        else :
+           param = {}
+        # print(param)
         data = LocationData (param ['latitude'], param ['longitude'])
         return JsonResponse (data.getIntersectionNames ())
            

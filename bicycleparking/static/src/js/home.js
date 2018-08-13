@@ -63,6 +63,9 @@ export default class Home {
         </div>
           <div class="logo">
             <h1 class="maintitle tshadow">BikeSpace</h1>
+          </div>
+      
+          <div class="nav">
                   <div class="button bshadow">
                       <a><p><em>Report a parking issue</em></p></a>
                   </div>

@@ -25,33 +25,6 @@ strong {
     font-weight: bold;
 }
 
-/*BETA_LABELS___________________________________________________________*/
-
-.betaMain {
-    font-weight: bold;
-    margin: 15vh auto 0vh auto;
-    width: 70vw;
-    background-image: url(assets/icons/beaker.png);
-    background-repeat: no-repeat;
-    background-position: calc(100% - 2.5vw) center;
-    background-size: 4vh;
-    text-align: left;
-    background-color: #f3b82b;
-    color: #000;
-    padding-bottom: 0vh;
-    padding-left: 4vw;
-    font-size: calc(2vw + 3vh);
-}
-
-.betaBeaker {
-    width: 100px;
-    height: 40px;
-    font-size: 1.6rem;
-    background-color: #f3b82b;
-    padding: 5px 0vh 3px 0vh;
-    margin: -48px 0px 0px auto;
-    text-align: center;
-}
 
 /*FONT_STYLING___________________________________________________________*/
 
@@ -91,16 +64,18 @@ body {
     background: url('assets/background_images/to_bike_desktop.jpg') 100% / cover;
     background-position: center;
     overflow-x: hidden;
-    min-height: 100vh;
     margin: auto;
+    display: flex;
+    justify-content: center;
 }
 
 /*___________________________________________________________*/
 
 header{
-    position: relative;
     width: 100%;
     background-color: #fff;
+    margin: auto;
+    height: 45px;
 }
 
 .title {
@@ -118,8 +93,7 @@ header{
     position: relative;
     z-index: 100;
     padding: 16px 0px 0px 0px;
-    width: 416px;
-    margin: 8px auto -80px auto;
+    margin: -45px auto -80px auto;
     height: 30px;
 }
 
@@ -224,19 +198,27 @@ header{
     padding-bottom: 0px;
     font-size: 3.5rem;
 }
+#btnAdd{
+    opacity: 0;
+}
 /*___________________________________________________________*/
+.pageWrapper {
+    display: flex;
+    width: 100vw;
+    margin: auto;
+    justify-content: center;
+    flex-direction: column;
+}
 
 .screen1 {
-    
-    padding: 5px 20px 20px 20px;
+    padding: 5px 20px 0px 20px;
     border-radius: 0px;
     width: 375px;
-    height: 84vh;
-    max-height: 620px;
-    min-height: 510px;
+    height: 77%;
+    max-height: 545px;
+    min-height: 445px;
     margin: auto;
-    margin-top: 35px;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 .clear {
     opacity: 0;
@@ -285,6 +267,7 @@ ul {
     cursor: pointer;
     position: absolute;
     opacity: 0;
+    margin-top: -132px;
     width: 100%;
     height: 100%;
 }
@@ -333,15 +316,17 @@ ul {
 /*___________________________________________________________*/
 
 footer {
-    overflow: hidden;
-    margin: auto;
     width: 375px;
 }
 
 .nav {
     margin-top: -80px;
+    margin-bottom: 10px;
     width: 375px;
-    position: absolute;
+    padding: 5px 20px 20px 20px;
+    overflow: hidden;
+    margin: auto;
+    background-color: #ffffffee;
 }
 .back {
     padding: 13px;
@@ -405,6 +390,10 @@ footer {
     background-color: #ed145b;
 }
 
+.removePhoto {
+    margin-top: 0px;
+}
+
 /*SUMMARY___________________________________________________________*/
 
 .titleSummary{
@@ -458,7 +447,7 @@ footer {
 
 /*MAP___________________________________________________________*/
 
-#mapid {
+#map {
     min-height: 320px;
     height: 54vh;
     max-height: 400px;

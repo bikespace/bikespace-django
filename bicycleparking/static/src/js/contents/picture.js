@@ -99,11 +99,6 @@ export default class Picture extends Content {
           <h2 id="pictureText" class="">${this.props.text}</h2>
             <ul>
                 <div class="doubleoption">
-                    <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
-                    <div id="preview" class="imagepreview hiddenPicture">
-                        <canvas id="picture" src="#" ></canvas>
-                        <canvas id="dst-cvs" class="img-responsive"></canvas>
-                    </div>
                     <div class="options">
                         <li><em>Camera</em></li>
                         <div class="check camera"> </div>
@@ -112,16 +107,15 @@ export default class Picture extends Content {
                         <li><em>Upload</em></li>
                         <div class="check upload"> </div>
                     </div>
+                    <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
+                    <div id="preview" class="imagepreview hiddenPicture">
+                        <canvas id="picture" src="#" ></canvas>
+                        <canvas id="dst-cvs" class="img-responsive"></canvas>
+                    </div>
                 </div>
             </ul>
+            <div id="buttonRed" class="button red removePhoto"><p><em>Remove photo</em></p></div>
         </div>
-            <footer>
-            <div class="nav">
-                <div id="buttonRed" class="button red">
-                    <p><em>Remove photo</em></p>
-                </div>
-            </div>
-        </footer>  
         </div>
       `
         )

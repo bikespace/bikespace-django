@@ -4,13 +4,13 @@
     font-style: normal;
 }
 @font-face {
-    font-family: 'opensans';
+    font-family: 'opensans, sans serif';
     src: url('assets/Open_Sans/OpenSans-Regular.ttf');
     font-weight: thin;
     font-style: normal;
 }
 @font-face {
-    font-family: 'opensans';
+    font-family: 'opensans, sans seif';
     src: url('assets/Open_Sans/OpenSans-Bold.ttf');
     font-weight: bold;
     font-style: normal;

@@ -11,13 +11,13 @@
     background: transparent;
 }
 @font-face {
-    font-family: 'opensans';
+    font-family: 'opensans, sans serif';
     src: url('assets/Open_Sans/OpenSans-Regular.ttf');
     font-weight: thin;
     font-style: normal;
 }
 @font-face {
-    font-family: 'opensans';
+    font-family: 'opensans, sans serif';
     src: url('assets/Open_Sans/OpenSans-Bold.ttf');
     font-weight: bold;
     font-style: normal;
@@ -84,6 +84,10 @@ body {
     overflow-x: hidden;
     overflow-y: hidden;
     height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -95,16 +99,21 @@ header{
     order: 1;
     position: relative;
     width: 100%;
-    height: 10%;
+    max-height: 10%;
+    height: 10vh;
     background-color: #fff;
     z-index: 1000;
     margin-bottom: 2%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 }
 
 .title {
     background: url(assets/icons/bikespace_header.svg) no-repeat center center;
-    background-size: calc(30vh);
+    background-size: 30vh;
     height: 100%;
     margin: auto;
     width: 30vh;
@@ -116,8 +125,8 @@ header{
     position: fixed;
     z-index: 10000;
     width: 100%;
-    height: 10%;
-    padding-bottom: 0.5vh;
+    max-height: 10%;
+    height: 10vh;
 }
 
 
@@ -136,7 +145,6 @@ header{
 /*___________________________________________________________*/
 
 .progress{
-    position: absolute;
     width: 3vw;
     margin-left: -1.5vw;
     border-radius: 1.5vw;
@@ -218,10 +226,13 @@ header{
 .screen1 {
     order: 2;
     margin-left: 2%;
+    display: -webkit-flex;
     display: flex;
-    height: 77%;
+    max-height: 78%;
+    height: 78vh;
     flex-direction: column;
     margin-right: 2%;
+    margin-bottom: 2vw;
 }
 .clear {
     opacity: 0;
@@ -260,9 +271,11 @@ header{
 
 .cameraButton{
     opacity: 0;
-    margin-top: -30%;
+    margin-top: -30vh;
     width: 93%;
-    height: 25%;
+    z-index: 1000;
+    max-height: 20%;
+    height: 20vh;
 }
 
 .check {    
@@ -321,17 +334,16 @@ header{
 
 .nav {
     order: 3;
-    height: 10%;
+    height: 10vh;
     max-height: 10%;
     background-color: #fffffff5;
     margin-left: 2%;
     margin-right: 2%;
 }
 .back {
-    padding: 2vw;
     box-shadow: 0px 0px 0px 0.6vw #25c252 inset;
-    height: 6vw;
-    width: 20vw;
+    height: 10vw;
+    width: 24vw;
     border-radius: 10vw;
     margin-left: 3vh;
     text-align: center;
@@ -339,7 +351,7 @@ header{
 }
 .back p {
     margin: auto;
-    padding: 1.5vw 2vw 2.5vw 2vw;
+    padding: 1.5vw 4vw 2.5vw 4vw;
     margin-top: -2vw;
     width: 20vw;
     height: 6vw;
@@ -348,10 +360,9 @@ header{
     
 }
 .next {
-    padding: 2vw;
     background: #25c252;
-    height: 6vw;
-    width: 20vw;
+    height: 10vw;
+    width: 24vw;
     margin-top: -10vw;
     border-radius: 10vw;
     margin-left: auto;
@@ -361,7 +372,7 @@ header{
 }
 .next p {
     margin: auto;
-    padding: 1.5vw 2vw 2.5vw 2vw;
+    padding: 1.5vw 4vw 2.5vw 4vw;
     margin-top: -2vw;
     width: 20vw;
     height: 6vw;
@@ -389,15 +400,18 @@ header{
     color: #fff
 }
 .removePhoto {
-    margin-top: -15%;
-    z-index: 100000000;
+    margin-top: -25vw;
+    z-index: -1000;
+}
+#buttonRed {
+    z-index: 10;
 }
 
 /*SUMMARY___________________________________________________________*/
 
 .summaryProblem {
-    height: 35vw;
-
+    max-height: 30%;
+    height: 30vw;
 }
 .mapSummary {
     float: right;
@@ -415,8 +429,8 @@ header{
 
 .hiddenPicture{
     opacity: 0 !important;
-    margin-top: 0%;
     height: 0 !important;
+    z-index: -1000;
 }
 .imagepreview {
     padding-left: 2vw;

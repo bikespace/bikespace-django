@@ -115,12 +115,12 @@ export default class Survey {
     const heading = this.props.heading ? `<h3>${this.props.heading}</h3>` : '';
     return (
       `
+<div class="pageWrapper">
       <header class="report">
         <div class="title"></div>
-      </header>  
-      <div id="error" class="hidden red"></div>  
+        <div id="error" class="hidden red"></div>
+      </header> 
         ${templates}
-        <footer>
             <div class="nav">
                 <div class="back">
                     <a id="back">
@@ -137,7 +137,7 @@ export default class Survey {
                     </a>
                 </div>
             </div>
-        </footer>   
+        </div>
       `
     )
   }

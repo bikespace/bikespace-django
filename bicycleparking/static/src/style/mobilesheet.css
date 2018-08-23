@@ -11,13 +11,13 @@
     background: transparent;
 }
 @font-face {
-    font-family: 'opensans';
+    font-family: 'opensans, sans serif';
     src: url('assets/Open_Sans/OpenSans-Regular.ttf');
     font-weight: thin;
     font-style: normal;
 }
 @font-face {
-    font-family: 'opensans';
+    font-family: 'opensans, sans serif';
     src: url('assets/Open_Sans/OpenSans-Bold.ttf');
     font-weight: bold;
     font-style: normal;
@@ -54,34 +54,6 @@ h1 {
     font-size: calc(9vw + 3vh);
 }
 
-/*BETA_LABELS___________________________________________________________*/
-
-.betaMain {
-    font-weight: bold;
-    margin: 15vh auto 0vh auto;
-    width: 70vw;
-    background-image: url(assets/icons/beaker.png);
-    background-repeat: no-repeat;
-    background-position: calc(100% - 2.5vw) center;
-    background-size: 4vh;
-    text-align: left;
-    background-color: #f3b82b;
-    color: #000;
-    padding-bottom: 0vh;
-    padding-left: 4vw;
-    font-size: calc(2vw + 3vh);
-}
-
-.betaBeaker {
-    width: calc(4vh + 12vw);
-    height: 8vh;
-    font-size: 4vh;
-    background-color: #f3b82b;
-    padding: 2vh 0vh 0vh 0vh;
-    margin: -10vh 0vh 0vh auto;
-    text-align: center;
-}
-
 /*FONT_STYLING___________________________________________________________*/
 
 h2 {
@@ -111,23 +83,38 @@ body {
     background-position: center;
     overflow-x: hidden;
     overflow-y: hidden;
-    min-height: 89vh;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
     margin: auto;
 }
 
 /*___________________________________________________________*/
 
 header{
-    position: fixed;
+    order: 1;
+    position: relative;
     width: 100%;
-    margin-top: -11vh;
+    max-height: 10%;
+    height: 10vh;
     background-color: #fff;
+    z-index: 1000;
+    margin-bottom: 2%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
 }
 
 .title {
     background: url(assets/icons/bikespace_header.svg) no-repeat center center;
-    background-size: calc(30vh);
-    height: 10vh;
+    background-size: 30vh;
+    height: 100%;
     margin: auto;
     width: 30vh;
 }
@@ -136,11 +123,10 @@ header{
 
 #error {
     position: fixed;
-    z-index: 100;
-    margin-top: -11vh;
+    z-index: 10000;
     width: 100%;
-    height: 9.7vh;
-    padding-bottom: 0.5vh;
+    max-height: 10%;
+    height: 10vh;
 }
 
 
@@ -159,7 +145,6 @@ header{
 /*___________________________________________________________*/
 
 .progress{
-    position: absolute;
     width: 3vw;
     margin-left: -1.5vw;
     border-radius: 1.5vw;
@@ -239,10 +224,15 @@ header{
 }
 
 .screen1 {
-    margin-left: 1vh;
-    height: 88vh;
-    margin-top: 11vh;
-    margin-right: 1vh;
+    order: 2;
+    margin-left: 2%;
+    display: -webkit-flex;
+    display: flex;
+    max-height: 78%;
+    height: 78vh;
+    flex-direction: column;
+    margin-right: 2%;
+    margin-bottom: 2vw;
 }
 .clear {
     opacity: 0;
@@ -280,10 +270,12 @@ header{
 }
 
 .cameraButton{
-    position: absolute;
     opacity: 0;
-    width: 100%;
-    height: 100%;
+    margin-top: -35vw;
+    width: 93%;
+    z-index: 1000;
+    max-height: 20%;
+    height: 20vh;
 }
 
 .check {    
@@ -328,11 +320,6 @@ header{
 
 /*___________________________________________________________*/
 
-footer {
-    position: absolute;
-    margin-top: -4vh;
-    width: 100%;
-}
 
 /* David Cox: I don't know what this does.
 
@@ -346,13 +333,17 @@ footer {
 }*/
 
 .nav {
+    order: 3;
+    height: 10vh;
+    max-height: 10%;
+    background-color: #fffffff5;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 .back {
-    padding: 2vw;
     box-shadow: 0px 0px 0px 0.6vw #25c252 inset;
-    height: 6vw;
-    width: 20vw;
-    margin-top: -8vw;
+    height: 10vw;
+    width: 24vw;
     border-radius: 10vw;
     margin-left: 3vh;
     text-align: center;
@@ -360,7 +351,7 @@ footer {
 }
 .back p {
     margin: auto;
-    padding: 1.5vw 2vw 2.5vw 2vw;
+    padding: 1.5vw 4vw 2.5vw 4vw;
     margin-top: -2vw;
     width: 20vw;
     height: 6vw;
@@ -369,10 +360,9 @@ footer {
     
 }
 .next {
-    padding: 2vw;
     background: #25c252;
-    height: 6vw;
-    width: 20vw;
+    height: 10vw;
+    width: 24vw;
     margin-top: -10vw;
     border-radius: 10vw;
     margin-left: auto;
@@ -382,7 +372,7 @@ footer {
 }
 .next p {
     margin: auto;
-    padding: 1.5vw 2vw 2.5vw 2vw;
+    padding: 1.5vw 4vw 2.5vw 4vw;
     margin-top: -2vw;
     width: 20vw;
     height: 6vw;
@@ -395,7 +385,7 @@ footer {
     height: 6vw;
     width: 70vw;
     padding: 2vw 0vw 2vw 0vw;
-    margin: -20vw auto 0vw auto;
+    margin: 20vw auto 0vw auto;
     border-radius: 10vw;
     text-align: center;
     cursor: pointer;
@@ -409,12 +399,19 @@ footer {
     margin-left: -2vw;
     color: #fff
 }
+.removePhoto {
+    margin-top: -25vw;
+    z-index: -1000;
+}
+#buttonRed {
+    z-index: 10;
+}
 
 /*SUMMARY___________________________________________________________*/
 
 .summaryProblem {
-    height: 35vw;
-
+    max-height: 30%;
+    height: 30vw;
 }
 .mapSummary {
     float: right;
@@ -433,10 +430,12 @@ footer {
 .hiddenPicture{
     opacity: 0 !important;
     height: 0 !important;
+    z-index: -1000;
 }
 .imagepreview {
     padding-left: 2vw;
     padding-right: 2vw;
+    margin-top: -17%;
     height: 55vh;
     overflow-y: hidden;
     overflow-x: hidden;
@@ -458,8 +457,8 @@ footer {
 
 /*MAP___________________________________________________________*/
 
-#mapid {
-    height: calc(100vh - 58%);
+#map {
+    height: 58%;
     margin-left: 2vw;
     margin-right: 2vw;
     background-color: #ddd;

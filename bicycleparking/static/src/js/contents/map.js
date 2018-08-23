@@ -63,7 +63,7 @@ export default class Map extends Content {
         <div class="progLine"><div class="progress prog2"></div></div>
         <h1>${this.props.heading}</h1>
         <h2>${this.props.text}</h2>
-        <div id="map" class=""></div>
+        <div id="map"></div>
 
       </div>
       `

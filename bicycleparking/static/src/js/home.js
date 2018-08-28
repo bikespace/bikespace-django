@@ -61,16 +61,15 @@ export default class Home {
         <div id="finish" class="success hidden">
             <h1>Thank you</h1>
         </div>
-          <div class="logo">
+            <div class="logo">
             <h1 class="maintitle tshadow">BikeSpace</h1>
                   <div class="button bshadow">
                       <a><p><em>Report a parking issue</em></p></a>
                   </div>
+            </div>
         </div>
-      
-          <div class="installPWA">
-            <button id="btnAdd"></button>
-          </div>
+        <div class="nav nav-no-bkgrd">
+            <button id="btnAdd"><p>Add to homescreen</p></button>
         </div>
       `
     )

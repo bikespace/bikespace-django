@@ -8,6 +8,7 @@ S3_BUCKET = os.environ.get('S3_BUCKET')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, '../../bicycleparking/static/dist'),
 ]

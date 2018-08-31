@@ -178,3 +178,29 @@ class UploadPicture(APIView):
         else :
             content = { 's3_name' : 'test/picture'}
         return Response(content)
+
+def submissions_to_moderate(request):
+    
+   if request.method == 'POST':
+       event_id = request.POST.get('event_id', None)
+       if event_id:
+           event = Event.objects.get(id=event_id)
+           Approval.objects.get_or_create(approved=event)
+
+   context = {}
+
+   approved_event_ids = Approval.objects.values_list('approved')  # already approved events
+   unapproved_events = Event.objects.exclude(id__in=approved_event_ids)  # only show unapproved events
+
+   context['unapproved_events'] = unapproved_events
+
+   unapproved_events_survey_answer_ids = Event.objects.exclude(id__in=approved_event_ids).values_list('answer')
+   pictures = Picture.objects.filter(id__in=unapproved_events_survey_answer_ids)
+
+   pictures_by_answer_id = {}
+   for picture in pictures:
+       pictures_by_answer_id[picture.answer.id] = picture
+
+   context['pictures_by_answer_id'] = pictures_by_answer_id
+
+   return render(request, 'bicycleparking/moderation.html', context)

@@ -1,0 +1,25 @@
+{% block title %}{% block page_title %}Moderation{% endblock %}{% endblock %}
+{% block subtitle %}List of events that are yet to be approved{% endblock %}
+
+{% block content %}
+<script src="moderation.js"></script>
+<table>
+   <tr><th>ID</th><th>Time</th><th>Lat/Lon</th><th>Comments</th><th>Picture</th><th>Approve</th></tr>
+{% for unapproved_event in unapproved_events %}
+   <tr>
+   <td>{{ unapproved_event.id }}</td>
+   <td>{{ unapproved_event.timeOf }}</td>
+   <td>{{ unapproved_event.answer.latitude }} / {{ unapproved_event.answer.longitude }}</td>
+   <td>{{ unapproved_event.answer.comments }}</td>
+   <td>{{ pictures_by_answer_id.unapproved_event.answer.id }}</td>
+   <td>
+       <form method="post">
+           {% csrf_token %}
+           <input type="hidden" id="event_id" name="event_id" value="{{ unapproved_event.id }}">
+           <input type="submit" value="Approve">
+       </form>
+   </td>
+   </tr>
+{% endfor %}
+</table>
+{% endblock %}

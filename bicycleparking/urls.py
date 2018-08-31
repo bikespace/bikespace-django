@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^api/pictures/(?P<filename>[^/]+)$', views.DownloadPicture.as_view()),
     url(r'^api/intersection$', views.LocationNameRequest.as_view()),
     url(r'^api/dashboarddata$', views.DashboardRequest.as_view ()),
+    url(r'^moderate_unapproved', views.submissions_to_moderate, name='moderate_unapproved'),
 ]

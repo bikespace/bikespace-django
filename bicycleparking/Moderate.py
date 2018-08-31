@@ -6,6 +6,9 @@
 #
 # Written 2018 07 23
 #
+# Modified 2018 08 30
+# Purpose getUnmoderated returns a dictionary with moderation values
+#
 # Modified 
 # Purpose
 #
@@ -17,29 +20,100 @@ class Moderate (object):
 
   def getUnmoderated (self, userId) :
      """Implements an html interface to list unmoderated requests."""
-     self.getPictures 
+     self.getPictures (Event.objects.filter (approval = None))
 
-  def getPictures (self) :
-     """Returns a string representing the html links to display pictures and 
-     prompt for form list."""
+  def approveList (self, list) :
+     """Calls the approve and edit function on multiple elements in the list."""   
+     for request in list :
+        self.approve (request)
 
-     formText = "<form>" 
-     unmoderated = Event.objects.filter (approval = None)
-     for event in unmoderated :
-        link = event.answer.id
-        comment = event.answer.comments
-        pictures = Picture.objects.filter (answer__id = link)
-        formText = formText + '<div>'
-        for pmod in pictures :
-           formText = formText + '<img src="app/pictures/{}" width="80" height="100">'.format (pmod.photo_uri)
-        formText = formText + '<div><p><textarea>' + event.answer.comments + '</textarea></p></div>'
-        formText = formText + '<button onclick="approve ({})">Approve</button>'.format (event.id)
-        formText = formText + "</div>"
-     formText = formText + "</form>"   
-
-  def approve (self, eventId, userId) :
+  def approve (self, response) :
     """Records the moderated records in the approval table in the database, 
     together with the identifier of the user who approved the request."""
+    if 'event' in response and 'moderator' in response :
+       eventId = response ['event']
+       userId = response ['moderator']
+    else :
+       raise ModerationError (response)
+    
     event = Event.object.get (id = eventId)
     approval = Approval (approved = event, moderatorId = userId)
     approval.save ()
+    self.editValues (event.answer, response)
+
+  def getPictures (self, list) :
+         """Returns a list of dictionaries to apply to the django template for 
+     creating the moderation list."""
+
+     result = []
+     for event in list :
+        eventEntry = {}
+        eventEntry ['id'] = link = event.answer.id
+        eventEntry ['time'] = event.timeOf
+        eventEntry ['comments'] = event.answer.comments
+        eventEntry ['location'] = self.where (event.answer)
+        eventEntry ['pictures'] = self.pic (Picture.objects.filter (answer__id = link))
+        result.append (eventEntry)
+     return result
+
+  def where (self, answer) :
+    """Gets the location of the pin from the value provided by the caller. 
+    Normally this will be the pin location contained in the latitude and 
+    longitude fields of the survey answer."""    
+    result = {}
+    result ['longitude'] = answer.longitude
+    result ['latitude'] = answer.latitude 
+    return result   
+
+  def pic (self, list) :
+     """Gets the list of pictures uploaded by the user."""   
+     result = []
+     for pmod in list :
+        result.append (pmod.photo_uri)
+     return result
+
+  def makeCondition (self, source) :
+     """Makes a condition value based on the response provided by the 
+     moderation process."""
+     condition = 'OK'
+     if 'status' in response :
+        if condition in ('OK', 'rejected', 'deferred') :
+           condition = response ['status'];
+        else :
+           raise moderationError ('error in status', source)
+     return condition 
+
+  def editValues (self, answerId, request) :
+     """Loops through the allowed edit fields and modifies the data values the
+     moderator is permitted to edit, recording the edits in the edit table."""
+
+     coords = ('latitude', 'longitude')
+     edited = False
+     toEdit = Answer.object.get (id = answerId)
+     for edit in ('latitude', 'longitude', 'comment') :
+        if edit in request : 
+           record = Edit (by = request ['moderator'], field = edit, edited = toEdit)
+           if edit in coords :
+              setattr (toEdit, edit, float (request [edit]))
+           else :
+              setattr (toEdit, edit, request [edit])
+           edited = True
+     if edited :
+        toEdit.save ()
+      
+
+class ModerationError (Exception):
+  """Define a moderation error handler with the specific input error."""
+
+  def __init__(self, message, request):
+     """Defines the class as a subclass of Exception"""
+
+     super().__init__(message)
+
+     self.errorCond = []
+     for missing in ('event', 'moderator') :
+        self.errorCond.append ('missing ' + 'missing')
+     self.status = 'OK'
+     if status in request :
+        self.status = request ['status']
+

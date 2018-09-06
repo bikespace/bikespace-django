@@ -51,18 +51,18 @@ class Dashboard :
         print (limits)
 
   def getLimits (self, center, degrees) :
-         """Finds the area to select given the center location and the radius of
-        the area as defined."""
-     result = {}
-     result ["long"] = self.betweenLoc (center ["lng"], degrees)
-     result ["lat"] = self.betweenLoc (center ["lat"], degrees)
-     return result
+    """Finds the area to select given the center location and the radius of
+    the area as defined."""
+    result = {}
+    result ["long"] = self.betweenLoc (center ["lng"], degrees)
+    result ["lat"] = self.betweenLoc (center ["lat"], degrees)
+    return result
 
   def betweenLoc (self, midPoint, degrees) :
-         """Finds the edges of an area as defined by a specific distance from the 
-        given midpoint."""
-     result = {}
-     result ["min"] = midPoint - (degrees / 2);
-     result ["max"] = midPoint + (degrees / 2);
-     return result
+    """Finds the edges of an area as defined by a specific distance from the
+    given midpoint."""
+    result = {}
+    result ["min"] = midPoint - (degrees / 2);
+    result ["max"] = midPoint + (degrees / 2);
+    return result
 

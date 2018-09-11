@@ -19,7 +19,7 @@ bicycleparking/package-lock.json
 
 # sftp configuration file
 sftp-config.json
-bicycleparking/static/dist
+
 # Basics
 *.py[cod]
 __pycache__
@@ -86,3 +86,9 @@ test/pic/sciencectr.png
 test/pic/trinityblwds.png
 test/pic/trinityblwds.png
 civictechto-bicycle-parking/bicycleparking/static/dist
+
+# ignore files in the dist folder
+bicycleparking/static/dist/*
+
+# but don't ignore the folder
+!/bicycleparking/static/dist/.keep

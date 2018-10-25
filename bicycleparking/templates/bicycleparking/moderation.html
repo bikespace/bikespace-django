@@ -1,25 +1,65 @@
+{% load static %}
 {% block title %}{% block page_title %}Moderation{% endblock %}{% endblock %}
 {% block subtitle %}List of events that are yet to be approved{% endblock %}
 
 {% block content %}
-<script src="moderation.js"></script>
+<link href="{% static "moderation/moderation.css" %}" rel="stylesheet">
+
+<!--
+    - convert lat/long to intersection with URL clickable to Google Maps for a map rendition
+    - convert date to three letter month
+    - drop down button
+    - combine time and date
+-->
 <table>
-   <tr><th>ID</th><th>Time</th><th>Lat/Lon</th><th>Comments</th><th>Picture</th><th>Approve</th></tr>
+   <colgroup>
+    <col width="5%">
+    <col width="10%">
+    <col width="20%">
+    <col width="10%">
+    <col width="10%">
+    <col width="20%">
+    <col width="25%">
+   </colgroup>
+   <thead>
+       <tr><th>ID</th><th>Problem</th><th>Lat/Lon</th><th>Date</th><th>Time</th><th>Picture</th><th>Comment</th><th>Approve</th></tr>
+    </thead>
+    <tbody>
 {% for unapproved_event in unapproved_events %}
    <tr>
    <td>{{ unapproved_event.id }}</td>
-   <td>{{ unapproved_event.timeOf }}</td>
-   <td>{{ unapproved_event.answer.latitude }} / {{ unapproved_event.answer.longitude }}</td>
-   <td>{{ unapproved_event.answer.comments }}</td>
-   <td>{{ pictures_by_answer_id.unapproved_event.answer.id }}</td>
+   <td>{{ unapproved_event.problem }}</td>
+   <td>{{ unapproved_event.location.latitude }} / {{ unapproved_event.location.longitude }}</td>
+   <td>{{ unapproved_event.time | date:"d-m-Y" }}</td>
+   <td>{{ unapproved_event.time | time:"fA" }}</td>
+   <td>
+   {% for pic in unapproved_event.pictures %}
+    <img src = "{{ pic }}" width="80" height="100">
+   {% endfor %}
+   </td>
+   <td><textarea>{{ unapproved_event.comments }}</textarea></td>
+
    <td>
        <form method="post">
            {% csrf_token %}
            <input type="hidden" id="event_id" name="event_id" value="{{ unapproved_event.id }}">
-           <input type="submit" value="Approve">
+           <label class="dropdown">
+
+            <div class="dd-button">
+              Approve<div class='down-arrow'></div>
+            </div>
+          
+            <input type="checkbox" class="dd-input" id="test">
+          
+            <ul class="dd-menu">
+             <li>Reject</li>
+            </ul>
+            
+          </label>      <!--     <input type="submit" value="Approve"> -->
        </form>
    </td>
    </tr>
 {% endfor %}
+</tbody>
 </table>
 {% endblock %}

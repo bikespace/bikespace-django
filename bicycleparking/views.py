@@ -46,10 +46,13 @@ from bicycleparking.serializers import BetaCommentSerializer
 from bicycleparking.models import SurveyAnswer
 from bicycleparking.models import Picture
 from bicycleparking.models import BetaComments
+from bicycleparking.models import Approval
+from bicycleparking.models import Event
 from bicycleparking.uploader import Uploader
 from bicycleparking.geocode import Geocode
 from bicycleparking.LocationData import LocationData
 from bicycleparking.CollectedData import CollectedData
+from bicycleparking.Moderate import Moderate
 
 # Create your views here.
 
@@ -189,15 +192,6 @@ def submissions_to_moderate(request):
    approved_event_ids = Approval.objects.values_list('approved')  # already approved events
    unapproved_events = Event.objects.exclude(id__in=approved_event_ids)  # only show unapproved events
 
-   context['unapproved_events'] = unapproved_events
-
-   unapproved_events_survey_answer_ids = Event.objects.exclude(id__in=approved_event_ids).values_list('answer')
-   pictures = Picture.objects.filter(id__in=unapproved_events_survey_answer_ids)
-
-   pictures_by_answer_id = {}
-   for picture in pictures:
-       pictures_by_answer_id[picture.answer.id] = picture
-
-   context['pictures_by_answer_id'] = pictures_by_answer_id
+   context ['unapproved_events'] = Moderate ().getUnmoderated ()
 
    return render(request, 'bicycleparking/moderation.html', context)

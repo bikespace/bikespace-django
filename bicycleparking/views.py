@@ -56,9 +56,6 @@ from bicycleparking.CollectedData import CollectedData
 def index(request):
     return render(request, 'bicycleparking/index.html', {})
 
-def dashboard(request):
-    return render(request, 'bicycleparking/dashboard.html', {})
-
 class SurveyAnswerList(generics.ListCreateAPIView):
     """Generates the main table entries from the user's survey input, generates
     the geographical aggregation data (closest and closest major intersection), 

@@ -4,13 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>BikeSpace - Home</title>
-    <link rel="manifest" href="<%= assetpath %>manifest.json">
+    <link rel="manifest" href="/static/dist/manifest.json">
 
     <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="<%= assetpath %>style/stylesheet.css" />
     <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="<%= assetpath %>style/mobilesheet.css" />
     <link type="text/css" rel="stylesheet" href="<%= assetpath %>style/flatpickr.min.css" />
     <link type="text/css" rel="stylesheet" href="<%= assetpath %>style/leaflet.css" />
     <link type="text/css" rel="stylesheet" href="<%= assetpath %>style/leaflet-search.css" />
+    <link rel="prefetch" href="<%= assetpath %>style/assets/icons/calendar.svg"/>
+    <link rel="prefetch" href="<%= assetpath %>style/assets/icons/camera.svg"/>
+    <link rel="prefetch" href="<%= assetpath %>style/assets/icons/upload.svg"/>
+    <link rel="prefetch" href="<%= assetpath %>style/assets/icons/clock.svg"/>
 
 
     <!--favicon-->
@@ -20,11 +24,11 @@
     <!-- META Tags -->
     <meta property="og:title" content="Bikespace">
     <meta property="og:description" content="Report bike parking issues in Toronto.">
-    <meta property="og:image" content="<%= assetpath %>assets/icons/media_thumb1.jpg">
+    <meta property="og:image" content="<%= assetpath %>assets/icons/bkespace-media-icon.jpg">
     <meta name="twitter:card" content="summary_large_image">
 
-    <meta property="og:site_name" content="BikeSpace visual prototype">
-    <meta name="twitter:image:alt" content="The BikeSpace logo with the word HTML over top">
+    <meta property="og:site_name" content="BikeSpace">
+    <meta name="twitter:image:alt" content="BikeSpace logo on top of a parked bicycle">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
         crossorigin="" />
@@ -60,7 +64,7 @@
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
-            .register('sw.js')
+            .register('/static/dist/sw.js')
             .then(function () { console.log('Service Worker Registered'); });
     }
 </script>

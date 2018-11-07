@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^api/intersection$', views.LocationNameRequest.as_view()),
     url(r'^api/dashboarddata$', views.DashboardRequest.as_view ()),
     url(r'^sw.js', (TemplateView.as_view(template_name="bicycleparking/sw.js", content_type='application/json')), name='sw.js'),
+    url(r'^manifest.json', (TemplateView.as_view(template_name="bicycleparking/manifest.json", content_type='application/json')), name='manifest.json'),
 ]

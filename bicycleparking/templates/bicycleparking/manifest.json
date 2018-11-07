@@ -1,0 +1,32 @@
+{
+    "short_name": "BikeSpace",
+    "name": "BikeSpace",
+    "theme_color": "#FFFFFF",
+    "background_color": "#3F51B5",
+    "start_url": "/index.html",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "https://s3.amazonaws.com/bikespace-static/dist/style/assets/icons/apple-touch-icon-180x180.png",
+            "sizes": "256x256"
+        },
+        {
+            "src": "https://s3.amazonaws.com/bikespace-static/dist/style/assets/icons/bikespace16.png",
+            "sizes": "16x16"
+        },
+        {
+            "src": "https://s3.amazonaws.com/bikespace-static/dist/style/assets/icons/bikespace32.png",
+            "sizes": "32x32"
+        },
+        {
+            "src": "https://s3.amazonaws.com/bikespace-static/dist/style/assets/icons/pwa-192x192.png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "https://s3.amazonaws.com/bikespace-static/dist/style/assets/icons/pwa-512x512.png",
+            "sizes": "512x512"
+        }
+    ]
+}

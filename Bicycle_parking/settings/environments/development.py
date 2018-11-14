@@ -1,5 +1,5 @@
 import dj_database_url
-
+import os
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 AWS_ACCESS_KEY_ID = ''

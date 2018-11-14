@@ -1,11 +1,12 @@
 # base image
 FROM mdillon/postgis
 
-# set working directory
-WORKDIR /usr/src/app
+RUN apt-get update \
+    && apt-get install -y curl zip \
+    && apt-get clean
 
-COPY ./mkintersectiondb.sh /usr/src/app/mkintersectiondb.sh
-COPY ./sql /usr/src/app
-RUN chmod +x /usr/src/app/mkintersectiondb.sh
+COPY ./mkintersectiondb.sh /docker-entrypoint-initdb.d/q_mkintersectiondb.sh
+COPY ./sql /docker-entrypoint-initdb.d/sql/
+RUN chmod +x /docker-entrypoint-initdb.d/q_mkintersectiondb.sh
 
-CMD ["/usr/src/app/mkintersectiondb.sh"]
+#CMD ["/docker-entrypoint-initdb.d/q_mkintersectiondb.sh"]

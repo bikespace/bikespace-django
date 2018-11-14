@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #set -e
 
@@ -6,7 +6,7 @@ export PGUSER="$POSTGRES_USER"
 export PGPASSWORD='postgres'
 OPTION=''
 USER='-U postgres'
-ADDR='-h db'
+#ADDR='-h db'
 
 URI='http://opendata.toronto.ca/gcc/centreline_intersection_wgs84.zip'
 

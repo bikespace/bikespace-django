@@ -4,7 +4,8 @@
 
 {% block content %}
 <link href="{% static "moderation/moderation.css" %}" rel="stylesheet">
-
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <!--
     - convert lat/long to intersection with URL clickable to Google Maps for a map rendition
     - convert date to three letter month
@@ -18,8 +19,9 @@
     <col width="20%">
     <col width="10%">
     <col width="10%">
+    <col width="10%">
     <col width="20%">
-    <col width="25%">
+    <col width="15%">
    </colgroup>
    <thead>
        <tr><th>ID</th><th>Problem</th><th>Lat/Lon</th><th>Date</th><th>Time</th><th>Picture</th><th>Comment</th><th>Approve</th></tr>
@@ -39,14 +41,16 @@
    </td>
    <td><textarea>{{ unapproved_event.comments }}</textarea></td>
 
+   <!-- look into bootstrap library !!! -->
    <td>
        <form method="post">
            {% csrf_token %}
            <input type="hidden" id="event_id" name="event_id" value="{{ unapproved_event.id }}">
-           <label class="dropdown">
-
-            <div class="dd-button">
-              Approve<div class='down-arrow'></div>
+           <!-- <label class="dropdown"> -->
+ 
+            <div class="approve-button">
+              <div class="button-text">Approve</div>
+              <div class='drop-down'>&gt;</div>
             </div>
           
             <input type="checkbox" class="dd-input" id="test">
@@ -55,7 +59,7 @@
              <li>Reject</li>
             </ul>
             
-          </label>      <!--     <input type="submit" value="Approve"> -->
+          <!-- </label>           <input type="submit" value="Approve"> -->
        </form>
    </td>
    </tr>

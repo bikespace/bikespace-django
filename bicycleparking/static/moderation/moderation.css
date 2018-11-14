@@ -16,7 +16,16 @@ img:hover
 }
 
 tbody tr:nth-child(even) {
-	background-color: #F2F2F2;
+	background-color: #d8e1e5;
+}
+
+thead 
+{
+	font-family: 'Open Sans', Sans-Serif;
+	padding: 30px;
+  color: #f6f6f6;
+	background-color: #25c252;
+
 }
 
 tbody tr:nth-child(odd) {
@@ -24,8 +33,8 @@ tbody tr:nth-child(odd) {
 }
 
 body {
-	color: #000000;
-	font-family: Sans-Serif;
+	color: #1f2a2d;
+	font-family: 'Open Sans', Sans-Serif;
 	padding: 30px;
 	background-color: #f6f6f6;
   }
@@ -38,38 +47,77 @@ body {
   a:hover {
 	color: #222222
   }
-  
-  /* Dropdown */
+	
+	/* moderation */
+
+	.approve-button {
+		display: inline-block;
+		border: 1px solid gray;
+		border-radius: 4px;
+		/*	width: 80%; */
+    background: white;
+    margin: auto;
+    padding: 10px;
+}
+.button-text {
+    float: left;
+	  padding: 1px 5px 1px 1px;
+    background: white;
+}
+.drop-down {
+    float: right;
+	  padding: 1px 1px 1px 5px;
+	  background: #e9f9ed;
+		transform: rotate(90deg);
+	}
+
+.menu-table 
+{
+	position: absolute;
+	top: 100%;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 0;
+	margin: 2px 0 0 0;
+	box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+	background-color: #ffffff;
+	list-style-type: none;
+}
+	
+  /* Dropdown *
   
   .dropdown {
 	display: inline-block;
 	position: relative;
   }
-  
+	
+	
   .dd-button {
 	display: inline-block;
 	border: 1px solid gray;
 	border-radius: 4px;
-	/* padding: 10px 30px 10px 20px; */
+	/* padding: 10px 30px 10px 20px; * /
 	background-color: #ffffff;
 	cursor: pointer;
 	white-space: nowrap;
   }
 	
   .down-arrow {
-	content: '>';
+	/* content: '>'; * /
 	position: relative;
-	top: 50%;
-	right: 15px;
+	/* top: 50%; 
+	right: 15px; * /
 	transform: rotate(90deg);
+	/*
 	width: 0; 
 	height: 0; 
 	border-left: 5px solid transparent;
 	border-right: 5px solid transparent;
 	border-top: 5px solid black;
+	* /
   }
   
-  .dd-button:hover {
+  .down-arrow:hover {
 	background-color: #eeeeee;
   }
   
@@ -117,4 +165,4 @@ body {
   .dd-menu li.divider{
 	padding: 0;
 	border-bottom: 1px solid #cccccc;
-  }
+  } */

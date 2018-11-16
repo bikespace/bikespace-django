@@ -43,7 +43,7 @@ class CollectedData (object):
      """Gets the list of approved items from the request database""" 
 
      result = []
-     list = Approval.objects.all ();
+     list = Approval.objects.filter (status__exact = 'OK');
 
      for entry in list :
          if self.bounded (entry.approved.answer) :

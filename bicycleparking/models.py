@@ -21,8 +21,8 @@
 # Modified 2018 05 03 
 # Purpose  added beta user comment table
 #
-# Modified 
-# Purpose   
+# Modified 2018 08 30
+# Purpose  added edit table and status to approval table; removed string functions from models
 #
 
 from django.db import models
@@ -52,9 +52,6 @@ class Picture (models.Model) :
     """Contains the definition of a photograph uploaded by the user of the 
        selected parking problem."""
     
-    def __str__ (self) :
-        return format_html ('<img src="/api/picture/{}">', self.photo_uri)
-
     photo_uri = models.TextField(default=None, null=True)
     photo_desc = models.TextField(default=None, null=True)
     answer = models.ForeignKey (SurveyAnswer, on_delete = models.PROTECT, default = DEFAULT_LINK)
@@ -82,15 +79,6 @@ class Event(models.Model) :
     table. Finally, information relating the request to an aggregated geographic 
     area resides in the area table."""
 
-    def approved (self) :
-        """Approved model property for moderation."""
-        return True
-
-    def __str__ (self) :
-        return 'time : {}, lat = {}, long = {}'.format (self.timeOf, 
-                                                        self.answer.latitude, 
-                                                        self.answer.longitude)
-
     sourceIP = models.GenericIPAddressField()
     area = models.ForeignKey (Area, on_delete = models.PROTECT, default = DEFAULT_LINK)
     answer = models.ForeignKey (SurveyAnswer, on_delete = models.PROTECT, default = DEFAULT_LINK)
@@ -102,8 +90,16 @@ class Approval (models.Model) :
     to the general public by a moderator."""
 
     timeOfApproval = models.DateTimeField (auto_now_add = True)
-    moderatorId = models.TextField(default=None, null=True)
+    moderatorId = models.TextField (default = '', null = True)
+    status = models.TextField (default = 'OK')
     approved = models.ForeignKey (Event, on_delete = models.PROTECT, default = DEFAULT_LINK)
+
+class Edit :
+    """Records the dits to the records made by a moderator or other privileged user."""
+    by = models.TextField (null = False)
+    timeOfApproval = models.DateTimeField (auto_now_add = True)
+    field = models.TextField (null = False);
+    edited = models.ForeignKey (SurveyAnswer, on_delete = models.PROTECT, default = DEFAULT_LINK)
 
 class BetaComments (models.Model) :
     """Contain comments made by users of the beta version -- delete after beta completed."""

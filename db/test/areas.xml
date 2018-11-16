@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<data>
+	<area>
+		<place><name>Rouge Hill Go</name><latitude>43.780319</latitude>
+			<longitude>-79.130228</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>206</gid><name>Lawrence Ave E / Frank Faubert Dr</name>
+			<type>MNRSL</type><typeId>Minor-Single Level</typeId><longitude>-79.130115822</longitude>
+			<latitude>43.781035009</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Centennial Park</name><latitude>43.651983</latitude>
+			<longitude>-79.589117</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>37</gid><name>Centennial Park Trl / Elmcrest Creek</name>
+			<type>SEUML</type><typeId>Pseudo Intersection-Overpass/Underpass</typeId>
+			<longitude>-79.5892509</longitude><latitude>43.652470771</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>CN Tower</name><latitude>43.642588</latitude><longitude>-79.387046</longitude>
+			<what>origin</what>
+		</place>
+		<place><what>closest</what><gid>76</gid><name>Bremner Blvd / Rees St</name>
+			<type>MNRSL</type><typeId>Minor-Single Level</typeId><longitude>-79.387622745</longitude>
+			<latitude>43.640856368</latitude>
+		</place>
+		<place><what>major</what><gid>92</gid><name>Bloor St E / Yonge St / Bloor St W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.386788062</longitude>
+			<latitude>43.670226387</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Long Branch GO</name><latitude>43.590963</latitude>
+			<longitude>-79.545468</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>13</gid><name>Exmoor Dr / Brow Dr</name>
+			<type>SEUSL</type><typeId>Pseudo Intersection-Single Level</typeId>
+			<longitude>-79.545623135</longitude><latitude>43.590928645</latitude>
+		</place>
+		<place><what>major</what><gid>92</gid><name>Bloor St E / Yonge St / Bloor St W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.386788062</longitude>
+			<latitude>43.670226387</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>North York Civic Centre</name><latitude>43.767218</latitude>
+			<longitude>-79.414696</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>139</gid><name>Beecroft Rd / North York Blvd</name>
+			<type>MNRSL</type><typeId>Minor-Single Level</typeId><longitude>-79.415372324</longitude>
+			<latitude>43.766331632</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>New Spiceland</name><latitude>43.836533</latitude>
+			<longitude>-79.248569</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>235</gid><name>Tapscott Rd / Steeles Ave E</name>
+			<type>MNRSL</type><typeId>Minor-Single Level</typeId><longitude>-79.248490369</longitude>
+			<latitude>43.837241185</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>1001 Queen St (CAMH)</name><latitude>43.643569</latitude>
+			<longitude>-79.417524</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>62</gid><name>Workman Way</name>
+			<type>CDSSL</type><typeId>Cul de Sac-Single Level</typeId>
+			<longitude>-79.417336495</longitude><latitude>43.644127277</latitude>
+		</place>
+		<place><what>major</what><gid>92</gid><name>Bloor St E / Yonge St / Bloor St W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.386788062</longitude>
+			<latitude>43.670226387</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Ontario Science Centre</name><latitude>43.716676</latitude>
+			<longitude>-79.338931</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>253</gid><name>Don Mills Rd / St Dennis Dr</name>
+			<type>MNRSL</type><typeId>Minor-Single Level</typeId><longitude>-79.337316385</longitude>
+			<latitude>43.716553623</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Sisterhood of St. John the Divine</name><latitude>43.788385</latitude>
+			<longitude>-79.405595</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>156</gid><name>Newtonbrook Park Trl</name>
+			<type>CDSSL</type><typeId>Cul de Sac-Single Level</typeId>
+			<longitude>-79.4060171</longitude><latitude>43.786631183</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Yorkdale Shopping Center</name><latitude>43.725692</latitude>
+			<longitude>-79.452120</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>125</gid><name>Highland Hill</name>
+			<type>SEUML</type><typeId>Pseudo Intersection-Overpass/Underpass</typeId>
+			<longitude>-79.451520015</longitude><latitude>43.724036837</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>York University</name><latitude>43.776142</latitude>
+			<longitude>-79.502551</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>135</gid><name>Winters Lane</name>
+			<type>CDSSL</type><typeId>Cul de Sac-Single Level</typeId>
+			<longitude>-79.501895259</longitude><latitude>43.776045959</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Humbertown Shopping Mall</name><latitude>43.661714</latitude>
+			<longitude>-79.519835</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>47</gid><name>Lambeth Rd / St George's Rd</name>
+			<type>MNRSL</type><typeId>Minor-Single Level</typeId><longitude>-79.519876962</longitude>
+			<latitude>43.660878449</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Thorncrest Shopping Center</name><latitude>43.662678</latitude>
+			<longitude>-79.531885</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>23</gid><name>Islington Ave / Bromley Cres</name>
+			<type>MNRSL</type><typeId>Minor-Single Level</typeId><longitude>-79.531265489</longitude>
+			<latitude>43.662628598</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Tremco Paint</name><latitude>43.713917</latitude>
+			<longitude>-79.348000</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>263</gid><name>Wicksteed Ave / Beth Nealson Dr</name>
+			<type>MNRSL</type><typeId>Minor-Single Level</typeId><longitude>-79.34655896</longitude>
+			<latitude>43.713377198</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Toronto Zoo</name><latitude>43.817559</latitude>
+			<longitude>-79.185706</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>195</gid><name>Rouge River</name>
+			<type>SEUML</type><typeId>Pseudo Intersection-Overpass/Underpass</typeId>
+			<longitude>-79.184447992</longitude><latitude>43.815259065</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Scarborough Town Centre</name><latitude>43.775578</latitude>
+			<longitude>-79.256804</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>181</gid><name>Progress Ave / Borough Dr</name>
+			<type>MNRML</type><typeId>Minor-Multi Level</typeId><longitude>-79.254215235</longitude>
+			<latitude>43.776649121</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Bay at Bloor Yonge</name><latitude>43.670575</latitude>
+			<longitude>-79.386508</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>92</gid><name>Bloor St E / Yonge St / Bloor St W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.386788062</longitude>
+			<latitude>43.670226387</latitude>
+		</place>
+		<place><what>major</what><gid>92</gid><name>Bloor St E / Yonge St / Bloor St W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.386788062</longitude>
+			<latitude>43.670226387</latitude>
+		</place>
+	</area>
+	<area>
+		<place><name>Yonge Eglinton Centre</name><latitude>43.707115</latitude>
+			<longitude>-79.398845</longitude><what>origin</what>
+		</place>
+		<place><what>closest</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+		<place><what>major</what><gid>109</gid><name>Eglinton Ave E / Yonge St / Eglinton Ave W</name>
+			<type>MJRSL</type><typeId>Major-Single Level</typeId><longitude>-79.398366496</longitude>
+			<latitude>43.706731991</latitude>
+		</place>
+	</area>
+</data>

@@ -4,4 +4,3 @@ BIKE_DB_USER="postgres"
 export BIKE_DB_USER 
 BIKE_DB_PW="postgres"
 export BIKE_DB_PW
-export DJANGO_ENV=ci

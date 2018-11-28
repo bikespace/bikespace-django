@@ -130,9 +130,9 @@ def put_event (transaction, sink) :
   print (transaction)
 
 try:
-  resource = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}'".format (SOURCE_DB, DB_HOST, DB_USER, DB_PW))
+  resource = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}' port=5435".format (SOURCE_DB, DB_HOST, DB_USER, DB_PW))
   source = resource.cursor ()
-  to = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}'".format (SINK_DB, DB_HOST, DB_USER, DB_PW))
+  to = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}' port=5435".format (SINK_DB, DB_HOST, DB_USER, DB_PW))
   sink = to.cursor ()
   construct (source, "transactions.xml", sink)
   to.commit ()

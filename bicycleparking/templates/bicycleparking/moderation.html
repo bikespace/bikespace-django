@@ -1,11 +1,46 @@
 {% load static %}
-{% block title %}{% block page_title %}Moderation{% endblock %}{% endblock %}
-{% block subtitle %}List of events that are yet to be approved{% endblock %}
-
+{% block nav %}
+<nav class="nav nav-pills flex-column flex-sm-row">
+       <a class="flex-sm-fill text-sm-center nav-link active" href="#">Login</a>
+       <a class="flex-sm-fill text-sm-center nav-link" href="https://www.bikespace.ca">Website</a>
+       <a class="flex-sm-fill text-sm-center nav-link" href="https://dashboard.bikespace.ca">Dashboard</a>
+       <a class="flex-sm-fill text-sm-center nav-link" href="https://app.bikespace.ca">App</a>
+     </nav>
+{% endblock %}
+{% block title %}
+{% block page_title %}
+<h1 id="title"> BikeSpace Public Report Moderation</h1>
+{% endblock %}
+{% endblock %}
+{% block subtitle %}
+<h3 id="subtitle">Submitted public reports through app.bikespace.ca</h3>
+<p>Moderation process:</p>
+<ul>
+   <li>Check the location</li>
+   <li>Review the comment for language or formatting errors</li>
+   <li>Review the image for inappropriate content</li>
+   <li>Approve or deny the submission</li>
+</ul>
+<p>For more information on moderation please refer to the <b><a href="https://docs.google.com/document/d/1YwZQOA_Ac6W0voWPxFipWvgvq9Nt7CNgLxhq9KztvAs/edit?usp=sharing"> BikeSpace moderation policy document.</a></b> For any other issues please email <b><a href="mailto:bikespaceto@gmail.com">bikespaceto@gmail.com</a></b> quoting the report ID in the header.</p>
+{% endblock %}
 {% block content %}
-<link href="{% static "moderation/moderation.css" %}" rel="stylesheet">
+<!-- !!! -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+  <script>
+      function submit (id, status)
+      {
+        var submit =  document.getElementById ('status_' + id)
+        submit.value = status;
+        document.getElementById("mod_form_" + id).submit()
+      }
+   </script>
+<!-- !!! -->
+<link href="{% static 'moderation/moderation.css' %}" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <!--
     - convert lat/long to intersection with URL clickable to Google Maps for a map rendition
     - convert date to three letter month
@@ -40,26 +75,25 @@
    {% endfor %}
    </td>
    <td><textarea>{{ unapproved_event.comments }}</textarea></td>
-
    <!-- look into bootstrap library !!! -->
    <td>
-       <form method="post">
+       <form name = 'mod_form_{{unapproved_event.id}}' method = "post">
            {% csrf_token %}
            <input type="hidden" id="event_id" name="event_id" value="{{ unapproved_event.id }}">
+           <input type="hidden" id="status_{{unapproved_event.id}}" name="status" value = "OK">
            <!-- <label class="dropdown"> -->
  
-            <div class="approve-button">
-              <div class="button-text">Approve</div>
-              <div class='drop-down'>&gt;</div>
-            </div>
-          
-            <input type="checkbox" class="dd-input" id="test">
-          
-            <ul class="dd-menu">
-             <li>Reject</li>
-            </ul>
-            
-          <!-- </label>           <input type="submit" value="Approve"> -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger" 
+                        onclick = "submit ('{{unapproved_event.id}}', 'OK')">Approve</button>
+                <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="sr-only">Toggle</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnDropdownDemo">
+                  <a class="dropdown-item" onclick = "submit ('{{unapproved_event.id}}', 'REJECT')">Reject</a>
+                  <a class="dropdown-item" onclick = "submit ('{{unapproved_event.id}}', 'DEFER')">Defer</a>
+                </div>
+              </div>          <!-- </label>           <input type="submit" value="Approve"> -->
        </form>
    </td>
    </tr>

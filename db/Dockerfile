@@ -11,4 +11,7 @@ RUN rm /tmp/centreline_intersection_wgs84.zip
 
 COPY ./mkintersectiondb.sh /docker-entrypoint-initdb.d/qmkintersectiondb.sh
 COPY ./sql /docker-entrypoint-initdb.d/sql/
+COPY ./test /docker-entrypoint-initdb.d/test/
+
 RUN chmod +x /docker-entrypoint-initdb.d/qmkintersectiondb.sh
+RUN chmod +x /docker-entrypoint-initdb.d/test/loadTestDB.py

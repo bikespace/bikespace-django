@@ -9,6 +9,43 @@ img:hover
     transform:scale(3.0);
 }
 
+h1 {
+font-family: 'Open Sans', Sans-Serif;
+color: #25c252;
+}
+
+h3 {
+	font-family: 'Open Sans', Sans-Serif;
+	color: #25c252;
+}
+
+ul {
+	color: #1f2a2d;
+	font-family: 'Open Sans', Sans-Serif;
+}
+
+p {
+	color: #1f2a2d;
+	font-family: 'Open Sans', Sans-Serif;
+}
+
+.nav{
+	background: #25c252;
+}
+
+.nav-link{
+	color: #FFFFFF;
+}
+
+#title {
+	padding-top: 30px; 
+	padding-bottom: 20px;
+}
+
+#subtitle{
+	padding-bottom: 20px;
+}
+
 .photo {
 	height: 71px;
 	width: 127px;

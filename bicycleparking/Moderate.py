@@ -28,22 +28,22 @@ class Moderate (object):
         self.approve (request)
 
   def approve (self, response) :
-    """Records the moderated records in the approval table in the database, 
-    together with the identifier of the user who approved the request."""
-    if 'event' in response and 'moderator' in response :
-       eventId = response ['event']
-       userId = response ['moderator']
-    else :
-       raise ModerationError (response)
+     """Records the moderated records in the approval table in the database, 
+     together with the identifier of the user who approved the request."""
+     if 'event' in response and 'moderator' in response :
+        eventId = response ['event']
+        userId = response ['moderator']
+     else :
+        raise ModerationError (response)
 
-    mod_status = 'OK'
-    if 'status' in response :
-       mod_status = response ['status']
+     mod_status = 'OK'
+     if 'status' in response :
+        mod_status = response ['status']
     
-    event = Event.object.get (id = eventId)
-    approval = Approval (approved = event, moderatorId = userId, status = mod_status)
-    approval.save ()
-    self.editValues (event.answer, response)
+     event = Event.object.get (id = eventId)
+     approval = Approval (approved = event, moderatorId = userId, status = mod_status)
+     approval.save ()
+     self.editValues (event.answer, response)
 
   def getPictures (self, list) :
      """Returns a list of dictionaries to apply to the django template for 

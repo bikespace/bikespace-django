@@ -10,8 +10,8 @@
 # a standard set of request records, which will return a set of expected 
 # results to compare with the actual test output.
 #
-# Modified 
-# Purpose 
+# Modified 2018 11 29
+# Purpose  generate json fields in survey table
 #
 import psycopg2
 import sys

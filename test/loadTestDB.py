@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # MIT License
 # Copyright 2017,Code 4 Canada
 # written by and for the bicycle parking project, a joint project of 
@@ -10,34 +11,18 @@
 # a standard set of request records, which will return a set of expected 
 # results to compare with the actual test output.
 #
-# Modified 2018 11 29
-# Purpose  generate json fields in survey table
+# Modified 
+# Purpose 
 #
 import psycopg2
 import sys
-import random
 import xml.etree.ElementTree as ET
-import json
 
 DB_HOST="127.0.0.1"
 DB_USER="postgres"
 DB_PW=""
 SOURCE_DB = "intersection"
 SINK_DB = "bike_parking_toronto"
-
-def flushTestDB (db) :
-  """Erases all of the entries in the test tables."""
-  
-  cursor = db.cursor ()
-  tables = [ 'approval', 'area', 'event', 'picture', 'surveyanswer' ]
-
-  for t in tables :
-     cmd = 'delete from bicycleparking_{};'.format (t)
-     print (cmd);
-     cursor.execute (cmd);
-  
-  db.commit ()
-  cursor.close
 
 def construct (cursor, fileId, sink) :
   """Reads the definition of a set of transactions and inserts the 
@@ -125,30 +110,13 @@ def put_area (elements, sink) :
   sink.execute (template, links)
   return sink.fetchone () [0]
 
-def makeSurveyJson (transaction) :
-  """Generates a problem description matching the survey definition in the
-     working database."""
-
-  durations = ["overnight","overnight+", "days", "4-8hours", "minutes", ">1hour", 
-               "hours", "1-2hours"]
-  problem_types = [ 'full', 'absent', 'damaged', 'badly', 'unusable', 'other']
-
-  result = {}
-  result ['map'] = [ [ float (transaction ['latitude']), float (transaction ['longitude']) ] ]
-  result ['happening'] = [ { 'date' : transaction ['time'], 
-                              'time' : random.choice (durations) } ]
-  result ['problem_type'] = [ random.choice (problem_types) ]
-
-  print (result)
-  return json.dumps (result)
-
 def put_survey_answer (transaction, sink) :
   """Puts the survey location data into the database."""
   template = """insert into bicycleparking_surveyanswer 
                 (latitude, longitude, survey, comments) values
                 (%(latitude)s, %(longitude)s, %(survey)s, %(comments)s) 
                 returning id;""" 
-  transaction ['survey'] = makeSurveyJson (transaction)
+  transaction ['survey'] = '{ "gripe" : "kvetch" }'
   transaction ['comments'] = 'this is a test'
   sink.execute (template, transaction)
   return sink.fetchone () [0]
@@ -163,9 +131,9 @@ def put_event (transaction, sink) :
   print (transaction)
 
 try:
-  resource = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}' port=5435".format (SOURCE_DB, DB_HOST, DB_USER, DB_PW))
+  resource = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}'".format (SOURCE_DB, DB_HOST, DB_USER, DB_PW))
   source = resource.cursor ()
-  to = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}' port=5435".format (SINK_DB, DB_HOST, DB_USER, DB_PW))
+  to = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}'".format (SINK_DB, DB_HOST, DB_USER, DB_PW))
   sink = to.cursor ()
   construct (source, "transactions.xml", sink)
   to.commit ()

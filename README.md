@@ -71,7 +71,6 @@ pip3 install -r requirements.txt
 ```
 
 ## Database
----
 
 ### Docker Workflow
 
@@ -100,6 +99,40 @@ docker-compose logs -f
 Once all the spatial tables are loaded then the container db instance is ready to go.
 Keep in mind the port it is running on, in order to not conflict with any other postgres instance you might have
 running we bind host post to `5435` so that is the port where the postgres instance will be running.
+
+### For Linux:
+Open your `5435` port it might be closed by default because of the firewall
+
+```shell
+#open 5435 code
+sudo ufw allow from 127.0.0.1/24  to any port 5435
+```
+
+### Start the Django Application
+
+Once all the above steps are complete test by running the django app.
+
+**Run migrations to apply the models defined into the database**
+
+Run this migrate whenever the models.py for the app has been changed so the
+changes can be applied to the databases.
+
+```shell
+# First we run the migrations for the database
+python manage.py migrate
+
+# Let us first create a superuser for the admin web page
+python manage.py createsuperuser
+
+# Now we can run the django web app
+python manage.py runserver
+
+```
+
+## Contributing
+
+See our [contributing guidelines](https://gitlab.com/bikespace/Bicycle-parking/blob/readmeContributing/CONTRIBUTING.md)
+
 
 ### Install ngrok
 
@@ -148,36 +181,12 @@ For hot-reloading:
 In the ```bicycleparking``` directory
 ```
 $ yarn run watch
-```
-
-### Start the Django Application
-
-Once all the above steps are complete test by running the django app.
-
-**Run migrations to apply the models defined into the database**
-
-Run this migrate whenever the models.py for the app has been changed so the
-changes can be applied to the databases.
-
-```shell
-# First we run the migrations for the database
-python manage.py migrate
-
-# Let us first create a superuser for the admin web page
-python manage.py createsuperuser
-
-# Now we can run the django web app
-python manage.py runserver
 
 # Now run ngrok to serve over https
 # ngrok http [please_insert_port_django_is_running_on]
 # for example
 ngrok http 3000
 ```
-
-## Contributing
-
-See our [contributing guidelines](https://gitlab.com/bikespace/Bicycle-parking/blob/readmeContributing/CONTRIBUTING.md)
 
 ## Project Structure
 

@@ -1,12 +1,9 @@
-version: '3.1'
+version: '3.6'
 
 services:
     db:
-        image: mdillon/postgis
-        restart: always
+        build:
+            context: ./db
+            dockerfile: Dockerfile
         ports:
-            - 5432:5432
-        environment:
-            POSTGRES_DB: bike_parking_toronto
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: "postgres"
+            - 5435:5432

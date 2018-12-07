@@ -15,13 +15,30 @@
 #
 import psycopg2
 import sys
+import random
 import xml.etree.ElementTree as ET
+import json
+import os
 
 DB_HOST="127.0.0.1"
 DB_USER="postgres"
 DB_PW=""
 SOURCE_DB = "intersection"
 SINK_DB = "bike_parking_toronto"
+
+def flushTestDB (db) :
+  """Erases all of the entries in the test tables."""
+  
+  cursor = db.cursor ()
+  tables = [ 'approval', 'area', 'event', 'picture', 'surveyanswer' ]
+
+  for t in tables :
+     cmd = 'delete from bicycleparking_{};'.format (t)
+     print (cmd);
+     cursor.execute (cmd);
+  
+  db.commit ()
+  cursor.close
 
 def construct (cursor, fileId, sink) :
   """Reads the definition of a set of transactions and inserts the 
@@ -31,11 +48,14 @@ def construct (cursor, fileId, sink) :
   
   entries = readTransactions (fileId)
 
+  pictureList = os.listdir ('test/pic')
   for test in entries :
      header = "\tprocessing place name: {name: <40}\tlat/long: {latitude}:{longitude}"
      print (header.format (**test))
-     recordTransaction (test, cursor, sink)
-     
+
+  for test in entries : 
+     test ['picture'] = random.choice (pictureList)
+     recordTransaction (test, cursor, sink)    
  
 def readTransactions (fn) :
   """Parses the xml input and extracts the list of elements defining the 
@@ -58,7 +78,8 @@ def processTransaction (transaction) :
 def recordTransaction (transaction, cursor, sink) :
   """Creates an area specifier containing three 'place' elements describing the selected
   location, the major and the closest intersections, and writes it out as an area element to
-  the result file."""
+  the result file. This method writes an entry to four tables: area, survey_answer, event
+  and picture."""
   majorSQL = """SELECT gid, int_id, intersec5, classifi6, classifi7, 
                        longitude, latitude, objectid, geom,
                        geom <-> st_setsrid(st_makepoint(%(longitude)s,%(latitude)s),4326) as distance
@@ -81,7 +102,8 @@ def recordTransaction (transaction, cursor, sink) :
   transaction ['area'] = put_area (areas, sink)
   transaction ['answer'] = put_survey_answer (transaction, sink)
   transaction ['distance'] = areas ['closest']['distance']
-  
+
+  put_picture (transaction, sink)  
   put_event (transaction, sink)
   
 def locate (transaction, sql, cursor) :
@@ -115,10 +137,33 @@ def put_survey_answer (transaction, sink) :
                 (latitude, longitude, survey, comments) values
                 (%(latitude)s, %(longitude)s, %(survey)s, %(comments)s) 
                 returning id;""" 
-  transaction ['survey'] = '{ "gripe" : "kvetch" }'
+  transaction ['survey'] = makeSurveyJson (transaction)
   transaction ['comments'] = 'this is a test'
   sink.execute (template, transaction)
   return sink.fetchone () [0]
+
+def makeSurveyJson (transaction) :
+  """Generates a problem description matching the survey definition in the
+     working database."""
+
+  durations = ["overnight","overnight+", "days", "4-8hours", "minutes", ">1hour", 
+               "hours", "1-2hours"]
+  problem_types = [ 'full', 'absent', 'damaged', 'badly', 'unusable', 'other']
+
+  result = {}
+  result ['map'] = [ [ float (transaction ['latitude']), float (transaction ['longitude']) ] ]
+  result ['happening'] = [ { 'date' : transaction ['time'], 
+                              'time' : random.choice (durations) } ]
+  result ['problem_type'] = [ random.choice (problem_types) ]
+
+  print (result)
+  return json.dumps (result)
+
+def put_picture (transaction, sink) :
+  """Puts the picture entry for the event."""
+  template = """insert into bicycleparking_picture (photo_uri, answer_id) values
+                                                  (%(picture)s, %(answer)s);"""
+  sink.execute (template, transaction)
 
 def put_event (transaction, sink) :
   """Puts the dummy event record."""
@@ -130,11 +175,13 @@ def put_event (transaction, sink) :
   print (transaction)
 
 try:
-  resource = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}'".format (SOURCE_DB, DB_HOST, DB_USER, DB_PW))
+  resource = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}' port = 5435".format (SOURCE_DB, DB_HOST, DB_USER, DB_PW))
   source = resource.cursor ()
-  to = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}'".format (SINK_DB, DB_HOST, DB_USER, DB_PW))
+  to = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}' port = 5435".format (SINK_DB, DB_HOST, DB_USER, DB_PW))
+
+  flushTestDB (to);
   sink = to.cursor ()
-  construct (source, "transactions.xml", sink)
+  construct (source, "test/transactions.xml", sink)
   to.commit ()
   source.close ()
   sink.close ()

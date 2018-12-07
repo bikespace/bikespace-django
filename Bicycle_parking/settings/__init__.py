@@ -16,7 +16,7 @@ ENV = environ.get('DJANGO_ENV') or 'development'
 
 base_settings = [
     'components/base.py', # standard django settings
-    'components/database.py', # postgres
+    #'components/database.py', # postgres
 
     # Select  the right env:
     'environments/%s.py' % ENV,

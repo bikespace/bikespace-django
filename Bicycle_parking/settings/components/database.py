@@ -1,4 +1,5 @@
 import dj_database_url
+import os
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -11,7 +12,7 @@ DATABASES = {
         'USER': os.getenv('BIKE_DB_USER', 'postgres'),
         'PASSWORD': os.getenv('BIKE_DB_PW', 'postgres'),
         'HOST': os.getenv('BIKE_DB_HOST', 'localhost'),
-        'PORT': '5432',
+        'PORT': '5435',
     },
     'geospatial': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -19,7 +20,7 @@ DATABASES = {
         'USER': os.getenv('BIKE_DB_USER', 'postgres'),
         'PASSWORD': os.getenv('BIKE_DB_PW', 'postgres'),
         'HOST': os.getenv('BIKE_DB_HOST', 'localhost'),
-        'PORT': '5432',
+        'PORT': '5435',
     }
 }
 

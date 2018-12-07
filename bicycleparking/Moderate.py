@@ -18,9 +18,9 @@ from bicycleparking.models import SurveyAnswer, Event, Area, Intersection2d, App
 class Moderate (object):
   """Implements a moderation protocol for the pictures in the requests.""" 
 
-  def getUnmoderated (self, userId) :
+  def getUnmoderated (self) :
      """Implements an html interface to list unmoderated requests."""
-     self.getPictures (Event.objects.filter (approval = None))
+     return self.getPictures (Event.objects.filter (approval = None))
 
   def approveList (self, list) :
      """Calls the approve and edit function on multiple elements in the list."""   
@@ -28,21 +28,25 @@ class Moderate (object):
         self.approve (request)
 
   def approve (self, response) :
-    """Records the moderated records in the approval table in the database, 
-    together with the identifier of the user who approved the request."""
-    if 'event' in response and 'moderator' in response :
-       eventId = response ['event']
-       userId = response ['moderator']
-    else :
-       raise ModerationError (response)
+     """Records the moderated records in the approval table in the database, 
+     together with the identifier of the user who approved the request."""
+     if 'event' in response and 'moderator' in response :
+        eventId = response ['event']
+        userId = response ['moderator']
+     else :
+        raise ModerationError (response)
+
+     mod_status = 'OK'
+     if 'status' in response :
+        mod_status = response ['status']
     
-    event = Event.object.get (id = eventId)
-    approval = Approval (approved = event, moderatorId = userId)
-    approval.save ()
-    self.editValues (event.answer, response)
+     event = Event.object.get (id = eventId)
+     approval = Approval (approved = event, moderatorId = userId, status = mod_status)
+     approval.save ()
+     self.editValues (event.answer, response)
 
   def getPictures (self, list) :
-         """Returns a list of dictionaries to apply to the django template for 
+     """Returns a list of dictionaries to apply to the django template for 
      creating the moderation list."""
 
      result = []
@@ -52,8 +56,10 @@ class Moderate (object):
         eventEntry ['time'] = event.timeOf
         eventEntry ['comments'] = event.answer.comments
         eventEntry ['location'] = self.where (event.answer)
+        eventEntry ['problem'] = event.answer.survey ['problem_type']
         eventEntry ['pictures'] = self.pic (Picture.objects.filter (answer__id = link))
         result.append (eventEntry)
+     
      return result
 
   def where (self, answer) :

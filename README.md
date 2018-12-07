@@ -101,6 +101,12 @@ Once all the spatial tables are loaded then the container db instance is ready t
 Keep in mind the port it is running on, in order to not conflict with any other postgres instance you might have
 running we bind host post to `5435` so that is the port where the postgres instance will be running.
 
+### Create the test data
+To create test data to work on, for moderation or other purposes, run the test transaction script:
+```shell
+python test/LoadTestDB.py
+```
+
 ### Install ngrok
 
 ngrok is needed to serve the local django application over ssl.

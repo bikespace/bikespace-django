@@ -71,7 +71,7 @@
    <td>{{ unapproved_event.time | time:"fA" }}</td>
    <td>
    {% for pic in unapproved_event.pictures %}
-    <img src = "{{ pic }}" width="80" height="100">
+    <img src = "api/pictures/{{ pic }}" width="80" height="100">
    {% endfor %}
    </td>
    <td><textarea>{{ unapproved_event.comments }}</textarea></td>

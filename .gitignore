@@ -23,6 +23,7 @@ sftp-config.json
 # Basics
 *.py[cod]
 __pycache__
+py36
 
 # Logs
 logs

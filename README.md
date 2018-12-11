@@ -65,6 +65,9 @@ virtualenv -p python3 venv
 # Use the "venv" you setup earlier for your python3 project buy running the activate script
 source venv/bin/activate
 
+#(for windows:)
+venv/Scripts/activate
+
 # Install requirements
 # Install the requirements from the supplied `requirements.txt`.
 pip3 install -r requirements.txt
@@ -96,6 +99,10 @@ docker-compose -f docker-compose.yml up -d --build
 docker-compose logs -f
 ```
 
+Note: Windows users might need to open some files in vim and set the fileformat to unix
+```vim
+:set fileformat=unix
+```
 Once all the spatial tables are loaded then the container db instance is ready to go.
 Keep in mind the port it is running on, in order to not conflict with any other postgres instance you might have
 running we bind host post to `5435` so that is the port where the postgres instance will be running.

@@ -95,7 +95,7 @@
     </thead>
     <tbody>
         {% for unapproved_event in unapproved_events %}
-        <tr>
+        <tr id='mod_form_{{unapproved_event.id}}'>
             <td>{{ unapproved_event.id }}</td>
             <td>{{ unapproved_event.problem }}</td>
             <td>{{ unapproved_event.location.latitude }} / {{ unapproved_event.location.longitude }}</td>
@@ -109,7 +109,7 @@
             <td><textarea>{{ unapproved_event.comments }}</textarea></td>
             <!-- look into bootstrap library !!! -->
             <td>
-                <div id='mod_form_{{unapproved_event.id}}'>
+                <div>
                     <input type="hidden" id="event_id" name="event_id" value="{{ unapproved_event.id }}">
                     <input type="hidden" id="status_{{unapproved_event.id}}" name="status" value="OK">
                     <!-- <label class="dropdown"> -->

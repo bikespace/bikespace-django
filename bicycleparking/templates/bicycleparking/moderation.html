@@ -34,7 +34,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 <script>
     function sendMyEvent(id, status) {
-        fetch("api/moderation",
+        fetch("/api/moderation",
             {
                 headers: {
                     'Accept': 'application/json',
@@ -53,9 +53,6 @@
             .catch(function (res) {
                 console.log(res)
             })
-        var submit = document.getElementById('status_' + id)
-        submit.value = status;
-        document.getElementById("mod_form_" + id).submit()
     }
 </script>
 <!-- !!! -->

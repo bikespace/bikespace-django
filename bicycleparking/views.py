@@ -190,16 +190,24 @@ class UploadPicture(APIView):
         return Response(content)
 
 class ModerationRequest (APIView):
-    renderer_classes = (JSONRenderer, )
-    def post(self, request, filename, format=None):
-        event_id = request.POST.get('id', None)
-        context = {}
-        if event_id:
-            event = Event.objects.get(id=event_id)
-            Approval.objects.get_or_create(approved=event)
+
+    def post(self, request):
+        data = json.loads(request.body.decode('utf-8'))
+        event_id = data['id']
+        status= data['status']
+        content = {}
+        if status == 'REJECT':
+            if event_id:
+                event = Event.objects.get(id=event_id)
+                print(event)
+                event.delete()
+                content={'id':event_id,'state':'success'}
+            else:
+                content={'id':None,'state':'error'}
+        elif status == 'OK':
             content={'id':event_id,'state':'success'}
-        else:
-            content={'id':None,'state':'error'}
+        elif status == 'DEFER':
+            content={'id':event_id,'state':'success'}
         return Response(content)
 
 def submissions_to_moderate(request):

@@ -1,11 +1,11 @@
 {% load static %}
 {% block nav %}
 <nav class="nav nav-pills flex-column flex-sm-row">
-       <a class="flex-sm-fill text-sm-center nav-link active" href="#">Login</a>
-       <a class="flex-sm-fill text-sm-center nav-link" href="https://www.bikespace.ca">Website</a>
-       <a class="flex-sm-fill text-sm-center nav-link" href="https://dashboard.bikespace.ca">Dashboard</a>
-       <a class="flex-sm-fill text-sm-center nav-link" href="https://app.bikespace.ca">App</a>
-     </nav>
+    <a class="flex-sm-fill text-sm-center nav-link active" href="#">Login</a>
+    <a class="flex-sm-fill text-sm-center nav-link" href="https://www.bikespace.ca">Website</a>
+    <a class="flex-sm-fill text-sm-center nav-link" href="https://dashboard.bikespace.ca">Dashboard</a>
+    <a class="flex-sm-fill text-sm-center nav-link" href="https://app.bikespace.ca">App</a>
+</nav>
 {% endblock %}
 {% block title %}
 {% block page_title %}
@@ -16,31 +16,54 @@
 <h3 id="subtitle">Submitted public reports through app.bikespace.ca</h3>
 <p>Moderation process:</p>
 <ul>
-   <li>Check the location</li>
-   <li>Review the comment for language or formatting errors</li>
-   <li>Review the image for inappropriate content</li>
-   <li>Approve or deny the submission</li>
+    <li>Check the location</li>
+    <li>Review the comment for language or formatting errors</li>
+    <li>Review the image for inappropriate content</li>
+    <li>Approve or deny the submission</li>
 </ul>
-<p>For more information on moderation please refer to the <b><a href="https://docs.google.com/document/d/1YwZQOA_Ac6W0voWPxFipWvgvq9Nt7CNgLxhq9KztvAs/edit?usp=sharing"> BikeSpace moderation policy document.</a></b> For any other issues please email <b><a href="mailto:bikespaceto@gmail.com">bikespaceto@gmail.com</a></b> quoting the report ID in the header.</p>
+<p>For more information on moderation please refer to the <b><a href="https://docs.google.com/document/d/1YwZQOA_Ac6W0voWPxFipWvgvq9Nt7CNgLxhq9KztvAs/edit?usp=sharing">
+            BikeSpace moderation policy document.</a></b> For any other issues please email <b><a href="mailto:bikespaceto@gmail.com">bikespaceto@gmail.com</a></b>
+    quoting the report ID in the header.</p>
 {% endblock %}
 {% block content %}
 <!-- !!! -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
-  <script>
-      function submit (id, status)
-      {
-        var submit =  document.getElementById ('status_' + id)
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+    crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+<script>
+    function sendMyEvent(id, status) {
+        fetch("api/moderation",
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({ id: id, status: status })
+            })
+            .then(function (res) {
+                var body=res.json()
+                if (body.id==null && status==='REJECT'){
+                    var div = document.getElementById('mod_form_'+id)
+                    div.parentNode.removeChild(div);
+                }
+            })
+            .catch(function (res) {
+                console.log(res)
+            })
+        var submit = document.getElementById('status_' + id)
         submit.value = status;
         document.getElementById("mod_form_" + id).submit()
-      }
-   </script>
+    }
+</script>
 <!-- !!! -->
 <link href="{% static 'moderation/moderation.css' %}" rel="stylesheet">
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+    rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+    rel='stylesheet' type='text/css'>
 <!--
     - convert lat/long to intersection with URL clickable to Google Maps for a map rendition
     - convert date to three letter month
@@ -48,56 +71,64 @@
     - combine time and date
 -->
 <table>
-   <colgroup>
-    <col width="5%">
-    <col width="10%">
-    <col width="20%">
-    <col width="10%">
-    <col width="10%">
-    <col width="10%">
-    <col width="20%">
-    <col width="15%">
-   </colgroup>
-   <thead>
-       <tr><th>ID</th><th>Problem</th><th>Lat/Lon</th><th>Date</th><th>Time</th><th>Picture</th><th>Comment</th><th>Approve</th></tr>
+    <colgroup>
+        <col width="5%">
+        <col width="10%">
+        <col width="20%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="20%">
+        <col width="15%">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Problem</th>
+            <th>Lat/Lon</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Picture</th>
+            <th>Comment</th>
+            <th>Approve</th>
+        </tr>
     </thead>
     <tbody>
-{% for unapproved_event in unapproved_events %}
-   <tr>
-   <td>{{ unapproved_event.id }}</td>
-   <td>{{ unapproved_event.problem }}</td>
-   <td>{{ unapproved_event.location.latitude }} / {{ unapproved_event.location.longitude }}</td>
-   <td>{{ unapproved_event.time | date:"d-m-Y" }}</td>
-   <td>{{ unapproved_event.time | time:"fA" }}</td>
-   <td>
-   {% for pic in unapproved_event.pictures %}
-    <img src = "api/pictures/{{ pic }}" width="80" height="100">
-   {% endfor %}
-   </td>
-   <td><textarea>{{ unapproved_event.comments }}</textarea></td>
-   <!-- look into bootstrap library !!! -->
-   <td>
-       <form name = 'mod_form_{{unapproved_event.id}}' method = "post">
-           {% csrf_token %}
-           <input type="hidden" id="event_id" name="event_id" value="{{ unapproved_event.id }}">
-           <input type="hidden" id="status_{{unapproved_event.id}}" name="status" value = "OK">
-           <!-- <label class="dropdown"> -->
- 
-            <div class="btn-group">
-                <button type="button" class="btn btn-danger" 
-                        onclick = "submit ('{{unapproved_event.id}}', 'OK')">Approve</button>
-                <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="sr-only">Toggle</span>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="btnDropdownDemo">
-                  <a class="dropdown-item" onclick = "submit ('{{unapproved_event.id}}', 'REJECT')">Reject</a>
-                  <a class="dropdown-item" onclick = "submit ('{{unapproved_event.id}}', 'DEFER')">Defer</a>
+        {% for unapproved_event in unapproved_events %}
+        <tr>
+            <td>{{ unapproved_event.id }}</td>
+            <td>{{ unapproved_event.problem }}</td>
+            <td>{{ unapproved_event.location.latitude }} / {{ unapproved_event.location.longitude }}</td>
+            <td>{{ unapproved_event.time | date:"d-m-Y" }}</td>
+            <td>{{ unapproved_event.time | time:"fA" }}</td>
+            <td>
+                {% for pic in unapproved_event.pictures %}
+                <img src="api/pictures/{{ pic }}" width="80" height="100">
+                {% endfor %}
+            </td>
+            <td><textarea>{{ unapproved_event.comments }}</textarea></td>
+            <!-- look into bootstrap library !!! -->
+            <td>
+                <div id='mod_form_{{unapproved_event.id}}'>
+                    <input type="hidden" id="event_id" name="event_id" value="{{ unapproved_event.id }}">
+                    <input type="hidden" id="status_{{unapproved_event.id}}" name="status" value="OK">
+                    <!-- <label class="dropdown"> -->
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger" onclick="sendMyEvent('{{unapproved_event.id}}', 'OK')">Approve</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnDropdownDemo">
+                            <a class="dropdown-item" onclick="sendMyEvent('{{unapproved_event.id}}', 'REJECT')">Reject</a>
+                            <a class="dropdown-item" onclick="sendMyEvent('{{unapproved_event.id}}', 'DEFER')">Defer</a>
+                        </div>
+                    </div> <!-- </label>           <input type="submit" value="Approve"> -->
                 </div>
-              </div>          <!-- </label>           <input type="submit" value="Approve"> -->
-       </form>
-   </td>
-   </tr>
-{% endfor %}
-</tbody>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}

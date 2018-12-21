@@ -147,7 +147,7 @@ class LocationNameRequest (APIView) :
         # print(param)
         data = LocationData (param ['latitude'], param ['longitude'])
         return JsonResponse (data.getIntersectionNames ())
-           
+              
 class DownloadPicture(APIView):
     uploader = Uploader()
 
@@ -189,14 +189,21 @@ class UploadPicture(APIView):
             content = { 's3_name' : 'test/picture'}
         return Response(content)
 
+class ModerationRequest (APIView):
+    renderer_classes = (JSONRenderer, )
+    def post(self, request, filename, format=None):
+        event_id = request.POST.get('id', None)
+        context = {}
+        if event_id:
+            event = Event.objects.get(id=event_id)
+            Approval.objects.get_or_create(approved=event)
+            content={'id':event_id,'state':'success'}
+        else:
+            content={'id':None,'state':'error'}
+        return Response(content)
+
 def submissions_to_moderate(request):
     
-   if request.method == 'POST':
-       event_id = request.POST.get('event_id', None)
-       if event_id:
-           event = Event.objects.get(id=event_id)
-           Approval.objects.get_or_create(approved=event)
-
    context = {}
 
    approved_event_ids = Approval.objects.values_list('approved')  # already approved events

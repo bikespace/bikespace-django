@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^sw.js', (TemplateView.as_view(template_name="bicycleparking/sw.js", content_type='application/javascript')), name='sw.js'),
     url(r'^manifest.json', (TemplateView.as_view(template_name="bicycleparking/manifest.json", content_type='application/json')), name='manifest.json'),
     url(r'^moderate_unapproved', views.submissions_to_moderate, name='moderate_unapproved'),
+    url(r'^api/moderation$', views.ModerationRequest.as_view()),
 ]

@@ -33,6 +33,11 @@ p {
 	background: #25c252;
 }
 
+.nav-pills .nav-link.active{
+ background-color: #FFFFFF;
+ color: #25c252;
+}
+
 .nav-link{
 	color: #FFFFFF;
 }

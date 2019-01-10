@@ -41,7 +41,7 @@
                     'Content-Type': 'application/json'
                 },
                 method: "POST",
-                body: JSON.stringify({ id: id, status: status })
+                body: JSON.stringify({ event : id, status: status })
             })
             .then(function (res) {
                 var body=res.json()

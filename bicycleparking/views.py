@@ -193,21 +193,15 @@ class ModerationRequest (APIView):
 
     def post(self, request):
         data = json.loads(request.body.decode('utf-8'))
-        event_id = data['id']
-        status= data['status']
+        data ['moderator'] = '000'
         content = {}
-        if status == 'REJECT':
-            if event_id:
-                event = Event.objects.get(id=event_id)
-                print(event)
-                event.delete()
-                content={'id':event_id,'state':'success'}
-            else:
-                content={'id':None,'state':'error'}
-        elif status == 'OK':
-            content={'id':event_id,'state':'success'}
-        elif status == 'DEFER':
-            content={'id':event_id,'state':'success'}
+        if 'status' in data and 'event' in data :
+            print(data)
+            mod = Moderate ()
+            mod.approve (data)
+            content = {'id': data ['event'], 'state':'success'}
+        else:
+            content={'id':None,'state':'error'}
         return Response(content)
 
 def submissions_to_moderate(request):

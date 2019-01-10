@@ -31,7 +31,11 @@ class Moderate (object):
      """Records the moderated records in the approval table in the database, 
      together with the identifier of the user who approved the request."""
      if 'event' in response and 'moderator' in response :
-        eventId = response ['event']
+        print (response)
+        eis = response ['event'] 
+        print (eis)
+        print (type (eis))
+        eventId = int (eis)
         userId = response ['moderator']
      else :
         raise ModerationError (response)
@@ -39,10 +43,15 @@ class Moderate (object):
      mod_status = 'OK'
      if 'status' in response :
         mod_status = response ['status']
-    
-     event = Event.object.get (id = eventId)
-     approval = Approval (approved = event, moderatorId = userId, status = mod_status)
+     event = Event.objects.get (id__exact = eventId)
+
+     if Approval.objects.filter (id__exact = eventId).exists ():
+        approval = Approval.objects.get (approved__exact = eventId)
+        approval.status = mod_status
+     else :
+        approval = Approval (approved = event, moderatorId = userId, status = mod_status)
      approval.save ()
+
      self.editValues (event.answer, response)
 
   def getPictures (self, list) :
@@ -89,23 +98,22 @@ class Moderate (object):
            raise moderationError ('error in status', source)
      return condition 
 
-  def editValues (self, answerId, request) :
+  def editValues (self, answer, request) :
      """Loops through the allowed edit fields and modifies the data values the
      moderator is permitted to edit, recording the edits in the edit table."""
 
      coords = ('latitude', 'longitude')
      edited = False
-     toEdit = Answer.object.get (id = answerId)
      for edit in ('latitude', 'longitude', 'comment') :
         if edit in request : 
            record = Edit (by = request ['moderator'], field = edit, edited = toEdit)
            if edit in coords :
-              setattr (toEdit, edit, float (request [edit]))
+              setattr (answer, edit, float (request [edit]))
            else :
-              setattr (toEdit, edit, request [edit])
+              setattr (answer, edit, request [edit])
            edited = True
      if edited :
-        toEdit.save ()
+        answer.save ()
       
 
 class ModerationError (Exception):

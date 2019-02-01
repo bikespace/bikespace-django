@@ -212,5 +212,6 @@ def submissions_to_moderate(request):
    unapproved_events = Event.objects.exclude(id__in=approved_event_ids)  # only show unapproved events
 
    context ['unapproved_events'] = Moderate ().getUnmoderated ()
+   context ['moderator'] = ''
 
    return render(request, 'bicycleparking/moderation.html', context)

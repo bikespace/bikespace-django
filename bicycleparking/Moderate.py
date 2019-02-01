@@ -45,11 +45,14 @@ class Moderate (object):
         mod_status = response ['status']
      event = Event.objects.get (id__exact = eventId)
 
+     print (event)
      if Approval.objects.filter (id__exact = eventId).exists ():
         approval = Approval.objects.get (approved__exact = eventId)
         approval.status = mod_status
      else :
         approval = Approval (approved = event, moderatorId = userId, status = mod_status)
+        
+     print (approval)
      approval.save ()
 
      self.editValues (event.answer, response)

@@ -44,11 +44,13 @@
                 body: JSON.stringify({ event : id, status: status })
             })
             .then(function (res) {
-                var body=res.json()
-                if (body.id==null && status==='REJECT'){
-                    var div = document.getElementById('mod_form_'+id)
-                    div.parentNode.removeChild(div);
-                }
+                var body=res.json();
+                var div = document.getElementById('mod_form_' + id);
+                div.hidden = true;
+                // if (body.id==null && status==='REJECT'){
+                //     var div = document.getElementById('mod_form_'+id)
+                //     div.parentNode.removeChild(div);
+                // }
             })
             .catch(function (res) {
                 console.log(res)

@@ -56,3 +56,6 @@ DATABASES = {
 
 DATABASE_ROUTERS = ['bicycleparking.Routers.GeoSpatialRouting',
                     'bicycleparking.Routers.DefaultRouting']
+
+# my_project/settings.py
+LOGIN_REDIRECT_URL = '/moderate_unapproved'                    

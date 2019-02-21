@@ -31,11 +31,16 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.http import FileResponse
 from django.core.files.base import ContentFile
+from django.contrib import admin
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import HttpResponseRedirect
 from datetime import datetime
 
 from rest_framework import generics
 from rest_framework.parsers import FileUploadParser
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import JSONRenderer
 import os.path
 import os
@@ -190,10 +195,13 @@ class UploadPicture(APIView):
         return Response(content)
 
 class ModerationRequest (APIView):
-
+    permission_classes = (IsAuthenticated,)
+    
     def post(self, request):
-        data = json.loads(request.body.decode('utf-8'))
-        data ['moderator'] = '000'
+        print(request.data)
+        # print (request.user.username)
+        data = request.data
+        data ['moderator'] = request.user.username
         content = {}
         if 'status' in data and 'event' in data :
             print(data)
@@ -204,14 +212,30 @@ class ModerationRequest (APIView):
             content={'id':None,'state':'error'}
         return Response(content)
 
-def submissions_to_moderate(request):
+class submissions_to_moderate (APIView):
+   # permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+       context = {}
+       
+       if not request.user.is_authenticated() :
+          # return HttpResponseRedirect ('login')
+          return HttpResponseRedirect ('admin')
+       approved_event_ids = Approval.objects.values_list('approved')  # already approved events
+       unapproved_events = Event.objects.exclude(id__in=approved_event_ids)  # only show unapproved events
+
+       context ['unapproved_events'] = Moderate ().getUnmoderated ()
+       context ['moderator'] = ''
+
+       return render(request, 'bicycleparking/moderation.html', context)
+# def submissions_to_moderate(request):
     
-   context = {}
+#    context = {}
 
-   approved_event_ids = Approval.objects.values_list('approved')  # already approved events
-   unapproved_events = Event.objects.exclude(id__in=approved_event_ids)  # only show unapproved events
+#    approved_event_ids = Approval.objects.values_list('approved')  # already approved events
+#    unapproved_events = Event.objects.exclude(id__in=approved_event_ids)  # only show unapproved events
 
-   context ['unapproved_events'] = Moderate ().getUnmoderated ()
-   context ['moderator'] = ''
+#    context ['unapproved_events'] = Moderate ().getUnmoderated ()
+#    context ['moderator'] = ''
 
-   return render(request, 'bicycleparking/moderation.html', context)
+#    return render(request, 'bicycleparking/moderation.html', context)

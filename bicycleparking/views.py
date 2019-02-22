@@ -195,16 +195,24 @@ class UploadPicture(APIView):
         return Response(content)
 
 class ModerationRequest (APIView):
+    """Implements the moderation AJAX handler, with the login requirement (the
+    originating program must provide a valid login cookie with the request). 
+    Adds the identifier of the authenticated user to the moderation request
+    to allow the system to track the moderators who make changes."""
     permission_classes = (IsAuthenticated,)
     
     def post(self, request):
-        print(request.data)
+        """Handles an AJAX request from the moderation page, extracting
+        the data passed as a body of the AJAX request and adding the name
+        of the originating user before instantiating a moderation database
+        access controller and passing the request into it."""
+        # print(request.data)
         # print (request.user.username)
         data = request.data
         data ['moderator'] = request.user.username
         content = {}
         if 'status' in data and 'event' in data :
-            print(data)
+            # print(data)
             mod = Moderate ()
             mod.approve (data)
             content = {'id': data ['event'], 'state':'success'}
@@ -213,14 +221,18 @@ class ModerationRequest (APIView):
         return Response(content)
 
 class submissions_to_moderate (APIView):
-   # permission_classes = (IsAuthenticated,)
+    """Handles the user request, passed as an http get, to list reports in
+    need of moderation."""
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request):
+       """Handles a get request; if the request does not come from an 
+       authenticated user, redirect to a login page.""" 
        context = {}
        
        if not request.user.is_authenticated() :
           # return HttpResponseRedirect ('login')
-          return HttpResponseRedirect ('admin')
+          return HttpResponseRedirect ('login')
        approved_event_ids = Approval.objects.values_list('approved')  # already approved events
        unapproved_events = Event.objects.exclude(id__in=approved_event_ids)  # only show unapproved events
 

@@ -19,6 +19,10 @@
 # Modified 2018 07 12
 # Purpose add dashboard endpoint
 #
+# Modified 2019 02 21
+# Purpose require authentication for moderation and redirect unauthenticated 
+#         users attempting to access the moderation page to the login page
+#
 # Modified
 # Purpose
 #

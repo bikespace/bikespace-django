@@ -94,7 +94,7 @@ class Approval (models.Model) :
     status = models.TextField (default = 'OK')
     approved = models.ForeignKey (Event, on_delete = models.PROTECT, default = DEFAULT_LINK)
 
-class Edit :
+class Edit (models.Model) :
     """Records the dits to the records made by a moderator or other privileged user."""
     by = models.TextField (null = False)
     timeOfApproval = models.DateTimeField (auto_now_add = True)

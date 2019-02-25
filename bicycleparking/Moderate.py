@@ -13,7 +13,7 @@
 # Purpose
 #
 
-from bicycleparking.models import SurveyAnswer, Event, Area, Intersection2d, Approval, Picture
+from bicycleparking.models import SurveyAnswer, Event, Area, Intersection2d, Approval, Picture, Edit
 
 class Moderate (object):
   """Implements a moderation protocol for the pictures in the requests.""" 
@@ -33,8 +33,8 @@ class Moderate (object):
      if 'event' in response and 'moderator' in response :
         print (response)
         eis = response ['event'] 
-        print (eis)
-        print (type (eis))
+        # print (eis)
+        # print (type (eis))
         eventId = int (eis)
         userId = response ['moderator']
      else :
@@ -45,7 +45,7 @@ class Moderate (object):
         mod_status = response ['status']
      event = Event.objects.get (id__exact = eventId)
 
-     print (event)
+     # print (event)
      if Approval.objects.filter (id__exact = eventId).exists ():
         approval = Approval.objects.get (approved__exact = eventId)
         approval.status = mod_status
@@ -90,17 +90,6 @@ class Moderate (object):
         result.append (pmod.photo_uri)
      return result
 
-  def makeCondition (self, source) :
-     """Makes a condition value based on the response provided by the 
-     moderation process."""
-     condition = 'OK'
-     if 'status' in response :
-        if condition in ('OK', 'rejected', 'deferred') :
-           condition = response ['status'];
-        else :
-           raise moderationError ('error in status', source)
-     return condition 
-
   def editValues (self, answer, request) :
      """Loops through the allowed edit fields and modifies the data values the
      moderator is permitted to edit, recording the edits in the edit table."""
@@ -108,13 +97,14 @@ class Moderate (object):
      coords = ('latitude', 'longitude')
      edited = False
      for edit in ('latitude', 'longitude', 'comment') :
-        if edit in request : 
-           record = Edit (by = request ['moderator'], field = edit, edited = toEdit)
+        if edit in request :
+           record = Edit (by = request ['moderator'], field = edit, edited = answer)
            if edit in coords :
               setattr (answer, edit, float (request [edit]))
            else :
               setattr (answer, edit, request [edit])
            edited = True
+           record.save ()
      if edited :
         answer.save ()
       
@@ -131,6 +121,6 @@ class ModerationError (Exception):
      for missing in ('event', 'moderator') :
         self.errorCond.append ('missing ' + 'missing')
      self.status = 'OK'
-     if status in request :
+     if self.status in request :
         self.status = request ['status']
 

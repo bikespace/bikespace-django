@@ -34,10 +34,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 <script>
+     /**
+      * Gets the text of the comment from the user.
+      * @param id to fetch
+      * @return the string contents
+      */
+     function getComment (id)
+     {
+        return getElementById (id).value
+     }
+
+
     /**
-     * 
+     * Sends the event, including updates to the data set by the moderator, to the
+     * server.
+     * @param id identifier of the event to update
+     * @param status status to assign (accept, reject, defer)
+     * @param description description parameter associated with the value
      */
-    function sendMyEvent(id, status) 
+    function sendMyEvent (id, status, description) 
     {
         csrftoken=document.getElementsByName("csrfmiddlewaretoken")[0].value;
         console.log(csrftoken);
@@ -49,7 +64,7 @@
                     'X-CSRFToken' : csrftoken,
                 },
                 method: "POST",
-                body: JSON.stringify({ event : id, status: status })
+                body: JSON.stringify({ event : id, status: status, comment : description })
             })
             .then(function (res) {
                 var body=res.json();
@@ -113,7 +128,7 @@
                 <img src="api/pictures/{{ pic }}" width="80" height="100">
                 {% endfor %}
             </td>
-            <td><textarea>{{ unapproved_event.comments }}</textarea></td>
+            <td><textarea id = 'TA_{{unapproved_event.id}}'>{{ unapproved_event.comments }}</textarea></td>
             <!-- look into bootstrap library !!! -->
             <td>
                 <div>
@@ -122,14 +137,14 @@
                     <!-- <label class="dropdown"> -->
 
                     <div class="btn-group">
-                        <button type="button" class="btn btn-danger" onclick="sendMyEvent('{{unapproved_event.id}}', 'OK')">Approve</button>
+                        <button type="button" class="btn btn-danger" onclick="sendMyEvent('{{unapproved_event.id}}', 'OK', getComment ('TA_{{unapproved_event.id}}'))">Approve</button>
                         <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <span class="sr-only">Toggle</span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnDropdownDemo">
-                            <a class="dropdown-item" onclick="sendMyEvent('{{unapproved_event.id}}', 'REJECT')">Reject</a>
-                            <a class="dropdown-item" onclick="sendMyEvent('{{unapproved_event.id}}', 'DEFER')">Defer</a>
+                            <a class="dropdown-item" onclick="sendMyEvent('{{unapproved_event.id}}', 'REJECT', getComment ('TA_{{unapproved_event.id}}'))">Reject</a>
+                            <a class="dropdown-item" onclick="sendMyEvent('{{unapproved_event.id}}', 'DEFER', getComment ('TA_{{unapproved_event.id}}'))">Defer</a>
                         </div>
                     </div> <!-- </label>           <input type="submit" value="Approve"> -->
                 </div>

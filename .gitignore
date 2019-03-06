@@ -93,3 +93,7 @@ bicycleparking/static/dist/*
 
 # but don't ignore the folder
 !/bicycleparking/static/dist/.keep
+
+#pipenv (until other people convert)
+Pipfile
+Pipfile.lock

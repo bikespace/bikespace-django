@@ -27,22 +27,22 @@ class Moderate (object):
      for request in list :
         self.approve (request)
 
-  def approve (self, response) :
+  def approve (self, request_data) :
      """Records the moderated records in the approval table in the database, 
      together with the identifier of the user who approved the request."""
-     if 'event' in response and 'moderator' in response :
-        print (response)
-        eis = response ['event'] 
+     if 'event' in request_data and 'moderator' in request_data :
+        print (request_data)
+        eis = request_data ['event'] 
         # print (eis)
         # print (type (eis))
         eventId = int (eis)
-        userId = response ['moderator']
+        userId = request_data ['moderator']
      else :
-        raise ModerationError (response)
+        raise ModerationError (request_data)
 
      mod_status = 'OK'
-     if 'status' in response :
-        mod_status = response ['status']
+     if 'status' in request_data :
+        mod_status = request_data ['status']
      event = Event.objects.get (id__exact = eventId)
 
      # print (event)
@@ -55,7 +55,7 @@ class Moderate (object):
      print (approval)
      approval.save ()
 
-     self.editValues (event.answer, response)
+     self.editValues (event.answer, request_data)
 
   def getPictures (self, list) :
      """Returns a list of dictionaries to apply to the django template for 
@@ -97,7 +97,7 @@ class Moderate (object):
      coords = ('latitude', 'longitude')
      edited = False
      for edit in ('latitude', 'longitude', 'comment') :
-        if edit in request :
+        if edit in request and self.updated (request, edit, answer, coords):
            record = Edit (by = request ['moderator'], field = edit, edited = answer)
            if edit in coords :
               setattr (answer, edit, float (request [edit]))
@@ -107,6 +107,26 @@ class Moderate (object):
            record.save ()
      if edited :
         answer.save ()
+        print ('\trequest edited')     # !!!
+     else :                            # !!!
+        print ('\trequest not edited') # !!!
+
+  def updated (self, input, field, answer, floatValues) :
+     """Determines whether or not the user has edited a field; used to
+        determine whether to change the data and record an edit. If the 
+        request contains a value not present in the answer object, the
+        field is created. Otherwise the existing field is compared with
+        the input; if they do not match, an update is performed."""
+     if hasattr (answer, field) :
+        value = getattr (answer, field)
+        isFloat = field in floatValues    
+
+        if isFloat :
+           return float (input [field]) == value
+        else :
+           return input [field] == value
+     else :
+        return True
       
 
 class ModerationError (Exception):

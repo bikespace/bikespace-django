@@ -102,7 +102,10 @@ class Moderate (object):
            if edit in coords :
               setattr (answer, edit, float (request [edit]))
            elif hasattr (answer, 'survey') :
-              setattr (answer.survey, edit, request [edit])
+              print (type(answer.survey))
+              print (answer.survey)
+              answer.survey [edit] = request [edit]
+              print (answer.survey)
            else :
               survey = { edit : request [edit] }    
               setattr (answer, 'survey', {}) 
@@ -120,12 +123,13 @@ class Moderate (object):
         request contains a value not present in the answer object, the
         field is created. Otherwise the existing field is compared with
         the input; if they do not match, an update is performed."""
-     value = getattr (answer, field)
      isFloat = field in floatValues    
 
      if isFloat and hasattr (answer, field):
+        value = getattr (answer, field)
         return float (input [field]) == value
      elif hasattr (answer, 'survey') and hasattr (answer.survey, field) :
+        value = getattr (answer.survey, field)    
         return input [field] == value
      else :
         return True

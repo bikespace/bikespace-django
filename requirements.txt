@@ -1,5 +1,3 @@
-awscli==1.14.48
-awsebcli==3.12.3
 blessed==1.14.2
 boto3==1.4.8
 botocore==1.8.38

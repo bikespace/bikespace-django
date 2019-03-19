@@ -94,8 +94,6 @@ class Moderate (object):
      """Loops through the allowed edit fields and modifies the data values the
      moderator is permitted to edit, recording the edits in the edit table."""
 
-   #   print ("survey answer: {}".format (vars (answer)))
-   #   print ("request: {}".format (request))
      coords = ('latitude', 'longitude')
      edited = False
      for edit in ('latitude', 'longitude', 'comment') :

@@ -235,23 +235,12 @@ class submissions_to_moderate (APIView):
        context = {}
        
        if not request.user.is_authenticated() :
-          # return HttpResponseRedirect ('login')
           return HttpResponseRedirect ('login')
        approved_event_ids = Approval.objects.values_list('approved')  # already approved events
        unapproved_events = Event.objects.exclude(id__in=approved_event_ids)  # only show unapproved events
 
        context ['unapproved_events'] = Moderate ().getUnmoderated ()
-       context ['moderator'] = ''
+       context ['moderator'] = request.user.username
+       print (context)
 
        return render(request, 'bicycleparking/moderation.html', context)
-# def submissions_to_moderate(request):
-    
-#    context = {}
-
-#    approved_event_ids = Approval.objects.values_list('approved')  # already approved events
-#    unapproved_events = Event.objects.exclude(id__in=approved_event_ids)  # only show unapproved events
-
-#    context ['unapproved_events'] = Moderate ().getUnmoderated ()
-#    context ['moderator'] = ''
-
-#    return render(request, 'bicycleparking/moderation.html', context)

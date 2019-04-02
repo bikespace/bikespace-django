@@ -220,7 +220,6 @@ This is the current project structure, please note:
 │   ├── node_modules
 │   ├── package.json
 │   ├── __pycache__
-│   ├── rollup.config.js
 │   ├── Routers.py
 │   ├── serializers.py
 │   ├── static

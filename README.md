@@ -163,7 +163,7 @@ npm install ngrok -g
 ```
 ### Build client side js
 
-We are using rollup to bundle the js for the client side. To compile `cd` into the `bicycleparking` and run :
+We are using Webpack to bundle the js for the client side. To compile `cd` into the `bicycleparking` and run :
 
 ```shell
 npm run local

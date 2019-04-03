@@ -16,7 +16,7 @@ export default class Map extends Content {
   }
 
   get value() {
-    this.values.push([this.marker.position.lat(), this.marker.position.lng()])
+    this.values[0] = [this.marker.position.lat(), this.marker.position.lng()];
     return this.values;
   }
 

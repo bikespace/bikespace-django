@@ -31,9 +31,13 @@ export default class Map extends Content {
     if (this.haveLocation) { zoom_level = 16; }
     if (typeof this.map === 'undefined') {
       var my_localisation = JSON.parse(localStorage.getItem('my_localisation'));
-      if(!my_localisation){
+      if(!my_localisation && this.values.length === 0){
         my_localisation= this.location;
+      } else if (this.values.length !== 0) {
+        my_localisation['lat'] = this.values[0][0];
+        my_localisation['lng'] = this.values[0][1];
       }
+      
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: zoom_level,
         center: my_localisation

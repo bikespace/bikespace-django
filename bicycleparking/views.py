@@ -28,6 +28,7 @@
 #
 
 from django.views.decorators.csrf import csrf_exempt
+from django.template.context_processors import csrf
 import json
 import base64
 from django.shortcuts import render
@@ -235,12 +236,13 @@ class submissions_to_moderate (APIView):
        context = {}
        
        if not request.user.is_authenticated() :
+          #print("User not authenticated")
           return HttpResponseRedirect ('login')
        approved_event_ids = Approval.objects.values_list('approved')  # already approved events
        unapproved_events = Event.objects.exclude(id__in=approved_event_ids)  # only show unapproved events
 
        context ['unapproved_events'] = Moderate ().getUnmoderated ()
        context ['moderator'] = request.user.username
-       print (context)
+       #print ("CONTEXT",context)
 
        return render(request, 'bicycleparking/moderation.html', context)

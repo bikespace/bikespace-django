@@ -85,7 +85,7 @@ class SurveyAnswerList(generics.ListCreateAPIView):
         answer = serializer.save()
         pic = Picture (answer = answer, photo_uri = self.request.data ['photo_uri'])
         pic.save ()
-        geocode = Geocode(answer, ipAddress=self.request.META['REMOTE_ADDR'])
+        geocode = Geocode(answer)
         geocode.output()         
 
 class BetaCommentList(generics.ListCreateAPIView):

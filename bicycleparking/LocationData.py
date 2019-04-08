@@ -14,7 +14,7 @@
 import requests
 import datetime
 import django.utils as utils
-from bicycleparking.models import Event, Area, SurveyAnswer, Intersection2d, Approval
+from bicycleparking.models import Event, SurveyAnswer, Approval
 
 class LocationData (object):
   """Encapsulates methods for accessing the geographical databases and 
@@ -44,6 +44,10 @@ class LocationData (object):
      to a valid location, and whether or not the intersection lookup found
      valid intersection data."""
      return self.closest != None
+     
+     
+  def getClosest (self) :
+      return self.closest
 
   def getIntersectionNames (self) :
      """Derive a map with the names of the closest major and minor
@@ -58,37 +62,6 @@ class LocationData (object):
                if result:
                   break
      return result
-
-  def getDistance (self) :
-     """Gets the approximate distance from the supplied coordinates to the 
-     intersection in meters"""
-     if self.closest != None :
-        return self.closest.distance * 1.11E+5
-     else:
-        return None
-
-  def getLocationCode (self) :
-     """Returns the location code for the current intersection."""
-     
-     if self.isValid () :
-        return self.closest.gid
-     else : 
-        return None  
-
-  def getArea (self) :
-     """Reads Area database record that goes with the intersection closest to the
-     selected point, and returns it. If the database does not yet contain such a 
-     record, returns None."""
-     result = None
-     if self.isValid () and Area.objects.filter (closest = self.closest.gid) :
-        result = Area.objects.get (closest = self.closest.gid)
-     return result 
-
-  def makeArea (self) :
-     """Creates and returns the area definition object. Calling this method will
-     create a row in the Area table in the database."""
-     return Area.objects.create (closest = self.closest.gid, 
-                                 major = self.getMajor ().gid)
 
   def getIntersectionData (self) :
      """Prepares the request to the geocode database of intersections;

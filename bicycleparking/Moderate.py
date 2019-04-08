@@ -13,7 +13,7 @@
 # Purpose
 #
 
-from bicycleparking.models import SurveyAnswer, Event, Area, Intersection2d, Approval, Picture, Edit
+from bicycleparking.models import SurveyAnswer, Event, Approval, Picture, Edit
 
 class Moderate (object):
   """Implements a moderation protocol for the pictures in the requests.""" 

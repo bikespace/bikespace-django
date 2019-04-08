@@ -37,8 +37,7 @@ import random
 from django.db import connections
 from bicycleparking.geocode import Geocode
 from bicycleparking.LocationData import LocationData
-from bicycleparking.models import SurveyAnswer, Event, Area, Intersection2d, Approval, Picture
-from bicycleparking.intersection import Intersection
+from bicycleparking.models import SurveyAnswer, Event, Approval, Picture
 from bicycleparking.CollectedData import CollectedData
 
 class Geocodetest (TestCase) :

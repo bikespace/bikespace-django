@@ -15,7 +15,7 @@ import requests
 import datetime
 import json
 import django.utils as utils
-from bicycleparking.models import Event, Area, SurveyAnswer, Intersection2d, Approval, Picture
+from bicycleparking.models import Event, SurveyAnswer, Approval, Picture
 
 class CollectedData (object):
   """Encapsulates methods for accessing the geographical databases and 

@@ -27,10 +27,7 @@ import datetime
 import django.utils as utils
 from bicycleparking.LocationData import LocationData
 from bicycleparking.models import Event
-from bicycleparking.models import Area
-from bicycleparking.models import Intersection2d
 from bicycleparking.models import SurveyAnswer
-from bicycleparking.intersection import Intersection
 
 class Geocode :
   """Defines a geographic coding object with seven immutable attributes:
@@ -45,7 +42,7 @@ class Geocode :
 
   ##  public (published) methods
 
-  def __init__ (self, answer, ipAddress) :
+  def __init__ (self, answer) :
      """Initializes the class with the following fields:
         errors: (array) the list of exception objects raised 
         when: (timestamp) the time the object was constructed
@@ -56,13 +53,8 @@ class Geocode :
 
      self.errors = []
      self.when = utils.timezone.now ()
-     self.fromWhere = ipAddress
      self.survey = answer     
      self.loc = LocationData (self.survey.latitude, self.survey.longitude)
-     if self.loc.isValid () :
-        self.area = self.loc.getArea ()
-     else :
-        self.area = None
 
   def isValid (self) :
      """Determines whether or not the latitde and longitude provided refer
@@ -77,34 +69,6 @@ class Geocode :
      """Gets the date and time the caller submitted the request."""
      return self.when
 
-  def getIP (self) :
-     """Gets the the internet protocol address associated with the request."""
-     return self.fromWhere
-
-  def getClosest (self) :
-     """Gets the intersection closest to the location."""
-     if self.isValid () :
-        return Intersection (self.loc.getLocationCode ())
-     else :
-        return None
-
-  def getMajor (self) :
-     """Gets the major intersection closest to the location."""
-     result = None
-     if self.isValid () and self.area == None :
-        result = Intersection (self.loc.getMajor ().gid)
-     elif self.isValid () :
-        result = Intersection (self.area.major)
-     return result
-
-  def getDistance (self) :
-     """Gets the approximate distance from the supplied coordinates to the 
-     intersection in meters"""
-     if self.loc != None :
-        return self.loc.getDistance ()
-     else:
-        return None
-
   def displayErrors (self) :
      """If the error detection routines detected any errors in execution,
         display the diagnostic output from all errors and return a 'True'
@@ -118,16 +82,11 @@ class Geocode :
   def display (self) :
      """Displays the current status on the output as a formatted report
      for testing purposes."""
-     tmp = ("\t\tfrom: {ip}\n\t\tintersection: {gid}\n\t\tcoord: ({lat}, {lng})\n",
-            "\t\tdistance: {dist}\n\t\ttime: {t}\n")
-     if self.isValid () :
-        closest = self.loc.getLocationCode ();
-     else : 
-        closest = 'undefined'
+     tmp = ("\t\tcoord: ({lat}, {lng})\n", "\t\ttime: {t}\n")
 
-     print (tmp[0].format (ip = self.fromWhere, gid = closest, 
-                           lat = self.survey.latitude, lng = self.survey.longitude))
-     print (tmp[1].format (dist = self.getDistance (), t = self.getTime ()))
+     print (tmp[0].format (lat = self.survey.latitude, lng = self.survey.longitude))
+     print (tmp[1].format (t = self.getTime ()))
+
      if len (self.errors) > 0 :
          print ("\t*** errors detected ***")
          for e in self.errors :
@@ -140,14 +99,9 @@ class Geocode :
      using django database management facilities. Adds a pin record if one
      does not exist for the closest intersection."""
 
-     if self.isValid () and self.area == None:
-        self.area = self.loc.makeArea ()
-
-     if self.area != None :
-        inserted = Event (sourceIP = self.fromWhere, area = self.area, 
-                          distance = self.loc.getDistance (), timeOf = self.when, 
-                          answer = self.survey)
-        inserted.save ()
+     if self.survey != None :
+        inserted = Event (timeOf = self.when, answer = self.survey)
+        inserted.save()
         return True
      else :
         return False

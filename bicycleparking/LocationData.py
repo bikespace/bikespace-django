@@ -14,6 +14,7 @@
 import requests
 import datetime
 import django.utils as utils
+from django.conf import settings
 from bicycleparking.models import Event, SurveyAnswer, Approval
 
 class LocationData (object):
@@ -21,7 +22,6 @@ class LocationData (object):
   determining the closest of some type of intersection: any or major."""
 
   GEOCODE_BASE_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
-  MAPS_API_KEY = 'AIzaSyA73LhqHU5DzT-G7azXj6UAZ-z3MD8TmLY'
   latLimits = (-90, 90)
   longLimits = (-180, 180)
 
@@ -88,7 +88,7 @@ class LocationData (object):
       """Translates the selected latitude and longitude into a Google Maps API reverse geocode response."""
       payload = {
          'latlng': "%s,%s" % (lat, lng),
-         'key': self.MAPS_API_KEY
+         'key': settings.MAPS_API_KEY
       }
       resp = requests.get(self.GEOCODE_BASE_URL + '?', params=payload)
       return resp.json()

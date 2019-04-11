@@ -8,7 +8,7 @@
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --env.STATIC_PATH=./ --config webpack.config.js --watch true",
     "local": "webpack --env.STATIC_PATH=./static/dist/ --config webpack.config.js && ./copy.sh",
-    "stage": "webpack --env.STATIC_PATH=https://s3.amazonaws.com/bikespace-staging-static/dist --config webpack.config.js && ./copy.sh",
+    "stage": "webpack --env.STATIC_PATH=https://bikespace-staging-static.s3.amazonaws.com/dist/ --config webpack.config.js && ./copy.sh",
     "prod": "webpack --env.STATIC_PATH=https://s3.amazonaws.com/bikespace-static/dist/  --config webpack.config.js  && ./copy.sh"
   },
   "author": "",

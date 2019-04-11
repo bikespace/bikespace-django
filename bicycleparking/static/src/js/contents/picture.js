@@ -37,6 +37,7 @@ export default class Picture extends Content {
                 document.getElementById("buttonRed").classList.remove('hiddenPicture');;
                 document.getElementById("preview").classList.remove('hiddenPicture');
                 document.getElementById("deviceCamera").classList.add('displayNone');
+                document.getElementById("deviceUpload").classList.add('displayNone');
                 document.getElementById("pictureText").classList.add('displayNone');
             };
             img.src = this.originalDataURL;
@@ -48,42 +49,46 @@ export default class Picture extends Content {
             document.getElementById("preview").classList.add('hiddenPicture');
             document.getElementById("buttonRed").classList.add('hiddenPicture');
             document.getElementById("deviceCamera").classList.remove('displayNone');
+            document.getElementById("deviceUpload").classList.remove('displayNone');
             document.getElementById("pictureText").classList.remove('displayNone');
             this.dataURL = null;
             this.originalDataURL = null;
             this.imageSelected = false;
         });
 
-        document.getElementById("deviceCamera").addEventListener('change', (event) => {
-            var img = new Image();
-            img.onload = function () {
-                document.getElementsByClassName("options")[0].classList.add('hiddenPicture');
-                document.getElementsByClassName("options")[1].classList.add('hiddenPicture');
-                document.getElementById("picture").classList.remove('hiddenPicture');
-                document.getElementById("buttonRed").classList.remove('hiddenPicture');;
-                document.getElementById("preview").classList.remove('hiddenPicture');
+        [document.getElementById("deviceCamera"), document.getElementById("deviceUpload")].forEach(element => {
+            element.addEventListener('change', (event) => {
+                var img = new Image();
+                img.onload = function () {
+                    document.getElementsByClassName("options")[0].classList.add('hiddenPicture');
+                    document.getElementsByClassName("options")[1].classList.add('hiddenPicture');
+                    document.getElementById("picture").classList.remove('hiddenPicture');
+                    document.getElementById("buttonRed").classList.remove('hiddenPicture');;
+                    document.getElementById("preview").classList.remove('hiddenPicture');
 
 
-                var src = document.getElementById('picture');
-                src.width = img.width;
-                src.height = img.height;
+                    var src = document.getElementById('picture');
+                    src.width = img.width;
+                    src.height = img.height;
 
-                var ctx = src.getContext("2d");
-                ctx.drawImage(img, 0, 0);
+                    var ctx = src.getContext("2d");
+                    ctx.drawImage(img, 0, 0);
 
-                var dst = document.getElementById('dst-cvs');
-                dst.width = 300;
-                dst.height = img.height * dst.width / img.width;
+                    var dst = document.getElementById('dst-cvs');
+                    dst.width = 300;
+                    dst.height = img.height * dst.width / img.width;
 
-                ctx = dst.getContext("2d")
-                ctx.drawImage(img, 0, 0, dst.width, dst.height);
-                document.getElementById("deviceCamera").classList.add('displayNone');
-                document.getElementById("pictureText").classList.add('displayNone');
-            }
+                    ctx = dst.getContext("2d")
+                    ctx.drawImage(img, 0, 0, dst.width, dst.height);
+                    document.getElementById("deviceCamera").classList.add('displayNone');
+                    document.getElementById("deviceUpload").classList.add('displayNone');
+                    document.getElementById("pictureText").classList.add('displayNone');
+                }
 
-            img.src = window.URL.createObjectURL(event.target.files[0]);
-            this.imageSelected = true;
-        });
+                img.src = window.URL.createObjectURL(event.target.files[0]);
+                this.imageSelected = true;
+                })
+        })
 
         document.getElementById("picture").classList.add('hiddenPicture');
         document.getElementById("buttonRed").classList.add('hiddenPicture');
@@ -99,15 +104,20 @@ export default class Picture extends Content {
           <h2 id="pictureText" class="">${this.props.text}</h2>
             <ul>
                 <div class="doubleoption">
-                    <div class="options">
-                        <li><em>Camera</em></li>
-                        <div class="check camera"> </div>
-                    </div>
-                    <div class="options">
-                        <li><em>Upload</em></li>
-                        <div class="check upload"> </div>
-                    </div>
+                    <label for="deviceCamera">
+                        <div class="options">
+                            <li> <em>Camera</em> </li>
+                            <div class="check camera"> </div>
+                        </div>
+                    </label>
+                    <label for="deviceUpload">
+                        <div class="options">
+                            <li><em>Upload</em></li>
+                            <div class="check upload"> </div>
+                        </div>
+                    </label>
                     <input id="deviceCamera" class="cameraButton" type="file" accept="image/*" capture/>
+                    <input id="deviceUpload" class="cameraButton" type="file" accept="image/*" />
                     <div id="preview" class="imagepreview hiddenPicture">
                         <canvas id="picture" src="#" ></canvas>
                         <canvas id="dst-cvs" class="img-responsive"></canvas>

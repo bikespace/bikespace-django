@@ -39,6 +39,7 @@ from django.contrib import admin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
+import django.utils as utils
 from datetime import datetime
 
 from rest_framework import generics
@@ -85,8 +86,8 @@ class SurveyAnswerList(generics.ListCreateAPIView):
         answer = serializer.save()
         pic = Picture (answer = answer, photo_uri = self.request.data ['photo_uri'])
         pic.save ()
-        geocode = Geocode(answer)
-        geocode.output()         
+        inserted = Event (timeOf = utils.timezone.now (), answer = answer)
+        inserted.save()    
 
 class BetaCommentList(generics.ListCreateAPIView):
     """Generic comments section for the beta release of the application.

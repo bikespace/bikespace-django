@@ -107,7 +107,7 @@ export default class Picture extends Content {
                         <li><em>Upload</em></li>
                         <div class="check upload"> </div>
                     </div>
-                    <input id="deviceCamera" class="cameraButton" type="file" accept="image/*;capture=camera"/>
+                    <input id="deviceCamera" class="cameraButton" type="file" accept="image/*" capture/>
                     <div id="preview" class="imagepreview hiddenPicture">
                         <canvas id="picture" src="#" ></canvas>
                         <canvas id="dst-cvs" class="img-responsive"></canvas>

@@ -11,7 +11,6 @@ before_script:
     - node -v
     - npm -v
     - gem install dpl
-    - npm install
 
 services:
   - name: mdillon/postgis
@@ -49,16 +48,26 @@ pages:
   only:
     - master
 
+develop:
+  type: deploy
+  script:
+  - npm install stage
+  - dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
+  only:
+  - develop
+
 staging:
   type: deploy
   script:
-  - dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
+  - npm install stage
+  - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-staging" --region="us-east-1" --bucket_name=$ELB_BUCKET_NAME
   only:
   - master
 
 production:
   type: deploy
   script:
+  - npm install prod
   - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-env" --region="us-east-1" --bucket_name=$ELB_BUCKET_NAME
   only:
   - tags

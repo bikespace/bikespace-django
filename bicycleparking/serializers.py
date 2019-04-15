@@ -32,8 +32,8 @@ class BetaCommentSerializer (serializers.ModelSerializer) :
 class LocationDataSerializer (serializers.Serializer) :
   """Serializes data to the Location object."""
   
-  latitude = serializers.FloatField (min_value = 43.58149, max_value = 43.886692)
-  longitude = serializers.FloatField (min_value = -79.61179, max_value = -79.114705)
+  latitude = serializers.FloatField (min_value = -90, max_value = 90)
+  longitude = serializers.FloatField (min_value = -180, max_value = 180)
 
   def create(self, validated_data):
      return Comment (validated_data ['latitude'], validated_data ['longitude'])

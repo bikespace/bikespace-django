@@ -61,7 +61,6 @@ from bicycleparking.models import BetaComments
 from bicycleparking.models import Approval
 from bicycleparking.models import Event
 from bicycleparking.uploader import Uploader
-from bicycleparking.geocode import Geocode
 from bicycleparking.LocationData import LocationData
 from bicycleparking.CollectedData import CollectedData
 from bicycleparking.Moderate import Moderate
@@ -72,8 +71,7 @@ def index(request):
     return render(request, 'bicycleparking/index.html', {})
 
 class SurveyAnswerList(generics.ListCreateAPIView):
-    """Generates the main table entries from the user's survey input, generates
-    the geographical aggregation data (closest and closest major intersection), 
+    """Generates the main table entries from the user's survey input, 
     and accesses the survey data to obtain the URI for a picture submitted and
     stored separately."""
     queryset = SurveyAnswer.objects.all()

@@ -12,7 +12,6 @@ urlpatterns = [
     url(r'^api/upload/(?P<filename>[^/]+)$', views.UploadPicture.as_view()),
     url(r'^api/pictures/(?P<filename>[^/]+)$', views.DownloadPicture.as_view()),
     url(r'^api/location$', views.LocationNameRequest.as_view()),
-    url(r'^api/dashboarddata$', views.DashboardRequest.as_view ()),
     url(r'^sw.js', (TemplateView.as_view(template_name="bicycleparking/sw.js", content_type='application/javascript')), name='sw.js'),
     url(r'^manifest.json', (TemplateView.as_view(template_name="bicycleparking/manifest.json", content_type='application/json')), name='manifest.json'),
     url(r'^moderate_unapproved', views.submissions_to_moderate.as_view ()),

@@ -25,8 +25,7 @@ class DefaultRouting :
   database in order to look up intersections from the submitted latitude
   and longitude coordinates."""
 
-  # models supported by the geospatial database
-  defaultModels = set (['area', 'event', 'surveyanswer'])
+  defaultModels = set (['event', 'surveyanswer'])
 
   def db_for_read (self, model, **hints):
      """Selects the default database to read from."""

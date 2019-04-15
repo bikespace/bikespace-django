@@ -17,14 +17,3 @@ else
 fi
 
 sed 's/db_id/intersection/' /docker-entrypoint-initdb.d/sql/makegisdb.sql | psql
-sed 's/db_id/test_intersection/' /docker-entrypoint-initdb.d/sql/makegisdb.sql | psql
-
-shp2pgsql -I -s 4326 /tmp/CENTRELINE_INTERSECTION_WGS84.shp public.centreline_intersection_wgs84 | psql -q -d intersection 
-
-psql -f /docker-entrypoint-initdb.d/sql/intersec2d.sql -d intersection
-psql -f /docker-entrypoint-initdb.d/sql/intersection_types.sql -d intersection
-
-shp2pgsql -I -s 4326 /tmp/CENTRELINE_INTERSECTION_WGS84.shp public.centreline_intersection_wgs84 | psql -q -d test_intersection 
-
-psql -f /docker-entrypoint-initdb.d/sql/intersec2d.sql -d test_intersection
-psql -f /docker-entrypoint-initdb.d/sql/intersection_types.sql -d test_intersection

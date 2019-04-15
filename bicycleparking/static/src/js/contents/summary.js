@@ -26,7 +26,7 @@ export default class Summary extends Content {
         document.getElementById('problems').innerHTML = problems;
         document.getElementById('date').innerHTML = new Date(state.happening[0].date).toLocaleString('en-US', { month: 'long', day: 'numeric' })
         document.getElementById('clock').innerHTML = new Date(state.happening[0].date).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-        fetch(`${document.location.origin}/api/intersection`, {
+        fetch(`${document.location.origin}/api/location`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export default class Summary extends Content {
             body: JSON.stringify({ 'latitude': state.map[0][0], 'longitude': state.map[0][1] }),
         }).then(response => {
             response.json().then(json => {
-                document.getElementById('intersection').innerHTML = json.major;
+                document.getElementById('location').innerHTML = json.closest;
             })
         })
     }
@@ -50,9 +50,9 @@ export default class Summary extends Content {
               <div class="options summaryProblem"><div id="problems">
               </div></div>
               <div class="linebreak"></div>
-              <h2> <em>Intersection </em> </h2>
+              <h2> <em>Location </em> </h2>
               <div class="options summaryChange">
-                  <li><em id="intersection"></em></li>
+                  <li><em id="location"></em></li>
               </div>
                 <div class="linebreak"></div>
               <h2>Date and time</h2>

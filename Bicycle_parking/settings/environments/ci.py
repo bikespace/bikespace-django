@@ -37,14 +37,6 @@ DATABASES = {
         'PASSWORD': os.getenv('BIKE_DB_PW', 'postgres'),
         'HOST': os.getenv('BIKE_DB_HOST', 'localhost'),
         'PORT': '5432',
-    },
-    'geospatial': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'intersection',
-        'USER': os.getenv('BIKE_DB_USER', 'postgres'),
-        'PASSWORD': os.getenv('BIKE_DB_PW', 'postgres'),
-        'HOST': os.getenv('BIKE_DB_HOST', 'localhost'),
-        'PORT': '5432',
     }
 }
 
@@ -58,5 +50,4 @@ DATABASES = {
 # routines to update or access a table defined as a model class in python
 # to the appropriate database
 
-DATABASE_ROUTERS = ['bicycleparking.Routers.GeoSpatialRouting',
-                    'bicycleparking.Routers.DefaultRouting']
+DATABASE_ROUTERS = ['bicycleparking.Routers.DefaultRouting']

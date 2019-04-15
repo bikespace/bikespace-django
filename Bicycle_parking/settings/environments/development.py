@@ -33,15 +33,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bike_parking_toronto',
-        'USER': os.getenv('BIKE_DB_USER', 'postgres'),
-        'PASSWORD': os.getenv('BIKE_DB_PW', 'postgres'),
-        'HOST': os.getenv('BIKE_DB_HOST', 'localhost'),
-        'PORT': '5435',
-    },
-    'geospatial': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'intersection',
+        'NAME': 'bike_parking',
         'USER': os.getenv('BIKE_DB_USER', 'postgres'),
         'PASSWORD': os.getenv('BIKE_DB_PW', 'postgres'),
         'HOST': os.getenv('BIKE_DB_HOST', 'localhost'),
@@ -59,8 +51,7 @@ DATABASES = {
 # routines to update or access a table defined as a model class in python
 # to the appropriate database
 
-DATABASE_ROUTERS = ['bicycleparking.Routers.GeoSpatialRouting',
-                    'bicycleparking.Routers.DefaultRouting']
+DATABASE_ROUTERS = ['bicycleparking.Routers.DefaultRouting']
 
 # my_project/settings.py
 LOGIN_REDIRECT_URL = '/moderate_unapproved'                    

@@ -18,77 +18,53 @@ from django.conf import settings
 from bicycleparking.models import Event, SurveyAnswer, Approval
 
 class LocationData (object):
-  """Encapsulates methods for accessing the geographical databases and 
-  determining the closest of some type of intersection: any or major."""
+  """Encapsulates methods for accessing the closest street or avenue
+  using reverse geocoding with the Google Maps API."""
 
   GEOCODE_BASE_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
-  latLimits = (-90, 90)
-  longLimits = (-180, 180)
 
   def __init__ (self, latitude, longitude) :
      """Defines the local variables: only latitude and longitude are parameters."""
      self.latitude = latitude
      self.longitude = longitude
-     self.closest = self.getIntersectionData ()
-     self.errors = []
+     self.closest = self.requestLocation ()
 
   def update (self, data) :
      """Updates the location data: provided for compatability with the
      serializer routines."""
      self.latitude = data.get('latitude', self.latitude)
      self.longitude = data.get('longitude', self.longitude)
-     self.closest = self.getIntersectionData ()
+     self.closest = self.requestLocation ()
      
   def isValid (self) :
-     """Determines whether or not the latitde and longitude provided refer
-     to a valid location, and whether or not the intersection lookup found
-     valid intersection data."""
+     """Determines whether or not the latitude and longitude provided refer
+     to a valid location."""
      return self.closest != None
      
-     
   def getClosest (self) :
-      return self.closest
+     """Returns the closest street or avenue once the LocationData object has
+     been initialized"""
+     return self.closest
 
-  def getIntersectionNames (self) :
-     """Derive a map with the names of the closest major and minor
-     intersections."""
+  def getLocationName (self, resp) :
+     """Returns the closest street or avenue name from the reverse geocoding 
+     response object from the Google Maps API."""
      result = {}
-     if self.closest != None :
-        if self.closest['status'] == 'OK':
-           for address in self.closest['results']:
+     if resp != None :
+        if resp['status'] == 'OK':
+           for address in resp['results']:
                for component in address['address_components']:
                   if 'route' in component['types']:
-                     result['major'] = component['long_name']
+                     result['closest'] = component['long_name']
                if result:
                   break
      return result
-
-  def getIntersectionData (self) :
-     """Prepares the request to the geocode database of intersections;
-     if the database contains the supplied latitude and longitude, look
-     up the nearest intersection and the nearest minor intersection,
-     and store both in the object. This method filters the latitude 
-     and longitude data submitted to a bounding box. If the latitude 
-     does not fall in this box, the method sets the geographic data to 
-     empty, which the test in isValid will reject."""
-
-     inLat = LocationData.latLimits [0] < self.latitude < LocationData.latLimits [1]
-     inLong = LocationData.longLimits [0] < self.longitude < LocationData.longLimits [1]
-     result = None
-
-     try :
-        if inLat and inLong :
-           result = self.lookupIntersection (self.latitude, self.longitude)
-     except Exception as error:
-        self.errors.append (error)
-
-     return result
     
-  def lookupIntersection (self, lat, lng) :
-      """Translates the selected latitude and longitude into a Google Maps API reverse geocode response."""
+  def requestLocation (self) :
+      """Makes a request to the Google Maps API with the selected latitude and longitude to return a reverse geocode response."""
       payload = {
-         'latlng': "%s,%s" % (lat, lng),
+         'latlng': "%s,%s" % (self.latitude, self.longitude),
          'key': settings.MAPS_API_KEY
       }
       resp = requests.get(self.GEOCODE_BASE_URL + '?', params=payload)
-      return resp.json()
+      return self.getLocationName(resp.json())

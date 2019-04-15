@@ -145,18 +145,15 @@ class LocationNameRequest (APIView) :
 
     def post (self, request) :
         """Takes a set of GET or POST parameters containing the lat/long and returns a JSON
-        string containing the names of the closest and the closest major intersection;
-        note, if the closest intersection is a major intersection, these fields will 
-        contain the same value."""
+        string containing the name of the closest street or avenue."""
 
         data = request.body.decode ('utf-8')
         if data :
            param = json.loads (data)
         else :
            param = {}
-        # print(param)
         data = LocationData (param ['latitude'], param ['longitude'])
-        return JsonResponse (data.getIntersectionNames ())
+        return JsonResponse (data.getClosest () )
               
 class DownloadPicture(APIView):
     uploader = Uploader()

@@ -23,19 +23,18 @@ import os
 DB_HOST="127.0.0.1"
 DB_USER="postgres"
 DB_PW=""
-SOURCE_DB = "intersection"
-SINK_DB = "bike_parking_toronto"
+SINK_DB = "bike_parking"
 
 def flushTestDB (db) :
   """Erases all of the entries in the test tables."""
   
   cursor = db.cursor ()
-  tables = [ 'approval', 'area', 'event', 'picture', 'surveyanswer' ]
+  tables = [ 'approval', 'event', 'picture', 'surveyanswer' ]
 
   for t in tables :
      cmd = 'delete from bicycleparking_{};'.format (t)
-     print (cmd);
-     cursor.execute (cmd);
+     print (cmd)
+     cursor.execute (cmd)
   
   db.commit ()
   cursor.close
@@ -175,17 +174,12 @@ def put_event (transaction, sink) :
   print (transaction)
 
 try:
-  resource = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}' port = 5435".format (SOURCE_DB, DB_HOST, DB_USER, DB_PW))
-  source = resource.cursor ()
   to = psycopg2.connect ("dbname='{0}' host='{1}' user = '{2}' password = '{3}' port = 5435".format (SINK_DB, DB_HOST, DB_USER, DB_PW))
 
-  flushTestDB (to);
+  flushTestDB (to)
   sink = to.cursor ()
-  construct (source, "test/transactions.xml", sink)
   to.commit ()
-  source.close ()
   sink.close ()
-  resource.close ()
   to.close ()
 except psycopg2.Warning as warning:
   if warning.pgerror != None: 

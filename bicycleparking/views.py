@@ -62,6 +62,7 @@ from bicycleparking.models import Approval
 from bicycleparking.models import Event
 from bicycleparking.uploader import Uploader
 from bicycleparking.LocationData import LocationData
+from bicycleparking.CollectedData import CollectedData
 from bicycleparking.Moderate import Moderate
 
 # Create your views here.
@@ -98,6 +99,42 @@ class BetaCommentList(generics.ListCreateAPIView):
         answer using the serializer, the aggregate geographic data (Geocode)
         and event record using the geocode class, and the picture record."""
         serializer.save()
+
+class DashboardRequest (APIView) :
+    """Wraps the location name object for retrieving data from the LocationData
+    object."""
+    
+    def post (self, request) :
+        """Takes a set of POST parameters containing the limits of the 
+        map viewport and returns a JSON string containing the details
+        of all the approved pins in the selected rectangle.
+        
+        The data returned by this call will depend on the settings in 
+        the CollectedData object, but they will generally include the
+        names of the closest and the closest major intersection, the
+        time of the request and the span of time requested for parking, 
+        the problem as defined by the user and a URI describing the 
+        picture (if any) associated with the request."""
+        
+        data = request.body.decode ('utf-8')
+        if data :
+           param = json.loads (data)
+        else :
+           param = {}
+        return self.access (param)
+
+    def access (self, param) :
+        """Provides access to the database for both POST and GET requests."""
+        # print(param)
+        upLeft = lowRight = None
+        if 'upper_left' in param :
+            upLeft = param ['upper_left']
+        if 'lower_right' in param :
+            lowRight = param ['lower_right']
+        data = CollectedData (upLeft, lowRight)
+        result = { 'dashboard' : data.get () }
+        return JsonResponse (result)
+
 
 class LocationNameRequest (APIView) :
     """Wraps the location name object for retrieving data from the LocationData

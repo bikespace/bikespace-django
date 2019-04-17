@@ -17,7 +17,8 @@ export default class Summary extends Content {
     }
 
     bind(state) {
-        var state = StateSession.getInstance().get();
+        var session = StateSession.getInstance();
+        var state = session.get();
         var questions = this.questions;
         var problems = state.problem_type.reduce((memo, value) => {
             memo += '<li><em>' + questions[0].questions[0].values.find(entry => entry.key === value).text + '</em></li>'
@@ -34,7 +35,9 @@ export default class Summary extends Content {
             body: JSON.stringify({ 'latitude': state.map[0][0], 'longitude': state.map[0][1] }),
         }).then(response => {
             response.json().then(json => {
-                document.getElementById('location').innerHTML = json.closest;
+                state.location = json.location;
+                session.save(state);
+                document.getElementById('location').innerHTML = json.location;
             })
         })
     }

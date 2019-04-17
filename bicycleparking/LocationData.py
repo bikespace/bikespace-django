@@ -55,7 +55,7 @@ class LocationData (object):
            for address in resp['results']:
                for component in address['address_components']:
                   if 'route' in component['types']:
-                     result['closest'] = component['long_name']
+                     result['location'] = component['long_name']
                if result:
                   break
      return result

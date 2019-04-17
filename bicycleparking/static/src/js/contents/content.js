@@ -16,7 +16,8 @@ export default class Content {
         case "problem_type": return instance.problem_type ? instance.problem_type : []; return;
         case "picture": return instance.picture ? instance.picture : []; return;
         case "map": return instance.map ? instance.map : []; return;
-        case "happening": return instance.happening ? instance.happening : []; return;      
+        case "happening": return instance.happening ? instance.happening : []; return;   
+        case "location": return instance.location ? instance.location : []; return;   
       }
     }
     return [];

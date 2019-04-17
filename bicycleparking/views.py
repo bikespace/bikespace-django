@@ -140,7 +140,7 @@ class LocationNameRequest (APIView) :
     """Wraps the location name object for retrieving data from the LocationData
     object."""
     
-    decorators = [ csrf_exempt ]
+    # decorators = [ csrf_exempt ]
 
     def post (self, request) :
         """Takes a set of GET or POST parameters containing the lat/long and returns a JSON

@@ -71,7 +71,7 @@ class CollectedData (object):
       result ['pic'] = self.getPicture (answer.id)
       result ['longitude'] = answer.longitude    
       result ['latitude'] = answer.latitude
-      result ['comments'] = answer.comments
+      result ['comments'] = survey['comments']
       result ['time'] = str(event.timeOf)
       result ['id'] = event.id
       return result

@@ -21,9 +21,8 @@ class CollectedData (object):
   """Encapsulates methods for accessing the geographical databases and 
   returning request data as approved by a moderator."""
 
-  latLimits = (43.58149, 43.886692)
-  longLimits = (-79.61179, -79.114705)
-  sqlStmt = """SELECT * FROM intersection2d WHERE gid = %(code)s;"""
+  latLimits = (-90, 90)
+  longLimits = (-180, 180)
 
   def __init__ (self, upperLeft = None, lowerRight = None) :
      """Defines the local variables: and the bounding box"""
@@ -59,7 +58,7 @@ class CollectedData (object):
       fromSurvey = [ { 'id' : 'duration', 'path' : ['happening', 0, 'time'] },
                      { 'id' : 'problem', "path" : ['problem_type']} ]
 
-      result = self.getNames (event.area)
+      result = {}
       survey = answer.survey
       for field in fromSurvey :
           try :
@@ -71,6 +70,7 @@ class CollectedData (object):
       result ['pic'] = self.getPicture (answer.id)
       result ['longitude'] = answer.longitude    
       result ['latitude'] = answer.latitude
+      result ['location'] = survey['location']
       result ['comments'] = answer.comments
       result ['time'] = str(event.timeOf)
       result ['id'] = event.id
@@ -97,20 +97,6 @@ class CollectedData (object):
 
       return self.limits [0][0] < survey.longitude < self.limits [0][1] and \
              self.limits [1][0] < survey.latitude < self.limits [1][1]  
-
-  def getNames (self, area) :
-     """Gets the names associated with the area supplied."""
-
-     instr = [ { 'id' : 'majorIntersection', 'code' : area.major },
-               { 'id' : 'intersection', 'code' : area.closest }]
-
-     result = {}
-
-     for req in instr :
-        query = Intersection2d.objects.raw (CollectedData.sqlStmt, req)
-        entry = query [0]
-        result [req ['id']] = entry.intersec5
-     return result
 
   def getPicture (self, id) :
      """Gets the picture from the dedicated picture reference table """ 

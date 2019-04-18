@@ -105,7 +105,8 @@ class BetaCommentList(generics.ListCreateAPIView):
 class DashboardRequest (APIView) :
     """Wraps the location name object for retrieving data from the LocationData
     object."""
-    
+    authentication_classes = ()
+ 
     def post (self, request) :
         """Takes a set of POST parameters containing the limits of the 
         map viewport and returns a JSON string containing the details
@@ -158,6 +159,7 @@ class LocationNameRequest (APIView) :
               
 class DownloadPicture(APIView):
     uploader = Uploader()
+    authentication_classes = ()
 
     def get(self, request, filename, format=None):
         ipAddress = request.META['REMOTE_ADDR']
@@ -180,6 +182,7 @@ class DownloadPicture(APIView):
 class UploadPicture(APIView):
     renderer_classes = (JSONRenderer, )
     uploader = Uploader()
+    authentication_classes = ()
 
     def post(self, request, filename, format=None):
         file_obj = self.request.data['picture']

@@ -78,7 +78,7 @@ class SurveyAnswerList(generics.ListCreateAPIView):
     stored separately."""
     queryset = SurveyAnswer.objects.all()
     serializer_class = SurveyAnswerSerializer
-
+    authentication_classes = ()
     def perform_create(self, serializer):
         """Executes the HTTP POST request by creating four objects: the survey
         answer using the serializer, the aggregate geographic data (Geocode)
@@ -140,18 +140,16 @@ class DashboardRequest (APIView) :
 class LocationNameRequest (APIView) :
     """Wraps the location name object for retrieving data from the LocationData
     object."""
+    authentication_classes = ()
     
-    # decorators = [ csrf_exempt ]
-
     def post (self, request) :
         """Takes a set of GET or POST parameters containing the lat/long and returns a JSON
         string containing the names of the closest and the closest major intersection;
         note, if the closest intersection is a major intersection, these fields will 
         contain the same value."""
-
-        data = request.body.decode ('utf-8')
+        data = request.data
         if data :
-           param = json.loads (data)
+           param = data
         else :
            param = {}
         # print(param)

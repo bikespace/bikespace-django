@@ -67,7 +67,7 @@ class Moderate (object):
            eventEntry = {}
            eventEntry ['id'] = link = event.id
            eventEntry ['time'] = event.timeOf
-           eventEntry ['comments'] = event.answer.comments
+           eventEntry ['comments'] = event.answer.survey['comments']
            eventEntry ['location'] = self.where (event.answer)
            jsonField = event.answer.survey 
            if 'problem_type' in jsonField :

@@ -64,6 +64,7 @@ export default class Happening extends Content {
 
   }
   get template() {
+    this.values = this.getDataFromSession(this.props['key']);
     const options = this.props.values.reduce((memo, value) => {
       var cssClass = "check off"
       if (this.values.length > 0 && this.values[0].time) {

@@ -539,12 +539,14 @@ input{
     width: 100%;
     font-weight: initial;
     height: 50vh;
+    max-height: 400px;
     padding: 8px 16px 3vh 16px;
     font-size: 1.3rem;
     border-color: #ccc;
     border-style: solid;
     border-width: 2px;
     border-radius: 0px;
+    resize: none;
 }
 .nav-no-bkgrd {
     background-color: #ffffff00;

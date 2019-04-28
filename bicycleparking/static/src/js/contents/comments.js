@@ -1,5 +1,4 @@
 import Content from './content';
-import StateSession from '../state-session';
 
 export default class Comments extends Content {
   constructor() {
@@ -17,10 +16,10 @@ export default class Comments extends Content {
 
  
   bind() {
-    this.values = StateSession.getInstance().get();
-    if( this.values.length>0 &&  this.values.comments){
-      document.getElementById('text_comment').value = this.values.comments;
-        }
+    this.values = this.getDataFromSession(this.props['key']);
+    if(this.values.length > 0){
+      document.getElementById('text_comment').value = this.values;
+    }
     
   }
 

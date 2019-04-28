@@ -134,11 +134,10 @@ def put_area (elements, sink) :
 def put_survey_answer (transaction, sink) :
   """Puts the survey location data into the database."""
   template = """insert into bicycleparking_surveyanswer 
-                (latitude, longitude, survey, comments) values
-                (%(latitude)s, %(longitude)s, %(survey)s, %(comments)s) 
+                (latitude, longitude, survey) values
+                (%(latitude)s, %(longitude)s, %(survey)s) 
                 returning id;""" 
   transaction ['survey'] = makeSurveyJson (transaction)
-  transaction ['comments'] = 'this is a test'
   sink.execute (template, transaction)
   return sink.fetchone () [0]
 
@@ -150,11 +149,13 @@ def makeSurveyJson (transaction) :
                "hours", "1-2hours"]
   problem_types = [ 'full', 'absent', 'damaged', 'badly', 'unusable', 'other']
 
+
   result = {}
   result ['map'] = [ [ float (transaction ['latitude']), float (transaction ['longitude']) ] ]
   result ['happening'] = [ { 'date' : transaction ['time'], 
                               'time' : random.choice (durations) } ]
   result ['problem_type'] = [ random.choice (problem_types) ]
+  result ['comments'] = [ "test comment" ]
 
   print (result)
   return json.dumps (result)

@@ -369,7 +369,7 @@ class Geocodetest (TestCase) :
      element of the test data."""
 
      surveyTest = { 'problem_type' : self.randomProblems (),
-                    'map': [[float (location ["latitude"], float (location ["longitude"]],
+                    'map': [[float (location ["latitude"]), float (location ["longitude"])]],
                     'happening' : [ {'date': "2019-04-28T00:23:51.000Z"}, { 'time' : ['hours'] }],
                     'comments' : "test comment"
                   }

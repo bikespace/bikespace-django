@@ -27,15 +27,15 @@ class CollectedData (object):
   def __init__ (self, upperLeft = None, lowerRight = None) :
      """Defines the local variables: and the bounding box"""
      if (upperLeft and lowerRight) :
-        self.limits = ((upperLeft [0], lowerRight [0]), (lowerRight [1], upperLeft [1]))
+        self.limits = ((lowerRight [0], upperLeft [0]), (upperLeft [1], lowerRight [1]))
      elif (upperLeft) :
-        self.limits = ((upperLeft [0], CollectedData.longLimits [1]), 
-                       (CollectedData.latLimits [0]), upperLeft [1])
+        self.limits = ((CollectedData.latLimits [0], upperLeft [0]),
+                       (upperLeft [1], CollectedData.longLimits [1]))
      elif (lowerRight) :
-        self.limits = ((CollectedData.longLimits [0], lowerRight [0]), 
-                       (lowerRight [1], CollectedData.latLimits [1]))         
+        self.limits = ((lowerRight [0], CollectedData.latLimits [1]),
+                       (CollectedData.longLimits [0], lowerRight [1]))         
      else :
-        self.limits = (CollectedData.longLimits, CollectedData.latLimits)
+        self.limits = (CollectedData.latLimits, CollectedData.longLimits)
      self.errors = []
 
   def get (self) :
@@ -95,8 +95,8 @@ class CollectedData (object):
       """Determines whether or not a pin falls within the boundaries associated
       with the request."""
 
-      return self.limits [0][0] < survey.longitude < self.limits [0][1] and \
-             self.limits [1][0] < survey.latitude < self.limits [1][1]  
+      return self.limits [0][0] < survey.latitude < self.limits [0][1] and \
+             self.limits [1][0] < survey.longitude < self.limits [1][1]  
 
   def getPicture (self, id) :
      """Gets the picture from the dedicated picture reference table """ 

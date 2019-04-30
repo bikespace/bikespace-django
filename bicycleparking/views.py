@@ -84,7 +84,7 @@ class SurveyAnswerList(generics.ListCreateAPIView):
         answer = serializer.save()
         pic = Picture (answer = answer, photo_uri = self.request.data ['photo_uri'])
         pic.save ()
-        inserted = Event (timeOf = utils.timezone.now (), answer = answer)
+        inserted = Event (timeOf = utils.timezone.now (), answer = answer, sourceIP=self.request.META['REMOTE_ADDR'])
         inserted.save()    
 
 class BetaCommentList(generics.ListCreateAPIView):

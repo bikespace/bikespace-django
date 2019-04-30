@@ -20,10 +20,6 @@ class Migration(migrations.Migration):
             model_name='event',
             name='distance',
         ),
-        migrations.RemoveField(
-            model_name='event',
-            name='sourceIP',
-        ),
         migrations.DeleteModel(
             name='Area',
         ),

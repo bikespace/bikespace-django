@@ -65,6 +65,7 @@ class Event(models.Model) :
     timestamp of the request, resides in the Event table. Finally, information
     relating the request to an aggregated geographic area resides in the area table."""
 
+    sourceIP = models.GenericIPAddressField()
     answer = models.ForeignKey (SurveyAnswer, on_delete = models.PROTECT, default = DEFAULT_LINK)
     timeOf = models.DateTimeField (auto_now_add = True)
 

@@ -12,7 +12,7 @@ export default class Survey {
     this.props = props;
     this.survey = survey;
     const question = {
-      submit: this.submit.bind(this),
+      submit: this.next.bind(this),
       onError: this.onError.bind(this),
       onMessage: this.onMessage.bind(this),
       router: this.survey.router
@@ -48,7 +48,7 @@ export default class Survey {
   }
 
 
-  submit() {
+  save() {
     const values = this.questions.reduce((memo, question) => {
       memo[question.props.key] = question.value;
       return memo;
@@ -56,6 +56,10 @@ export default class Survey {
     if (values) {
       this.survey.setState(values)
     }
+  }
+
+  next() {
+    this.save();
     if (this.props.final) {
       this.survey.submit();
     } else if (this.errors.length) {
@@ -69,7 +73,8 @@ export default class Survey {
   }
 
   back() {
-    this.survey.back()
+    this.save();
+    this.survey.back();
   }
 
   onError(error) {
@@ -94,7 +99,7 @@ export default class Survey {
   bind() {
     const state = this.survey.state;
     document.getElementById('next').addEventListener('click', (event) => {
-      this.submit();
+      this.next();
     });
 
     document.getElementById('back').addEventListener('click', (event) => {

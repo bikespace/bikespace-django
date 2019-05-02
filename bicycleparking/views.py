@@ -28,6 +28,7 @@
 #
 
 from django.views.decorators.csrf import csrf_exempt
+from django.template.context_processors import csrf
 import json
 import base64
 from django.shortcuts import render
@@ -76,7 +77,7 @@ class SurveyAnswerList(generics.ListCreateAPIView):
     stored separately."""
     queryset = SurveyAnswer.objects.all()
     serializer_class = SurveyAnswerSerializer
-
+    authentication_classes = ()
     def perform_create(self, serializer):
         """Executes the HTTP POST request by creating four objects: the survey
         answer using the serializer, the aggregate geographic data (Geocode)
@@ -103,7 +104,8 @@ class BetaCommentList(generics.ListCreateAPIView):
 class DashboardRequest (APIView) :
     """Wraps the location name object for retrieving data from the LocationData
     object."""
-    
+    authentication_classes = ()
+ 
     def post (self, request) :
         """Takes a set of POST parameters containing the limits of the 
         map viewport and returns a JSON string containing the details
@@ -139,16 +141,16 @@ class DashboardRequest (APIView) :
 class LocationNameRequest (APIView) :
     """Wraps the location name object for retrieving data from the LocationData
     object."""
+    authentication_classes = ()
     
-    decorators = [ csrf_exempt ]
-
     def post (self, request) :
         """Takes a set of GET or POST parameters containing the lat/long and returns a JSON
         string containing the name of the closest street or avenue."""
 
         data = request.body.decode ('utf-8')
+        data = request.data
         if data :
-           param = json.loads (data)
+           param = data
         else :
            param = {}
         data = LocationData (param ['latitude'], param ['longitude'])
@@ -156,6 +158,7 @@ class LocationNameRequest (APIView) :
               
 class DownloadPicture(APIView):
     uploader = Uploader()
+    authentication_classes = ()
 
     def get(self, request, filename, format=None):
         ipAddress = request.META['REMOTE_ADDR']
@@ -178,6 +181,7 @@ class DownloadPicture(APIView):
 class UploadPicture(APIView):
     renderer_classes = (JSONRenderer, )
     uploader = Uploader()
+    authentication_classes = ()
 
     def post(self, request, filename, format=None):
         file_obj = self.request.data['picture']
@@ -232,12 +236,13 @@ class submissions_to_moderate (APIView):
        context = {}
        
        if not request.user.is_authenticated() :
+          #print("User not authenticated")
           return HttpResponseRedirect ('login')
        approved_event_ids = Approval.objects.values_list('approved')  # already approved events
        unapproved_events = Event.objects.exclude(id__in=approved_event_ids)  # only show unapproved events
 
        context ['unapproved_events'] = Moderate ().getUnmoderated ()
        context ['moderator'] = request.user.username
-       print (context)
+       #print ("CONTEXT",context)
 
        return render(request, 'bicycleparking/moderation.html', context)

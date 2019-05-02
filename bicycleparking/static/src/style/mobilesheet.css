@@ -270,12 +270,7 @@ header{
 }
 
 .cameraButton{
-    opacity: 0;
-    margin-top: -35vw;
-    width: 93%;
-    z-index: 1000;
-    max-height: 20%;
-    height: 20vh;
+    display: none;
 }
 
 .check {    

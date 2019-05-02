@@ -367,12 +367,15 @@ class Geocodetest (TestCase) :
      """Constructs a dummy survey answer using the information in the location 
      element of the test data."""
 
-     surveyTest = { 'picture' : 'http:xxx.yyy.com', 'happening' : [{ 'time' : '00.00.00' }],
-                    'problem_type' : self.randomProblems ()}
+     surveyTest = { 'problem_type' : self.randomProblems (),
+                    'map': [[float (location ["latitude"]), float (location ["longitude"])]],
+                    'happening' : [ {'date': "2019-04-28T00:23:51.000Z"}, { 'time' : ['hours'] }],
+                    'comments' : "test comment"
+                  }
 
      return SurveyAnswer (latitude = float (location ["latitude"]), 
                           longitude = float (location ["longitude"]), 
-                          survey = surveyTest, comments = "")
+                          survey = surveyTest)
 
   def findAndWrite (self, answer, testData) :
      """Executes the location request, finds the data, and writes a set of test results to

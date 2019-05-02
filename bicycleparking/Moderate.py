@@ -62,16 +62,22 @@ class Moderate (object):
      result = []
      for event in list :
         if Approval.objects.filter (id__exact = event.id).exists ():
-           print ("invalid field encountered {}".format (event.id))       
-        eventEntry = {}
-        eventEntry ['id'] = link = event.id
-        eventEntry ['time'] = event.timeOf
-        eventEntry ['comments'] = event.answer.comments
-        eventEntry ['location'] = self.where (event.answer)
-        eventEntry ['problem'] = event.answer.survey ['problem_type']
-        eventEntry ['pictures'] = self.pic (Picture.objects.filter (answer__id = link))
-        result.append (eventEntry)
-     
+           print ("invalid field encountered {}".format (event.id))
+        try :       
+           eventEntry = {}
+           eventEntry ['id'] = link = event.id
+           eventEntry ['time'] = event.timeOf
+           eventEntry ['comments'] = event.answer.survey['comments']
+           eventEntry ['location'] = self.where (event.answer)
+           jsonField = event.answer.survey 
+           if 'problem_type' in jsonField :
+              eventEntry ['problem'] = jsonField ['problem_type']
+           else :
+              eventEntry ['problem'] = 'undefined'
+           eventEntry ['pictures'] = self.pic (Picture.objects.filter (answer__id = link))
+           result.append (eventEntry)
+        except Exception as error:
+           print (error)
      return result
 
   def where (self, answer) :

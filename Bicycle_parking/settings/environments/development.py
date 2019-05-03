@@ -33,7 +33,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bike_parking',
+        'NAME': 'bike_parking_toronto',
         'USER': os.getenv('BIKE_DB_USER', 'postgres'),
         'PASSWORD': os.getenv('BIKE_DB_PW', 'postgres'),
         'HOST': os.getenv('BIKE_DB_HOST', 'localhost'),

@@ -27,30 +27,42 @@ class LocationData (object):
      """Defines the local variables: only latitude and longitude are parameters."""
      self.latitude = latitude
      self.longitude = longitude
-     self.closest = self.requestLocation ()
+     self.closest = self.getLocation ()
 
   def update (self, data) :
      """Updates the location data: provided for compatability with the
      serializer routines."""
      self.latitude = data.get('latitude', self.latitude)
      self.longitude = data.get('longitude', self.longitude)
-     self.closest = self.requestLocation ()
+     self.closest = self.getLocation ()
      
   def isValid (self) :
      """Determines whether or not the latitude and longitude provided refer
      to a valid location."""
      return self.closest != None
-     
+
   def getClosest (self) :
      """Returns the closest street or avenue once the LocationData object has
-     been initialized"""
+     been initialized."""
      return self.closest
 
-  def getLocationName (self, resp) :
+  def requestLocation (self) :
+      """Makes a request to the Google Maps API with the selected latitude and
+      longitude to return a reverse geocode response."""
+      payload = {
+         'latlng': "%s,%s" % (self.latitude, self.longitude),
+         'key': settings.MAPS_API_KEY
+      }
+      return requests.get(self.GEOCODE_BASE_URL + '?', params=payload)
+
+  def getLocation (self) :
      """Returns the closest street or avenue name from the reverse geocoding 
      response object from the Google Maps API."""
+     resp = self.requestLocation()
+
      result = {}
-     if resp != None :
+     if resp:
+        resp = resp.json()
         if resp['status'] == 'OK':
            for address in resp['results']:
                for component in address['address_components']:
@@ -59,12 +71,3 @@ class LocationData (object):
                if result:
                   break
      return result
-    
-  def requestLocation (self) :
-      """Makes a request to the Google Maps API with the selected latitude and longitude to return a reverse geocode response."""
-      payload = {
-         'latlng': "%s,%s" % (self.latitude, self.longitude),
-         'key': settings.MAPS_API_KEY
-      }
-      resp = requests.get(self.GEOCODE_BASE_URL + '?', params=payload)
-      return self.getLocationName(resp.json())

@@ -7,6 +7,6 @@ ALTER DATABASE db_id SET search_path=public, postgis, contrib;
 CREATE EXTENSION postgis SCHEMA postgis;
 SELECT postgis_full_version();
 
-CREATE DATABASE bike_parking;
+CREATE DATABASE bike_parking_toronto;
 
-GRANT ALL PRIVILEGES ON DATABASE bike_parking to postgres;
+GRANT ALL PRIVILEGES ON DATABASE bike_parking_toronto to postgres;

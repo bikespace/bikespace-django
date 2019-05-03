@@ -23,7 +23,7 @@ import os
 DB_HOST="127.0.0.1"
 DB_USER="postgres"
 DB_PW=""
-SINK_DB = "bike_parking"
+SINK_DB = "bike_parking_toronto"
 
 def flushTestDB (db) :
   """Erases all of the entries in the test tables."""

@@ -156,6 +156,7 @@ class Geocodetest (TestCase) :
         
      for test in entries :
         answer = self.saveAnswer (test)
+        self.saveEvent(answer)
         uri = 'http://park_pic_{}.jpg'.format (answer.id)
         pic = Picture (photo_uri = uri,  answer = answer)
         pic.save ()
@@ -238,7 +239,8 @@ class Geocodetest (TestCase) :
      surveyTest = { 'problem_type' : self.randomProblems (),
                     'map': [[float (location ["latitude"]), float (location ["longitude"])]],
                     'happening' : [ {'date': "2019-04-28T00:23:51.000Z"}, { 'time' : ['hours'] }],
-                    'comments' : "test comment"
+                    'comments' : "test comment",
+                    'location' : location['name']
                   }
 
      return SurveyAnswer (latitude = float (location ["latitude"]), 

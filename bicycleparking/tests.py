@@ -133,9 +133,10 @@ class Test (TestCase) :
         link = event.answer.id
         pictures = Picture.objects.filter (answer__id = link)
         print ('<div>')
-     for pmod in pictures :
-        print ('<img src="{}" width="80" height="100">'.format (pmod.photo_uri))
-        print ("</div>")   
+        for pmod in pictures :
+           print ('<img src="{}" width="80" height="100">'.format (pmod.photo_uri))
+        print ("</div>")
+        
      self.assertTrue (self.success)
 
   def moderate (self, accept) :

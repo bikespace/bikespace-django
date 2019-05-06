@@ -40,37 +40,38 @@ from bicycleparking.models import SurveyAnswer, Event, Approval, Picture
 from bicycleparking.CollectedData import CollectedData
 from bicycleparking.SurveyEvent import SurveyEvent
 
-class Geocodetest (TestCase) :
+class Test (TestCase) :
 
   """ Tests include:
-         test_record:        Tests the processes for writing data to he database and compares
-                             the database entries as created with the expected entries. 
+         test_location:      Tests the process for requesting the nearest street or avenue
+                             compares the results with the expected locations. 
+
+         test_record:        Tests the process for writing the survey data to the database. 
 
          test_selected       Tests the process of collecting data for the dashboard. This
                              process simulates and tests the moderation process.
+
+         test_unmoderated    Tests the ability to access unmoderated requests.
          
          Each of these methods uses the same test data; this consists of a dataset coded
-         in xml with specifications for a location, the (known) closest intersection to the
-         given location, and the (known) closest major intersection. Each test method defines
-         a map, consisting of an entry for the origin, closest and (closest) major. Each 
-         entry in the map in turn contains a nested map, and each entry in the nested map 
-         consists of a tag name and a field name. The field name refers to a tag within the 
+         in xml with specifications for a location and the (known) closest street or avenue to the
+         given location. Each test method defines a map, consisting of an entry for the origin
+         and closest. Each entry in the map in turn contains a nested map, and each entry in the
+         nested map consists of a tag name and a field name. The field name refers to a tag within the 
          corresponding xml specification, and the field name must contain a string unique 
          throughout the entire map. For each test, this map converts the test location 
          definition element to a parameter list, which the test routines will then use. 
-         See the ReadGeoEntries and its subsidiary methods for more details.
+         See the ReadEntries and its subsidiary methods for more details.
 
          The data in the test file include both inputs and the main expected
          results to test against. Test output will indicate whether or not 
-         the test execution returned the expected result, and if it does not
-         return successfully the test system will return diagnostic 
-         information."""
+         the test execution returned the expected result."""
 
   locations = "test/locations.xml"
 
   def test_location(self):
-     """Tests the process of submitting a latitude and longitude to
-     get the closest street or avenue.
+     """Tests the process of requesting the nearest street or avenue and
+     compares the results with the expected locations
      """
 
      print ("\t\ttesting location request")
@@ -86,7 +87,7 @@ class Geocodetest (TestCase) :
      """Tests the process of making a survey answer from the test data and
      saving the survey answer into the database."""
 
-     print ("\t\ttesting geocode recording")
+     print ("\t\ttesting survey recording")
      sources = { 'origin' : { 'latitude' : 'latitude', 'longitude' : 'longitude' },
                  'closest' : { 'name' : 'name'} }
 
@@ -125,19 +126,16 @@ class Geocodetest (TestCase) :
 
      print ("\t\ttesting selection of unmoderated output for moderation process")
      self.success = True
-     if self.database_exists () :
-        self.moderate (0.6)
+     self.moderate (0.6)
         
-        unmoderated = Event.objects.filter (approval = None)
-        for event in unmoderated :
-           link = event.answer.id
-           pictures = Picture.objects.filter (answer__id = link)
-           print ('<div>')
-           for pmod in pictures :
-              print ('<img src="{}" width="80" height="100">'.format (pmod.photo_uri))
-           print ("</div>")   
-     else :
-        print ("No geographic database found, assuming test OK")
+     unmoderated = Event.objects.filter (approval = None)
+     for event in unmoderated :
+        link = event.answer.id
+        pictures = Picture.objects.filter (answer__id = link)
+        print ('<div>')
+     for pmod in pictures :
+        print ('<img src="{}" width="80" height="100">'.format (pmod.photo_uri))
+        print ("</div>")   
      self.assertTrue (self.success)
 
   def moderate (self, accept) :

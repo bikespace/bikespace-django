@@ -17,8 +17,8 @@ import django.utils as utils
 from django.conf import settings
 from bicycleparking.models import Event, SurveyAnswer, Approval
 
-class Survey (object):
-  """Defines a survey object used to save the survey answer to the database."""
+class SurveyEvent (object):
+  """Defines an object used to save the survey answer as an event to the database."""
 
   def __init__ (self, answer, ipAddress) :
      """Defines the local variables: survey is the survey answer, when is the 

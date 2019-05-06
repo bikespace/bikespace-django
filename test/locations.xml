@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<data>
+	<location>
+		<place>
+			<latitude>43.780319</latitude>
+			<longitude>-79.130228</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Chesterton Shores</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.651983</latitude>
+			<longitude>-79.589117</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Centennial Park Road</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.642588</latitude>
+			<longitude>-79.387046</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Front Street West</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.590963</latitude>
+			<longitude>-79.545468</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Lake Shore Boulevard West</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.767218</latitude>
+			<longitude>-79.414696</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Yonge Street</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.836533</latitude>
+			<longitude>-79.248569</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Steeles Avenue East</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.643569</latitude>
+			<longitude>-79.417524</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Workman Way</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.716676</latitude>
+			<longitude>-79.338931</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Don Mills Road</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.788385</latitude>
+			<longitude>-79.405595</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Cummer Avenue</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.725692</latitude>
+			<longitude>-79.452120</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Dufferin Street</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.776142</latitude>
+			<longitude>-79.502551</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>McLaughlin Road</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.661714</latitude>
+			<longitude>-79.519835</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>The Kingsway</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.662678</latitude>
+			<longitude>-79.531885</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Islington Avenue</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.713917</latitude>
+			<longitude>-79.348000</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Wicksteed Avenue</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.817559</latitude>
+			<longitude>-79.185706</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Meadowvale Road</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.775578</latitude>
+			<longitude>-79.256804</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Borough Drive</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.670575</latitude>
+			<longitude>-79.386508</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Bloor Street East</name>
+			<what>closest</what>
+		</place>
+	</location>
+	<location>
+		<place>
+			<latitude>43.707115</latitude>
+			<longitude>-79.398845</longitude>
+			<what>origin</what>
+		</place>
+		<place>
+			<name>Eglinton Avenue West</name>
+			<what>closest</what>
+		</place>
+	</location>
+</data>

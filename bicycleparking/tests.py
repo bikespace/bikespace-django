@@ -34,11 +34,11 @@ import xml.etree.ElementTree as ET
 import time
 import json
 import random
+import django.utils as utils
 from django.db import connections
 from bicycleparking.LocationData import LocationData
 from bicycleparking.models import SurveyAnswer, Event, Approval, Picture
 from bicycleparking.CollectedData import CollectedData
-from bicycleparking.SurveyEvent import SurveyEvent
 
 class Test (TestCase) :
 
@@ -97,7 +97,7 @@ class Test (TestCase) :
      entries = self.readEntries(sources)
 
      for test in entries :
-        self.saveEvent(self.saveAnswer(test))
+        self.saveAnswer(test)
         
   def test_selected (self) :
      """Tests the call to collect data for the dashboard.
@@ -154,7 +154,6 @@ class Test (TestCase) :
         
      for test in entries :
         answer = self.saveAnswer (test)
-        self.saveEvent(answer)
         uri = 'http://park_pic_{}.jpg'.format (answer.id)
         pic = Picture (photo_uri = uri,  answer = answer)
         pic.save ()
@@ -172,9 +171,9 @@ class Test (TestCase) :
 
   def readEntries (self, sources) :
      """Reads data to test the search and database management routines."""
-     print ("Reading test source file {0}".format (Geocodetest.locations))
+     print ("Reading test source file {0}".format (Test.locations))
      result = []
-     doc = ET.parse (Geocodetest.locations)
+     doc = ET.parse (Test.locations)
      root = doc.getroot ()
      for element in root :
         if element.tag == "location" :
@@ -228,6 +227,9 @@ class Test (TestCase) :
      to support the creation of linked data items."""
      answer = self.makeAnswer (location)
      answer.save ()
+     inserted = Event (sourceIP = "127.0.0.1", timeOf = utils.timezone.now (), 
+                           answer = answer)
+     inserted.save ()  
      return answer
 
   def makeAnswer (self, location) :
@@ -244,13 +246,6 @@ class Test (TestCase) :
      return SurveyAnswer (latitude = float (location ["latitude"]), 
                           longitude = float (location ["longitude"]), 
                           survey = surveyTest)
-
-  def saveEvent (self, answer) :
-     """Creates a SurveyEvent object used to save the survey as an Event."""
-     event = SurveyEvent (answer, "127.0.0.1")
-     if event != None :
-        event.output ()
-        return event
 
   def randomProblems (self) :
      """Return a randomized list of possible problems."""

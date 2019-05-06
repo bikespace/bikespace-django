@@ -40,7 +40,6 @@ from django.contrib import admin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
-import django.utils as utils
 from datetime import datetime
 
 from rest_framework import generics
@@ -65,6 +64,7 @@ from bicycleparking.uploader import Uploader
 from bicycleparking.LocationData import LocationData
 from bicycleparking.CollectedData import CollectedData
 from bicycleparking.Moderate import Moderate
+from bicycleparking.Survey import Survey
 
 # Create your views here.
 
@@ -85,8 +85,8 @@ class SurveyAnswerList(generics.ListCreateAPIView):
         answer = serializer.save()
         pic = Picture (answer = answer, photo_uri = self.request.data ['photo_uri'])
         pic.save ()
-        inserted = Event (timeOf = utils.timezone.now (), answer = answer, sourceIP=self.request.META['REMOTE_ADDR'])
-        inserted.save()    
+        survey = Survey(answer, ipAddress = self.request.META['REMOTE_ADDR'])
+        survey.output()    
 
 class BetaCommentList(generics.ListCreateAPIView):
     """Generic comments section for the beta release of the application.

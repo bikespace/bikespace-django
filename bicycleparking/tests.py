@@ -38,7 +38,7 @@ from django.db import connections
 from bicycleparking.LocationData import LocationData
 from bicycleparking.models import SurveyAnswer, Event, Approval, Picture
 from bicycleparking.CollectedData import CollectedData
-from bicycleparking.Survey import Survey
+from bicycleparking.SurveyEvent import SurveyEvent
 
 class Geocodetest (TestCase) :
 
@@ -66,18 +66,28 @@ class Geocodetest (TestCase) :
          return successfully the test system will return diagnostic 
          information."""
 
-  modSrc = { 'origin' : { 'latitude' : 'latitude', 'longitude' : 'longitude' },
-             'closest' : { 'name' : 'name'} }
-
   locations = "test/locations.xml"
 
+  def test_location(self):
+     """Tests the process of submitting a latitude and longitude to
+     get the closest street or avenue.
+     """
+
+     print ("\t\ttesting location request")
+     sources = { 'origin' : {'latitude' : 'latitude', 'longitude' : 'longitude' },
+                 'closest' : { 'name' : 'name'} }
+
+     entries = self.readEntries(sources)
+
+     for test in entries :
+        self.locateAndCompare (test)
         
   def test_record (self) :
-     """Tests the process of creating a survey answer and saving the
-     answer into the database."""
+     """Tests the process of making a survey answer from the test data and
+     saving the survey answer into the database."""
 
      print ("\t\ttesting geocode recording")
-     sources = { 'origin' : { 'name' : 'name', 'latitude' : 'latitude', 'longitude' : 'longitude' },
+     sources = { 'origin' : { 'latitude' : 'latitude', 'longitude' : 'longitude' },
                  'closest' : { 'name' : 'name'} }
 
      Event.objects.all ().delete ()
@@ -86,12 +96,12 @@ class Geocodetest (TestCase) :
      entries = self.readEntries(sources)
 
      for test in entries :
-        self.findAndWrite(self.saveAnswer(test), test)
+        self.saveEvent(self.saveAnswer(test))
         
   def test_selected (self) :
      """Tests the call to collect data for the dashboard.
      
-     This test collectes the entries created by the test record process and dumps
+     This test collects the entries created by the test record process and dumps
      the resulting output."""
 
      sources = { 'origin' : { 'latitude' : 'latitude', 'longitude' : 'longitude' },
@@ -99,16 +109,15 @@ class Geocodetest (TestCase) :
 
      print ("\t\ttesting selected and moderated dashboard output")
      self.success = True
-     if self.database_exists () :
-        self.moderate (1.1)
-        dashboard = CollectedData ()
-        list = dashboard.get ()
 
-        print ('{} entries received'.format (len (list)))
-        for item in list :
-           print (json.dumps (item, indent=4, separators=(',', ': ')))
-     else :
-        print ("No geographic database found, assuming test OK")
+     self.moderate (1.1)
+     dashboard = CollectedData ()
+     list = dashboard.get ()
+
+     print ('{} entries received'.format (len (list)))
+     for item in list :
+        print (json.dumps (item, indent=4, separators=(',', ': ')))
+
      self.assertTrue (self.success)
 
   def test_unmoderated (self) :
@@ -137,10 +146,13 @@ class Geocodetest (TestCase) :
      Adds references to the modertion table and elements to the picture table to 
      test the collection methods for accessing the dashboard."""
 
+     sources = { 'origin' : { 'latitude' : 'latitude', 'longitude' : 'longitude' },
+             'closest' : { 'name' : 'name'} }
+
      print ('simulating moderation')
 
      rejected = 0
-     entries = self.readGeoEntries (Geocodetest.modSrc)
+     entries = self.readEntries (sources)
         
      for test in entries :
         answer = self.saveAnswer (test)
@@ -197,6 +209,21 @@ class Geocodetest (TestCase) :
         struc [part.tag] = part.text
      return struc
 
+  def locateAndCompare (self, location) :
+     """Tests the location operation without writing any information to the database."""
+     data = LocationData (location ['latitude'], location ['longitude'])
+     closest = data.getClosest()
+
+     if not closest:
+        self.success = False
+
+     self.locationCompare (location ['name'], closest ['location'])
+
+  def locationCompare (self, expected, result) :
+     """Compares the result of a lookup to the expected item as defined in the place 
+     xml element in the test file."""
+     self.assertEqual(expected, result)
+
   def saveAnswer (self, location) :
      """Creates an answer record as a dummy, and then writes it to the database
      to support the creation of linked data items."""
@@ -218,13 +245,12 @@ class Geocodetest (TestCase) :
                           longitude = float (location ["longitude"]), 
                           survey = surveyTest)
 
-  def findAndWrite (self, answer, testData) :
-     """Executes the location request, finds the data, and writes a set of test results to
-     the database."""
-     where = self.locate (answer, testData)
-     if where != None :
-        where.output ()
-        return where
+  def saveEvent (self, answer) :
+     """Creates a SurveyEvent object used to save the survey as an Event."""
+     event = SurveyEvent (answer, "127.0.0.1")
+     if event != None :
+        event.output ()
+        return event
 
   def randomProblems (self) :
      """Return a randomized list of possible problems."""
@@ -238,37 +264,3 @@ class Geocodetest (TestCase) :
      if (len (result) == 0) :
         result = [ random.choice (poss) ]
      return result
-
-  def diagnostic (self, where, errors) :
-     """Prints a set of messages for diagnostic purposes if the comparison between the
-     expected and returned data fails in a test run"""
-     header = "\texpected location not found: \n\t\tname: {name}\n\t\tident: {gid}\n\t\tlat: {latitude}\n\t\tlong: {longitude}" 
-     print (header.format (**errors))
-     print ('\tfound location {0}'.format (where.getClosest ().getIdent ()))
-     print ("\n\t********** geocoded data retrieved *****")
-     where.display ()
-
-
-  def locate (self, answer, location) :
-     """Tests the location operation without writing any information to the database.
-     Returns a Survey object."""
-     result = None
-     data = LocationData (location ['latitude'], location ['longitude'])
-     survey = Survey(answer, "127.0.0.1")
-     closest = data.getClosest()
-
-     if closest:
-        if self.locationCompare(location ['name'], closest):
-           result = survey
-        else:
-           self.success = False
-     else:
-        self.success = False   
-
-     return result
-
-  def locationCompare (self, name, result) :
-     """Compares the result of a lookup to the expected item as defined in the place 
-     xml element in the test file."""
-     self.assertEqual(result['location'], name)
-     return True

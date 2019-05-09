@@ -88,8 +88,9 @@ test/pic/trinityblwds.png
 test/pic/trinityblwds.png
 civictechto-bicycle-parking/bicycleparking/static/dist
 
-# ignore files in the dist folder
+# ignore files in the dist folder and survey folder
 bicycleparking/static/dist/*
+bicycleparking/static/survey/*
 
 # but don't ignore the folder
 !/bicycleparking/static/dist/.keep

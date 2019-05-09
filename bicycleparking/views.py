@@ -69,7 +69,7 @@ from bicycleparking.Moderate import Moderate
 # Create your views here.
 
 def index(request):
-    return render(request, 'bicycleparking/index.html', {})
+    return render(request, 'survey/index.html', {})
 
 class SurveyAnswerList(generics.ListCreateAPIView):
     """Generates the main table entries from the user's survey input, 

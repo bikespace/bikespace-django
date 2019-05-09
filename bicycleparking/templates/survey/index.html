@@ -1,3 +1,4 @@
+{% load static %}
 <html>
 
 <head>
@@ -6,25 +7,25 @@
     <title>BikeSpace - Home</title>
     <link rel="manifest" href="/manifest.json">
 
-    <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="<%= assetpath %>style/stylesheet.css" />
-    <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="<%= assetpath %>style/mobilesheet.css" />
-    <link type="text/css" rel="stylesheet" href="<%= assetpath %>style/flatpickr.min.css" />
-    <link type="text/css" rel="stylesheet" href="<%= assetpath %>style/leaflet.css" />
-    <link type="text/css" rel="stylesheet" href="<%= assetpath %>style/leaflet-search.css" />
-    <link rel="prefetch" href="<%= assetpath %>style/assets/icons/calendar.svg"/>
-    <link rel="prefetch" href="<%= assetpath %>style/assets/icons/camera.svg"/>
-    <link rel="prefetch" href="<%= assetpath %>style/assets/icons/upload.svg"/>
-    <link rel="prefetch" href="<%= assetpath %>style/assets/icons/clock.svg"/>
+    <link type="text/css" rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="{% static 'survey/style/stylesheet.css' %}" />
+    <link type="text/css" rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="{% static 'survey/style/mobilesheet.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'survey/style/flatpickr.min.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'survey/style/leaflet.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'survey/style/leaflet-search.css' %}" />
+    <link rel="prefetch" href="{% static 'survey/style/assets/icons/calendar.svg' %}"/>
+    <link rel="prefetch" href="{% static 'survey/style/assets/icons/camera.svg' %}"/>
+    <link rel="prefetch" href="{% static 'survey/style/assets/icons/upload.svg' %}"/>
+    <link rel="prefetch" href="{% static 'survey/style/assets/icons/clock.svg' %}"/>
 
 
     <!--favicon-->
-    <link rel="icon" type="image/png" href="<%= assetpath %>style/assets/icons/bikespace32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="<%= assetpath %>style/assets/icons/bikespace16.png" />
+    <link rel="icon" type="image/png" href="{% static 'survey/style/assets/icons/bikespace32.png' %}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{% static 'survey/style/assets/icons/bikespace16.png' %}" />
 
     <!-- META Tags -->
     <meta property="og:title" content="Bikespace">
     <meta property="og:description" content="Report bike parking issues in Toronto.">
-    <meta property="og:image" content="<%= assetpath %>assets/icons/bkespace-media-icon.jpg">
+    <meta property="og:image" content="{% static 'survey/assets/icons/bkespace-media-icon.jpg' %}">
     <meta name="twitter:card" content="summary_large_image">
 
     <meta property="og:site_name" content="BikeSpace">

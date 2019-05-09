@@ -343,20 +343,12 @@
 	border-radius: 5px;
 	}
 .leaflet-control-layers-toggle {
-<<<<<<< HEAD
-	background-image: url('../images/layers.png');
-=======
-	background-image: url(images/layers.png);
->>>>>>> 874609de9bda30baeaf927559ec0ab1f2296575d
+	background-image: url('assets/images/layers.png');
 	width: 36px;
 	height: 36px;
 	}
 .leaflet-retina .leaflet-control-layers-toggle {
-<<<<<<< HEAD
-	background-image: url('../images/layers-2x.png');
-=======
-	background-image: url(images/layers-2x.png);
->>>>>>> 874609de9bda30baeaf927559ec0ab1f2296575d
+	background-image: url('assets/images/layers-2x.png');
 	background-size: 26px 26px;
 	}
 .leaflet-touch .leaflet-control-layers-toggle {
@@ -397,11 +389,7 @@
 
 /* Default icon URLs */
 .leaflet-default-icon-path {
-<<<<<<< HEAD
-	background-image: url('../images/marker-icon.png');
-=======
-	background-image: url(/images/marker-icon.png);
->>>>>>> 874609de9bda30baeaf927559ec0ab1f2296575d
+	background-image: url('assets/images/marker-icon.png');
 	}
 
 

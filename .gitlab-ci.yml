@@ -51,7 +51,7 @@ pages:
 develop:
   type: deploy
   script:
-  - cd frontend && npm install && npm install --dev && npm run develop
+  - cd bicycleparking && npm install && npm install --dev && npm run develop
   - cd ../ && python3 manage.py collectstatic --noinput
   - dpl --provider=s3 --local-dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key=$AWS_SECRET_ACCESS_KEY --bucket="bikespace-develop-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
   - dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
@@ -61,7 +61,7 @@ develop:
 staging:
   type: deploy
   script:
-  - cd frontend && npm install && npm install --dev && npm run staging
+  - cd bicycleparking && npm install && npm install --dev && npm run staging
   - cd ../ && python3 manage.py collectstatic --noinput
   - dpl --provider=s3 --local-dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key=$AWS_SECRET_ACCESS_KEY --bucket="bikespace-staging-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
   - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-staging" --region="us-east-1" --bucket_name=$ELB_BUCKET_NAME
@@ -71,7 +71,7 @@ staging:
 production:
   type: deploy
   script:
-  - cd frontend && npm install && npm install --dev && npm run prod
+  - cd bicycleparking && npm install && npm install --dev && npm run prod
   - cd ../ && python3 manage.py collectstatic --noinput
   - dpl --provider=s3 --local-dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key=$AWS_SECRET_ACCESS_KEY --bucket="bikespace-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
   - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-env" --region="us-east-1" --bucket_name=$ELB_BUCKET_NAME

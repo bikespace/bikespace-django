@@ -11,9 +11,6 @@ MAPS_API_KEY = os.environ.get('MAPS_API_KEY')
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 #STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, '../bicycleparking/static/dist'),
-]
 AWS_S3_CUSTOM_DOMAIN = os.environ.get('STATIC_URL')
 
 STATIC_URL = '/static/'

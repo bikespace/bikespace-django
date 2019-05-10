@@ -21,22 +21,11 @@ class CollectedData (object):
   """Encapsulates methods for accessing the geographical databases and 
   returning request data as approved by a moderator."""
 
-  latLimits = (-90, 90)
-  longLimits = (-180, 180)
-
-  def __init__ (self, upperLeft = None, lowerRight = None) :
+  def __init__ (self, upperLeft, lowerRight) :
      """Defines the local variables: and the bounding box"""
-     if (upperLeft and lowerRight) :
-        self.limits = ((lowerRight [0], upperLeft [0]), (upperLeft [1], lowerRight [1]))
-     elif (upperLeft) :
-        self.limits = ((CollectedData.latLimits [0], upperLeft [0]),
-                       (upperLeft [1], CollectedData.longLimits [1]))
-     elif (lowerRight) :
-        self.limits = ((lowerRight [0], CollectedData.latLimits [1]),
-                       (CollectedData.longLimits [0], lowerRight [1]))         
-     else :
-        self.limits = (CollectedData.latLimits, CollectedData.longLimits)
+     
      self.errors = []
+     self.limits = ((lowerRight [0], upperLeft [0]), (upperLeft [1], lowerRight [1]))
 
   def get (self) :
      """Gets the list of approved items from the request database""" 

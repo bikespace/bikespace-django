@@ -120,20 +120,24 @@ class DashboardRequest (APIView) :
         picture (if any) associated with the request."""
         
         data = request.body.decode ('utf-8')
-        if data :
-           param = json.loads (data)
-        else :
-           param = {}
+        param = json.loads (data)
+
+        if 'upper_left' not in param:
+          return JsonResponse(status=400, data={
+            'message': 'Error: no field upper_left'
+          })
+        elif 'lower_right' not in param:
+          return JsonResponse(status=400, data={
+            'message': 'Error: no field lower_right'
+          })
+
         return self.access (param)
 
     def access (self, param) :
         """Provides access to the database for both POST and GET requests."""
-        # print(param)
-        upLeft = lowRight = None
-        if 'upper_left' in param :
-            upLeft = param ['upper_left']
-        if 'lower_right' in param :
-            lowRight = param ['lower_right']
+
+        upLeft = param ['upper_left']
+        lowRight = param ['lower_right']
         data = CollectedData (upLeft, lowRight)
         result = { 'dashboard' : data.get () }
         return JsonResponse (result)

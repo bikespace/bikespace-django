@@ -53,25 +53,12 @@ class CollectedData (object):
       """Takes the specifications for each individual item and constructs a single
       description object."""
 
-      answer = event.answer
-
-      fromSurvey = [ { 'id' : 'duration', 'path' : ['happening', 0, 'time'] },
-                     { 'id' : 'problem', "path" : ['problem_type']} ]
-
       result = {}
-      survey = answer.survey
-      for field in fromSurvey :
-          try :
-              key = field ['id']
-              result [key] = self.fromSurvey (survey, field ['path'])
-          except Exception as err:
-              errors.append (err.msg)
                      
-      result ['pic'] = self.getPicture (answer.id)
-      result ['longitude'] = answer.longitude    
-      result ['latitude'] = answer.latitude
-      result ['location'] = survey['location']
-      result ['comments'] = survey['comments']
+      result ['pic'] = self.getPicture (event.answer.id)
+      result ['longitude'] = event.answer.longitude    
+      result ['latitude'] = event.answer.latitude
+      result ['survey'] = event.answer.survey
       result ['time'] = str(event.timeOf)
       result ['id'] = event.id
       return result

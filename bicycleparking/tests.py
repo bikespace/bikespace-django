@@ -112,7 +112,7 @@ class Test (TestCase) :
      self.success = True
 
      self.moderate (1.1)
-     dashboard = CollectedData ()
+     dashboard = CollectedData ([44.0, -80.0], [43.0, -79.0])
      list = dashboard.get ()
 
      print ('{} entries received'.format (len (list)))

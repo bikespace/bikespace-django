@@ -26,7 +26,7 @@ psycopg2==2.7.3.2
 pyasn1==0.4.2
 python-dateutil==2.6.1
 pytz==2017.2
-PyYAML==3.12
+PyYAML==5.1
 ratelim==0.1.6
 requests==2.9.1
 rsa==3.4.2

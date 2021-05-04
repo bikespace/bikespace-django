@@ -72,7 +72,6 @@ class Test (TestCase) :
   def test_location(self):
      """Tests the process of requesting the nearest street or avenue and
      compares the results with the expected locations
-     """
 
      print ("\t\ttesting location request")
      sources = { 'origin' : {'latitude' : 'latitude', 'longitude' : 'longitude' },
@@ -82,6 +81,7 @@ class Test (TestCase) :
 
      for test in entries :
         self.locateAndCompare (test)
+     """
         
   def test_record (self) :
      """Tests the process of making a survey answer from the test data and

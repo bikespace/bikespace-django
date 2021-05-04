@@ -1,3 +1,5 @@
+image: "python:3.6"
+
 before_script:
     - ruby -v
     - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list

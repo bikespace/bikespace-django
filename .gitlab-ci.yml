@@ -1,11 +1,11 @@
-image: "python:3.6"
+image: "debian:buster"
 
 before_script:
-    - ruby -v
     - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
     - wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
     - apt-get update -qy
-    - apt-get install -y libssl-dev build-essential wget ruby-dev heroku-toolbelt python3-dev python3-pip
+    - apt-get install -y libssl-dev build-essential wget ruby-dev heroku-toolbelt python3.6 python3.6-dev python3-pip
+    - ruby -v
     - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
     - source /root/.bashrc
     - nvm install --lts

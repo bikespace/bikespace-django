@@ -1,9 +1,6 @@
 image: "python:3.6"
 
 before_script:
-    - apt-get update -qy
-    - apt-get install -y gnupg2 libssl-dev build-essential wget ruby-dev heroku-toolbelt
-    - ruby -v
     - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
     - wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
     - apt-get update -qy

@@ -76,6 +76,6 @@ production:
   - cd bicycleparking && npm install && npm install --dev && npm run prod
   - cd ../ && python3 manage.py collectstatic --noinput
   - dpl --provider=s3 --local-dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key=$AWS_SECRET_ACCESS_KEY --bucket="bikespace-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
-  - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace-prod" --env="Bikespaceprod-env-1" --region="us-east-1" --bucket_name=$ELB_BUCKET_NAME
+  - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-prod-env" --region="us-east-1" --bucket_name=$ELB_BUCKET_NAME
   only:
   - tags

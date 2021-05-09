@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import SurveyAnswer, Picture, Event, Approval
 from django.utils.html import format_html
 from django.conf.urls import url
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 admin.site.register(SurveyAnswer)

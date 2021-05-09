@@ -8,7 +8,7 @@ before_script:
     - ruby -v
     - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
     - source /root/.bashrc
-    - nvm install --lts
+    - nvm install --lts 
     - nvm use node
     - node -v
     - npm -v
@@ -68,7 +68,6 @@ staging:
   - dpl --provider=s3 --local-dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key=$AWS_SECRET_ACCESS_KEY --bucket="bikespace-staging-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
   - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-staging" --region="us-east-1" --bucket_name=$ELB_BUCKET_NAME
   only:
-  - master
 
 production:
   type: deploy
@@ -76,7 +75,7 @@ production:
   - cd bicycleparking && npm install && npm install --dev && npm run prod
   - cd ../ && python3 manage.py collectstatic --noinput
   - dpl --provider=s3 --local-dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key=$AWS_SECRET_ACCESS_KEY --bucket="bikespace-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
-  - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-prod-env" --region="us-east-1" --bucket_name=$ELB_BUCKET_NAME
+  - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-django22-prod-env" --region="us-east-1" --bucket_name=$ELB_BUCKET_NAME
   only:
   - master
   - tags

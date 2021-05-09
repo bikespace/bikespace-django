@@ -42,9 +42,10 @@ class DefaultRouting :
      that, so the router only allows relations handled by django for
      the default database"""
 
-     result = (obj1._meta.model_name in DefaultRouting.defaultModels and 
-               obj2._meta.model_name in DefaultRouting.defaultModels)
-     return result
+     if (obj1._meta.model_name in DefaultRouting.defaultModels and 
+             obj2._meta.model_name in DefaultRouting.defaultModels):
+         return True
+     return None
     
   def allow_syncdb(self, db, model):
      """Allow django to synchronize the default database."""

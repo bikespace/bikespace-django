@@ -1,4 +1,4 @@
-image: "python:3.6"
+image: "python:3.7.4"
 
 before_script:
     - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list

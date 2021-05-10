@@ -98,3 +98,5 @@ bicycleparking/static/survey/*
 #pipenv (until other people convert)
 Pipfile
 Pipfile.lock
+
+builds/

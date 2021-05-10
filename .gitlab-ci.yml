@@ -24,7 +24,9 @@ variables:
   POSTGRES_DB: bike_parking_toronto
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: "postgres"
+
 test:
+  stage: test
   script:
   - apt-get update -qy
   - source test/useci
@@ -35,10 +37,13 @@ test:
   artifacts:
     paths:
       - htmlcov/
+  only:
+    - master
+    - merge_requests
 
 pages:
   stage: deploy
-  dependencies:
+  needs:
     - test
   script:
     - mkdir -p public/
@@ -49,33 +54,31 @@ pages:
     expire_in: 30 days
   only:
     - master
+    - merge_requests
 
-develop:
+deploy-staging:
+  stage: deploy
   type: deploy
-  script:
-  - cd bicycleparking && npm install && npm install --dev && npm run develop
-  - cd ../ && python3 manage.py collectstatic --noinput
-  - dpl --provider=s3 --local-dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key=$AWS_SECRET_ACCESS_KEY --bucket="bikespace-develop-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
-  - dpl --provider=heroku --app=torontobikeparking-staging --api-key=$HEROKU_STAGING_API_KEY
-  only:
-  - develop
-
-staging:
-  type: deploy
+  needs:
+    - test
   script:
   - cd bicycleparking && npm install && npm install --dev && npm run staging
   - cd ../ && python3 manage.py collectstatic --noinput
-  - dpl --provider=s3 --local-dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key=$AWS_SECRET_ACCESS_KEY --bucket="bikespace-staging-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
-  - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-staging" --region="us-east-1" --bucket_name=$ELB_BUCKET_NAME
+  - dpl --provider=s3 --local-dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id="$AWS_ACCESS_KEY_ID" --secret-access-key="$AWS_SECRET_ACCESS_KEY" --bucket="bikespace-develop-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
+  - dpl --provider=heroku --app="torontobikeparking-staging" --api-key="$HEROKU_STAGING_API_KEY"
   only:
+    - merge_requests
 
-production:
+deploy-production:
+  stage: deploy
   type: deploy
+  needs:
+    - test
   script:
   - cd bicycleparking && npm install && npm install --dev && npm run prod
   - cd ../ && python3 manage.py collectstatic --noinput
-  - dpl --provider=s3 --local-dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key=$AWS_SECRET_ACCESS_KEY --bucket="bikespace-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
-  - dpl --provider=elasticbeanstalk --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-django22-prod-env" --region="us-east-1" --bucket_name=$ELB_BUCKET_NAME
+  - dpl --provider=s3 --local_dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id="$AWS_ACCESS_KEY_ID" --secret-access-key="$AWS_SECRET_ACCESS_KEY" --bucket="bikespace-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
+  - dpl --provider=elasticbeanstalk --access-key-id="$AWS_ACCESS_KEY_ID" --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-django22-prod-env" --region="us-east-1" --bucket_name="$ELB_BUCKET_NAME"
   only:
   - master
   - tags

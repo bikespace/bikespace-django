@@ -20,10 +20,10 @@ import xml.etree.ElementTree as ET
 import json
 import os
 
-DB_HOST="127.0.0.1"
-DB_USER="postgres"
-DB_PW=""
-DB = "bike_parking_toronto"
+DB_HOST = os.getenv('BIKE_DB_HOST', "127.0.0.1")
+DB_USER = os.getenv('BIKE_DB_USER', "postgres")
+DB_PW = os.getenv('BIKE_DB_PW', 'postgres')
+DB = os.getenv('BIKE_DB_NAME', "bike_parking_toronto")
 
 def flushTestDB (db) :
   """Erases all of the entries in the test tables."""

@@ -50,27 +50,7 @@ We now will setup an environment to run the python code of
 the [https://gitlab.com/bikespace/Bicycle-parking](https://gitlab.com/bikespace/Bicycle-parking) project setup on your computer
 
 ```shell
-pip3 install virtualenv
-
-# get the repository of code on your machine and change to the directory
-git clone git@gitlab.com:bikespace/Bicycle-parking.git bikespace
-
-# change to the directory
-cd bikespace
-
-# setup a virtualenv for python3
-virtualenv -p python3 venv
-# note "venv" is now the name of the directory containing the python virtualenv
-
-# Use the "venv" you setup earlier for your python3 project buy running the activate script
-source venv/bin/activate
-
-#(for windows:)
-venv/Scripts/activate
-
-# Install requirements
-# Install the requirements from the supplied `requirements.txt`.
-pip3 install -r requirements.txt
+make setup
 ```
 
 ## Database
@@ -110,7 +90,7 @@ running we bind host post to `5435` so that is the port where the postgres insta
 ### Create the test data
 To create test data to work on, for moderation or other purposes, run the test transaction script:
 ```shell
-python test/LoadTestDB.py
+make seed
 ```
 
 ### For Linux:
@@ -125,21 +105,15 @@ sudo ufw allow from 127.0.0.1/24  to any port 5435
 
 Once all the above steps are complete test by running the django app.
 
-**Run migrations to apply the models defined into the database**
+```shell
+make start
+```
 
-Run this migrate whenever the models.py for the app has been changed so the
-changes can be applied to the databases.
+Whenever the `models.py` for the app has been changed, the
+changes can be applied to the databases by running:
 
 ```shell
-# First we run the migrations for the database
-python manage.py migrate
-
-# Let us first create a superuser for the admin web page
-python manage.py createsuperuser
-
-# Now we can run the django web app
-python manage.py runserver
-
+make migrate
 ```
 
 ## Contributing

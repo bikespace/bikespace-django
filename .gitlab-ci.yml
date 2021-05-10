@@ -1,20 +1,11 @@
 image: "python:3.7.4"
 
 before_script:
-    - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
-    - wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
-    - apt-get update -qy
-    - apt-get install -y gnupg2 libssl-dev build-essential wget ruby-dev heroku-toolbelt
-    - ruby -v
-    - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-    - source /root/.bashrc
-    - nvm install --lts 
-    - nvm use node
-    - node -v
-    - npm -v
-    - gem install dpl
-    - npm install
-    - pip3 install -r requirements.txt
+  - bash scripts/prepare_gitlab_ci.sh
+  - source /root/.bashrc
+  - nvm use node
+  - make setup-node
+  - pip3 install -r requirements.txt
 
 services:
   - name: mdillon/postgis
@@ -28,11 +19,8 @@ variables:
 test:
   stage: test
   script:
-  - apt-get update -qy
   - source test/useci
-  - coverage run --source='bicycleparking/' manage.py test --no-input
-  - coverage html
-  - coverage report -m
+  - make test
   coverage: '/TOTAL.+ ([0-9]{1,3}%)/'
   artifacts:
     paths:
@@ -61,11 +49,7 @@ deploy-staging:
   type: deploy
   needs:
     - test
-  script:
-  - cd bicycleparking && npm install && npm install --dev && npm run staging
-  - cd ../ && python3 manage.py collectstatic --noinput
-  - dpl --provider=s3 --local-dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id="$AWS_ACCESS_KEY_ID" --secret-access-key="$AWS_SECRET_ACCESS_KEY" --bucket="bikespace-develop-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
-  - dpl --provider=heroku --app="torontobikeparking-staging" --api-key="$HEROKU_STAGING_API_KEY"
+  script: make deploy-staging
   only:
     - merge_requests
 
@@ -74,11 +58,7 @@ deploy-production:
   type: deploy
   needs:
     - test
-  script:
-  - cd bicycleparking && npm install && npm install --dev && npm run prod
-  - cd ../ && python3 manage.py collectstatic --noinput
-  - dpl --provider=s3 --local_dir="Bicycle_parking/staticfiles" --acl=public_read --access-key-id="$AWS_ACCESS_KEY_ID" --secret-access-key="$AWS_SECRET_ACCESS_KEY" --bucket="bikespace-static" --region="us-east-1" --default_text_charset="utf-8" --skip-cleanup
-  - dpl --provider=elasticbeanstalk --access-key-id="$AWS_ACCESS_KEY_ID" --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app="bikespace" --env="bikespace-django22-prod-env" --region="us-east-1" --bucket_name="$ELB_BUCKET_NAME"
+  script: make deploy-prod
   only:
   - master
   - tags

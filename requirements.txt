@@ -33,7 +33,7 @@ rsa==3.4.2
 s3transfer==0.1.12
 semantic-version==2.5.0
 six==1.10.0
-sqlparse==0.4.1
+sqlparse==0.4.2
 tabulate==0.7.5
 termcolor==1.1.0
 urllib3==1.22
